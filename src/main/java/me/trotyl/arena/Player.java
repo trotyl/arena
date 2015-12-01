@@ -21,6 +21,10 @@ public class Player {
     }
 
     public void attack(Player another) {
+        another.suffer(aggressivity);
+    }
 
+    private void suffer(int damage) {
+        health -= damage;
     }
 }
