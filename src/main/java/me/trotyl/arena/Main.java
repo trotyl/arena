@@ -1,4 +1,4 @@
-package me.trotyl;
+package me.trotyl.arena;
 
 public class Main {
 
