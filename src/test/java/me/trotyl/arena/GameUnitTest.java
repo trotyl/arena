@@ -10,7 +10,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 
-public class GameTest {
+public class GameUnitTest {
     private Game game;
     private Player player1;
     private Player player2;

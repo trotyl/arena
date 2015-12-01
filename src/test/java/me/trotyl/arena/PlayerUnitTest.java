@@ -8,7 +8,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
 
-public class PlayerTest {
+public class PlayerUnitTest {
     @Before
     public void setUp() throws Exception {
 
