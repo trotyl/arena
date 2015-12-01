@@ -2,6 +2,7 @@ package me.trotyl.arena;
 
 
 public class Player {
+
     private String name;
     private int health;
     private int aggressivity;
