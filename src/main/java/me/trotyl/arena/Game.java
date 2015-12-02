@@ -26,17 +26,15 @@ public class Game {
     }
 
     public Game() {
-        init();
+        inTurnOfPlayer1 = true;
     }
 
     public void setPlayer1(Player player1) {
         this.player1 = player1;
-        init();
     }
 
     public void setPlayer2(Player player2) {
         this.player2 = player2;
-        init();
     }
 
     public Player getPlayer1() {
@@ -63,9 +61,9 @@ public class Game {
 
     public AttackProcedure runStep() {
         Attacker attacker = inTurnOfPlayer1? player1: player2;
-        Attackable defender = attacker.equals(player1)? player2: player1;
+        Attackable attackable = attacker.equals(player1)? player2: player1;
 
-        AttackProcedure procedure = attacker.attack(defender);
+        AttackProcedure procedure = attacker.attack(attackable);
         inTurnOfPlayer1 = ! inTurnOfPlayer1;
 
         return procedure;
@@ -84,9 +82,5 @@ public class Game {
 
     public boolean over() {
         return !player1.alive() || !player2.alive();
-    }
-
-    private void init() {
-        inTurnOfPlayer1 = true;
     }
 }
