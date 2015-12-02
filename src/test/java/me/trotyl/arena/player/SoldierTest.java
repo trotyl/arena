@@ -1,5 +1,6 @@
 package me.trotyl.arena.player;
 
+import me.trotyl.arena.Armor;
 import me.trotyl.arena.Weapon;
 import org.junit.After;
 import org.junit.Before;
@@ -32,5 +33,18 @@ public class SoldierTest {
         soldier.attack(player);
 
         assertThat(player.health(), is(30));
+    }
+
+    @Test
+    public void should_be_more_defensive_with_weapon() throws Exception {
+        Soldier soldier = new Soldier("张三", 100, 20);
+        Armor armor = new Armor(10);
+        soldier.equip(armor);
+
+        Player player = new Player("李四", 100, 20);
+
+        player.attack(soldier);
+
+        assertThat(soldier.health(), is(90));
     }
 }
