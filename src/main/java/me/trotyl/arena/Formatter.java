@@ -3,11 +3,12 @@ package me.trotyl.arena;
 
 import me.trotyl.arena.procedure.AttackProcedure;
 import me.trotyl.arena.procedure.OverProcedure;
+import me.trotyl.arena.record.WeaponRecord;
 
 public class Formatter {
 
     public String formatAttack(AttackProcedure procedure) {
-        String weaponPart = procedure.attacker.weapon() != null?
+        String weaponPart = procedure.attacker.weapon() != WeaponRecord.none?
                 String.format("用%s", procedure.attacker.weapon().name()): "";
 
         String result = String.format("%s%s%s攻击了%s%s, %s受到了%d点伤害, %s剩余生命: %d",

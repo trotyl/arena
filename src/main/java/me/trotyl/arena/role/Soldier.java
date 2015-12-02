@@ -48,12 +48,12 @@ public class Soldier extends Player {
 
     @Override
     public int aggressivity() {
-        return aggressivity + (weapon != null? weapon.aggressivity(): 0);
+        return aggressivity + weapon.aggressivity();
     }
 
     @Override
     public int defence() {
-        return armor != null? armor.defence(): 0;
+        return armor.defence();
     }
 
     @Override

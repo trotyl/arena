@@ -20,7 +20,7 @@ public class Strike extends Attribute {
     @Override
     public DamageRecord apply(Attacker attacker, Attackable attackable) {
         if (random.nextFloat() > rate) {
-            return null;
+            return Attribute.none.apply(attacker, attackable);
         }
 
         int damage = 3 * (attacker.aggressivity() - attackable.defence());

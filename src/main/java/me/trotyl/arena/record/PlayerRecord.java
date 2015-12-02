@@ -5,6 +5,7 @@ import me.trotyl.arena.role.Role;
 
 public class PlayerRecord implements AttackerRecord, AttackableRecord {
 
+    public static final PlayerRecord none = new PlayerRecord("", 0, Role.none);
     private final String name;
     private final int health;
     private final Role role;
@@ -12,7 +13,7 @@ public class PlayerRecord implements AttackerRecord, AttackableRecord {
     private final ArmorRecord armor;
 
     public PlayerRecord(String name, int health, Role role) {
-        this(name, health, role, null, null);
+        this(name, health, role, WeaponRecord.none, ArmorRecord.none);
     }
 
     public PlayerRecord(String name, int health, Role role, WeaponRecord weapon, ArmorRecord armor) {

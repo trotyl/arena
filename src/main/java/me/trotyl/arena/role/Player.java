@@ -44,6 +44,6 @@ public class Player implements Attacker, Attackable {
     @Override
     public AttackProcedure attack(Attackable attackable) {
         int damage = attackable.suffer(aggressivity);
-        return new AttackProcedure(record(), attackable.record(), new DamageRecord(null, damage));
+        return new AttackProcedure(record(), attackable.record(), new DamageRecord(damage));
     }
 }

@@ -13,6 +13,6 @@ public class ArmorRecord implements Record {
 
     @Override
     public String name() {
-        return null;
+        return "";
     }
 }

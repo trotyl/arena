@@ -69,7 +69,7 @@ public class Game {
 
     public OverProcedure overProcedure() {
         if (!over()) {
-            return null;
+            return OverProcedure.none;
         }
 
         Player winner = player1.alive()? player1: player2;
