@@ -4,6 +4,7 @@ package me.trotyl.arena.procedure;
 import me.trotyl.arena.status.PlayerStatus;
 
 public class AttackProcedure extends Procedure {
+
     public PlayerStatus attacker;
     public PlayerStatus defender;
     public int damage;
