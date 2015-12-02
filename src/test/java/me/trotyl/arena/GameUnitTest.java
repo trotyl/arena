@@ -1,5 +1,6 @@
 package me.trotyl.arena;
 
+import me.trotyl.arena.player.Player;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

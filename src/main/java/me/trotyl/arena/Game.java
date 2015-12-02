@@ -1,6 +1,7 @@
 package me.trotyl.arena;
 
 
+import me.trotyl.arena.player.Player;
 import me.trotyl.arena.procedure.AttackProcedure;
 import me.trotyl.arena.procedure.OverProcedure;
 import me.trotyl.arena.procedure.Procedure;
