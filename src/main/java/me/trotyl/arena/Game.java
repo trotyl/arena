@@ -36,6 +36,14 @@ public class Game {
         init();
     }
 
+    public Player getPlayer1() {
+        return player1;
+    }
+
+    public Player getPlayer2() {
+        return player2;
+    }
+
     public List<Procedure> run() {
         List<Procedure> procedures = new ArrayList<Procedure>();
 
