@@ -1,4 +1,4 @@
-package me.trotyl.arena.player;
+package me.trotyl.arena.role;
 
 
 import me.trotyl.arena.procedure.AttackProcedure;

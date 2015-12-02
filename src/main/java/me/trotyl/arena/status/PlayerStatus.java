@@ -1,8 +1,8 @@
 package me.trotyl.arena.status;
 
 
-import me.trotyl.arena.player.Player;
-import me.trotyl.arena.player.Soldier;
+import me.trotyl.arena.role.Player;
+import me.trotyl.arena.role.Soldier;
 
 public class PlayerStatus {
     private Player player;
