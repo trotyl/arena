@@ -1,5 +1,6 @@
 package me.trotyl.arena;
 
+import me.trotyl.arena.status.PlayerStatus;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -60,5 +61,15 @@ public class PlayerUnitTest {
 
         assertTrue(player1.alive());
         assertFalse(player2.alive());
+    }
+
+    @Test
+    public void should_be_able_to_get_right_status() throws Exception {
+        Player player1 = new Player("张三", 10, 5);
+
+        PlayerStatus status = player1.status();
+
+        assertThat(status.name, is("张三"));
+        assertThat(status.health, is(10));
     }
 }
