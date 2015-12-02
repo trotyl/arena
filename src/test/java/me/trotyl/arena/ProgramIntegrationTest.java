@@ -26,7 +26,7 @@ public class ProgramIntegrationTest {
 
         out = mock(PrintStream.class);
 
-        program = new Program(in, out);
+        program = new Program(in, out, new Parser(), new Formatter());
     }
 
     @After

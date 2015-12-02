@@ -11,10 +11,12 @@ import java.io.*;
 public class Program {
 
     private final PrintStream out;
+    private final Formatter formatter;
     private final Game game;
 
-    public Program(InputStream in, PrintStream out, Parser parser) {
+    public Program(InputStream in, PrintStream out, Parser parser, Formatter formatter) {
         this.out = out;
+        this.formatter = formatter;
 
         JSONTokener tokener = new JSONTokener(in);
         JSONObject configObject = (JSONObject) tokener.nextValue();
@@ -35,7 +37,7 @@ public class Program {
         String path = reader.readLine();
         FileInputStream in = new FileInputStream(path);
 
-        Program program = new Program(in, System.out, new Parser());
+        Program program = new Program(in, System.out, new Parser(), new Formatter());
         program.run();
 
         reader.close();
@@ -44,20 +46,16 @@ public class Program {
     public void run() {
         while (!game.over()) {
             AttackProcedure procedure = game.runStep();
-            String weaponOutput = procedure.attacker.weapon() != null?
-                    String.format("用%s", procedure.attacker.weapon().name()): "";
-            String output = String.format("%s%s%s攻击了%s%s, %s受到了%d点伤害, %s剩余生命: %d",
-                    procedure.attacker.role(), procedure.attacker.name(), weaponOutput,
-                    procedure.attackable.role(), procedure.attackable.name(),
-                    procedure.attackable.name(), procedure.damage,
-                    procedure.attackable.name(), procedure.attackable.health());
+
+            String output = formatter.formatAttack(procedure);
 
             out.println(output);
         }
 
         try {
             OverProcedure procedure = game.overProcedure();
-            String output = String.format("%s被打败了.", procedure.loser.name());
+
+            String output = formatter.formatOver(procedure);
 
             out.println(output);
         } catch (Exception ignored) {}
