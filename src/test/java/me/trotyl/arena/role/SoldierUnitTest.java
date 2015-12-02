@@ -2,12 +2,18 @@ package me.trotyl.arena.role;
 
 import me.trotyl.arena.Armor;
 import me.trotyl.arena.Weapon;
+import me.trotyl.arena.attribute.Attribute;
+import me.trotyl.arena.attribute.Strike;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Random;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 
 public class SoldierUnitTest {
@@ -46,5 +52,23 @@ public class SoldierUnitTest {
         player.attack(soldier);
 
         assertThat(soldier.health, is(90));
+    }
+
+
+    @Test
+    public void should_have_3_times_damage_with_strike() throws Exception {
+        Soldier soldier = new Soldier("张三", 100, 20);
+        Weapon weapon = new Weapon("我真剑", 10);
+        Random random = mock(Random.class);
+        when(random.nextFloat()).thenReturn(0.0f);
+        Attribute strike = new Strike(random, 1);
+        weapon.with(strike);
+        soldier.equip(weapon);
+
+        Player player = new Player("李四", 100, 10);
+
+        soldier.attack(player);
+
+        assertThat(player.health, is(10));
     }
 }

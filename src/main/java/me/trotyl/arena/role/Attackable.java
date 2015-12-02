@@ -7,4 +7,5 @@ public interface Attackable {
 
     public int suffer(int injury);
     public AttackableRecord record();
+    public int defence();
 }

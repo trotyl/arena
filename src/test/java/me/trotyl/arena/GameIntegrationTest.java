@@ -55,7 +55,7 @@ public class GameIntegrationTest {
         assertThat(attackProcedure0.attackable.role(), is(Role.normal));
         assertThat(attackProcedure0.attackable.name(), is("李四"));
         assertThat(attackProcedure0.attackable.health(), is(10));
-        assertThat(attackProcedure0.damage, is(10));
+        assertThat(attackProcedure0.damage.damage, is(10));
 
         Procedure procedure1 = procedures.get(1);
         assertThat(procedure1, instanceOf(AttackProcedure.class));
@@ -63,7 +63,7 @@ public class GameIntegrationTest {
         assertThat(attackProcedure1.attacker.name(), is("李四"));
         assertThat(attackProcedure1.attackable.name(), is("张三"));
         assertThat(attackProcedure1.attackable.health(), is(6));
-        assertThat(attackProcedure1.damage, is(4));
+        assertThat(attackProcedure1.damage.damage, is(4));
 
         Procedure procedure2 = procedures.get(2);
         assertThat(procedure2, instanceOf(AttackProcedure.class));
@@ -71,7 +71,7 @@ public class GameIntegrationTest {
         assertThat(attackProcedure2.attacker.name(), is("张三"));
         assertThat(attackProcedure2.attackable.name(), is("李四"));
         assertThat(attackProcedure2.attackable.health(), is(0));
-        assertThat(attackProcedure2.damage, is(10));
+        assertThat(attackProcedure2.damage.damage, is(10));
 
         Procedure procedure4 = procedures.get(3);
         assertThat(procedure4, instanceOf(OverProcedure.class));

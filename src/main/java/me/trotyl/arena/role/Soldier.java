@@ -5,6 +5,7 @@ import me.trotyl.arena.Armor;
 import me.trotyl.arena.Weapon;
 import me.trotyl.arena.procedure.AttackProcedure;
 import me.trotyl.arena.record.ArmorRecord;
+import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.record.PlayerRecord;
 import me.trotyl.arena.record.WeaponRecord;
 
@@ -27,7 +28,13 @@ public class Soldier extends Player {
 
     @Override
     public AttackProcedure attack(Attackable attackable) {
-        int damage = attackable.suffer(aggressivity + weapon.aggressivity());
+        DamageRecord damage;
+
+        if (weapon != null && weapon.attribute != null) {
+            damage = weapon.attribute.apply(this, attackable);
+        } else {
+            damage = new DamageRecord(null, attackable.suffer(aggressivity()));
+        }
 
         return new AttackProcedure(record(), attackable.record(), damage);
     }
@@ -38,6 +45,16 @@ public class Soldier extends Player {
             health -= (injury - armor.defence());
         }
         return injury - armor.defence();
+    }
+
+    @Override
+    public int aggressivity() {
+        return aggressivity + (weapon != null? weapon.aggressivity(): 0);
+    }
+
+    @Override
+    public int defence() {
+        return armor != null? armor.defence(): 0;
     }
 
     @Override
