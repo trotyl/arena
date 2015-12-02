@@ -1,9 +1,8 @@
 package me.trotyl.arena;
 
-import me.trotyl.arena.role.Player;
 import me.trotyl.arena.procedure.AttackProcedure;
 import me.trotyl.arena.procedure.OverProcedure;
-import me.trotyl.arena.role.Soldier;
+import me.trotyl.arena.role.Player;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
@@ -14,17 +13,17 @@ public class Program {
     private final PrintStream out;
     private final Game game;
 
-    public Program(InputStream in, PrintStream out) {
+    public Program(InputStream in, PrintStream out, Parser parser) {
         this.out = out;
 
         JSONTokener tokener = new JSONTokener(in);
         JSONObject configObject = (JSONObject) tokener.nextValue();
 
         JSONObject player1Object = configObject.getJSONObject("player1");
-        Player player1 = parsePlayer(player1Object);
+        Player player1 = parser.parsePlayer(player1Object);
 
         JSONObject player2Object = configObject.getJSONObject("player2");
-        Player player2 = parsePlayer(player2Object);
+        Player player2 = parser.parsePlayer(player2Object);
 
         game = Game.between(player1, player2);
     }
@@ -36,7 +35,7 @@ public class Program {
         String path = reader.readLine();
         FileInputStream in = new FileInputStream(path);
 
-        Program program = new Program(in, System.out);
+        Program program = new Program(in, System.out, new Parser());
         program.run();
 
         reader.close();
@@ -62,42 +61,5 @@ public class Program {
 
             out.println(output);
         } catch (Exception ignored) {}
-    }
-
-    private Player parsePlayer(JSONObject object) {
-        String name = object.getString("name");
-        int health = object.getInt("health");
-        int aggressivity = object.getInt("aggressivity");
-        String role = object.getString("role");
-        if (role.equals("Normal")) {
-            return new Player(name, health, aggressivity);
-        }
-
-        Soldier soldier = new Soldier(name, health, aggressivity);
-        if (object.has("weapon")) {
-            JSONObject weaponObject = object.getJSONObject("weapon");
-            Weapon weapon = parseWeapon(weaponObject);
-            soldier.equip(weapon);
-        }
-        if (object.has("armor")) {
-            JSONObject armorObject = object.getJSONObject("armor");
-            Armor armor = parseArmor(armorObject);
-            soldier.equip(armor);
-        }
-
-        return soldier;
-    }
-
-    private Weapon parseWeapon(JSONObject object) {
-        String name = object.getString("name");
-        int aggressivity = object.getInt("aggressivity");
-
-        return new Weapon(name, aggressivity);
-    }
-
-    private Armor parseArmor(JSONObject object) {
-        int defence = object.getInt("defence");
-
-        return new Armor(defence);
     }
 }
