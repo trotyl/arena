@@ -1,11 +1,26 @@
 package me.trotyl.arena;
 
 
+import me.trotyl.arena.procedure.AttackProcedure;
+import me.trotyl.arena.procedure.OverProcedure;
+import me.trotyl.arena.procedure.Procedure;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Game {
 
     private Player player1;
     private Player player2;
     private boolean inTurnOfPlayer1;
+
+    public static Game between(Player player1, Player player2) {
+        Game game = new Game();
+        game.setPlayer1(player1);
+        game.setPlayer2(player2);
+
+        return game;
+    }
 
     public Game() {
         init();
@@ -21,25 +36,46 @@ public class Game {
         init();
     }
 
-    public Player run() {
-        while (player1.isAlive() && player2.isAlive()) {
-            Player attacker = inTurnOfPlayer1? player1: player2;
-            Player defender = inTurnOfPlayer1? player2: player1;
+    public List<Procedure> run() {
+        List<Procedure> procedures = new ArrayList<Procedure>();
 
-            attacker.attack(defender);
+        while (!over()) {
+            procedures.add(runStep());
         }
-        return player1.isAlive()? player2: player1;
+
+        try {
+            procedures.add(overProcedure());
+        } catch (Exception ignored) {}
+
+        return procedures;
+    }
+
+    public AttackProcedure runStep() {
+        Player attacker = inTurnOfPlayer1? player1: player2;
+        Player defender = attacker.equals(player1)? player2: player1;
+
+        AttackProcedure procedure = attacker.attack(defender);
+        inTurnOfPlayer1 = ! inTurnOfPlayer1;
+
+        return procedure;
+    }
+
+    public OverProcedure overProcedure() throws Exception {
+        if (!over()) {
+            throw new Exception("The game is not over yet.");
+        }
+
+        Player winner = player1.alive()? player1: player2;
+        Player loser = winner.equals(player1)? player2: player1;
+
+        return new OverProcedure(winner.status(), loser.status());
+    }
+
+    public boolean over() {
+        return !player1.alive() || !player2.alive();
     }
 
     private void init() {
         inTurnOfPlayer1 = true;
-    }
-
-    public static Game between(Player player1, Player player2) {
-        Game game = new Game();
-        game.setPlayer1(player1);
-        game.setPlayer2(player2);
-
-        return game;
     }
 }

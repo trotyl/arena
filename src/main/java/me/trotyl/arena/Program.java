@@ -1,5 +1,7 @@
 package me.trotyl.arena;
 
+import me.trotyl.arena.procedure.AttackProcedure;
+import me.trotyl.arena.procedure.OverProcedure;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
@@ -39,9 +41,21 @@ public class Program {
         Player player2 = parsePlayer(player2Object);
 
         Game game = Game.between(player1, player2);
-        Player loser = game.run();
 
-        out.println(loser.getName() + "被打败了.");
+        while (!game.over()) {
+            AttackProcedure procedure = game.runStep();
+            String output = String.format("%s攻击了%s, %s受到了%d点伤害, %s剩余生命: %d",
+                    procedure.attacker.name, procedure.defender.name,
+                    procedure.defender.name, procedure.damage,
+                    procedure.defender.name, procedure.defender.health);
+            out.println(output);
+        }
+
+        try {
+            OverProcedure procedure = game.overProcedure();
+            String output = String.format("%s被打败了.", procedure.loser.name);
+            out.println(output);
+        } catch (Exception ignored) {}
     }
 
     private Player parsePlayer(JSONObject object) {

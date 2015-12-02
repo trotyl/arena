@@ -1,6 +1,9 @@
 package me.trotyl.arena;
 
 
+import me.trotyl.arena.procedure.AttackProcedure;
+import me.trotyl.arena.status.PlayerStatus;
+
 public class Player {
 
     private String name;
@@ -17,15 +20,23 @@ public class Player {
         return name;
     }
 
-    public boolean isAlive() {
+    public boolean alive() {
         return health > 0;
     }
 
-    public void attack(Player another) {
-        another.suffer(aggressivity);
+    public AttackProcedure attack(Player another) {
+        int damage = aggressivity;
+
+        another.suffer(damage);
+
+        return new AttackProcedure(status(), another.status(), damage);
     }
 
     private void suffer(int damage) {
         health -= damage;
+    }
+
+    public PlayerStatus status() {
+        return new PlayerStatus(name, health);
     }
 }

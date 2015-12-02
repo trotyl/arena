@@ -24,7 +24,7 @@ public class PlayerUnitTest {
     public void should_be_alive_when_health_is_greater_than_zero() throws Exception {
         Player player = new Player("张三", 1, 5);
 
-        boolean isAlive = player.isAlive();
+        boolean isAlive = player.alive();
 
         assertThat(isAlive, is(true));
     }
@@ -34,8 +34,8 @@ public class PlayerUnitTest {
         Player player1 = new Player("张三", 0, 5);
         Player player2 = new Player("李四", -1, 5);
 
-        boolean isPlayer1Alive = player1.isAlive();
-        boolean isPlayer2Alive = player2.isAlive();
+        boolean isPlayer1Alive = player1.alive();
+        boolean isPlayer2Alive = player2.alive();
 
         assertThat(isPlayer1Alive, is(false));
         assertThat(isPlayer2Alive, is(false));
@@ -48,17 +48,17 @@ public class PlayerUnitTest {
 
         player1.attack(player2);
 
-        assertTrue(player1.isAlive());
-        assertTrue(player2.isAlive());
+        assertTrue(player1.alive());
+        assertTrue(player2.alive());
 
         player2.attack(player1);
 
-        assertTrue(player1.isAlive());
-        assertTrue(player2.isAlive());
+        assertTrue(player1.alive());
+        assertTrue(player2.alive());
 
         player1.attack(player2);
 
-        assertTrue(player1.isAlive());
-        assertFalse(player2.isAlive());
+        assertTrue(player1.alive());
+        assertFalse(player2.alive());
     }
 }
