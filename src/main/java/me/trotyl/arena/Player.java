@@ -16,10 +16,6 @@ public class Player {
         this.aggressivity = aggressivity;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public boolean alive() {
         return health > 0;
     }
@@ -32,7 +28,7 @@ public class Player {
         return new AttackProcedure(status(), another.status(), damage);
     }
 
-    private void suffer(int damage) {
+    protected void suffer(int damage) {
         health -= damage;
     }
 

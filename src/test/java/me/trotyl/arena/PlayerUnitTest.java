@@ -72,4 +72,15 @@ public class PlayerUnitTest {
         assertThat(status.name, is("张三"));
         assertThat(status.health, is(10));
     }
+
+    @Test
+    public void should_reduce_health_when_suffered() throws Exception {
+        Player player1 = new Player("张三", 10, 5);
+        PlayerStatus originalStatus = player1.status();
+        player1.suffer(5);
+        PlayerStatus finalStatus = player1.status();
+
+        assertThat(originalStatus.health, is(10));
+        assertThat(finalStatus.health, is(5));
+    }
 }
