@@ -12,11 +12,21 @@ import java.io.*;
 public class Program {
 
     private final PrintStream out;
-    private final InputStream in;
+    private final Game game;
 
     public Program(InputStream in, PrintStream out) {
-        this.in = in;
         this.out = out;
+
+        JSONTokener tokener = new JSONTokener(in);
+        JSONObject configObject = (JSONObject) tokener.nextValue();
+
+        JSONObject player1Object = configObject.getJSONObject("player1");
+        Player player1 = parsePlayer(player1Object);
+
+        JSONObject player2Object = configObject.getJSONObject("player2");
+        Player player2 = parsePlayer(player2Object);
+
+        game = Game.between(player1, player2);
     }
 
     public static void main(String[] args) throws IOException {
@@ -33,17 +43,6 @@ public class Program {
     }
 
     public void run() {
-        JSONTokener tokener = new JSONTokener(in);
-        JSONObject configObject = (JSONObject) tokener.nextValue();
-
-        JSONObject player1Object = configObject.getJSONObject("player1");
-        Player player1 = parsePlayer(player1Object);
-
-        JSONObject player2Object = configObject.getJSONObject("player2");
-        Player player2 = parsePlayer(player2Object);
-
-        Game game = Game.between(player1, player2);
-
         while (!game.over()) {
             AttackProcedure procedure = game.runStep();
             String weaponOutput = procedure.attacker.weapon() != null?
@@ -53,12 +52,14 @@ public class Program {
                     procedure.attackable.role(), procedure.attackable.name(),
                     procedure.attackable.name(), procedure.damage,
                     procedure.attackable.name(), procedure.attackable.health());
+
             out.println(output);
         }
 
         try {
             OverProcedure procedure = game.overProcedure();
             String output = String.format("%s被打败了.", procedure.loser.name());
+
             out.println(output);
         } catch (Exception ignored) {}
     }
