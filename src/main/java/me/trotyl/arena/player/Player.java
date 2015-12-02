@@ -23,13 +23,14 @@ public class Player {
     public AttackProcedure attack(Player player) {
         int damage = aggressivity;
 
-        player.suffer(damage);
+        damage = player.suffer(damage);
 
         return new AttackProcedure(status(), player.status(), damage);
     }
 
-    protected void suffer(int damage) {
+    protected int suffer(int damage) {
         health -= damage;
+        return damage;
     }
 
     public PlayerStatus status() {
