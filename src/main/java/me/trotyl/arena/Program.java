@@ -45,15 +45,15 @@ public class Program {
         while (!game.over()) {
             AttackProcedure procedure = game.runStep();
             String output = String.format("%s攻击了%s, %s受到了%d点伤害, %s剩余生命: %d",
-                    procedure.attacker.name, procedure.defender.name,
-                    procedure.defender.name, procedure.damage,
-                    procedure.defender.name, procedure.defender.health);
+                    procedure.attacker.name(), procedure.defender.name(),
+                    procedure.defender.name(), procedure.damage,
+                    procedure.defender.name(), procedure.defender.health());
             out.println(output);
         }
 
         try {
             OverProcedure procedure = game.overProcedure();
-            String output = String.format("%s被打败了.", procedure.loser.name);
+            String output = String.format("%s被打败了.", procedure.loser.name());
             out.println(output);
         } catch (Exception ignored) {}
     }

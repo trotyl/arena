@@ -1,12 +1,22 @@
 package me.trotyl.arena.status;
 
 
-public class PlayerStatus {
-    public String name;
-    public int health;
+import me.trotyl.arena.Player;
 
-    public PlayerStatus(String name, int health) {
-        this.name = name;
-        this.health = health;
+public class PlayerStatus {
+    private Player player;
+    private int health;
+
+    public PlayerStatus(Player player) {
+        this.player = player;
+        this.health = player.health();
+    }
+
+    public int health() {
+        return health;
+    }
+
+    public String name() {
+        return player.name();
     }
 }

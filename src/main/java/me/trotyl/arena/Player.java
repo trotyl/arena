@@ -33,6 +33,14 @@ public class Player {
     }
 
     public PlayerStatus status() {
-        return new PlayerStatus(name, health);
+        return new PlayerStatus(this);
+    }
+
+    public int health() {
+        return health;
+    }
+
+    public String name() {
+        return name;
     }
 }
