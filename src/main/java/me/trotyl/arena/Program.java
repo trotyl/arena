@@ -3,8 +3,7 @@ package me.trotyl.arena;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-import java.io.InputStream;
-import java.io.PrintStream;
+import java.io.*;
 
 public class Program {
 
@@ -16,8 +15,17 @@ public class Program {
         this.out = out;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
+        System.out.println("Please input the path of config file: ");
+        String path = reader.readLine();
+        FileInputStream in = new FileInputStream(path);
+
+        Program program = new Program(in, System.out);
+        program.run();
+
+        reader.close();
     }
 
     public void run() {

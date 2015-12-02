@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.mockito.InOrder;
 
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.PrintStream;
 
 import static org.mockito.Mockito.inOrder;
@@ -16,11 +17,12 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 public class ProgramIntegrationTest {
 
     private Program program;
+    InputStream in;
     PrintStream out;
 
     @Before
     public void setUp() throws Exception {
-        FileInputStream in = new FileInputStream("./fixture/config.json");
+        in = new FileInputStream("./fixture/config.json");
 
         out = mock(PrintStream.class);
 
@@ -29,7 +31,7 @@ public class ProgramIntegrationTest {
 
     @After
     public void tearDown() throws Exception {
-
+        in.close();
     }
 
     @Test
