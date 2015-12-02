@@ -1,7 +1,7 @@
 package me.trotyl.arena;
 
 
-import me.trotyl.arena.status.ArmorStatus;
+import me.trotyl.arena.status.ArmorRecord;
 
 public class Armor {
 
@@ -15,7 +15,7 @@ public class Armor {
         return defence;
     }
 
-    public ArmorStatus status() {
-        return new ArmorStatus(defence);
+    public ArmorRecord record() {
+        return new ArmorRecord(defence);
     }
 }

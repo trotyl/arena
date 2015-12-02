@@ -1,7 +1,7 @@
 package me.trotyl.arena.status;
 
 
-public interface Status {
+public interface Record {
 
     public String name();
 }

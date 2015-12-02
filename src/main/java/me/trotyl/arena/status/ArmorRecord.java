@@ -1,11 +1,11 @@
 package me.trotyl.arena.status;
 
 
-public class ArmorStatus implements Status {
+public class ArmorRecord implements Record {
 
     public final int defence;
 
-    public ArmorStatus(int defence) {
+    public ArmorRecord(int defence) {
         this.defence = defence;
     }
 

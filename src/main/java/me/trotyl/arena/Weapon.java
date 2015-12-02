@@ -1,7 +1,7 @@
 package me.trotyl.arena;
 
 
-import me.trotyl.arena.status.WeaponStatus;
+import me.trotyl.arena.status.WeaponRecord;
 
 public class Weapon {
 
@@ -21,7 +21,7 @@ public class Weapon {
         return name;
     }
 
-    public WeaponStatus status() {
-        return new WeaponStatus(name);
+    public WeaponRecord record() {
+        return new WeaponRecord(name);
     }
 }

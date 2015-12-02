@@ -50,9 +50,9 @@ public class Program {
                     String.format("用%s", procedure.attacker.weapon().name()): "";
             String output = String.format("%s%s%s攻击了%s%s, %s受到了%d点伤害, %s剩余生命: %d",
                     procedure.attacker.role(), procedure.attacker.name(), weaponOutput,
-                    procedure.defender.role(), procedure.defender.name(),
-                    procedure.defender.name(), procedure.damage,
-                    procedure.defender.name(), procedure.defender.health());
+                    procedure.attackable.role(), procedure.attackable.name(),
+                    procedure.attackable.name(), procedure.damage,
+                    procedure.attackable.name(), procedure.attackable.health());
             out.println(output);
         }
 

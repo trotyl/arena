@@ -1,6 +1,6 @@
 package me.trotyl.arena.role;
 
-import me.trotyl.arena.status.PlayerStatus;
+import me.trotyl.arena.status.PlayerRecord;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -67,7 +67,7 @@ public class PlayerUnitTest {
     public void should_be_able_to_get_right_status() throws Exception {
         Player player1 = new Player("张三", 10, 5);
 
-        PlayerStatus status = player1.status();
+        PlayerRecord status = player1.record();
 
         assertThat(status.name(), is("张三"));
         assertThat(status.health(), is(10));
@@ -76,9 +76,9 @@ public class PlayerUnitTest {
     @Test
     public void should_reduce_health_when_suffered() throws Exception {
         Player player1 = new Player("张三", 10, 5);
-        PlayerStatus originalStatus = player1.status();
+        PlayerRecord originalStatus = player1.record();
         player1.suffer(5);
-        PlayerStatus finalStatus = player1.status();
+        PlayerRecord finalStatus = player1.record();
 
         assertThat(originalStatus.health(), is(10));
         assertThat(finalStatus.health(), is(5));

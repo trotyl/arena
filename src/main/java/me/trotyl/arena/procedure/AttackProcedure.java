@@ -1,20 +1,20 @@
 package me.trotyl.arena.procedure;
 
 
-import me.trotyl.arena.status.AttackableStatus;
-import me.trotyl.arena.status.AttackerStatus;
+import me.trotyl.arena.status.AttackableRecord;
+import me.trotyl.arena.status.AttackerRecord;
 
 public class AttackProcedure extends Procedure {
 
-    public AttackerStatus attacker;
-    public AttackableStatus defender;
+    public AttackerRecord attacker;
+    public AttackableRecord attackable;
     public int damage;
 
-    public AttackProcedure(AttackerStatus attacker, AttackableStatus defender, int damage) {
+    public AttackProcedure(AttackerRecord attacker, AttackableRecord attackable, int damage) {
         super();
 
         this.attacker = attacker;
-        this.defender = defender;
+        this.attackable = attackable;
         this.damage = damage;
     }
 }

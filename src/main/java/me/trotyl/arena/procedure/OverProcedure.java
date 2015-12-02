@@ -1,14 +1,14 @@
 package me.trotyl.arena.procedure;
 
 
-import me.trotyl.arena.status.PlayerStatus;
+import me.trotyl.arena.status.PlayerRecord;
 
 public class OverProcedure extends Procedure {
 
-    public PlayerStatus winner;
-    public PlayerStatus loser;
+    public PlayerRecord winner;
+    public PlayerRecord loser;
 
-    public OverProcedure(PlayerStatus winner, PlayerStatus loser) {
+    public OverProcedure(PlayerRecord winner, PlayerRecord loser) {
         this.winner = winner;
         this.loser = loser;
     }

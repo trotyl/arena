@@ -1,10 +1,10 @@
 package me.trotyl.arena.role;
 
 
-import me.trotyl.arena.status.AttackableStatus;
+import me.trotyl.arena.status.AttackableRecord;
 
 public interface Attackable {
 
     public int suffer(int injury);
-    public AttackableStatus status();
+    public AttackableRecord record();
 }

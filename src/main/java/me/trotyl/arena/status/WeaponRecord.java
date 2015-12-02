@@ -1,11 +1,11 @@
 package me.trotyl.arena.status;
 
 
-public class WeaponStatus implements Status {
+public class WeaponRecord implements Record {
 
     private final String name;
 
-    public WeaponStatus(String name) {
+    public WeaponRecord(String name) {
         this.name = name.intern();
     }
 
