@@ -34,4 +34,12 @@ public class Game {
     private void init() {
         inTurnOfPlayer1 = true;
     }
+
+    public static Game between(Player player1, Player player2) {
+        Game game = new Game();
+        game.setPlayer1(player1);
+        game.setPlayer2(player2);
+
+        return game;
+    }
 }
