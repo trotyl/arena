@@ -34,14 +34,6 @@ public class Player {
     }
 
     public PlayerStatus status() {
-        return new PlayerStatus(this);
-    }
-
-    public int health() {
-        return health;
-    }
-
-    public String name() {
-        return name;
+        return new PlayerStatus(name, health, Role.normal);
     }
 }

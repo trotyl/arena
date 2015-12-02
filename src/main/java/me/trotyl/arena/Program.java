@@ -46,19 +46,19 @@ public class Program {
 
         while (!game.over()) {
             AttackProcedure procedure = game.runStep();
-            String weaponOutput = procedure.attacker.weapon().isEmpty()? "":
-                    String.format("用%s", procedure.attacker.weapon());
+            String weaponOutput = procedure.attacker.weapon != null?
+                    String.format("用%s", procedure.attacker.weapon.name): "";
             String output = String.format("%s%s%s攻击了%s%s, %s受到了%d点伤害, %s剩余生命: %d",
-                    procedure.attacker.role(), procedure.attacker.name(), weaponOutput,
-                    procedure.defender.role(), procedure.defender.name(),
-                    procedure.defender.name(), procedure.damage,
-                    procedure.defender.name(), procedure.defender.health());
+                    procedure.attacker.role, procedure.attacker.name, weaponOutput,
+                    procedure.defender.role, procedure.defender.name,
+                    procedure.defender.name, procedure.damage,
+                    procedure.defender.name, procedure.defender.health);
             out.println(output);
         }
 
         try {
             OverProcedure procedure = game.overProcedure();
-            String output = String.format("%s被打败了.", procedure.loser.name());
+            String output = String.format("%s被打败了.", procedure.loser.name);
             out.println(output);
         } catch (Exception ignored) {}
     }

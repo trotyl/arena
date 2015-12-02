@@ -1,6 +1,7 @@
 package me.trotyl.arena;
 
 import me.trotyl.arena.role.Player;
+import me.trotyl.arena.role.Role;
 import me.trotyl.arena.role.Soldier;
 import me.trotyl.arena.procedure.AttackProcedure;
 import me.trotyl.arena.procedure.OverProcedure;
@@ -48,37 +49,37 @@ public class GameIntegrationTest {
         Procedure procedure0 = procedures.get(0);
         assertThat(procedure0, instanceOf(AttackProcedure.class));
         AttackProcedure attackProcedure0 = (AttackProcedure)procedure0;
-        assertThat(attackProcedure0.attacker.role(), is("战士"));
-        assertThat(attackProcedure0.attacker.name(), is("张三"));
-        assertThat(attackProcedure0.attacker.health(), is(10));
-        assertThat(attackProcedure0.attacker.weapon(), is("优质木棒"));
-        assertThat(attackProcedure0.defender.role(), is("普通人"));
-        assertThat(attackProcedure0.defender.name(), is("李四"));
-        assertThat(attackProcedure0.defender.health(), is(10));
+        assertThat(attackProcedure0.attacker.role, is(Role.soldier));
+        assertThat(attackProcedure0.attacker.name, is("张三"));
+        assertThat(attackProcedure0.attacker.health, is(10));
+        assertThat(attackProcedure0.attacker.weapon.name, is("优质木棒"));
+        assertThat(attackProcedure0.defender.role, is(Role.normal));
+        assertThat(attackProcedure0.defender.name, is("李四"));
+        assertThat(attackProcedure0.defender.health, is(10));
         assertThat(attackProcedure0.damage, is(10));
 
         Procedure procedure1 = procedures.get(1);
         assertThat(procedure1, instanceOf(AttackProcedure.class));
         AttackProcedure attackProcedure1 = (AttackProcedure)procedure1;
-        assertThat(attackProcedure1.attacker.name(), is("李四"));
-        assertThat(attackProcedure1.attacker.health(), is(10));
-        assertThat(attackProcedure1.defender.name(), is("张三"));
-        assertThat(attackProcedure1.defender.health(), is(6));
+        assertThat(attackProcedure1.attacker.name, is("李四"));
+        assertThat(attackProcedure1.attacker.health, is(10));
+        assertThat(attackProcedure1.defender.name, is("张三"));
+        assertThat(attackProcedure1.defender.health, is(6));
         assertThat(attackProcedure1.damage, is(4));
 
         Procedure procedure2 = procedures.get(2);
         assertThat(procedure2, instanceOf(AttackProcedure.class));
         AttackProcedure attackProcedure2 = (AttackProcedure)procedure2;
-        assertThat(attackProcedure2.attacker.name(), is("张三"));
-        assertThat(attackProcedure2.attacker.health(), is(6));
-        assertThat(attackProcedure2.defender.name(), is("李四"));
-        assertThat(attackProcedure2.defender.health(), is(0));
+        assertThat(attackProcedure2.attacker.name, is("张三"));
+        assertThat(attackProcedure2.attacker.health, is(6));
+        assertThat(attackProcedure2.defender.name, is("李四"));
+        assertThat(attackProcedure2.defender.health, is(0));
         assertThat(attackProcedure2.damage, is(10));
 
         Procedure procedure4 = procedures.get(3);
         assertThat(procedure4, instanceOf(OverProcedure.class));
         OverProcedure overProcedure = (OverProcedure)procedure4;
-        assertThat(overProcedure.winner.name(), is("张三"));
-        assertThat(overProcedure.loser.name(), is("李四"));
+        assertThat(overProcedure.winner.name, is("张三"));
+        assertThat(overProcedure.loser.name, is("李四"));
     }
 }

@@ -32,7 +32,7 @@ public class SoldierTest {
 
         soldier.attack(player);
 
-        assertThat(player.health(), is(30));
+        assertThat(player.health, is(30));
     }
 
     @Test
@@ -45,6 +45,6 @@ public class SoldierTest {
 
         player.attack(soldier);
 
-        assertThat(soldier.health(), is(90));
+        assertThat(soldier.health, is(90));
     }
 }

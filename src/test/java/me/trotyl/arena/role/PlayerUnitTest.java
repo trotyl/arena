@@ -69,8 +69,8 @@ public class PlayerUnitTest {
 
         PlayerStatus status = player1.status();
 
-        assertThat(status.name(), is("张三"));
-        assertThat(status.health(), is(10));
+        assertThat(status.name, is("张三"));
+        assertThat(status.health, is(10));
     }
 
     @Test
@@ -80,7 +80,7 @@ public class PlayerUnitTest {
         player1.suffer(5);
         PlayerStatus finalStatus = player1.status();
 
-        assertThat(originalStatus.health(), is(10));
-        assertThat(finalStatus.health(), is(5));
+        assertThat(originalStatus.health, is(10));
+        assertThat(finalStatus.health, is(5));
     }
 }

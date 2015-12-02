@@ -4,8 +4,12 @@ package me.trotyl.arena.role;
 import me.trotyl.arena.Armor;
 import me.trotyl.arena.Weapon;
 import me.trotyl.arena.procedure.AttackProcedure;
+import me.trotyl.arena.status.ArmorStatus;
+import me.trotyl.arena.status.PlayerStatus;
+import me.trotyl.arena.status.WeaponStatus;
 
 public class Soldier extends Player {
+
     private Weapon weapon;
     private Armor armor;
 
@@ -38,7 +42,10 @@ public class Soldier extends Player {
         return damage - armor.defence();
     }
 
-    public Weapon weapon() {
-        return weapon;
+    @Override
+    public PlayerStatus status() {
+        WeaponStatus weaponStatus = weapon != null? weapon.status(): null;
+        ArmorStatus armorStatus = armor != null? armor.status(): null;
+        return new PlayerStatus(name, health, Role.soldier, weaponStatus, armorStatus);
     }
 }

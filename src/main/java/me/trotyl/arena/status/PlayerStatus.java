@@ -1,38 +1,25 @@
 package me.trotyl.arena.status;
 
 
-import me.trotyl.arena.role.Player;
-import me.trotyl.arena.role.Soldier;
+import me.trotyl.arena.role.Role;
 
 public class PlayerStatus {
-    private Player player;
-    private int health;
 
-    public PlayerStatus(Player player) {
-        this.player = player;
-        this.health = player.health();
+    public final String name;
+    public final int health;
+    public final Role role;
+    public final WeaponStatus weapon;
+    public final ArmorStatus armor;
+
+    public PlayerStatus(String name, int health, Role role) {
+        this(name, health, role, null, null);
     }
 
-    public int health() {
-        return health;
-    }
-
-    public String name() {
-        return player.name();
-    }
-
-    public String weapon() {
-        if(!(player instanceof Soldier)) {
-            return "";
-        }
-        Soldier soldier = (Soldier)player;
-        if(soldier.weapon() == null) {
-            return "";
-        }
-        return soldier.weapon().name();
-    }
-
-    public String role() {
-        return (player instanceof Soldier)? "战士": "普通人";
+    public PlayerStatus(String name, int health, Role role, WeaponStatus weapon, ArmorStatus armor) {
+        this.name = name.intern();
+        this.health = health;
+        this.role = role;
+        this.weapon = weapon;
+        this.armor = armor;
     }
 }
