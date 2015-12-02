@@ -6,9 +6,9 @@ import me.trotyl.arena.status.PlayerStatus;
 
 public class Player {
 
-    private String name;
-    private int health;
-    private int aggressivity;
+    protected String name;
+    protected int health;
+    protected int aggressivity;
 
     public Player(String name, int health, int aggressivity) {
         this.name = name;
@@ -20,12 +20,12 @@ public class Player {
         return health > 0;
     }
 
-    public AttackProcedure attack(Player another) {
+    public AttackProcedure attack(Player player) {
         int damage = aggressivity;
 
-        another.suffer(damage);
+        player.suffer(damage);
 
-        return new AttackProcedure(status(), another.status(), damage);
+        return new AttackProcedure(status(), player.status(), damage);
     }
 
     protected void suffer(int damage) {
