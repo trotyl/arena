@@ -4,9 +4,9 @@ package me.trotyl.arena.role;
 import me.trotyl.arena.Armor;
 import me.trotyl.arena.Weapon;
 import me.trotyl.arena.procedure.AttackProcedure;
-import me.trotyl.arena.status.ArmorRecord;
-import me.trotyl.arena.status.PlayerRecord;
-import me.trotyl.arena.status.WeaponRecord;
+import me.trotyl.arena.record.ArmorRecord;
+import me.trotyl.arena.record.PlayerRecord;
+import me.trotyl.arena.record.WeaponRecord;
 
 public class Soldier extends Player {
 

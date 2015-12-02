@@ -1,7 +1,7 @@
 package me.trotyl.arena;
 
 
-import me.trotyl.arena.status.WeaponRecord;
+import me.trotyl.arena.record.WeaponRecord;
 
 public class Weapon {
 

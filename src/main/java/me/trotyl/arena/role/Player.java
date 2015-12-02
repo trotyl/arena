@@ -2,7 +2,7 @@ package me.trotyl.arena.role;
 
 
 import me.trotyl.arena.procedure.AttackProcedure;
-import me.trotyl.arena.status.PlayerRecord;
+import me.trotyl.arena.record.PlayerRecord;
 
 public class Player implements Attacker, Attackable {
 

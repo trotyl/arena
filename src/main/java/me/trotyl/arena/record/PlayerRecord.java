@@ -1,4 +1,4 @@
-package me.trotyl.arena.status;
+package me.trotyl.arena.record;
 
 
 import me.trotyl.arena.role.Role;

@@ -1,4 +1,4 @@
-package me.trotyl.arena.status;
+package me.trotyl.arena.record;
 
 
 public class WeaponRecord implements Record {

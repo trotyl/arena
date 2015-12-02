@@ -1,8 +1,8 @@
 package me.trotyl.arena.procedure;
 
 
-import me.trotyl.arena.status.AttackableRecord;
-import me.trotyl.arena.status.AttackerRecord;
+import me.trotyl.arena.record.AttackableRecord;
+import me.trotyl.arena.record.AttackerRecord;
 
 public class AttackProcedure extends Procedure {
 

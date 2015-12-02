@@ -1,6 +1,6 @@
 package me.trotyl.arena.role;
 
-import me.trotyl.arena.status.PlayerRecord;
+import me.trotyl.arena.record.PlayerRecord;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

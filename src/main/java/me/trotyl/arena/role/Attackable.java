@@ -1,7 +1,7 @@
 package me.trotyl.arena.role;
 
 
-import me.trotyl.arena.status.AttackableRecord;
+import me.trotyl.arena.record.AttackableRecord;
 
 public interface Attackable {
 

@@ -1,7 +1,7 @@
 package me.trotyl.arena.procedure;
 
 
-import me.trotyl.arena.status.PlayerRecord;
+import me.trotyl.arena.record.PlayerRecord;
 
 public class OverProcedure extends Procedure {
 
