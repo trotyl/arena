@@ -5,6 +5,13 @@ import me.trotyl.arena.record.ArmorRecord;
 
 public class Armor {
 
+    public static final Armor none = new Armor(0) {
+        @Override
+        public ArmorRecord record() {
+            return ArmorRecord.none;
+        }
+    };
+
     private final int defence;
 
     public Armor(int defence) {

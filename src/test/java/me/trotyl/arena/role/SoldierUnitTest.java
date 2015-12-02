@@ -42,7 +42,18 @@ public class SoldierUnitTest {
     }
 
     @Test
-    public void should_be_more_defensive_with_weapon() throws Exception {
+    public void should_be_as_normal_player_without_weapon() throws Exception {
+        Soldier soldier = new Soldier("张三", 100, 20);
+
+        Player player = new Player("李四", 100, 10);
+
+        soldier.attack(player);
+
+        assertThat(player.health, is(80));
+    }
+
+    @Test
+    public void should_be_more_defensive_with_armor() throws Exception {
         Soldier soldier = new Soldier("张三", 100, 20);
         Armor armor = new Armor(10);
         soldier.equip(armor);
@@ -52,6 +63,17 @@ public class SoldierUnitTest {
         player.attack(soldier);
 
         assertThat(soldier.health, is(90));
+    }
+
+    @Test
+    public void should_be_as_normal_player_without_armor() throws Exception {
+        Soldier soldier = new Soldier("张三", 100, 20);
+
+        Player player = new Player("李四", 100, 20);
+
+        player.attack(soldier);
+
+        assertThat(soldier.health, is(80));
     }
 
 

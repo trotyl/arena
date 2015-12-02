@@ -7,7 +7,7 @@ import me.trotyl.arena.role.Attacker;
 
 import java.util.Random;
 
-public class Strike implements Attribute {
+public class Strike extends Attribute {
 
     private final Random random;
     private final float rate;
