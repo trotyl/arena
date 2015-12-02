@@ -39,11 +39,10 @@ public class ProgramIntegrationTest {
         program.run();
 
         InOrder inOrder = inOrder(out);
-        inOrder.verify(out).println("张三攻击了李四, 李四受到了8点伤害, 李四剩余生命: 12");
-        inOrder.verify(out).println("李四攻击了张三, 张三受到了9点伤害, 张三剩余生命: 1");
-        inOrder.verify(out).println("张三攻击了李四, 李四受到了8点伤害, 李四剩余生命: 4");
-        inOrder.verify(out).println("李四攻击了张三, 张三受到了9点伤害, 张三剩余生命: -8");
-        inOrder.verify(out).println("张三被打败了.");
+        inOrder.verify(out).println("战士张三用优质木棒攻击了普通人李四, 李四受到了10点伤害, 李四剩余生命: 10");
+        inOrder.verify(out).println("普通人李四攻击了战士张三, 张三受到了4点伤害, 张三剩余生命: 6");
+        inOrder.verify(out).println("战士张三用优质木棒攻击了普通人李四, 李四受到了10点伤害, 李四剩余生命: 0");
+        inOrder.verify(out).println("李四被打败了.");
         verifyNoMoreInteractions(out);
     }
 }

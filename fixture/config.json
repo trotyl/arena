@@ -2,11 +2,20 @@
   "player1": {
     "name": "张三",
     "health": 10,
-    "aggressivity": 8
+    "aggressivity": 8,
+    "role": "Soldier",
+    "weapon": {
+      "name": "优质木棒",
+      "aggressivity": 2
+    },
+    "armor": {
+      "defence": 5
+    }
   },
   "player2": {
     "name": "李四",
     "health": 20,
-    "aggressivity": 9
+    "aggressivity": 9,
+    "role": "Normal"
   }
 }

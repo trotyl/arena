@@ -3,6 +3,7 @@ package me.trotyl.arena;
 import me.trotyl.arena.role.Player;
 import me.trotyl.arena.procedure.AttackProcedure;
 import me.trotyl.arena.procedure.OverProcedure;
+import me.trotyl.arena.role.Soldier;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
@@ -45,8 +46,11 @@ public class Program {
 
         while (!game.over()) {
             AttackProcedure procedure = game.runStep();
-            String output = String.format("%s攻击了%s, %s受到了%d点伤害, %s剩余生命: %d",
-                    procedure.attacker.name(), procedure.defender.name(),
+            String weaponOutput = procedure.attacker.weapon().isEmpty()? "":
+                    String.format("用%s", procedure.attacker.weapon());
+            String output = String.format("%s%s%s攻击了%s%s, %s受到了%d点伤害, %s剩余生命: %d",
+                    procedure.attacker.role(), procedure.attacker.name(), weaponOutput,
+                    procedure.defender.role(), procedure.defender.name(),
                     procedure.defender.name(), procedure.damage,
                     procedure.defender.name(), procedure.defender.health());
             out.println(output);
@@ -63,7 +67,36 @@ public class Program {
         String name = object.getString("name");
         int health = object.getInt("health");
         int aggressivity = object.getInt("aggressivity");
+        String role = object.getString("role");
+        if (role.equals("Normal")) {
+            return new Player(name, health, aggressivity);
+        }
 
-        return new Player(name, health, aggressivity);
+        Soldier soldier = new Soldier(name, health, aggressivity);
+        if (object.has("weapon")) {
+            JSONObject weaponObject = object.getJSONObject("weapon");
+            Weapon weapon = parseWeapon(weaponObject);
+            soldier.equip(weapon);
+        }
+        if (object.has("armor")) {
+            JSONObject armorObject = object.getJSONObject("armor");
+            Armor armor = parseArmor(armorObject);
+            soldier.equip(armor);
+        }
+
+        return soldier;
+    }
+
+    private Weapon parseWeapon(JSONObject object) {
+        String name = object.getString("name");
+        int aggressivity = object.getInt("aggressivity");
+
+        return new Weapon(name, aggressivity);
+    }
+
+    private Armor parseArmor(JSONObject object) {
+        int defence = object.getInt("defence");
+
+        return new Armor(defence);
     }
 }
