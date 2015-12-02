@@ -22,6 +22,6 @@ public class Weapon {
     }
 
     public WeaponStatus status() {
-        return new WeaponStatus(name, aggressivity);
+        return new WeaponStatus(name);
     }
 }

@@ -10,7 +10,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 
-public class SoldierTest {
+public class SoldierUnitTest {
 
     @Before
     public void setUp() throws Exception {

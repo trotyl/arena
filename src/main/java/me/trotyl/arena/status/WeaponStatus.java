@@ -1,13 +1,16 @@
 package me.trotyl.arena.status;
 
 
-public class WeaponStatus {
+public class WeaponStatus implements Status {
 
-    public final int aggressivity;
-    public final String name;
+    private final String name;
 
-    public WeaponStatus(String name, int aggressivity) {
+    public WeaponStatus(String name) {
         this.name = name.intern();
-        this.aggressivity = aggressivity;
+    }
+
+    @Override
+    public String name() {
+        return name;
     }
 }

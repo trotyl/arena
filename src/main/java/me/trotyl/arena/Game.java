@@ -1,6 +1,8 @@
 package me.trotyl.arena;
 
 
+import me.trotyl.arena.role.Attackable;
+import me.trotyl.arena.role.Attacker;
 import me.trotyl.arena.role.Player;
 import me.trotyl.arena.procedure.AttackProcedure;
 import me.trotyl.arena.procedure.OverProcedure;
@@ -60,8 +62,8 @@ public class Game {
     }
 
     public AttackProcedure runStep() {
-        Player attacker = inTurnOfPlayer1? player1: player2;
-        Player defender = attacker.equals(player1)? player2: player1;
+        Attacker attacker = inTurnOfPlayer1? player1: player2;
+        Attackable defender = attacker.equals(player1)? player2: player1;
 
         AttackProcedure procedure = attacker.attack(defender);
         inTurnOfPlayer1 = ! inTurnOfPlayer1;

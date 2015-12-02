@@ -3,13 +3,13 @@ package me.trotyl.arena.status;
 
 import me.trotyl.arena.role.Role;
 
-public class PlayerStatus {
+public class PlayerStatus implements AttackerStatus, AttackableStatus {
 
-    public final String name;
-    public final int health;
-    public final Role role;
-    public final WeaponStatus weapon;
-    public final ArmorStatus armor;
+    private final String name;
+    private final int health;
+    private final Role role;
+    private final WeaponStatus weapon;
+    private final ArmorStatus armor;
 
     public PlayerStatus(String name, int health, Role role) {
         this(name, health, role, null, null);
@@ -21,5 +21,30 @@ public class PlayerStatus {
         this.role = role;
         this.weapon = weapon;
         this.armor = armor;
+    }
+
+    @Override
+    public String name() {
+        return name;
+    }
+
+    @Override
+    public int health() {
+        return health;
+    }
+
+    @Override
+    public ArmorStatus armor() {
+        return armor;
+    }
+
+    @Override
+    public Role role() {
+        return role;
+    }
+
+    @Override
+    public WeaponStatus weapon() {
+        return weapon;
     }
 }

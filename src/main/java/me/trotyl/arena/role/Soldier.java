@@ -26,20 +26,18 @@ public class Soldier extends Player {
     }
 
     @Override
-    public AttackProcedure attack(Player player) {
-        int damage = aggressivity + weapon.aggressivity();
+    public AttackProcedure attack(Attackable attackable) {
+        int damage = attackable.suffer(aggressivity + weapon.aggressivity());
 
-        damage = player.suffer(damage);
-
-        return new AttackProcedure(status(), player.status(), damage);
+        return new AttackProcedure(status(), attackable.status(), damage);
     }
 
     @Override
-    public int suffer(int damage) {
-        if (damage > armor.defence()) {
-            health -= (damage - armor.defence());
+    public int suffer(int injury) {
+        if (injury > armor.defence()) {
+            health -= (injury - armor.defence());
         }
-        return damage - armor.defence();
+        return injury - armor.defence();
     }
 
     @Override
