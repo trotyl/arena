@@ -52,9 +52,7 @@ public class Game {
             procedures.add(runStep());
         }
 
-        try {
-            procedures.add(overProcedure());
-        } catch (Exception ignored) {}
+        procedures.add(overProcedure());
 
         return procedures;
     }
@@ -69,9 +67,9 @@ public class Game {
         return procedure;
     }
 
-    public OverProcedure overProcedure() throws Exception {
+    public OverProcedure overProcedure() {
         if (!over()) {
-            throw new Exception("The game is not over yet.");
+            return null;
         }
 
         Player winner = player1.alive()? player1: player2;

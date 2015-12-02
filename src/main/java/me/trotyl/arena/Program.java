@@ -52,12 +52,10 @@ public class Program {
             out.println(output);
         }
 
-        try {
-            OverProcedure procedure = game.overProcedure();
+        OverProcedure procedure = game.overProcedure();
 
-            String output = formatter.formatOver(procedure);
+        String output = formatter.formatOver(procedure);
 
-            out.println(output);
-        } catch (Exception ignored) {}
+        out.println(output);
     }
 }

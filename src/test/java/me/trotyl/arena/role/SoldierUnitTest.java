@@ -2,7 +2,6 @@ package me.trotyl.arena.role;
 
 import me.trotyl.arena.Armor;
 import me.trotyl.arena.Weapon;
-import me.trotyl.arena.attribute.Attribute;
 import me.trotyl.arena.attribute.Strike;
 import org.junit.After;
 import org.junit.Before;
@@ -31,8 +30,7 @@ public class SoldierUnitTest {
     @Test
     public void should_be_more_aggressive_with_weapon() throws Exception {
         Soldier soldier = new Soldier("张三", 100, 20);
-        Weapon weapon = new Weapon("优质木棒", 50);
-        soldier.equip(weapon);
+        soldier.equip(new Weapon("优质木棒", 50));
 
         Player player = new Player("李四", 100, 10);
 
@@ -55,8 +53,7 @@ public class SoldierUnitTest {
     @Test
     public void should_be_more_defensive_with_armor() throws Exception {
         Soldier soldier = new Soldier("张三", 100, 20);
-        Armor armor = new Armor(10);
-        soldier.equip(armor);
+        soldier.equip(new Armor(10));
 
         Player player = new Player("李四", 100, 20);
 
@@ -79,12 +76,10 @@ public class SoldierUnitTest {
 
     @Test
     public void should_have_3_times_damage_with_strike() throws Exception {
-        Soldier soldier = new Soldier("张三", 100, 20);
-        Weapon weapon = new Weapon("我真剑", 10);
         Random random = mock(Random.class);
         when(random.nextFloat()).thenReturn(0.0f);
-        Attribute strike = new Strike(random, 1);
-        weapon.with(strike);
+        Weapon weapon = new Weapon("我真剑", 10, new Strike(random, 1));
+        Soldier soldier = new Soldier("张三", 100, 20);
         soldier.equip(weapon);
 
         Player player = new Player("李四", 100, 10);
