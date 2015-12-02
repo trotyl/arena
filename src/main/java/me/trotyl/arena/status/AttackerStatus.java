@@ -1,5 +1,5 @@
 package me.trotyl.arena.status;
 
 
-public interface AttackerStatus extends Status, WeaponerStatus, RolerStatus {
+public interface AttackerStatus extends WeaponerStatus, RolerStatus {
 }
