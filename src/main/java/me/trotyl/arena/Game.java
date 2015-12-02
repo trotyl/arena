@@ -77,7 +77,7 @@ public class Game {
         Player winner = player1.alive()? player1: player2;
         Player loser = winner.equals(player1)? player2: player1;
 
-        return new OverProcedure(winner.status(), loser.status());
+        return new OverProcedure(winner.record(), loser.record());
     }
 
     public boolean over() {

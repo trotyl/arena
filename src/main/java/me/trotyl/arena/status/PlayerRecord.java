@@ -3,19 +3,19 @@ package me.trotyl.arena.status;
 
 import me.trotyl.arena.role.Role;
 
-public class PlayerStatus implements AttackerStatus, AttackableStatus {
+public class PlayerRecord implements AttackerRecord, AttackableRecord {
 
     private final String name;
     private final int health;
     private final Role role;
-    private final WeaponStatus weapon;
-    private final ArmorStatus armor;
+    private final WeaponRecord weapon;
+    private final ArmorRecord armor;
 
-    public PlayerStatus(String name, int health, Role role) {
+    public PlayerRecord(String name, int health, Role role) {
         this(name, health, role, null, null);
     }
 
-    public PlayerStatus(String name, int health, Role role, WeaponStatus weapon, ArmorStatus armor) {
+    public PlayerRecord(String name, int health, Role role, WeaponRecord weapon, ArmorRecord armor) {
         this.name = name.intern();
         this.health = health;
         this.role = role;
@@ -34,7 +34,7 @@ public class PlayerStatus implements AttackerStatus, AttackableStatus {
     }
 
     @Override
-    public ArmorStatus armor() {
+    public ArmorRecord armor() {
         return armor;
     }
 
@@ -44,7 +44,7 @@ public class PlayerStatus implements AttackerStatus, AttackableStatus {
     }
 
     @Override
-    public WeaponStatus weapon() {
+    public WeaponRecord weapon() {
         return weapon;
     }
 }

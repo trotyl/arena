@@ -4,9 +4,9 @@ package me.trotyl.arena.role;
 import me.trotyl.arena.Armor;
 import me.trotyl.arena.Weapon;
 import me.trotyl.arena.procedure.AttackProcedure;
-import me.trotyl.arena.status.ArmorStatus;
-import me.trotyl.arena.status.PlayerStatus;
-import me.trotyl.arena.status.WeaponStatus;
+import me.trotyl.arena.status.ArmorRecord;
+import me.trotyl.arena.status.PlayerRecord;
+import me.trotyl.arena.status.WeaponRecord;
 
 public class Soldier extends Player {
 
@@ -29,7 +29,7 @@ public class Soldier extends Player {
     public AttackProcedure attack(Attackable attackable) {
         int damage = attackable.suffer(aggressivity + weapon.aggressivity());
 
-        return new AttackProcedure(status(), attackable.status(), damage);
+        return new AttackProcedure(record(), attackable.record(), damage);
     }
 
     @Override
@@ -41,9 +41,9 @@ public class Soldier extends Player {
     }
 
     @Override
-    public PlayerStatus status() {
-        WeaponStatus weaponStatus = weapon != null? weapon.status(): null;
-        ArmorStatus armorStatus = armor != null? armor.status(): null;
-        return new PlayerStatus(name, health, Role.soldier, weaponStatus, armorStatus);
+    public PlayerRecord record() {
+        WeaponRecord weaponRecord = weapon != null? weapon.record(): null;
+        ArmorRecord armorRecord = armor != null? armor.record(): null;
+        return new PlayerRecord(name, health, Role.soldier, weaponRecord, armorRecord);
     }
 }

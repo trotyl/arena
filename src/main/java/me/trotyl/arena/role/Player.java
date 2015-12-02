@@ -2,7 +2,7 @@ package me.trotyl.arena.role;
 
 
 import me.trotyl.arena.procedure.AttackProcedure;
-import me.trotyl.arena.status.PlayerStatus;
+import me.trotyl.arena.status.PlayerRecord;
 
 public class Player implements Attacker, Attackable {
 
@@ -25,13 +25,14 @@ public class Player implements Attacker, Attackable {
         return damage;
     }
 
-    public PlayerStatus status() {
-        return new PlayerStatus(name, health, Role.normal);
+    @Override
+    public PlayerRecord record() {
+        return new PlayerRecord(name, health, Role.normal);
     }
 
     @Override
     public AttackProcedure attack(Attackable attackable) {
         int damage = attackable.suffer(aggressivity);
-        return new AttackProcedure(status(), attackable.status(), damage);
+        return new AttackProcedure(record(), attackable.record(), damage);
     }
 }

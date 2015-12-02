@@ -52,25 +52,25 @@ public class GameIntegrationTest {
         assertThat(attackProcedure0.attacker.role(), is(Role.soldier));
         assertThat(attackProcedure0.attacker.name(), is("张三"));
         assertThat(attackProcedure0.attacker.weapon().name(), is("优质木棒"));
-        assertThat(attackProcedure0.defender.role(), is(Role.normal));
-        assertThat(attackProcedure0.defender.name(), is("李四"));
-        assertThat(attackProcedure0.defender.health(), is(10));
+        assertThat(attackProcedure0.attackable.role(), is(Role.normal));
+        assertThat(attackProcedure0.attackable.name(), is("李四"));
+        assertThat(attackProcedure0.attackable.health(), is(10));
         assertThat(attackProcedure0.damage, is(10));
 
         Procedure procedure1 = procedures.get(1);
         assertThat(procedure1, instanceOf(AttackProcedure.class));
         AttackProcedure attackProcedure1 = (AttackProcedure)procedure1;
         assertThat(attackProcedure1.attacker.name(), is("李四"));
-        assertThat(attackProcedure1.defender.name(), is("张三"));
-        assertThat(attackProcedure1.defender.health(), is(6));
+        assertThat(attackProcedure1.attackable.name(), is("张三"));
+        assertThat(attackProcedure1.attackable.health(), is(6));
         assertThat(attackProcedure1.damage, is(4));
 
         Procedure procedure2 = procedures.get(2);
         assertThat(procedure2, instanceOf(AttackProcedure.class));
         AttackProcedure attackProcedure2 = (AttackProcedure)procedure2;
         assertThat(attackProcedure2.attacker.name(), is("张三"));
-        assertThat(attackProcedure2.defender.name(), is("李四"));
-        assertThat(attackProcedure2.defender.health(), is(0));
+        assertThat(attackProcedure2.attackable.name(), is("李四"));
+        assertThat(attackProcedure2.attackable.health(), is(0));
         assertThat(attackProcedure2.damage, is(10));
 
         Procedure procedure4 = procedures.get(3);
