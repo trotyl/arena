@@ -44,9 +44,9 @@ public class GameIntegrationTest {
     public void should_produce_the_right_procedure() throws Exception {
         List<Procedure> procedures = game.run();
 
-        assertThat(procedures.size(), is(4));
+        assertThat(procedures.size(), is(7));
 
-        Procedure procedure0 = procedures.get(0);
+        Procedure procedure0 = procedures.get(1);
         assertThat(procedure0, instanceOf(AttackProcedure.class));
         AttackProcedure attackProcedure0 = (AttackProcedure)procedure0;
         assertThat(attackProcedure0.attacker.role(), is(Role.soldier));
@@ -57,7 +57,7 @@ public class GameIntegrationTest {
         assertThat(attackProcedure0.attackable.health(), is(10));
         assertThat(attackProcedure0.damage.extent, is(10));
 
-        Procedure procedure1 = procedures.get(1);
+        Procedure procedure1 = procedures.get(3);
         assertThat(procedure1, instanceOf(AttackProcedure.class));
         AttackProcedure attackProcedure1 = (AttackProcedure)procedure1;
         assertThat(attackProcedure1.attacker.name(), is("李四"));
@@ -65,7 +65,7 @@ public class GameIntegrationTest {
         assertThat(attackProcedure1.attackable.health(), is(6));
         assertThat(attackProcedure1.damage.extent, is(4));
 
-        Procedure procedure2 = procedures.get(2);
+        Procedure procedure2 = procedures.get(5);
         assertThat(procedure2, instanceOf(AttackProcedure.class));
         AttackProcedure attackProcedure2 = (AttackProcedure)procedure2;
         assertThat(attackProcedure2.attacker.name(), is("张三"));
@@ -73,7 +73,7 @@ public class GameIntegrationTest {
         assertThat(attackProcedure2.attackable.health(), is(0));
         assertThat(attackProcedure2.damage.extent, is(10));
 
-        Procedure procedure4 = procedures.get(3);
+        Procedure procedure4 = procedures.get(6);
         assertThat(procedure4, instanceOf(OverProcedure.class));
         OverProcedure overProcedure = (OverProcedure)procedure4;
         assertThat(overProcedure.winner.name(), is("张三"));

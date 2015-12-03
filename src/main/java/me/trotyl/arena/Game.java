@@ -1,12 +1,14 @@
 package me.trotyl.arena;
 
 
+import me.trotyl.arena.procedure.EffectProcedure;
 import me.trotyl.arena.role.Attackable;
 import me.trotyl.arena.role.Attacker;
 import me.trotyl.arena.role.Player;
 import me.trotyl.arena.procedure.AttackProcedure;
 import me.trotyl.arena.procedure.OverProcedure;
 import me.trotyl.arena.procedure.Procedure;
+import org.javatuples.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +51,9 @@ public class Game {
         List<Procedure> procedures = new ArrayList<Procedure>();
 
         while (!over()) {
-            procedures.add(runStep());
+            Pair<EffectProcedure, AttackProcedure> pair = runStep();
+            procedures.add(pair.getValue0());
+            procedures.add(pair.getValue1());
         }
 
         procedures.add(overProcedure());
@@ -57,14 +61,14 @@ public class Game {
         return procedures;
     }
 
-    public AttackProcedure runStep() {
+    public Pair<EffectProcedure, AttackProcedure> runStep() {
         Attacker attacker = inTurnOfPlayer1? player1: player2;
         Attackable attackable = attacker.equals(player1)? player2: player1;
 
-        AttackProcedure procedure = attacker.attack(attackable);
+        Pair<EffectProcedure, AttackProcedure> pair = attacker.attack(attackable);
         inTurnOfPlayer1 = ! inTurnOfPlayer1;
 
-        return procedure;
+        return pair;
     }
 
     public OverProcedure overProcedure() {

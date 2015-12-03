@@ -1,8 +1,10 @@
 package me.trotyl.arena;
 
 import me.trotyl.arena.procedure.AttackProcedure;
+import me.trotyl.arena.procedure.EffectProcedure;
 import me.trotyl.arena.procedure.OverProcedure;
 import me.trotyl.arena.role.Player;
+import org.javatuples.Pair;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
@@ -45,11 +47,17 @@ public class Program {
 
     public void run() {
         while (!game.over()) {
-            AttackProcedure procedure = game.runStep();
+            Pair<EffectProcedure, AttackProcedure> pair = game.runStep();
 
-            String output = formatter.formatAttack(procedure);
+            String effect = formatter.formatEffect(pair.getValue0());
+            if (effect != null) {
+                out.println(effect);
+            }
 
-            out.println(output);
+            String attack = formatter.formatAttack(pair.getValue1());
+            if (attack != null) {
+                out.println(attack);
+            }
         }
 
         OverProcedure procedure = game.overProcedure();

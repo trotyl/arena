@@ -1,10 +1,12 @@
 package me.trotyl.arena;
 
 import me.trotyl.arena.procedure.AttackProcedure;
+import me.trotyl.arena.procedure.EffectProcedure;
 import me.trotyl.arena.role.Attackable;
 import me.trotyl.arena.role.Attacker;
 import me.trotyl.arena.role.Player;
 import me.trotyl.arena.role.Soldier;
+import org.javatuples.Pair;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +24,8 @@ public class FormatterUnitTest {
             anotherSoldierWithArmor, anotherSoldierWithWeaponAndArmor;
 
     private String formattedAttack(Attacker attacker, Attackable attackable) {
-        AttackProcedure attack = attacker.attack(attackable);
+        Pair<EffectProcedure, AttackProcedure> pair = attacker.attack(attackable);
+        AttackProcedure attack = pair.getValue1();
         return formatter.formatAttack(attack);
     }
 

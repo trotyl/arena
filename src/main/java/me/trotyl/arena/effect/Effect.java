@@ -1,16 +1,29 @@
 package me.trotyl.arena.effect;
 
 
+import me.trotyl.arena.attribute.Attribute;
+import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.record.EffectRecord;
 import me.trotyl.arena.role.Attackable;
+import me.trotyl.arena.role.Attacker;
 
 public abstract class Effect {
 
     public static final Effect none = new Effect(0) {
 
         @Override
-        public EffectRecord take(Attackable attackable) {
+        public DamageRecord take(Attackable attackable) {
+            return DamageRecord.none;
+        }
+
+        @Override
+        public EffectRecord record() {
             return EffectRecord.none;
+        }
+
+        @Override
+        public DamageRecord sway(Attacker attacker, Attackable attackable, Attribute attribute) {
+            return attribute.apply(attacker, attackable);
         }
     };
 
@@ -20,5 +33,9 @@ public abstract class Effect {
         this.remain = remain;
     }
 
-    public abstract EffectRecord take(Attackable attackable);
+    public abstract DamageRecord take(Attackable attackable);
+
+    public abstract EffectRecord record();
+
+    public abstract DamageRecord sway(Attacker attacker, Attackable attackable, Attribute attribute);
 }

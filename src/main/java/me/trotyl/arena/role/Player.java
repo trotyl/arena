@@ -4,8 +4,10 @@ package me.trotyl.arena.role;
 import me.trotyl.arena.attribute.Attribute;
 import me.trotyl.arena.effect.Effect;
 import me.trotyl.arena.procedure.AttackProcedure;
+import me.trotyl.arena.procedure.EffectProcedure;
 import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.record.PlayerRecord;
+import org.javatuples.Pair;
 
 public class Player implements Attacker, Attackable {
 
@@ -18,6 +20,7 @@ public class Player implements Attacker, Attackable {
         this.name = name;
         this.health = health;
         this.aggressivity = aggressivity;
+        this.effect = Effect.none;
     }
 
     public boolean alive() {
@@ -51,8 +54,11 @@ public class Player implements Attacker, Attackable {
     }
 
     @Override
-    public AttackProcedure attack(Attackable attackable) {
-        DamageRecord damage = Attribute.none.apply(this, attackable);
-        return new AttackProcedure(record(), attackable.record(), damage);
+    public Pair<EffectProcedure, AttackProcedure> attack(Attackable attackable) {
+        DamageRecord effectDamage = effect.take(this);
+        EffectProcedure effectProcedure = new EffectProcedure(record(), effect.record(), effectDamage);
+        DamageRecord attackDamage = effect.sway(this, attackable, Attribute.none);
+        AttackProcedure attackProcedure = new AttackProcedure(record(), attackable.record(), attackDamage);
+        return new Pair<>(effectProcedure, attackProcedure);
     }
 }

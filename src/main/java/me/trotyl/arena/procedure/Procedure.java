@@ -1,6 +1,6 @@
 package me.trotyl.arena.procedure;
 
 
-public class Procedure {
+public abstract class Procedure {
 
 }

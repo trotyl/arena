@@ -1,6 +1,6 @@
 package me.trotyl.arena.effect;
 
-import me.trotyl.arena.record.EffectRecord;
+import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.record.PlayerRecord;
 import me.trotyl.arena.role.Player;
 import org.junit.After;
@@ -28,10 +28,10 @@ public class ToxinTest {
         Player player = new Player("张三", 10, 5);
         Toxin toxin = new Toxin(2, 2);
 
-        EffectRecord effectRecord = toxin.take(player);
+        DamageRecord damageRecord = toxin.take(player);
         PlayerRecord playerRecord = player.record();
 
-        assertThat(effectRecord.damage.extent, is(2));
+        assertThat(damageRecord.extent, is(2));
         assertThat(playerRecord.health(), is(8));
     }
 }

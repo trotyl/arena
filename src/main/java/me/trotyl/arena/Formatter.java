@@ -2,6 +2,7 @@ package me.trotyl.arena;
 
 
 import me.trotyl.arena.procedure.AttackProcedure;
+import me.trotyl.arena.procedure.EffectProcedure;
 import me.trotyl.arena.procedure.OverProcedure;
 import me.trotyl.arena.record.WeaponRecord;
 
@@ -24,5 +25,9 @@ public class Formatter {
         String result = String.format("%s被打败了.", procedure.loser.name());
 
         return result;
+    }
+
+    public String formatEffect(EffectProcedure procedure) {
+        return null;
     }
 }
