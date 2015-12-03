@@ -159,4 +159,18 @@ public class GameTest {
         inOrder.verify(player1).record();
         verifyNoMoreInteractions(player0, player1);
     }
+
+    @Test
+    public void over_should_have_proper_result() {
+        Player player0 = mock(Player.class);
+        Player player1 = mock(Player.class);
+        when(player0.alive()).thenReturn(true);
+        when(player1.alive()).thenReturn(true, true, false);
+
+        game = Game.between(player0, player1);
+
+        assertThat(game.over(), is(false));
+        assertThat(game.over(), is(false));
+        assertThat(game.over(), is(true));
+    }
 }
