@@ -37,33 +37,19 @@ public class PlayerTest {
     }
 
     @Test
-    public void should_be_alive_when_health_is_greater_than_zero() throws Exception {
-        Player player = new Player("张三", 1, 5);
+    public void suffer_should_have_proper_result() {
+        PlayerRecord record0 = player1.record();
+        assertThat(record0.health(), is(10));
 
-        boolean isAlive = player.alive();
+        player1.suffer(5, Effect.none);
 
-        assertThat(isAlive, is(true));
-    }
+        PlayerRecord record1 = player1.record();
+        assertThat(record1.health(), is(5));
 
-    @Test
-    public void should_reduce_health_another_when_attack() throws Exception {
-        Player player1 = new Player("张三", 10, 5);
-        Player player2 = new Player("李四", 10, 3);
+        player1.suffer(5, Effect.none);
 
-        player1.attack(player2);
-
-        assertTrue(player1.alive());
-        assertTrue(player2.alive());
-
-        player2.attack(player1);
-
-        assertTrue(player1.alive());
-        assertTrue(player2.alive());
-
-        player1.attack(player2);
-
-        assertTrue(player1.alive());
-        assertFalse(player2.alive());
+        PlayerRecord record2 = player1.record();
+        assertThat(record2.health(), is(0));
     }
 
     @Test
@@ -74,16 +60,5 @@ public class PlayerTest {
 
         assertThat(status.name(), is("张三"));
         assertThat(status.health(), is(10));
-    }
-
-    @Test
-    public void should_reduce_health_when_suffered() throws Exception {
-        Player player1 = new Player("张三", 10, 5);
-        PlayerRecord originalStatus = player1.record();
-        player1.suffer(5, Effect.none);
-        PlayerRecord finalStatus = player1.record();
-
-        assertThat(originalStatus.health(), is(10));
-        assertThat(finalStatus.health(), is(5));
     }
 }
