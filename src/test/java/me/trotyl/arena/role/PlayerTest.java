@@ -3,7 +3,9 @@ package me.trotyl.arena.role;
 import me.trotyl.arena.effect.Effect;
 import me.trotyl.arena.effect.Fire;
 import me.trotyl.arena.effect.Toxin;
+import me.trotyl.arena.record.ArmorRecord;
 import me.trotyl.arena.record.PlayerRecord;
+import me.trotyl.arena.record.WeaponRecord;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -65,14 +67,14 @@ public class PlayerTest {
         assertThat(player2.effect, is(toxin));
     }
 
-
     @Test
-    public void should_be_able_to_get_right_status() throws Exception {
-        Player player1 = new Player("张三", 10, 5);
+    public void record_should_have_proper_result() {
+        PlayerRecord record = player1.record();
 
-        PlayerRecord status = player1.record();
-
-        assertThat(status.name(), is("张三"));
-        assertThat(status.health(), is(10));
+        assertThat(record.name(), is("张三"));
+        assertThat(record.health(), is(10));
+        assertThat(record.armor(), is(ArmorRecord.none));
+        assertThat(record.weapon(), is(WeaponRecord.none));
+        assertThat(record.role(), is(Role.normal));
     }
 }
