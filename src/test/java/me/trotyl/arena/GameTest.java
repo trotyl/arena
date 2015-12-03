@@ -138,4 +138,25 @@ public class GameTest {
         assertThat(procedure.winner.name(), is("张三"));
         assertThat(procedure.loser.name(), is("李四"));
     }
+
+    @Test
+    public void over_procedure_should_have_proper_invocation() {
+        Player player0 = mock(Player.class);
+        Player player1 = mock(Player.class);
+        when(player0.alive()).thenReturn(true);
+        when(player1.alive()).thenReturn(false);
+        when(player0.attack(player1)).thenReturn(new Pair<>(EffectProcedure.none, AttackProcedure.none));
+        when(player1.attack(player0)).thenReturn(new Pair<>(EffectProcedure.none, AttackProcedure.none));
+
+        game = Game.between(player0, player1);
+        game.overProcedure();
+
+        InOrder inOrder = inOrder(player0, player1);
+        inOrder.verify(player0).alive();
+        inOrder.verify(player1).alive();
+        inOrder.verify(player0).alive();
+        inOrder.verify(player0).record();
+        inOrder.verify(player1).record();
+        verifyNoMoreInteractions(player0, player1);
+    }
 }
