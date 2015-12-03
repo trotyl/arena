@@ -5,12 +5,9 @@ import me.trotyl.arena.record.EffectRecord;
 import me.trotyl.arena.role.Attackable;
 
 public class Swoon extends Effect {
-    private int limit;
 
     public Swoon(int limit) {
-        super();
-
-        this.limit = limit;
+        super(2);
     }
 
     @Override

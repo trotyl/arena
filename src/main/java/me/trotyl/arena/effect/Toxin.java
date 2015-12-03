@@ -9,6 +9,8 @@ public class Toxin extends Effect {
     private int extent;
 
     public Toxin(int extent, int limit) {
+        super(limit);
+
         this.extent = extent;
     }
 
