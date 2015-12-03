@@ -9,16 +9,10 @@ import java.util.Random;
 
 public class Striking extends Attribute {
 
-    private static Random random = new Random();
-
-    public static void config(Random random) {
-        Striking.random = random;
-    }
-
     private float rate;
 
-    public Striking(float rate) {
-        this.rate = rate;
+    public Striking(int limit, float rate) {
+        super(limit, rate);
     }
 
     @Override

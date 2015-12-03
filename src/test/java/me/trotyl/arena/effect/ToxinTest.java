@@ -26,7 +26,7 @@ public class ToxinTest {
     @Test
     public void should_produce_toxin_effect() {
         Player player = new Player("张三", 10, 5);
-        Toxin toxin = new Toxin(2);
+        Toxin toxin = new Toxin(2, 2);
 
         EffectRecord effectRecord = toxin.take(player);
         PlayerRecord playerRecord = player.record();

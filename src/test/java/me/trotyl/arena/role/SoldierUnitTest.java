@@ -2,8 +2,10 @@ package me.trotyl.arena.role;
 
 import me.trotyl.arena.Armor;
 import me.trotyl.arena.Weapon;
+import me.trotyl.arena.attribute.Dizzy;
 import me.trotyl.arena.attribute.Noxious;
 import me.trotyl.arena.attribute.Striking;
+import me.trotyl.arena.effect.Swoon;
 import me.trotyl.arena.effect.Toxin;
 import org.junit.After;
 import org.junit.Before;
@@ -85,7 +87,7 @@ public class SoldierUnitTest {
     public void should_have_3_times_damage_with_strike() throws Exception {
         Random random = mock(Random.class);
         when(random.nextFloat()).thenReturn(0.0f);
-        Weapon weapon = new Weapon("我真剑", 10, new Striking(1.0f));
+        Weapon weapon = new Weapon("我真剑", 10, new Striking(0, 1.0f));
         Soldier soldier = new Soldier("张三", 100, 20);
         soldier.equip(weapon);
 
@@ -99,7 +101,7 @@ public class SoldierUnitTest {
     @Test
     public void should_produce_toxin_effect_with_noxious() throws Exception {
 
-        Weapon weapon = new Weapon("我真剑", 10, new Noxious(2, 1.0f));
+        Weapon weapon = new Weapon("我真剑", 10, new Noxious(2, 2, 1.0f));
         Soldier soldier = new Soldier("张三", 100, 20);
         soldier.equip(weapon);
 
@@ -109,5 +111,20 @@ public class SoldierUnitTest {
 
         assertThat(player.health, is(70));
         assertThat(player.effect, instanceOf(Toxin.class));
+    }
+
+    @Test
+    public void should_produce_toxin_effect_with_dizzy() throws Exception {
+
+        Weapon weapon = new Weapon("我真剑", 10, new Dizzy(1.0f));
+        Soldier soldier = new Soldier("张三", 100, 20);
+        soldier.equip(weapon);
+
+        Player player = new Player("李四", 100, 10);
+
+        soldier.attack(player);
+
+        assertThat(player.health, is(70));
+        assertThat(player.effect, instanceOf(Swoon.class));
     }
 }

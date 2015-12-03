@@ -5,25 +5,15 @@ import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.role.Attackable;
 import me.trotyl.arena.role.Attacker;
 
-import java.util.Random;
-
 
 public class Noxious extends Attribute {
 
-    private static Random random = new Random();
-
-    public static void config(Random random) {
-        Noxious.random = random;
-    }
-
-    private float rate = 0.5f;
     private final int extent;
 
-    public Noxious(int extent, float rate) {
-        super();
+    public Noxious(int extent, int limit, float rate) {
+        super(limit, rate);
 
         this.extent = extent;
-        this.rate = rate;
     }
 
     @Override
@@ -32,9 +22,10 @@ public class Noxious extends Attribute {
             return Attribute.none.apply(attacker, attackable);
         }
 
-        Toxin toxin = new Toxin(extent);
+        Toxin toxin = new Toxin(extent, limit);
         int damage = attacker.aggressivity() - attackable.defence();
         attackable.suffer(damage, toxin);
-        return null;
+
+        return new DamageRecord(Genre.noxious, damage);
     }
 }
