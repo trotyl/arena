@@ -1,0 +1,38 @@
+{
+  "player1": {
+    "name": "张三",
+    "health": 1000,
+    "aggressivity": 82,
+    "role": "soldier",
+    "weapon": {
+      "name": "青龙偃月刀",
+      "aggressivity": 54,
+      "attribute": {
+        "genre": "striking",
+        "rate": 0.8
+      }
+    },
+    "armor": {
+      "defence": 31
+    }
+  },
+  "player2": {
+    "name": "李四",
+    "health": 800,
+    "aggressivity": 97,
+    "role": "sodlier",
+    "weapon": {
+      "name": "丈八蛇矛",
+      "aggressivity": 47,
+      "attribute": {
+        "genre": "flaming",
+        "rate": 0.6,
+        "extent": 19,
+        "limit": 2
+      }
+    },
+    "armor": {
+      "defence": 44
+    }
+  }
+}
