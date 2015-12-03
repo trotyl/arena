@@ -2,6 +2,7 @@ package me.trotyl.arena;
 
 import me.trotyl.arena.attribute.*;
 import me.trotyl.arena.role.Player;
+import me.trotyl.arena.role.Soldier;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.junit.After;
@@ -9,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -167,6 +169,26 @@ public class ParserTest {
         JSONObject object = getObject(json);
         Player player = parser.parsePlayer(object);
 
+        assertThat(player, not(instanceOf(Soldier.class)));
+        assertThat(player.name(), is("张三"));
+        assertThat(player.health(), is(10));
+        assertThat(player.aggressivity(), is(5));
+    }
+
+    @Test
+    public void parse_player_should_have_proper_result_for_soldier_without_equipment() {
+        String json = "" +
+                "{" +
+                "  \"name\": \"张三\"," +
+                "  \"role\": \"soldier\"," +
+                "  \"health\": 10," +
+                "  \"aggressivity\": 5" +
+                "}";
+
+        JSONObject object = getObject(json);
+        Player player = parser.parsePlayer(object);
+
+        assertThat(player, instanceOf(Soldier.class));
         assertThat(player.name(), is("张三"));
         assertThat(player.health(), is(10));
         assertThat(player.aggressivity(), is(5));
