@@ -161,7 +161,7 @@ public class GameTest {
     }
 
     @Test
-    public void over_should_have_proper_result() {
+    public void over_should_have_proper_result_and_invocation() {
         Player player0 = mock(Player.class);
         Player player1 = mock(Player.class);
         when(player0.alive()).thenReturn(true);
@@ -172,5 +172,14 @@ public class GameTest {
         assertThat(game.over(), is(false));
         assertThat(game.over(), is(false));
         assertThat(game.over(), is(true));
+
+        InOrder inOrder = inOrder(player0, player1);
+        inOrder.verify(player0).alive();
+        inOrder.verify(player1).alive();
+        inOrder.verify(player0).alive();
+        inOrder.verify(player1).alive();
+        inOrder.verify(player0).alive();
+        inOrder.verify(player1).alive();
+        verifyNoMoreInteractions(player0, player1);
     }
 }
