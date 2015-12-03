@@ -10,7 +10,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 
-public class FormatterTest {
+public class FormatterUnitTest {
 
     private Formatter formatter;
 
