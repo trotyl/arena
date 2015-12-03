@@ -34,7 +34,7 @@ public abstract class Attribute {
     public abstract DamageRecord apply(Attacker attacker, Attackable attackable);
 
     protected boolean works() {
-        return random.nextFloat() <= rate;
+        return random.nextFloat() < rate;
     }
 
     protected DamageRecord applyByEffect(Attacker attacker, Attackable attackable, Effect effect, Genre genre) {
@@ -50,7 +50,7 @@ public abstract class Attribute {
 
     protected DamageRecord applyNoEffect(Attacker attacker, Attackable attackable) {
         int damage = attacker.aggressivity() - attackable.defence();
-        attackable.suffer(damage);
+        attackable.suffer(damage, Effect.none);
 
         return new DamageRecord(damage);
     }

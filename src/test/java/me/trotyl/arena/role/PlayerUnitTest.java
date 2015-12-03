@@ -1,5 +1,6 @@
 package me.trotyl.arena.role;
 
+import me.trotyl.arena.effect.Effect;
 import me.trotyl.arena.record.PlayerRecord;
 import org.junit.After;
 import org.junit.Before;
@@ -77,7 +78,7 @@ public class PlayerUnitTest {
     public void should_reduce_health_when_suffered() throws Exception {
         Player player1 = new Player("张三", 10, 5);
         PlayerRecord originalStatus = player1.record();
-        player1.suffer(5);
+        player1.suffer(5, Effect.none);
         PlayerRecord finalStatus = player1.record();
 
         assertThat(originalStatus.health(), is(10));

@@ -1,6 +1,7 @@
 package me.trotyl.arena.attribute;
 
 
+import me.trotyl.arena.effect.Effect;
 import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.role.Attackable;
 import me.trotyl.arena.role.Attacker;
@@ -20,7 +21,7 @@ public class Striking extends Attribute {
         }
 
         int damage = 3 * (attacker.aggressivity() - attackable.defence());
-        attackable.suffer(damage);
+        attackable.suffer(damage, Effect.none);
 
         return new DamageRecord(Genre.striking, damage);
     }
