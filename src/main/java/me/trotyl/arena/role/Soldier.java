@@ -34,7 +34,7 @@ public class Soldier extends Player {
 
     @Override
     public Pair<EffectProcedure, AttackProcedure> attack(Attackable attackable) {
-        return attackByAttribute(attackable, weapon.attribute);
+        return attackByAttribute(attackable, weapon.attribute());
     }
 
     @Override

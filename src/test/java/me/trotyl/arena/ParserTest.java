@@ -58,9 +58,9 @@ public class ParserTest {
         assertThat(attribute, instanceOf(Toxic.class));
 
         Toxic toxic = (Toxic) attribute;
-        assertThat(toxic.rate, is(0.5f));
-        assertThat(toxic.extent, is(4));
-        assertThat(toxic.limit, is(2));
+        assertThat(toxic.rate(), is(0.5f));
+        assertThat(toxic.extent(), is(4));
+        assertThat(toxic.limit(), is(2));
     }
 
     @Test
@@ -79,9 +79,9 @@ public class ParserTest {
         assertThat(attribute, instanceOf(Flaming.class));
 
         Flaming flaming = (Flaming) attribute;
-        assertThat(flaming.rate, is(0.5f));
-        assertThat(flaming.extent, is(4));
-        assertThat(flaming.limit, is(2));
+        assertThat(flaming.rate(), is(0.5f));
+        assertThat(flaming.extent(), is(4));
+        assertThat(flaming.limit(), is(2));
     }
 
     @Test
@@ -99,8 +99,8 @@ public class ParserTest {
         assertThat(attribute, instanceOf(Freezing.class));
 
         Freezing freezing = (Freezing) attribute;
-        assertThat(freezing.rate, is(0.5f));
-        assertThat(freezing.limit, is(2));
+        assertThat(freezing.rate(), is(0.5f));
+        assertThat(freezing.limit(), is(2));
     }
 
     @Test
@@ -117,7 +117,7 @@ public class ParserTest {
         assertThat(attribute, instanceOf(Dizzy.class));
 
         Dizzy dizzy = (Dizzy) attribute;
-        assertThat(dizzy.rate, is(0.5f));
+        assertThat(dizzy.rate(), is(0.5f));
     }
 
     @Test
@@ -153,7 +153,7 @@ public class ParserTest {
 
         assertThat(weapon.aggressivity(), is(5));
         assertThat(weapon.name(), is("优质木棒"));
-        assertThat(weapon.attribute, instanceOf(Dizzy.class));
+        assertThat(weapon.attribute(), instanceOf(Dizzy.class));
     }
 
     @Test

@@ -23,8 +23,8 @@ public abstract class Attribute {
         }
     };
 
-    public int limit;
-    public float rate;
+    protected int limit;
+    protected float rate;
 
     public Attribute(int limit, float rate) {
         this.limit = limit;
@@ -53,5 +53,13 @@ public abstract class Attribute {
         attackable.suffer(damage, Effect.none);
 
         return new DamageRecord(damage);
+    }
+
+    public float rate() {
+        return rate;
+    }
+
+    public int limit() {
+        return limit;
     }
 }

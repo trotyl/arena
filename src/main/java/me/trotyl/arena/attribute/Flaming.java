@@ -8,7 +8,7 @@ import me.trotyl.arena.role.Attacker;
 
 public class Flaming extends Attribute {
 
-    public int extent;
+    protected int extent;
 
     public Flaming(int extent, int limit, float rate) {
         super(limit, rate);
@@ -18,5 +18,9 @@ public class Flaming extends Attribute {
     @Override
     public DamageRecord apply(Attacker attacker, Attackable attackable) {
         return applyByEffect(attacker, attackable, new Fire(extent, limit), Genre.flaming);
+    }
+
+    public int extent() {
+        return extent;
     }
 }
