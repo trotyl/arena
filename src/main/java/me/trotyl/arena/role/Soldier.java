@@ -39,14 +39,6 @@ public class Soldier extends Player {
     }
 
     @Override
-    public int suffer(int injury) {
-        if (injury > armor.defence()) {
-            health -= (injury - armor.defence());
-        }
-        return injury - armor.defence();
-    }
-
-    @Override
     public int aggressivity() {
         return aggressivity + weapon.aggressivity();
     }

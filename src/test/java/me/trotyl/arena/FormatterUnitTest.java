@@ -16,12 +16,10 @@ import static org.junit.Assert.assertThat;
 public class FormatterUnitTest {
 
     private Formatter formatter;
-    private Player player;
-    private Player anotherPlayer;
-    private Soldier soldierWithoutEquipment;
-    private Soldier soldierWithWeapon;
-    private Soldier soldierWithArmor;
-    private Soldier soldierWithWeaponAndArmor;
+    private Player player, anotherPlayer;
+    private Soldier soldierWithoutEquipment, soldierWithWeapon, soldierWithArmor, soldierWithWeaponAndArmor;
+    private Soldier anotherSoldierWithoutEquipment, anotherSoldierWithWeapon,
+            anotherSoldierWithArmor, anotherSoldierWithWeaponAndArmor;
 
     private String formattedAttack(Attacker attacker, Attackable attackable) {
         AttackProcedure attack = attacker.attack(attackable);
@@ -33,15 +31,32 @@ public class FormatterUnitTest {
         formatter = new Formatter();
 
         player = new Player("张三", 10, 5);
+
         anotherPlayer = new Player("李四", 20, 8);
+
         soldierWithoutEquipment = new Soldier("李四", 20, 8);
+
         soldierWithWeapon = new Soldier("李四", 20, 8);
         soldierWithWeapon.equip(new Weapon("优质木棒", 5));
+
         soldierWithArmor = new Soldier("李四", 20, 8);
         soldierWithArmor.equip(new Armor(3));
+
         soldierWithWeaponAndArmor = new Soldier("李四", 20, 8);
         soldierWithWeaponAndArmor.equip(new Weapon("优质木棒", 5));
         soldierWithWeaponAndArmor.equip(new Armor(3));
+
+        anotherSoldierWithoutEquipment = new Soldier("张三", 10, 5);
+
+        anotherSoldierWithWeapon = new Soldier("张三", 10, 5);
+        anotherSoldierWithWeapon.equip(new Weapon("优质木棒", 5));
+
+        anotherSoldierWithArmor = new Soldier("张三", 10, 5);
+        anotherSoldierWithArmor.equip(new Armor(3));
+
+        anotherSoldierWithWeaponAndArmor = new Soldier("张三", 10, 5);
+        anotherSoldierWithWeaponAndArmor.equip(new Weapon("优质木棒", 5));
+        anotherSoldierWithWeaponAndArmor.equip(new Armor(3));
     }
 
     @After
@@ -103,5 +118,26 @@ public class FormatterUnitTest {
         String result = formattedAttack(soldierWithWeaponAndArmor, player);
 
         assertThat(result, is("战士李四用优质木棒攻击了普通人张三, 张三受到了13点伤害, 张三剩余生命: -3"));
+    }
+
+    @Test
+    public void should_work_of_attack_between_soldiers_without_equipment() {
+        String result = formattedAttack(soldierWithoutEquipment, anotherSoldierWithoutEquipment);
+
+        assertThat(result, is("战士李四攻击了战士张三, 张三受到了8点伤害, 张三剩余生命: 2"));
+    }
+
+    @Test
+    public void should_work_of_attack_between_soldier_without_equipment_and_soldier_with_weapon() {
+        String result = formattedAttack(soldierWithoutEquipment, anotherSoldierWithWeapon);
+
+        assertThat(result, is("战士李四攻击了战士张三, 张三受到了8点伤害, 张三剩余生命: 2"));
+    }
+
+    @Test
+    public void should_work_of_attack_between_soldier_without_equipment_and_soldier_with_armor() {
+        String result = formattedAttack(soldierWithoutEquipment, anotherSoldierWithArmor);
+
+        assertThat(result, is("战士李四攻击了战士张三, 张三受到了5点伤害, 张三剩余生命: 5"));
     }
 }
