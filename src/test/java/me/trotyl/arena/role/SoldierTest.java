@@ -108,26 +108,11 @@ public class SoldierTest {
     }
 
     @Test
-    public void should_be_more_aggressive_with_weapon() throws Exception {
-        Soldier soldier = new Soldier("张三", 100, 20);
-        soldier.equip(new Weapon("优质木棒", 50));
+    public void aggressivity_should_have_proper_result() {
+        assertThat(soldier0.aggressivity(), is(5));
 
-        Player player = new Player("李四", 100, 10);
-
-        soldier.attack(player);
-
-        assertThat(player.health, is(30));
-    }
-
-    @Test
-    public void should_be_as_normal_player_without_weapon() throws Exception {
-        Soldier soldier = new Soldier("张三", 100, 20);
-
-        Player player = new Player("李四", 100, 10);
-
-        soldier.attack(player);
-
-        assertThat(player.health, is(80));
+        soldier0.equip(new Weapon("我真剑", 5));
+        assertThat(soldier0.aggressivity(), is(10));
     }
 
     @Test
