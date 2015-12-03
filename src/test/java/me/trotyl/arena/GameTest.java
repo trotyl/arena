@@ -6,6 +6,7 @@ import me.trotyl.arena.role.Soldier;
 import me.trotyl.arena.procedure.AttackProcedure;
 import me.trotyl.arena.procedure.OverProcedure;
 import me.trotyl.arena.procedure.Procedure;
+import org.hamcrest.core.Is;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,9 +16,10 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
 
 
-public class GameIntegrationTest {
+public class GameTest {
 
     private Game game;
 
@@ -37,6 +39,17 @@ public class GameIntegrationTest {
     @After
     public void tearDown() throws Exception {
 
+    }
+
+    @Test
+    public void should_between_exact_players() throws Exception {
+        Player player1 = mock(Player.class);
+        Player player2 = mock(Player.class);
+
+        Game game = Game.between(player1, player2);
+
+        assertThat(game.getPlayer1(), Is.is(player1));
+        assertThat(game.getPlayer2(), Is.is(player2));
     }
 
 
