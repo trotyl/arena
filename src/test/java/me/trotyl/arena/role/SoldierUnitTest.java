@@ -25,8 +25,8 @@ public class SoldierUnitTest {
         Random random = mock(Random.class);
         when(random.nextFloat()).thenReturn(0.0f);
 
-        Striking.config(random, 1.0f);
-        Noxious.config(random, 1.0f);
+        Striking.config(random);
+        Noxious.config(random);
     }
 
     @After
@@ -85,7 +85,7 @@ public class SoldierUnitTest {
     public void should_have_3_times_damage_with_strike() throws Exception {
         Random random = mock(Random.class);
         when(random.nextFloat()).thenReturn(0.0f);
-        Weapon weapon = new Weapon("我真剑", 10, new Striking());
+        Weapon weapon = new Weapon("我真剑", 10, new Striking(1.0f));
         Soldier soldier = new Soldier("张三", 100, 20);
         soldier.equip(weapon);
 
@@ -99,7 +99,7 @@ public class SoldierUnitTest {
     @Test
     public void should_produce_toxin_effect_with_noxious() throws Exception {
 
-        Weapon weapon = new Weapon("我真剑", 10, new Noxious(2));
+        Weapon weapon = new Weapon("我真剑", 10, new Noxious(2, 1.0f));
         Soldier soldier = new Soldier("张三", 100, 20);
         soldier.equip(weapon);
 

@@ -11,18 +11,19 @@ import java.util.Random;
 public class Noxious extends Attribute {
 
     private static Random random = new Random();
-    private static float rate = 0.5f;
-    private final int extent;
 
-    public static void config(Random random, float rate) {
+    public static void config(Random random) {
         Noxious.random = random;
-        Noxious.rate = rate;
     }
 
-    public Noxious(int extent) {
+    private float rate = 0.5f;
+    private final int extent;
+
+    public Noxious(int extent, float rate) {
         super();
 
         this.extent = extent;
+        this.rate = rate;
     }
 
     @Override

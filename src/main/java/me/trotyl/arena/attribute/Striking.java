@@ -10,11 +10,15 @@ import java.util.Random;
 public class Striking extends Attribute {
 
     private static Random random = new Random();
-    private static float rate = 0.5f;
 
-    public static void config(Random random, float rate) {
+    public static void config(Random random) {
         Striking.random = random;
-        Striking.rate = rate;
+    }
+
+    private float rate;
+
+    public Striking(float rate) {
+        this.rate = rate;
     }
 
     @Override
