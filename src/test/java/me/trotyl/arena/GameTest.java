@@ -4,6 +4,7 @@ import me.trotyl.arena.attribute.Toxic;
 import me.trotyl.arena.effect.Type;
 import me.trotyl.arena.procedure.AttackProcedure;
 import me.trotyl.arena.procedure.EffectProcedure;
+import me.trotyl.arena.procedure.OverProcedure;
 import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.record.EffectRecord;
 import me.trotyl.arena.role.Player;
@@ -109,5 +110,32 @@ public class GameTest {
         inOrder.verify(player1).alive();
         inOrder.verify(player1).attack(player0);
         verifyNoMoreInteractions(player0, player1);
+    }
+
+    @Test
+    public void over_procedure_should_have_proper_result() {
+        Soldier soldier = new Soldier("张三", 10, 5,
+                new Weapon("方天画戟", 5, new Toxic(2, 2, 2.0f)),
+                new Armor(6));
+        Player player = new Player("李四", 20, 8);
+        game = Game.between(soldier, player);
+
+        OverProcedure procedure;
+
+        procedure = game.overProcedure();
+        assertThat(procedure, is(OverProcedure.none));
+
+        game.run();
+        procedure = game.overProcedure();
+        assertThat(procedure, is(OverProcedure.none));
+
+        game.run();
+        procedure = game.overProcedure();
+        assertThat(procedure, is(OverProcedure.none));
+
+        game.run();
+        procedure = game.overProcedure();
+        assertThat(procedure.winner.name(), is("张三"));
+        assertThat(procedure.loser.name(), is("李四"));
     }
 }
