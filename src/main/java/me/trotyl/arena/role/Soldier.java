@@ -51,4 +51,12 @@ public class Soldier extends Player {
     public PlayerRecord record() {
         return new PlayerRecord(name, health, Role.soldier, weapon.record(), armor.record());
     }
+
+    public Weapon weapon() {
+        return weapon;
+    }
+
+    public Armor armor() {
+        return armor;
+    }
 }

@@ -189,10 +189,47 @@ public class ParserTest {
         Player player = parser.parsePlayer(object);
 
         assertThat(player, instanceOf(Soldier.class));
-        assertThat(player.name(), is("张三"));
-        assertThat(player.health(), is(10));
-        assertThat(player.aggressivity(), is(5));
+
+        Soldier soldier = (Soldier) player;
+
+        assertThat(soldier.name(), is("张三"));
+        assertThat(soldier.health(), is(10));
+        assertThat(soldier.aggressivity(), is(5));
     }
+
+    @Test
+    public void parse_player_should_have_proper_result_for_soldier_with_equipment() {
+        String json = "" +
+                "{" +
+                "  \"name\": \"张三\"," +
+                "  \"role\": \"soldier\"," +
+                "  \"health\": 10," +
+                "  \"aggressivity\": 5," +
+                "  \"weapon\": " +
+                "  {" +
+                "    \"name\": \"优质木棒\"," +
+                "    \"aggressivity\": 5" +
+                "  }," +
+                "  \"armor\": " +
+                "  {" +
+                "    \"defence\": 8" +
+                "  }" +
+                "}";
+
+        JSONObject object = getObject(json);
+        Player player = parser.parsePlayer(object);
+
+        assertThat(player, instanceOf(Soldier.class));
+
+        Soldier soldier = (Soldier) player;
+
+        assertThat(soldier.name(), is("张三"));
+        assertThat(soldier.health(), is(10));
+        assertThat(soldier.aggressivity(), is(10));
+        assertThat(soldier.weapon().name(), is("优质木棒"));
+        assertThat(soldier.armor().defence(), is(8));
+    }
+
 
     private JSONObject getObject(String json) {
         JSONTokener tokener = new JSONTokener(json);
