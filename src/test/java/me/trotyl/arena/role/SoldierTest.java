@@ -2,10 +2,7 @@ package me.trotyl.arena.role;
 
 import me.trotyl.arena.Armor;
 import me.trotyl.arena.Weapon;
-import me.trotyl.arena.attribute.Dizzy;
-import me.trotyl.arena.attribute.Genre;
-import me.trotyl.arena.attribute.Toxic;
-import me.trotyl.arena.attribute.Striking;
+import me.trotyl.arena.attribute.*;
 import me.trotyl.arena.effect.Effect;
 import me.trotyl.arena.effect.Swoon;
 import me.trotyl.arena.effect.Toxin;
@@ -74,6 +71,14 @@ public class SoldierTest {
     public void attack_should_have_proper_result() {
         Soldier soldier2 = spy(soldier0);
         Soldier soldier3 = spy(soldier1);
+        Attribute attribute = mock(Attribute.class);
+        Effect effect = mock(Effect.class);
+        when(effect.valid()).thenReturn(true);
+        when(effect.record()).thenReturn(EffectRecord.none);
+        when(effect.take(soldier2)).thenReturn(new DamageRecord(2));
+        when(effect.sway(soldier2, soldier3, attribute)).thenReturn(new DamageRecord(3));
+        soldier2.effect = effect;
+        soldier2.weapon = spy(new Weapon("玄铁重剑", 3, attribute));
 
         Pair<EffectProcedure, AttackProcedure> pair = soldier2.attack(soldier3);
         EffectProcedure effectProcedure = pair.getValue0();
@@ -81,21 +86,25 @@ public class SoldierTest {
 
         assertThat(effectProcedure.attackable.name(), is("张三"));
         assertThat(effectProcedure.attackable.health(), is(10));
-        assertThat(effectProcedure.damage, is(DamageRecord.none));
-        assertThat(effectProcedure.effect, is(EffectRecord.none));
+        assertThat(effectProcedure.damage.extent, is(2));
         assertThat(attackProcedure.attacker.name(), is("张三"));
         assertThat(attackProcedure.attackable.name(), is("李四"));
-        assertThat(attackProcedure.attackable.health(), is(15));
+        assertThat(attackProcedure.attackable.health(), is(20));
         assertThat(attackProcedure.damage.genre, is(Genre.none));
-        assertThat(attackProcedure.damage.extent, is(5));
+        assertThat(attackProcedure.damage.extent, is(3));
 
-        InOrder inOrder = inOrder(soldier2, soldier3);
+        verifyZeroInteractions(attribute);
+
+        InOrder inOrder = inOrder(soldier2, soldier3, effect);
+        inOrder.verify(effect).take(soldier2);
         inOrder.verify(soldier2).record();
-        inOrder.verify(soldier2).aggressivity();
-        inOrder.verify(soldier3).defence();
-        inOrder.verify(soldier3).suffer(5, Effect.none);
+        inOrder.verify(effect).record();
+        inOrder.verify(effect).sway(soldier2, soldier3, attribute);
         inOrder.verify(soldier2).record();
         inOrder.verify(soldier3).record();
+        inOrder.verify(effect).valid();
+
+        verifyNoMoreInteractions(effect);
     }
 
     @Test
