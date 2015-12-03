@@ -10,6 +10,7 @@ import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verifyZeroInteractions;
 
 
 public class EffectTest {
@@ -42,4 +43,12 @@ public class EffectTest {
         assertThat(player1Record.health(), is(10));
         assertThat(player2Record.health(), is(20));
     }
+
+    @Test
+    public void should_be_taken_with_proper_invocation() {
+        effect.take(player1);
+
+        verifyZeroInteractions(player1);
+    }
+
 }
