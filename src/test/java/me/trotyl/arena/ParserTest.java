@@ -1,6 +1,7 @@
 package me.trotyl.arena;
 
 import me.trotyl.arena.attribute.Attribute;
+import me.trotyl.arena.attribute.Flaming;
 import me.trotyl.arena.attribute.Toxic;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -59,6 +60,27 @@ public class ParserTest {
         assertThat(toxic.rate, is(0.5f));
         assertThat(toxic.extent, is(4));
         assertThat(toxic.limit, is(2));
+    }
+
+    @Test
+    public void parse_attribute_should_have_proper_result_for_flaming() {
+        String json = "" +
+                "{" +
+                "  \"genre\": \"flaming\"," +
+                "  \"rate\": 0.5," +
+                "  \"extent\": 4," +
+                "  \"limit\": 2" +
+                "}";
+
+        JSONObject object = getObject(json);
+        Attribute attribute = parser.parseAttribute(object);
+
+        assertThat(attribute, instanceOf(Flaming.class));
+
+        Flaming flaming = (Flaming) attribute;
+        assertThat(flaming.rate, is(0.5f));
+        assertThat(flaming.extent, is(4));
+        assertThat(flaming.limit, is(2));
     }
 
     private JSONObject getObject(String json) {
