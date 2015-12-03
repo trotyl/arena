@@ -5,7 +5,6 @@ import me.trotyl.arena.Armor;
 import me.trotyl.arena.Weapon;
 import me.trotyl.arena.procedure.AttackProcedure;
 import me.trotyl.arena.procedure.EffectProcedure;
-import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.record.PlayerRecord;
 import org.javatuples.Pair;
 
@@ -35,11 +34,7 @@ public class Soldier extends Player {
 
     @Override
     public Pair<EffectProcedure, AttackProcedure> attack(Attackable attackable) {
-        DamageRecord effectDamage = effect.take(this);
-        EffectProcedure effectProcedure = new EffectProcedure(record(), effect.record(), effectDamage);
-        DamageRecord attackDamage = weapon.attribute.apply(this, attackable);
-        AttackProcedure attackProcedure = new AttackProcedure(record(), attackable.record(), attackDamage);
-        return new Pair<>(effectProcedure, attackProcedure);
+        return attackByAttribute(attackable, weapon.attribute);
     }
 
     @Override

@@ -55,9 +55,13 @@ public class Player implements Attacker, Attackable {
 
     @Override
     public Pair<EffectProcedure, AttackProcedure> attack(Attackable attackable) {
+        return attackByAttribute(attackable, Attribute.none);
+    }
+
+    protected Pair<EffectProcedure, AttackProcedure> attackByAttribute(Attackable attackable, Attribute attribute) {
         DamageRecord effectDamage = effect.take(this);
         EffectProcedure effectProcedure = new EffectProcedure(record(), effect.record(), effectDamage);
-        DamageRecord attackDamage = effect.sway(this, attackable, Attribute.none);
+        DamageRecord attackDamage = effect.sway(this, attackable, attribute);
         AttackProcedure attackProcedure = new AttackProcedure(record(), attackable.record(), attackDamage);
 
         if (!effect.valid()) {
