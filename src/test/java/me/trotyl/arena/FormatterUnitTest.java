@@ -95,4 +95,15 @@ public class FormatterUnitTest {
 
         assertThat(result, is("战士李四攻击了普通人张三, 张三受到了8点伤害, 张三剩余生命: 2"));
     }
+
+    @Test
+    public void should_work_of_attack_between_soldier_with_weapon_but_no_armor_and_normal_player() {
+        Player player1 = new Player("张三", 10, 5);
+        Soldier player2 = new Soldier("李四", 20, 8);
+        player2.equip(new Weapon("优质木棒", 5));
+
+        String result = formattedAttack(player2, player1);
+
+        assertThat(result, is("战士李四用优质木棒攻击了普通人张三, 张三受到了13点伤害, 张三剩余生命: -3"));
+    }
 }
