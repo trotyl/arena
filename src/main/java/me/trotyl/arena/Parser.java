@@ -13,7 +13,7 @@ public class Parser {
         int health = object.getInt("health");
         int aggressivity = object.getInt("aggressivity");
         String role = object.getString("role");
-        if (role.equals("Normal")) {
+        if (role.equals("normal")) {
             return new Player(name, health, aggressivity);
         }
 
