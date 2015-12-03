@@ -2,6 +2,7 @@ package me.trotyl.arena.role;
 
 
 import me.trotyl.arena.attribute.Attribute;
+import me.trotyl.arena.effect.Effect;
 import me.trotyl.arena.procedure.AttackProcedure;
 import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.record.PlayerRecord;
@@ -11,6 +12,7 @@ public class Player implements Attacker, Attackable {
     protected String name;
     protected int health;
     protected int aggressivity;
+    protected Effect effect;
 
     public Player(String name, int health, int aggressivity) {
         this.name = name;
@@ -22,8 +24,15 @@ public class Player implements Attacker, Attackable {
         return health > 0;
     }
 
-    public int suffer(int damage) {
+    @Override
+    public int suffer(int injury) {
+        return suffer(injury, Effect.none);
+    }
+
+    @Override
+    public int suffer(int damage, Effect effect) {
         health -= damage;
+        this.effect = effect;
         return damage;
     }
 

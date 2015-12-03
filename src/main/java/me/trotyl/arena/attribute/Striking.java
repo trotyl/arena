@@ -7,14 +7,14 @@ import me.trotyl.arena.role.Attacker;
 
 import java.util.Random;
 
-public class Strike extends Attribute {
+public class Striking extends Attribute {
 
-    private final Random random;
-    private final float rate;
+    private static Random random = new Random();
+    private static float rate = 0.5f;
 
-    public Strike(Random random, float rate) {
-        this.random = random;
-        this.rate = rate;
+    public static void config(Random random, float rate) {
+        Striking.random = random;
+        Striking.rate = rate;
     }
 
     @Override

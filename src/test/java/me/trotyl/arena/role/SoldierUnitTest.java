@@ -2,13 +2,16 @@ package me.trotyl.arena.role;
 
 import me.trotyl.arena.Armor;
 import me.trotyl.arena.Weapon;
-import me.trotyl.arena.attribute.Strike;
+import me.trotyl.arena.attribute.Noxious;
+import me.trotyl.arena.attribute.Striking;
+import me.trotyl.arena.effect.Toxin;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Random;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
@@ -19,7 +22,11 @@ public class SoldierUnitTest {
 
     @Before
     public void setUp() throws Exception {
+        Random random = mock(Random.class);
+        when(random.nextFloat()).thenReturn(0.0f);
 
+        Striking.config(random, 1.0f);
+        Noxious.config(random, 1.0f);
     }
 
     @After
@@ -78,7 +85,7 @@ public class SoldierUnitTest {
     public void should_have_3_times_damage_with_strike() throws Exception {
         Random random = mock(Random.class);
         when(random.nextFloat()).thenReturn(0.0f);
-        Weapon weapon = new Weapon("我真剑", 10, new Strike(random, 1));
+        Weapon weapon = new Weapon("我真剑", 10, new Striking());
         Soldier soldier = new Soldier("张三", 100, 20);
         soldier.equip(weapon);
 
@@ -87,5 +94,20 @@ public class SoldierUnitTest {
         soldier.attack(player);
 
         assertThat(player.health, is(10));
+    }
+
+    @Test
+    public void should_produce_toxin_effect_with_noxious() throws Exception {
+
+        Weapon weapon = new Weapon("我真剑", 10, new Noxious(2));
+        Soldier soldier = new Soldier("张三", 100, 20);
+        soldier.equip(weapon);
+
+        Player player = new Player("李四", 100, 10);
+
+        soldier.attack(player);
+
+        assertThat(player.health, is(70));
+        assertThat(player.effect, instanceOf(Toxin.class));
     }
 }
