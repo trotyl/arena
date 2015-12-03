@@ -1,12 +1,11 @@
 package me.trotyl.arena;
 
 import me.trotyl.arena.attribute.Genre;
+import me.trotyl.arena.effect.Type;
 import me.trotyl.arena.procedure.AttackProcedure;
+import me.trotyl.arena.procedure.EffectProcedure;
 import me.trotyl.arena.procedure.OverProcedure;
-import me.trotyl.arena.record.ArmorRecord;
-import me.trotyl.arena.record.DamageRecord;
-import me.trotyl.arena.record.PlayerRecord;
-import me.trotyl.arena.record.WeaponRecord;
+import me.trotyl.arena.record.*;
 import me.trotyl.arena.role.Role;
 import org.junit.After;
 import org.junit.Before;
@@ -67,7 +66,7 @@ public class FormatterTest {
     }
 
     @Test
-    public void format_attack_should_have_proper_result_with_weapon_and_effect() {
+    public void format_attack_should_have_proper_result_with_weapon_and_normal_effect() {
         AttackProcedure procedure = new AttackProcedure(
                 new PlayerRecord("张三", 10, Role.soldier, new WeaponRecord("优质木棒"), ArmorRecord.none),
                 new PlayerRecord("李四", 20, Role.normal),
@@ -86,5 +85,16 @@ public class FormatterTest {
         String result = formatter.formatOver(procedure);
 
         assertThat(result, is("李四被打败了."));
+    }
+
+    @Test
+    public void format_effect_should_have_proper_result_for_toxin() {
+        EffectProcedure procedure = new EffectProcedure(new PlayerRecord("张三", 10, Role.soldier),
+                                                        new EffectRecord(Type.toxin),
+                                                        new DamageRecord(5));
+
+        String result = formatter.formatEffect(procedure);
+
+        assertThat(result, is("张三受到5点毒性伤害, 张三剩余生命: 10"));
     }
 }
