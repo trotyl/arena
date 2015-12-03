@@ -25,15 +25,14 @@ public class Player implements Attacker, Attackable {
     }
 
     @Override
-    public int suffer(int injury) {
-        return suffer(injury, Effect.none);
+    public void suffer(int injury) {
+        suffer(injury, Effect.none);
     }
 
     @Override
-    public int suffer(int damage, Effect effect) {
+    public void suffer(int damage, Effect effect) {
         health -= damage;
         this.effect = effect;
-        return damage;
     }
 
     @Override
