@@ -1,8 +1,8 @@
 package me.trotyl.arena.role;
 
 
-import me.trotyl.arena.Armor;
-import me.trotyl.arena.Weapon;
+import me.trotyl.arena.armor.Armor;
+import me.trotyl.arena.weapon.Weapon;
 import me.trotyl.arena.procedure.AttackProcedure;
 import me.trotyl.arena.procedure.EffectProcedure;
 import me.trotyl.arena.record.PlayerRecord;

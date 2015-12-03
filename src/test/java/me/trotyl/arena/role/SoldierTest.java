@@ -1,7 +1,7 @@
 package me.trotyl.arena.role;
 
-import me.trotyl.arena.Armor;
-import me.trotyl.arena.Weapon;
+import me.trotyl.arena.armor.Armor;
+import me.trotyl.arena.weapon.Weapon;
 import me.trotyl.arena.attribute.Attribute;
 import me.trotyl.arena.attribute.Genre;
 import me.trotyl.arena.effect.Effect;

@@ -1,5 +1,6 @@
 package me.trotyl.arena;
 
+import me.trotyl.arena.armor.Armor;
 import me.trotyl.arena.attribute.Toxic;
 import me.trotyl.arena.effect.Type;
 import me.trotyl.arena.procedure.AttackProcedure;
@@ -9,6 +10,7 @@ import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.record.EffectRecord;
 import me.trotyl.arena.role.Player;
 import me.trotyl.arena.role.Soldier;
+import me.trotyl.arena.weapon.Weapon;
 import org.javatuples.Pair;
 import org.junit.After;
 import org.junit.Before;

@@ -1,4 +1,4 @@
-package me.trotyl.arena;
+package me.trotyl.arena.weapon;
 
 
 import me.trotyl.arena.attribute.Attribute;

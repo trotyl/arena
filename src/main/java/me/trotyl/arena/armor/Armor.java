@@ -1,4 +1,4 @@
-package me.trotyl.arena;
+package me.trotyl.arena.armor;
 
 
 import me.trotyl.arena.record.ArmorRecord;

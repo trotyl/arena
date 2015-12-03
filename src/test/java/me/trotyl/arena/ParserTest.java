@@ -1,8 +1,10 @@
 package me.trotyl.arena;
 
+import me.trotyl.arena.armor.Armor;
 import me.trotyl.arena.attribute.*;
 import me.trotyl.arena.role.Player;
 import me.trotyl.arena.role.Soldier;
+import me.trotyl.arena.weapon.Weapon;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.junit.After;
