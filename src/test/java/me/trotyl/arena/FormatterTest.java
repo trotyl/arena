@@ -125,11 +125,22 @@ public class FormatterTest {
     @Test
     public void format_effect_should_have_proper_result_for_freeze() {
         EffectProcedure procedure = new EffectProcedure(new PlayerRecord("张三", 10, Role.soldier),
-                new EffectRecord(Type.freeze),
+                new EffectRecord(Type.freeze, 1),
                 new DamageRecord(5));
 
         String result = formatter.formatEffect(procedure);
 
         assertThat(result, is("张三冻僵了, 无法攻击."));
+    }
+
+    @Test
+    public void format_effect_should_have_proper_result_for_swoon() {
+        EffectProcedure procedure = new EffectProcedure(new PlayerRecord("张三", 10, Role.soldier),
+                new EffectRecord(Type.swoon, 2),
+                new DamageRecord(5));
+
+        String result = formatter.formatEffect(procedure);
+
+        assertThat(result, is("张三晕倒了, 无法攻击, 眩晕还剩: 2轮"));
     }
 }
