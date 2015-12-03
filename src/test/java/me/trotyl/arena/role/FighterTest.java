@@ -11,13 +11,13 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
 
-public class AssassinTest {
+public class FighterTest {
 
-    private Assassin assassin;
+    private Fighter fighter;
 
     @Before
     public void setUp() throws Exception {
-        assassin = new Assassin("张三", 10, 5);
+        fighter = new Fighter("张三", 10, 5);
     }
 
     @After
@@ -31,22 +31,22 @@ public class AssassinTest {
         Weapon middleWeapon = new Weapon("雌雄双股剑", 4, Length.medium);
         Weapon longWeapon = new Weapon("方天画戟", 5, Length.longer);
 
-        assassin.equip(shortWeapon);
+        fighter.equip(middleWeapon);
 
-        assertThat(assassin.weapon, is(shortWeapon));
+        assertThat(fighter.weapon, is(middleWeapon));
 
         try {
-            assassin.equip(middleWeapon);
+            fighter.equip(shortWeapon);
             fail();
         } catch (IllegalArgumentException e) {
-            assertThat(e.getMessage(), is("Assassin can only equip short weapon!"));
+            assertThat(e.getMessage(), is("Fighter can only equip medium weapon!"));
         }
 
         try {
-            assassin.equip(longWeapon);
+            fighter.equip(longWeapon);
             fail();
         } catch (IllegalArgumentException e) {
-            assertThat(e.getMessage(), is("Assassin can only equip short weapon!"));
+            assertThat(e.getMessage(), is("Fighter can only equip medium weapon!"));
         }
     }
 }
