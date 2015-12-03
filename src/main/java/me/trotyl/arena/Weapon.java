@@ -15,7 +15,7 @@ public class Weapon {
 
     private final int aggressivity;
     private final String name;
-    public Attribute attribute;
+    private Attribute attribute;
 
     public Weapon(String name, int aggressivity) {
         this(name, aggressivity, Attribute.none);
@@ -41,5 +41,9 @@ public class Weapon {
 
     public void with(Attribute attribute) {
         this.attribute = attribute;
+    }
+
+    public Attribute attribute() {
+        return attribute;
     }
 }

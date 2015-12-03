@@ -10,9 +10,10 @@ public class Type {
 
     @Override
     public String toString() {
-        if (this.equals(toxin)) {
-            return "毒性";
-        }
-        return "";
+        return this.equals(toxin)? "Toxin":
+            this.equals(none)? "None":
+            this.equals(swoon)? "Swoon":
+            this.equals(fire)? "Fire":
+            this.equals(freeze)? "Freeze": "Null";
     }
 }

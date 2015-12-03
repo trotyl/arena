@@ -54,4 +54,12 @@ public abstract class Attribute {
 
         return new DamageRecord(damage);
     }
+
+    public float rate() {
+        return rate;
+    }
+
+    public int limit() {
+        return limit;
+    }
 }

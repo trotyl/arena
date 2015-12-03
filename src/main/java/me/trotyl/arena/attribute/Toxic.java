@@ -8,7 +8,7 @@ import me.trotyl.arena.role.Attacker;
 
 public class Toxic extends Attribute {
 
-    private final int extent;
+    protected final int extent;
 
     public Toxic(int extent, int limit, float rate) {
         super(limit, rate);
@@ -19,5 +19,9 @@ public class Toxic extends Attribute {
     @Override
     public DamageRecord apply(Attacker attacker, Attackable attackable) {
         return applyByEffect(attacker, attackable, new Toxin(extent, limit), Genre.toxic);
+    }
+
+    public int extent() {
+        return extent;
     }
 }

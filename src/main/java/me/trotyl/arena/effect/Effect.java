@@ -45,4 +45,12 @@ public abstract class Effect {
     public abstract DamageRecord sway(Attacker attacker, Attackable attackable, Attribute attribute);
 
     public abstract boolean valid();
+
+    public int remain() {
+        return remain;
+    }
+
+    public void append(int remain) {
+        this.remain += remain;
+    }
 }

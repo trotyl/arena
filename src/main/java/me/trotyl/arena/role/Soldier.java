@@ -10,8 +10,8 @@ import org.javatuples.Pair;
 
 public class Soldier extends Player {
 
-    private Weapon weapon;
-    private Armor armor;
+    protected Weapon weapon;
+    protected Armor armor;
 
     public Soldier(String name, int health, int aggressivity) {
         this(name, health, aggressivity, Weapon.none, Armor.none);
@@ -34,7 +34,7 @@ public class Soldier extends Player {
 
     @Override
     public Pair<EffectProcedure, AttackProcedure> attack(Attackable attackable) {
-        return attackByAttribute(attackable, weapon.attribute);
+        return attackByAttribute(attackable, weapon.attribute());
     }
 
     @Override
@@ -50,5 +50,13 @@ public class Soldier extends Player {
     @Override
     public PlayerRecord record() {
         return new PlayerRecord(name, health, Role.soldier, weapon.record(), armor.record());
+    }
+
+    public Weapon weapon() {
+        return weapon;
+    }
+
+    public Armor armor() {
+        return armor;
     }
 }
