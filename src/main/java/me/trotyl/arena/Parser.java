@@ -35,8 +35,14 @@ public class Parser {
     public Weapon parseWeapon(JSONObject object) {
         String name = object.getString("name");
         int aggressivity = object.getInt("aggressivity");
+        if (!object.has("attribute")) {
+            return new Weapon(name, aggressivity);
+        }
 
-        return new Weapon(name, aggressivity);
+        JSONObject attrObject = object.getJSONObject("attribute");
+        Attribute attribute = parseAttribute(attrObject);
+
+        return new Weapon(name, aggressivity, attribute);
     }
 
     public Armor parseArmor(JSONObject object) {

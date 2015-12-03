@@ -105,7 +105,7 @@ public class ParserTest {
         String json = "" +
                 "{" +
                 "  \"genre\": \"dizzy\"," +
-                "  \"rate\": 0.5," +
+                "  \"rate\": 0.5" +
                 "}";
 
         JSONObject object = getObject(json);
@@ -115,6 +115,42 @@ public class ParserTest {
 
         Dizzy dizzy = (Dizzy) attribute;
         assertThat(dizzy.rate, is(0.5f));
+    }
+
+    @Test
+    public void parse_weapon_should_have_proper_result_without_attribute() {
+        String json = "" +
+                "{" +
+                "  \"name\": \"优质木棒\"," +
+                "  \"aggressivity\": 5" +
+                "}";
+
+        JSONObject object = getObject(json);
+        Weapon weapon = parser.parseWeapon(object);
+
+        assertThat(weapon.aggressivity(), is(5));
+        assertThat(weapon.name(), is("优质木棒"));
+    }
+
+    @Test
+    public void parse_weapon_should_have_proper_result_with_attribute() {
+        String json = "" +
+                "{" +
+                "  \"name\": \"优质木棒\"," +
+                "  \"aggressivity\": 5," +
+                "  \"attribute\": " +
+                "  {" +
+                "    \"genre\": \"dizzy\"," +
+                "    \"rate\": 0.5" +
+                "  }" +
+                "}";
+
+        JSONObject object = getObject(json);
+        Weapon weapon = parser.parseWeapon(object);
+
+        assertThat(weapon.aggressivity(), is(5));
+        assertThat(weapon.name(), is("优质木棒"));
+        assertThat(weapon.attribute, instanceOf(Dizzy.class));
     }
 
     private JSONObject getObject(String json) {
