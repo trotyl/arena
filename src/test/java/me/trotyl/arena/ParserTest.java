@@ -1,8 +1,6 @@
 package me.trotyl.arena;
 
-import me.trotyl.arena.attribute.Attribute;
-import me.trotyl.arena.attribute.Flaming;
-import me.trotyl.arena.attribute.Toxic;
+import me.trotyl.arena.attribute.*;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.junit.After;
@@ -81,6 +79,42 @@ public class ParserTest {
         assertThat(flaming.rate, is(0.5f));
         assertThat(flaming.extent, is(4));
         assertThat(flaming.limit, is(2));
+    }
+
+    @Test
+    public void parse_attribute_should_have_proper_result_for_freezing() {
+        String json = "" +
+                "{" +
+                "  \"genre\": \"freezing\"," +
+                "  \"rate\": 0.5," +
+                "  \"limit\": 2" +
+                "}";
+
+        JSONObject object = getObject(json);
+        Attribute attribute = parser.parseAttribute(object);
+
+        assertThat(attribute, instanceOf(Freezing.class));
+
+        Freezing freezing = (Freezing) attribute;
+        assertThat(freezing.rate, is(0.5f));
+        assertThat(freezing.limit, is(2));
+    }
+
+    @Test
+    public void parse_attribute_should_have_proper_result_for_dizzy() {
+        String json = "" +
+                "{" +
+                "  \"genre\": \"dizzy\"," +
+                "  \"rate\": 0.5," +
+                "}";
+
+        JSONObject object = getObject(json);
+        Attribute attribute = parser.parseAttribute(object);
+
+        assertThat(attribute, instanceOf(Dizzy.class));
+
+        Dizzy dizzy = (Dizzy) attribute;
+        assertThat(dizzy.rate, is(0.5f));
     }
 
     private JSONObject getObject(String json) {
