@@ -79,9 +79,8 @@ public class Formatter {
     }
 
     private String formatRole(Role role) {
-        if (role.equals(Role.soldier)) {
-            return "战士";
-        }
-        return "普通人";
+        return role.equals(Role.assassin)? "刺客":
+                role.equals(Role.fighter)? "战士":
+                role.equals(Role.knight)? "骑士": "普通人";
     }
 }

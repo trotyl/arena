@@ -31,7 +31,7 @@ public class FormatterTest {
     @Test
     public void format_attack_should_have_proper_result_without_weapon_nor_attribute() {
         AttackProcedure procedure = new AttackProcedure(
-                new PlayerRecord("张三", 10, Role.soldier),
+                new PlayerRecord("张三", 10, Role.fighter),
                 new PlayerRecord("李四", 20, Role.normal),
                 new DamageRecord(5));
 
@@ -43,7 +43,7 @@ public class FormatterTest {
     @Test
     public void format_attack_should_have_proper_result_with_weapon() {
         AttackProcedure procedure = new AttackProcedure(
-                new PlayerRecord("张三", 10, Role.soldier, new WeaponRecord("优质木棒"), ArmorRecord.none),
+                new PlayerRecord("张三", 10, Role.fighter, new WeaponRecord("优质木棒"), ArmorRecord.none),
                 new PlayerRecord("李四", 20, Role.normal),
                 new DamageRecord(5));
 
@@ -55,7 +55,7 @@ public class FormatterTest {
     @Test
     public void format_attack_should_have_proper_result_with_normal_effect() {
         AttackProcedure procedure = new AttackProcedure(
-                new PlayerRecord("张三", 10, Role.soldier),
+                new PlayerRecord("张三", 10, Role.fighter),
                 new PlayerRecord("李四", 20, Role.normal),
                 new DamageRecord(Genre.toxic, 5));
 
@@ -67,7 +67,7 @@ public class FormatterTest {
     @Test
     public void format_attack_should_have_proper_result_with_striking() {
         AttackProcedure procedure = new AttackProcedure(
-                new PlayerRecord("张三", 10, Role.soldier),
+                new PlayerRecord("张三", 10, Role.fighter),
                 new PlayerRecord("李四", 20, Role.normal),
                 new DamageRecord(Genre.striking, 5));
 
@@ -80,7 +80,7 @@ public class FormatterTest {
     @Test
     public void format_attack_should_have_proper_result_with_weapon_and_effect() {
         AttackProcedure procedure = new AttackProcedure(
-                new PlayerRecord("张三", 10, Role.soldier, new WeaponRecord("优质木棒"), ArmorRecord.none),
+                new PlayerRecord("张三", 10, Role.fighter, new WeaponRecord("优质木棒"), ArmorRecord.none),
                 new PlayerRecord("李四", 20, Role.normal),
                 new DamageRecord(Genre.toxic, 5));
 
@@ -91,7 +91,7 @@ public class FormatterTest {
 
     @Test
     public void format_over_should_have_proper_result() {
-        OverProcedure procedure = new OverProcedure(new PlayerRecord("张三", 10, Role.soldier),
+        OverProcedure procedure = new OverProcedure(new PlayerRecord("张三", 10, Role.fighter),
                                                     new PlayerRecord("李四", 20, Role.normal));
 
         String result = formatter.formatOver(procedure);
@@ -101,7 +101,7 @@ public class FormatterTest {
 
     @Test
     public void format_effect_should_have_proper_result_for_toxin() {
-        EffectProcedure procedure = new EffectProcedure(new PlayerRecord("张三", 10, Role.soldier),
+        EffectProcedure procedure = new EffectProcedure(new PlayerRecord("张三", 10, Role.fighter),
                                                         new EffectRecord(Type.toxin),
                                                         new DamageRecord(5));
 
@@ -112,7 +112,7 @@ public class FormatterTest {
 
     @Test
     public void format_effect_should_have_proper_result_for_fire() {
-        EffectProcedure procedure = new EffectProcedure(new PlayerRecord("张三", 10, Role.soldier),
+        EffectProcedure procedure = new EffectProcedure(new PlayerRecord("张三", 10, Role.fighter),
                 new EffectRecord(Type.fire),
                 new DamageRecord(5));
 
@@ -123,7 +123,7 @@ public class FormatterTest {
 
     @Test
     public void format_effect_should_have_proper_result_for_freeze() {
-        EffectProcedure procedure = new EffectProcedure(new PlayerRecord("张三", 10, Role.soldier),
+        EffectProcedure procedure = new EffectProcedure(new PlayerRecord("张三", 10, Role.fighter),
                 new EffectRecord(Type.freeze, 1),
                 new DamageRecord(5));
 
@@ -134,7 +134,7 @@ public class FormatterTest {
 
     @Test
     public void format_effect_should_have_proper_result_for_swoon() {
-        EffectProcedure procedure = new EffectProcedure(new PlayerRecord("张三", 10, Role.soldier),
+        EffectProcedure procedure = new EffectProcedure(new PlayerRecord("张三", 10, Role.fighter),
                 new EffectRecord(Type.swoon, 2),
                 new DamageRecord(5));
 

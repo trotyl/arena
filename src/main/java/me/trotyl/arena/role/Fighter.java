@@ -1,6 +1,7 @@
 package me.trotyl.arena.role;
 
 
+import me.trotyl.arena.record.PlayerRecord;
 import me.trotyl.arena.weapon.Length;
 import me.trotyl.arena.weapon.Weapon;
 
@@ -16,5 +17,10 @@ public class Fighter extends Soldier {
             throw new IllegalArgumentException("Fighter can only equip medium weapon!");
         }
         super.equip(weapon);
+    }
+
+    @Override
+    public PlayerRecord record() {
+        return new PlayerRecord(name, health, Role.fighter, weapon.record(), armor.record());
     }
 }

@@ -1,6 +1,7 @@
 package me.trotyl.arena.role;
 
 
+import me.trotyl.arena.record.PlayerRecord;
 import me.trotyl.arena.weapon.Length;
 import me.trotyl.arena.weapon.Weapon;
 
@@ -16,5 +17,10 @@ public class Assassin extends Soldier {
             throw new IllegalArgumentException("Assassin can only equip short weapon!");
         }
         super.equip(weapon);
+    }
+
+    @Override
+    public PlayerRecord record() {
+        return new PlayerRecord(name, health, Role.assassin, weapon.record(), armor.record());
     }
 }
