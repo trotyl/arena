@@ -12,10 +12,11 @@ import org.javatuples.Pair;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InOrder;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 
 
 public class GameTest {
@@ -85,5 +86,28 @@ public class GameTest {
         assertThat(effectProcedure.effect, is(EffectRecord.none));
         assertThat(effectProcedure.damage, is(DamageRecord.none));
         assertThat(attackProcedure.attackable.health(), is(-2));
+    }
+
+    @Test
+    public void run_should_have_proper_invocation() {
+        Player player0 = mock(Player.class);
+        Player player1 = mock(Player.class);
+        when(player0.alive()).thenReturn(true);
+        when(player1.alive()).thenReturn(true);
+        when(player0.attack(player1)).thenReturn(new Pair<>(EffectProcedure.none, AttackProcedure.none));
+        when(player1.attack(player0)).thenReturn(new Pair<>(EffectProcedure.none, AttackProcedure.none));
+
+        game = Game.between(player0, player1);
+        game.run();
+        game.run();
+
+        InOrder inOrder = inOrder(player0, player1);
+        inOrder.verify(player0).alive();
+        inOrder.verify(player1).alive();
+        inOrder.verify(player0).attack(player1);
+        inOrder.verify(player0).alive();
+        inOrder.verify(player1).alive();
+        inOrder.verify(player1).attack(player0);
+        verifyNoMoreInteractions(player0, player1);
     }
 }
