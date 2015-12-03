@@ -1,7 +1,6 @@
 package me.trotyl.arena.effect;
 
 import me.trotyl.arena.attribute.Attribute;
-import me.trotyl.arena.attribute.Genre;
 import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.record.EffectRecord;
 import me.trotyl.arena.record.PlayerRecord;
@@ -11,11 +10,11 @@ import me.trotyl.arena.role.Player;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InOrder;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.*;
 
 
 public class EffectTest {
@@ -35,7 +34,7 @@ public class EffectTest {
         attribute = spy(new Attribute(-1, 0.0f) {
             @Override
             public DamageRecord apply(Attacker attacker, Attackable attackable) {
-                return applyNoEffect(attacker, attackable);
+                return DamageRecord.none;
             }
         });
     }
@@ -75,7 +74,23 @@ public class EffectTest {
     public void sway_should_have_proper_result() {
         DamageRecord damage = effect.sway(player1, player2, attribute);
 
-        assertThat(damage.genre, is(Genre.none));
-        assertThat(damage.extent, is(5));
+        assertThat(damage, is(DamageRecord.none));
+    }
+
+    @Test
+    public void sway_should_have_proper_invocation() {
+        effect.sway(player1, player2, attribute);
+
+        verifyZeroInteractions(player1);
+        verifyZeroInteractions(player2);
+
+        InOrder inOrder = inOrder(attribute);
+        inOrder.verify(attribute).apply(player1, player2);
+        verifyNoMoreInteractions(attribute);
+    }
+
+    @Test
+    public void valid_should_have_proper_result() {
+        assertThat(effect.valid(), is(true));
     }
 }
