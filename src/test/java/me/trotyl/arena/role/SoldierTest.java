@@ -2,23 +2,18 @@ package me.trotyl.arena.role;
 
 import me.trotyl.arena.Armor;
 import me.trotyl.arena.Weapon;
-import me.trotyl.arena.attribute.*;
+import me.trotyl.arena.attribute.Attribute;
+import me.trotyl.arena.attribute.Genre;
 import me.trotyl.arena.effect.Effect;
-import me.trotyl.arena.effect.Swoon;
-import me.trotyl.arena.effect.Toxin;
 import me.trotyl.arena.procedure.AttackProcedure;
 import me.trotyl.arena.procedure.EffectProcedure;
-import me.trotyl.arena.record.DamageRecord;
-import me.trotyl.arena.record.EffectRecord;
+import me.trotyl.arena.record.*;
 import org.javatuples.Pair;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InOrder;
 
-import java.util.Random;
-
-import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
@@ -116,71 +111,28 @@ public class SoldierTest {
     }
 
     @Test
-    public void should_be_more_defensive_with_armor() throws Exception {
-        Soldier soldier = new Soldier("张三", 100, 20);
-        soldier.equip(new Armor(10));
+    public void defence_should_have_proper_result() {
+        assertThat(soldier0.defence(), is(0));
 
-        Player player = new Player("李四", 100, 20);
-
-        player.attack(soldier);
-
-        assertThat(soldier.health, is(90));
+        soldier0.equip(new Armor(5));
+        assertThat(soldier0.defence(), is(5));
     }
 
     @Test
-    public void should_be_as_normal_player_without_armor() throws Exception {
-        Soldier soldier = new Soldier("张三", 100, 20);
+    public void record_should_have_proper_result() {
+        PlayerRecord record = soldier0.record();
 
-        Player player = new Player("李四", 100, 20);
+        assertThat(record.name(), is("张三"));
+        assertThat(record.health(), is(10));
+        assertThat(record.role(), is(Role.soldier));
+        assertThat(record.weapon(), is(WeaponRecord.none));
+        assertThat(record.armor(), is(ArmorRecord.none));
 
-        player.attack(soldier);
+        soldier0.equip(new Weapon("我真剑", 5));
+        soldier0.equip(new Armor(5));
+        PlayerRecord newRecord = soldier0.record();
 
-        assertThat(soldier.health, is(80));
-    }
-
-
-    @Test
-    public void should_have_3_times_damage_with_strike() throws Exception {
-        Random random = mock(Random.class);
-        when(random.nextFloat()).thenReturn(0.0f);
-        Weapon weapon = new Weapon("我真剑", 10, new Striking(1.0f));
-        Soldier soldier = new Soldier("张三", 100, 20);
-        soldier.equip(weapon);
-
-        Player player = new Player("李四", 100, 10);
-
-        soldier.attack(player);
-
-        assertThat(player.health, is(10));
-    }
-
-    @Test
-    public void should_produce_toxin_effect_with_noxious() throws Exception {
-
-        Weapon weapon = new Weapon("我真剑", 10, new Toxic(2, 2, 1.0f));
-        Soldier soldier = new Soldier("张三", 100, 20);
-        soldier.equip(weapon);
-
-        Player player = new Player("李四", 100, 10);
-
-        soldier.attack(player);
-
-        assertThat(player.health, is(70));
-        assertThat(player.effect, instanceOf(Toxin.class));
-    }
-
-    @Test
-    public void should_produce_toxin_effect_with_dizzy() throws Exception {
-
-        Weapon weapon = new Weapon("我真剑", 10, new Dizzy(1.0f));
-        Soldier soldier = new Soldier("张三", 100, 20);
-        soldier.equip(weapon);
-
-        Player player = new Player("李四", 100, 10);
-
-        soldier.attack(player);
-
-        assertThat(player.health, is(70));
-        assertThat(player.effect, instanceOf(Swoon.class));
+        assertThat(newRecord.weapon().name(), is("我真剑"));
+        assertThat(newRecord.armor().defence, is(5));
     }
 }
