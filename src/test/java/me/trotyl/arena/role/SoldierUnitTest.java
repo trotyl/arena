@@ -3,7 +3,7 @@ package me.trotyl.arena.role;
 import me.trotyl.arena.Armor;
 import me.trotyl.arena.Weapon;
 import me.trotyl.arena.attribute.Dizzy;
-import me.trotyl.arena.attribute.Noxious;
+import me.trotyl.arena.attribute.Toxic;
 import me.trotyl.arena.attribute.Striking;
 import me.trotyl.arena.effect.Swoon;
 import me.trotyl.arena.effect.Toxin;
@@ -28,7 +28,7 @@ public class SoldierUnitTest {
         when(random.nextFloat()).thenReturn(0.0f);
 
         Striking.config(random);
-        Noxious.config(random);
+        Toxic.config(random);
     }
 
     @After
@@ -101,7 +101,7 @@ public class SoldierUnitTest {
     @Test
     public void should_produce_toxin_effect_with_noxious() throws Exception {
 
-        Weapon weapon = new Weapon("我真剑", 10, new Noxious(2, 2, 1.0f));
+        Weapon weapon = new Weapon("我真剑", 10, new Toxic(2, 2, 1.0f));
         Soldier soldier = new Soldier("张三", 100, 20);
         soldier.equip(weapon);
 

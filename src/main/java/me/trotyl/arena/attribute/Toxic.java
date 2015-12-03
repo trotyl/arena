@@ -6,11 +6,11 @@ import me.trotyl.arena.role.Attackable;
 import me.trotyl.arena.role.Attacker;
 
 
-public class Noxious extends Attribute {
+public class Toxic extends Attribute {
 
     private final int extent;
 
-    public Noxious(int extent, int limit, float rate) {
+    public Toxic(int extent, int limit, float rate) {
         super(limit, rate);
 
         this.extent = extent;
@@ -18,6 +18,6 @@ public class Noxious extends Attribute {
 
     @Override
     public DamageRecord apply(Attacker attacker, Attackable attackable) {
-        return applyByEffect(attacker, attackable, new Toxin(extent, limit), Genre.noxious);
+        return applyByEffect(attacker, attackable, new Toxin(extent, limit), Genre.toxic);
     }
 }
