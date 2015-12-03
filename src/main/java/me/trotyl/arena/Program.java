@@ -35,12 +35,22 @@ public class Program {
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-        System.out.println("Please input the path of config file: ");
-        String path = reader.readLine();
-        FileInputStream in = new FileInputStream(path);
+        while (true) {
+            System.out.println("Please input the path of config file, empty to exit: ");
+            String path = reader.readLine();
 
-        Program program = new Program(in, System.out, new Parser(), new Formatter());
-        program.run();
+            if (path.isEmpty()) {
+                System.out.println("Goodbye!");
+                break;
+            }
+
+            FileInputStream in = new FileInputStream(path);
+
+            Program program = new Program(in, System.out, new Parser(), new Formatter());
+            program.run();
+
+            System.out.println();
+        }
 
         reader.close();
     }
