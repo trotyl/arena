@@ -5,8 +5,6 @@ import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.role.Attackable;
 import me.trotyl.arena.role.Attacker;
 
-import java.util.Random;
-
 public class Striking extends Attribute {
 
     private float rate;
@@ -17,8 +15,8 @@ public class Striking extends Attribute {
 
     @Override
     public DamageRecord apply(Attacker attacker, Attackable attackable) {
-        if (random.nextFloat() > rate) {
-            return Attribute.none.apply(attacker, attackable);
+        if (!works()) {
+            return applyNoEffect(attacker, attackable);
         }
 
         int damage = 3 * (attacker.aggressivity() - attackable.defence());

@@ -1,6 +1,7 @@
 package me.trotyl.arena.attribute;
 
 
+import me.trotyl.arena.effect.Effect;
 import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.role.Attackable;
 import me.trotyl.arena.role.Attacker;
@@ -18,10 +19,7 @@ public abstract class Attribute {
     public static Attribute none = new Attribute(-1, 0.0f) {
         @Override
         public DamageRecord apply(Attacker attacker, Attackable attackable) {
-            int damage = attacker.aggressivity() - attackable.defence();
-            attackable.suffer(damage);
-
-            return new DamageRecord(damage);
+            return applyNoEffect(attacker, attackable);
         }
     };
 
@@ -34,4 +32,26 @@ public abstract class Attribute {
     }
 
     public abstract DamageRecord apply(Attacker attacker, Attackable attackable);
+
+    protected boolean works() {
+        return random.nextFloat() <= rate;
+    }
+
+    protected DamageRecord applyByEffect(Attacker attacker, Attackable attackable, Effect effect, Genre genre) {
+        if (!works()) {
+            return applyNoEffect(attacker, attackable);
+        }
+
+        int damage = attacker.aggressivity() - attackable.defence();
+        attackable.suffer(damage, effect);
+
+        return new DamageRecord(genre, damage);
+    }
+
+    protected DamageRecord applyNoEffect(Attacker attacker, Attackable attackable) {
+        int damage = attacker.aggressivity() - attackable.defence();
+        attackable.suffer(damage);
+
+        return new DamageRecord(damage);
+    }
 }

@@ -14,14 +14,6 @@ public class Dizzy extends Attribute {
 
     @Override
     public DamageRecord apply(Attacker attacker, Attackable attackable) {
-        if (random.nextFloat() > rate) {
-            return Attribute.none.apply(attacker, attackable);
-        }
-
-        Swoon swoon = new Swoon(limit);
-        int damage = attacker.aggressivity() - attackable.defence();
-        attackable.suffer(damage, swoon);
-
-        return new DamageRecord(Genre.dizzy, damage);
+        return applyByEffect(attacker, attackable, new Swoon(limit), Genre.dizzy);
     }
 }
