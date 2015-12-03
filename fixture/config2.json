@@ -3,16 +3,17 @@
     "name": "张三",
     "health": 10,
     "aggressivity": 5,
-    "role": "soldier",
+    "role": "fighter",
     "weapon": {
       "name": "优质木棒",
-      "aggressivity": 5
+      "aggressivity": 5,
+      "length": "medium"
     }
   },
   "player2": {
     "name": "李四",
     "health": 20,
     "aggressivity": 8,
-    "role": "normal"
+    "role": "fighter"
   }
 }
