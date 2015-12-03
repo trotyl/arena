@@ -10,4 +10,5 @@ public class Genre {
     public static final Genre toxic = new Genre();
     public static final Genre dizzy = new Genre();
     public static final Genre flaming = new Genre();
+    public static final Genre freezing = new Genre();
 }
