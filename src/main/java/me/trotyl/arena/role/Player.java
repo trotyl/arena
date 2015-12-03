@@ -29,7 +29,7 @@ public class Player implements Attacker, Attackable {
 
     @Override
     public void suffer(int injury) {
-        suffer(injury, Effect.none);
+        suffer(injury, effect);
     }
 
     @Override
