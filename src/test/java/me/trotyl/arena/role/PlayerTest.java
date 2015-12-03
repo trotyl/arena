@@ -1,13 +1,16 @@
 package me.trotyl.arena.role;
 
 import me.trotyl.arena.effect.Effect;
+import me.trotyl.arena.effect.Fire;
+import me.trotyl.arena.effect.Toxin;
 import me.trotyl.arena.record.PlayerRecord;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.spy;
 
 
 public class PlayerTest {
@@ -50,7 +53,18 @@ public class PlayerTest {
 
         PlayerRecord record2 = player1.record();
         assertThat(record2.health(), is(0));
+
+        Fire fire = spy(new Fire(2, 2));
+
+        player2.suffer(1, fire);
+        assertThat(player2.effect, is(fire));
+
+        Toxin toxin = spy(new Toxin(2, 2));
+
+        player2.suffer(2, toxin);
+        assertThat(player2.effect, is(toxin));
     }
+
 
     @Test
     public void should_be_able_to_get_right_status() throws Exception {
