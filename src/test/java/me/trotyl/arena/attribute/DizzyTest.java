@@ -1,6 +1,7 @@
 package me.trotyl.arena.attribute;
 
 import me.trotyl.arena.record.DamageRecord;
+import me.trotyl.arena.record.PlayerRecord;
 import me.trotyl.arena.role.Player;
 import org.junit.After;
 import org.junit.Before;
@@ -38,8 +39,13 @@ public class DizzyTest {
         Player player2 = new Player("李四", 20, 8);
 
         DamageRecord damage = dizzy.apply(player1, player2);
+        PlayerRecord player1Record = player1.record();
+        PlayerRecord player2Record = player2.record();
 
         assertThat(damage.genre, is(Genre.dizzy));
         assertThat(damage.extent, is(5));
+
+        assertThat(player1Record.health(), is(10));
+        assertThat(player2Record.health(), is(15));
     }
 }
