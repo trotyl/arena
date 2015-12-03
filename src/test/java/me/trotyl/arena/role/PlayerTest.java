@@ -68,6 +68,11 @@ public class PlayerTest {
 
         player2.suffer(2, toxin);
         assertThat(player2.effect, is(toxin));
+        assertThat(player2.effect.remain(), is(2));
+
+        player2.suffer(2, toxin);
+        assertThat(player2.effect, is(toxin));
+        assertThat(player2.effect.remain(), is(4));
     }
 
     @Test

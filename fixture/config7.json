@@ -9,7 +9,7 @@
       "aggressivity": 54,
       "attribute": {
         "genre": "striking",
-        "rate": 0.8
+        "rate": 0.5
       }
     },
     "armor": {
@@ -26,7 +26,7 @@
       "aggressivity": 47,
       "attribute": {
         "genre": "flaming",
-        "rate": 0.6,
+        "rate": 0.4,
         "extent": 19,
         "limit": 2
       }

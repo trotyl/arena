@@ -30,7 +30,12 @@ public class Player implements Attacker, Attackable {
     @Override
     public void suffer(int damage, Effect effect) {
         health -= damage;
-        this.effect = effect.equals(Effect.none) ? this.effect: effect;
+
+        if (effect.equals(this.effect)) {
+            this.effect.append(effect.remain());
+        } else if (!effect.equals(Effect.none)) {
+            this.effect = effect;
+        }
     }
 
     @Override
