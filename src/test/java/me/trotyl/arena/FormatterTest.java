@@ -121,4 +121,15 @@ public class FormatterTest {
 
         assertThat(result, is("张三受到5点火焰伤害, 张三剩余生命: 10"));
     }
+
+    @Test
+    public void format_effect_should_have_proper_result_for_freeze() {
+        EffectProcedure procedure = new EffectProcedure(new PlayerRecord("张三", 10, Role.soldier),
+                new EffectRecord(Type.freeze),
+                new DamageRecord(5));
+
+        String result = formatter.formatEffect(procedure);
+
+        assertThat(result, is("张三冻僵了, 无法攻击."));
+    }
 }
