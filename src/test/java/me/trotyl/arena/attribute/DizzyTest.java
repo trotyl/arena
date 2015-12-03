@@ -34,7 +34,7 @@ public class DizzyTest {
     }
 
     @Test
-    public void should_apply_to_playersPlayer() {
+    public void should_be_applicable_to_players() {
         Player player1 = new Player("张三", 10, 5);
         Player player2 = new Player("李四", 20, 8);
 
