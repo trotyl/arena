@@ -1,6 +1,7 @@
 package me.trotyl.arena;
 
 
+import me.trotyl.arena.attribute.*;
 import me.trotyl.arena.role.Player;
 import me.trotyl.arena.role.Soldier;
 import org.json.JSONObject;
@@ -42,5 +43,31 @@ public class Parser {
         int defence = object.getInt("defence");
 
         return new Armor(defence);
+    }
+
+    public Attribute parseAttribute(JSONObject object) {
+        String genre = object.getString("genre");
+        float rate = (float) object.getDouble("rate");
+        if (genre.equals("dizzy")) {
+            return new Dizzy(rate);
+        }
+        if (genre.equals("striking")) {
+            return new Striking(rate);
+        }
+
+        int limit = object.getInt("limit");
+        if (genre.equals("freezing")) {
+            return new Freezing(limit, rate);
+        }
+
+        int extent = object.getInt("extent");
+        if (genre.equals("flaming")) {
+            return new Flaming(extent, limit, rate);
+        }
+        if (genre.equals("toxic")) {
+            return new Toxic(extent, limit, rate);
+        }
+
+        return Attribute.none;
     }
 }
