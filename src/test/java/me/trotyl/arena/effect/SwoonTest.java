@@ -33,9 +33,19 @@ public class SwoonTest {
 
         Player anotherPlayer = new Player("李四", 20, 8);
 
-        Pair<EffectProcedure, AttackProcedure> pair = player.attack(anotherPlayer);
-        AttackProcedure attack = pair.getValue1();
+        Pair<EffectProcedure, AttackProcedure> pair0 = player.attack(anotherPlayer);
+        AttackProcedure attack0 = pair0.getValue1();
 
-        assertThat(attack.damage, is(DamageRecord.none));
+        assertThat(attack0.damage, is(DamageRecord.none));
+
+        Pair<EffectProcedure, AttackProcedure> pair1 = player.attack(anotherPlayer);
+        AttackProcedure attack1 = pair1.getValue1();
+
+        assertThat(attack1.damage, is(DamageRecord.none));
+
+        Pair<EffectProcedure, AttackProcedure> pair2 = player.attack(anotherPlayer);
+        AttackProcedure attack2 = pair2.getValue1();
+
+        assertThat(attack2.damage.extent, is(5));
     }
 }

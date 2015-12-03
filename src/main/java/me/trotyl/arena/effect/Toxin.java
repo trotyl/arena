@@ -33,4 +33,9 @@ public class Toxin extends Effect {
     public DamageRecord sway(Attacker attacker, Attackable attackable, Attribute attribute) {
         return Effect.none.sway(attacker, attackable, attribute);
     }
+
+    @Override
+    public boolean valid() {
+        return remain > 0;
+    }
 }

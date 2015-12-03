@@ -25,6 +25,12 @@ public class Swoon extends Effect {
 
     @Override
     public DamageRecord sway(Attacker attacker, Attackable attackable, Attribute attribute) {
+        remain--;
         return DamageRecord.none;
+    }
+
+    @Override
+    public boolean valid() {
+        return remain > 0;
     }
 }

@@ -25,6 +25,11 @@ public abstract class Effect {
         public DamageRecord sway(Attacker attacker, Attackable attackable, Attribute attribute) {
             return attribute.apply(attacker, attackable);
         }
+
+        @Override
+        public boolean valid() {
+            return true;
+        }
     };
 
     protected int remain;
@@ -38,4 +43,6 @@ public abstract class Effect {
     public abstract EffectRecord record();
 
     public abstract DamageRecord sway(Attacker attacker, Attackable attackable, Attribute attribute);
+
+    public abstract boolean valid();
 }
