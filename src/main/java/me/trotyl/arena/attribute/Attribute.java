@@ -23,8 +23,8 @@ public abstract class Attribute {
         }
     };
 
-    protected int limit;
-    protected float rate;
+    public int limit;
+    public float rate;
 
     public Attribute(int limit, float rate) {
         this.limit = limit;

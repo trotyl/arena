@@ -8,7 +8,7 @@ import me.trotyl.arena.role.Attacker;
 
 public class Toxic extends Attribute {
 
-    private final int extent;
+    public final int extent;
 
     public Toxic(int extent, int limit, float rate) {
         super(limit, rate);
