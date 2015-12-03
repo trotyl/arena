@@ -140,4 +140,18 @@ public class FormatterUnitTest {
 
         assertThat(result, is("战士李四攻击了战士张三, 张三受到了5点伤害, 张三剩余生命: 5"));
     }
+
+    @Test
+    public void should_work_of_attack_between_soldier_without_equipment_and_soldier_with_weapon_and_armor() {
+        String result = formattedAttack(soldierWithoutEquipment, anotherSoldierWithWeaponAndArmor);
+
+        assertThat(result, is("战士李四攻击了战士张三, 张三受到了5点伤害, 张三剩余生命: 5"));
+    }
+
+    @Test
+    public void should_work_of_attack_between_soldier_with_weapon_and_soldier_without_equipment() {
+        String result = formattedAttack(soldierWithWeapon, anotherSoldierWithoutEquipment);
+
+        assertThat(result, is("战士李四用优质木棒攻击了战士张三, 张三受到了13点伤害, 张三剩余生命: -3"));
+    }
 }
