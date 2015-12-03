@@ -9,8 +9,8 @@ import me.trotyl.arena.record.PlayerRecord;
 public class EffectProcedure extends Procedure {
 
     public static final EffectProcedure none = new EffectProcedure(PlayerRecord.none, EffectRecord.none, DamageRecord.none);
-    private AttackableRecord attackable;
-    private EffectRecord effect;
+    public AttackableRecord attackable;
+    public EffectRecord effect;
     public DamageRecord damage;
 
     public EffectProcedure(AttackableRecord attackable, EffectRecord effect, DamageRecord damage) {

@@ -6,8 +6,8 @@ import me.trotyl.arena.effect.Type;
 public class EffectRecord implements Record {
 
     public static final EffectRecord none = new EffectRecord( Type.none, 0);
-    private Type type;
-    private int remain;
+    public Type type;
+    public int remain;
 
     public EffectRecord(Type type) {
         this(type, -1);
