@@ -1,13 +1,14 @@
 package me.trotyl.arena.record;
 
 
+import me.trotyl.arena.attribute.Genre;
 import me.trotyl.arena.effect.Type;
 
 public class EffectRecord implements Record {
 
     public static final EffectRecord none = new EffectRecord(Type.none, 0);
     private Type type;
-    private int extent;
+    public DamageRecord damage;
     private int remain;
 
     public EffectRecord(Type type, int extent) {
@@ -17,7 +18,7 @@ public class EffectRecord implements Record {
     public EffectRecord(Type type, int extent, int remain) {
 
         this.type = type;
-        this.extent = extent;
+        this.damage = new DamageRecord(Genre.effect, extent);
         this.remain = remain;
     }
 

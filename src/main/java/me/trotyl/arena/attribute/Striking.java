@@ -26,6 +26,6 @@ public class Striking extends Attribute {
         int damage = 3 * (attacker.aggressivity() - attackable.defence());
         attackable.suffer(damage);
 
-        return new DamageRecord(Genre.strike, damage);
+        return new DamageRecord(Genre.striking, damage);
     }
 }

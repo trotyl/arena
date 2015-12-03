@@ -1,8 +1,8 @@
 package me.trotyl.arena.effect;
 
 
-import me.trotyl.arena.attribute.Genre;
 import me.trotyl.arena.record.EffectRecord;
+import me.trotyl.arena.role.Attackable;
 
 public class Toxin extends Effect {
 
@@ -13,8 +13,8 @@ public class Toxin extends Effect {
     }
 
     @Override
-    public EffectRecord take() {
+    public EffectRecord take(Attackable attackable) {
+        attackable.suffer(extent);
         return new EffectRecord(Type.toxin, extent);
-
     }
 }
