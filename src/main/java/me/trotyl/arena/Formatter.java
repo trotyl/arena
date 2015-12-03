@@ -38,7 +38,7 @@ public class Formatter {
         }
 
         if (procedure.damage.genre.equals(Genre.striking)) {
-            return format("%s发动了致命一击, %s", procedure.attacker.name(), damagePart);
+            return format("%s发动了全力一击, %s", procedure.attacker.name(), damagePart);
         }
 
         String attributePart = procedure.damage.genre.equals(Genre.toxic)? "中毒了":

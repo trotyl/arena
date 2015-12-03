@@ -54,7 +54,7 @@ public class FormatterTest {
     }
 
     @Test
-    public void format_attack_should_have_proper_result_with_effect() {
+    public void format_attack_should_have_proper_result_with_normal_effect() {
         AttackProcedure procedure = new AttackProcedure(
                 new PlayerRecord("张三", 10, Role.soldier),
                 new PlayerRecord("李四", 20, Role.normal),
@@ -66,7 +66,20 @@ public class FormatterTest {
     }
 
     @Test
-    public void format_attack_should_have_proper_result_with_weapon_and_normal_effect() {
+    public void format_attack_should_have_proper_result_with_striking() {
+        AttackProcedure procedure = new AttackProcedure(
+                new PlayerRecord("张三", 10, Role.soldier),
+                new PlayerRecord("李四", 20, Role.normal),
+                new DamageRecord(Genre.striking, 5));
+
+        String result = formatter.formatAttack(procedure);
+
+        assertThat(result, is("战士张三攻击了普通人李四, 张三发动了全力一击, 李四受到了5点伤害, 李四剩余生命: 20"));
+    }
+
+
+    @Test
+    public void format_attack_should_have_proper_result_with_weapon_and_effect() {
         AttackProcedure procedure = new AttackProcedure(
                 new PlayerRecord("张三", 10, Role.soldier, new WeaponRecord("优质木棒"), ArmorRecord.none),
                 new PlayerRecord("李四", 20, Role.normal),
