@@ -1,6 +1,7 @@
 package me.trotyl.arena.effect;
 
 import me.trotyl.arena.record.DamageRecord;
+import me.trotyl.arena.record.EffectRecord;
 import me.trotyl.arena.record.PlayerRecord;
 import me.trotyl.arena.role.Player;
 import org.junit.After;
@@ -51,4 +52,10 @@ public class EffectTest {
         verifyZeroInteractions(player1);
     }
 
+    @Test
+    public void should_be_record_proper_result() {
+        EffectRecord record = effect.record();
+
+        assertThat(record, is(EffectRecord.none));
+    }
 }
