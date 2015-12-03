@@ -77,4 +77,10 @@ public class PlayerTest {
         assertThat(record.weapon(), is(WeaponRecord.none));
         assertThat(record.role(), is(Role.normal));
     }
+
+    @Test
+    public void defence_should_have_proper_result() {
+        assertThat(player1.defence(), is(0));
+        assertThat(player2.defence(), is(0));
+    }
 }
