@@ -10,11 +10,14 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
 
-public class PlayerUnitTest {
+public class PlayerTest {
+
+    Player player1, player2;
 
     @Before
     public void setUp() throws Exception {
-
+        player1 = new Player("张三", 10, 5);
+        player2 = new Player("李四", 20, 8);
     }
 
     @After
