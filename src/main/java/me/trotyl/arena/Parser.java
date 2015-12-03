@@ -3,8 +3,7 @@ package me.trotyl.arena;
 
 import me.trotyl.arena.armor.Armor;
 import me.trotyl.arena.attribute.*;
-import me.trotyl.arena.role.Player;
-import me.trotyl.arena.role.Soldier;
+import me.trotyl.arena.role.*;
 import me.trotyl.arena.weapon.Length;
 import me.trotyl.arena.weapon.Weapon;
 import org.json.JSONObject;
@@ -20,7 +19,11 @@ public class Parser {
             return new Player(name, health, aggressivity);
         }
 
-        Soldier soldier = new Soldier(name, health, aggressivity);
+        Soldier soldier = role.equals("assassin")? new Assassin(name, health, aggressivity):
+                role.equals("fighter")? new Fighter(name, health, aggressivity):
+                role.equals("knight")? new Knight(name, health, aggressivity):
+                new Soldier(name, health, aggressivity);
+
         if (object.has("weapon")) {
             JSONObject weaponObject = object.getJSONObject("weapon");
             Weapon weapon = parseWeapon(weaponObject);
@@ -38,14 +41,19 @@ public class Parser {
     public Weapon parseWeapon(JSONObject object) {
         String name = object.getString("name");
         int aggressivity = object.getInt("aggressivity");
+        String lengthStr = object.getString("length");
+        Length length = lengthStr.equals("short")? Length.shorter:
+                lengthStr.equals("medium")? Length.medium:
+                lengthStr.equals("long")? Length.longer:
+                Length.none;
         if (!object.has("attribute")) {
-            return new Weapon(name, aggressivity, Length.none);
+            return new Weapon(name, aggressivity, length);
         }
 
         JSONObject attrObject = object.getJSONObject("attribute");
         Attribute attribute = parseAttribute(attrObject);
 
-        return new Weapon(name, aggressivity, Length.none, attribute);
+        return new Weapon(name, aggressivity, length, attribute);
     }
 
     public Armor parseArmor(JSONObject object) {

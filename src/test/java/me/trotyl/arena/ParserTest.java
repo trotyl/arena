@@ -2,8 +2,8 @@ package me.trotyl.arena;
 
 import me.trotyl.arena.armor.Armor;
 import me.trotyl.arena.attribute.*;
-import me.trotyl.arena.role.Player;
-import me.trotyl.arena.role.Soldier;
+import me.trotyl.arena.role.*;
+import me.trotyl.arena.weapon.Length;
 import me.trotyl.arena.weapon.Weapon;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -127,7 +127,8 @@ public class ParserTest {
         String json = "" +
                 "{" +
                 "  \"name\": \"优质木棒\"," +
-                "  \"aggressivity\": 5" +
+                "  \"aggressivity\": 5," +
+                "  \"length\": \"medium\"" +
                 "}";
 
         JSONObject object = getObject(json);
@@ -135,6 +136,7 @@ public class ParserTest {
 
         assertThat(weapon.aggressivity(), is(5));
         assertThat(weapon.name(), is("优质木棒"));
+        assertThat(weapon.length(), is(Length.medium));
     }
 
     @Test
@@ -143,6 +145,7 @@ public class ParserTest {
                 "{" +
                 "  \"name\": \"优质木棒\"," +
                 "  \"aggressivity\": 5," +
+                "  \"length\": \"medium\"," +
                 "  \"attribute\": " +
                 "  {" +
                 "    \"genre\": \"dizzy\"," +
@@ -155,6 +158,7 @@ public class ParserTest {
 
         assertThat(weapon.aggressivity(), is(5));
         assertThat(weapon.name(), is("优质木棒"));
+        assertThat(weapon.length(), is(Length.medium));
         assertThat(weapon.attribute(), instanceOf(Dizzy.class));
     }
 
@@ -178,11 +182,11 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_player_should_have_proper_result_for_soldier_without_equipment() {
+    public void parse_player_should_have_proper_result_for_assassin() {
         String json = "" +
                 "{" +
                 "  \"name\": \"张三\"," +
-                "  \"role\": \"soldier\"," +
+                "  \"role\": \"assassin\"," +
                 "  \"health\": 10," +
                 "  \"aggressivity\": 5" +
                 "}";
@@ -190,27 +194,72 @@ public class ParserTest {
         JSONObject object = getObject(json);
         Player player = parser.parsePlayer(object);
 
-        assertThat(player, instanceOf(Soldier.class));
+        assertThat(player, instanceOf(Assassin.class));
 
-        Soldier soldier = (Soldier) player;
+        Assassin assassin = (Assassin) player;
 
-        assertThat(soldier.name(), is("张三"));
-        assertThat(soldier.health(), is(10));
-        assertThat(soldier.aggressivity(), is(5));
+        assertThat(assassin.name(), is("张三"));
+        assertThat(assassin.health(), is(10));
+        assertThat(assassin.aggressivity(), is(5));
     }
 
     @Test
-    public void parse_player_should_have_proper_result_for_soldier_with_equipment() {
+    public void parse_player_should_have_proper_result_for_fighter() {
         String json = "" +
                 "{" +
                 "  \"name\": \"张三\"," +
-                "  \"role\": \"soldier\"," +
+                "  \"role\": \"fighter\"," +
+                "  \"health\": 10," +
+                "  \"aggressivity\": 5" +
+                "}";
+
+        JSONObject object = getObject(json);
+        Player player = parser.parsePlayer(object);
+
+        assertThat(player, instanceOf(Fighter.class));
+
+        Fighter fighter = (Fighter) player;
+
+        assertThat(fighter.name(), is("张三"));
+        assertThat(fighter.health(), is(10));
+        assertThat(fighter.aggressivity(), is(5));
+    }
+
+    @Test
+    public void parse_player_should_have_proper_result_for_knight() {
+        String json = "" +
+                "{" +
+                "  \"name\": \"张三\"," +
+                "  \"role\": \"knight\"," +
+                "  \"health\": 10," +
+                "  \"aggressivity\": 5" +
+                "}";
+
+        JSONObject object = getObject(json);
+        Player player = parser.parsePlayer(object);
+
+        assertThat(player, instanceOf(Knight.class));
+
+        Knight knight = (Knight) player;
+
+        assertThat(knight.name(), is("张三"));
+        assertThat(knight.health(), is(10));
+        assertThat(knight.aggressivity(), is(5));
+    }
+
+    @Test
+    public void parse_player_should_have_proper_result_for_fighter_with_equipment() {
+        String json = "" +
+                "{" +
+                "  \"name\": \"张三\"," +
+                "  \"role\": \"fighter\"," +
                 "  \"health\": 10," +
                 "  \"aggressivity\": 5," +
                 "  \"weapon\": " +
                 "  {" +
                 "    \"name\": \"优质木棒\"," +
-                "    \"aggressivity\": 5" +
+                "    \"aggressivity\": 5," +
+                "    \"length\": \"medium\"" +
                 "  }," +
                 "  \"armor\": " +
                 "  {" +

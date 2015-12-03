@@ -13,4 +13,9 @@ public class Length {
     public Length(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }
