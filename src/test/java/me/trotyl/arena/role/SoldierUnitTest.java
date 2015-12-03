@@ -87,7 +87,7 @@ public class SoldierUnitTest {
     public void should_have_3_times_damage_with_strike() throws Exception {
         Random random = mock(Random.class);
         when(random.nextFloat()).thenReturn(0.0f);
-        Weapon weapon = new Weapon("我真剑", 10, new Striking(0, 1.0f));
+        Weapon weapon = new Weapon("我真剑", 10, new Striking(1.0f));
         Soldier soldier = new Soldier("张三", 100, 20);
         soldier.equip(weapon);
 

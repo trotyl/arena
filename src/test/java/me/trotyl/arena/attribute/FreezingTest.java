@@ -29,7 +29,7 @@ public class FreezingTest {
     public void setUp() throws Exception {
         random = mock(Random.class);
         when(random.nextFloat()).thenReturn(0.0f);
-        Dizzy.config(random);
+        Attribute.config(random);
 
         freezing = new Freezing(2, 0.5f);
 

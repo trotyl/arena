@@ -10,8 +10,8 @@ public class Striking extends Attribute {
 
     private float rate;
 
-    public Striking(int limit, float rate) {
-        super(limit, rate);
+    public Striking(float rate) {
+        super(-1, rate);
     }
 
     @Override
