@@ -1,23 +1,42 @@
 package me.trotyl.arena.effect;
 
-import me.trotyl.arena.procedure.AttackProcedure;
-import me.trotyl.arena.procedure.EffectProcedure;
+import me.trotyl.arena.attribute.Attribute;
 import me.trotyl.arena.record.DamageRecord;
+import me.trotyl.arena.record.EffectRecord;
+import me.trotyl.arena.record.PlayerRecord;
+import me.trotyl.arena.role.Attackable;
+import me.trotyl.arena.role.Attacker;
 import me.trotyl.arena.role.Player;
-import org.javatuples.Pair;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InOrder;
 
-import static org.hamcrest.core.Is.is;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.*;
 
 
 public class FreezeTest {
 
+    private Freeze freeze;
+    private Player player1;
+    private Player player2;
+    private Attribute attribute;
+
     @Before
     public void setUp() throws Exception {
+        freeze = new Freeze(2);
 
+        player1 = spy(new Player("张三", 10, 5));
+        player2 = spy(new Player("李四", 20, 8));
+
+        attribute = spy(new Attribute(-1, 0.0f) {
+            @Override
+            public DamageRecord apply(Attacker attacker, Attackable attackable) {
+                return DamageRecord.none;
+            }
+        });
     }
 
     @After
@@ -26,31 +45,67 @@ public class FreezeTest {
     }
 
     @Test
-    public void should_not_attack_in_each_of_2_rounds() {
-        Player player = new Player("张三", 10, 5);
-        Freeze freeze = new Freeze(5);
-        player.suffer(0, freeze);
+    public void take_should_have_proper_result() {
+        DamageRecord damage = freeze.take(player1);
+        PlayerRecord player1Record = player1.record();
+        PlayerRecord player2Record = player2.record();
 
-        Player anotherPlayer = new Player("李四", 20, 8);
+        assertThat(damage, is(DamageRecord.none));
 
-        Pair<EffectProcedure, AttackProcedure> pair0 = player.attack(anotherPlayer);
-        AttackProcedure attack0 = pair0.getValue1();
+        assertThat(player1Record.health(), is(10));
+        assertThat(player2Record.health(), is(20));
+    }
 
-        assertThat(attack0.damage, is(DamageRecord.none));
+    @Test
+    public void take_should_have_proper_invocation() {
+        freeze.take(player1);
 
-        Pair<EffectProcedure, AttackProcedure> pair1 = player.attack(anotherPlayer);
-        AttackProcedure attack1 = pair1.getValue1();
+        verifyZeroInteractions(player1);
+    }
 
-        assertThat(attack1.damage.extent, is(5));
+    @Test
+    public void record_should_have_proper_result() {
+        EffectRecord record = freeze.record();
 
-        Pair<EffectProcedure, AttackProcedure> pair2 = player.attack(anotherPlayer);
-        AttackProcedure attack2 = pair2.getValue1();
+        assertThat(record.type, is(Type.freeze));
+        assertThat(record.remain, is(2));
+    }
 
-        assertThat(attack2.damage, is(DamageRecord.none));
+    @Test
+    public void sway_should_have_proper_result() {
+        DamageRecord damage = freeze.sway(player1, player2, attribute);
 
-        Pair<EffectProcedure, AttackProcedure> pair3 = player.attack(anotherPlayer);
-        AttackProcedure attack3 = pair3.getValue1();
+        assertThat(damage, is(DamageRecord.none));
+    }
 
-        assertThat(attack3.damage.extent, is(5));
+    @Test
+    public void sway_should_have_proper_invocation() {
+        freeze.sway(player1, player2, attribute);
+
+        verifyZeroInteractions(player1);
+        verifyZeroInteractions(player2);
+        verifyZeroInteractions(attribute);
+
+        freeze.sway(player1, player2, attribute);
+
+        InOrder inOrder = inOrder(attribute);
+        inOrder.verify(attribute).apply(player1, player2);
+
+        freeze.sway(player1, player2, attribute);
+
+        verifyZeroInteractions(player1);
+        verifyZeroInteractions(player2);
+        verifyNoMoreInteractions(attribute);
+    }
+
+    @Test
+    public void valid_should_have_proper_result() {
+        assertThat(freeze.valid(), is(true));
+
+        freeze.sway(player1, player2, attribute);
+        assertThat(freeze.valid(), is(true));
+
+        freeze.sway(player1, player2, attribute);
+        assertThat(freeze.valid(), is(false));
     }
 }
