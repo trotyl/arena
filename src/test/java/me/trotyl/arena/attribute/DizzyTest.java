@@ -1,5 +1,6 @@
 package me.trotyl.arena.attribute;
 
+import me.trotyl.arena.effect.Effect;
 import me.trotyl.arena.effect.Swoon;
 import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.record.PlayerRecord;
@@ -19,13 +20,14 @@ import static org.mockito.Mockito.*;
 
 public class DizzyTest {
 
+    private Random random;
     private Dizzy dizzy;
     private Player player1;
     private Player player2;
 
     @Before
     public void setUp() throws Exception {
-        Random random = mock(Random.class);
+        random = mock(Random.class);
         when(random.nextFloat()).thenReturn(0.0f);
         Dizzy.config(random);
 
@@ -61,6 +63,18 @@ public class DizzyTest {
         inOrder.verify(player1).aggressivity();
         inOrder.verify(player2).defence();
         inOrder.verify(player2).suffer(eq(5), argThat(instanceOf(Swoon.class)));
+        verifyNoMoreInteractions(player1, player2);
+    }
+
+    @Test
+    public void should_depends_on_proper_interface_without_effect() {
+        when(random.nextFloat()).thenReturn(2.0f);
+        dizzy.apply(player1, player2);
+
+        InOrder inOrder = inOrder(player1, player2);
+        inOrder.verify(player1).aggressivity();
+        inOrder.verify(player2).defence();
+        inOrder.verify(player2).suffer(5, Effect.none);
         verifyNoMoreInteractions(player1, player2);
     }
 }
