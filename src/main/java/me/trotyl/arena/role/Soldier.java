@@ -10,8 +10,8 @@ import org.javatuples.Pair;
 
 public class Soldier extends Player {
 
-    private Weapon weapon;
-    private Armor armor;
+    protected Weapon weapon;
+    protected Armor armor;
 
     public Soldier(String name, int health, int aggressivity) {
         this(name, health, aggressivity, Weapon.none, Armor.none);

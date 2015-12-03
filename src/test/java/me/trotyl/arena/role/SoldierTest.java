@@ -20,20 +20,47 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 
-public class SoldierUnitTest {
+public class SoldierTest {
+
+    Soldier soldier0, soldier1;
 
     @Before
     public void setUp() throws Exception {
-        Random random = mock(Random.class);
-        when(random.nextFloat()).thenReturn(0.0f);
-
-        Striking.config(random);
-        Toxic.config(random);
+        soldier0 = new Soldier("张三", 10, 5);
+        soldier1 = new Soldier("李四", 20, 8);
     }
 
     @After
     public void tearDown() throws Exception {
 
+    }
+
+    @Test
+    public void equip_should_have_proper_result() {
+        Weapon weapon = new Weapon("我真剑", 2);
+        Armor armor = new Armor(3);
+
+        assertThat(soldier0.weapon, is(Weapon.none));
+        assertThat(soldier0.armor, is(Armor.none));
+
+        soldier0.equip(weapon);
+        assertThat(soldier0.weapon, is(weapon));
+        assertThat(soldier0.armor, is(Armor.none));
+
+        soldier0.equip(armor);
+        assertThat(soldier0.weapon, is(weapon));
+        assertThat(soldier0.armor, is(armor));
+
+        Weapon newWeapon = new Weapon("优质木棒", 4);
+        Armor newArmor = new Armor(4);
+
+        soldier0.equip(newArmor);
+        assertThat(soldier0.weapon, is(weapon));
+        assertThat(soldier0.armor, is(newArmor));
+
+        soldier0.equip(newWeapon);
+        assertThat(soldier0.weapon, is(newWeapon));
+        assertThat(soldier0.armor, is(newArmor));
     }
 
     @Test
