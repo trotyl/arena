@@ -83,4 +83,10 @@ public class PlayerTest {
         assertThat(player1.defence(), is(0));
         assertThat(player2.defence(), is(0));
     }
+
+    @Test
+    public void aggressivity_should_have_proper_result() {
+        assertThat(player1.aggressivity(), is(5));
+        assertThat(player2.aggressivity(), is(8));
+    }
 }
