@@ -40,7 +40,7 @@ public class AttributeTest {
     }
 
     @Test
-    public void should_be_applicable_to_players() {
+    public void apply_should_have_proper_result() {
         DamageRecord damage = attribute.apply(player1, player2);
         PlayerRecord player1Record = player1.record();
         PlayerRecord player2Record = player2.record();
@@ -53,7 +53,7 @@ public class AttributeTest {
     }
 
     @Test
-    public void should_depends_on_proper_interface() {
+    public void apply_should_have_proper_invocation() {
         attribute.apply(player1, player2);
 
         InOrder inOrder = inOrder(player1, player2);

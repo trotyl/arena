@@ -43,7 +43,7 @@ public class FlamingTest {
     }
 
     @Test
-    public void should_be_applicable_to_players() {
+    public void apply_should_have_proper_result() {
         DamageRecord damage = flaming.apply(player1, player2);
         PlayerRecord player1Record = player1.record();
         PlayerRecord player2Record = player2.record();
@@ -56,7 +56,7 @@ public class FlamingTest {
     }
 
     @Test
-    public void should_depends_on_proper_interface_with_effect() {
+    public void apply_should_have_proper_invocation_with_effect() {
         flaming.apply(player1, player2);
 
         InOrder inOrder = inOrder(player1, player2);
@@ -67,7 +67,7 @@ public class FlamingTest {
     }
 
     @Test
-    public void should_depends_on_proper_interface_without_effect() {
+    public void apply_should_have_proper_invocation_without_effect() {
         when(random.nextFloat()).thenReturn(2.0f);
         flaming.apply(player1, player2);
 
