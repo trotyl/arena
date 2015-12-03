@@ -10,6 +10,7 @@ import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.record.EffectRecord;
 import me.trotyl.arena.role.Player;
 import me.trotyl.arena.role.Soldier;
+import me.trotyl.arena.weapon.Length;
 import me.trotyl.arena.weapon.Weapon;
 import org.javatuples.Pair;
 import org.junit.After;
@@ -51,7 +52,7 @@ public class GameTest {
     @Test
     public void run_should_have_proper_result() throws Exception {
         Soldier soldier = new Soldier("张三", 10, 5,
-                new Weapon("方天画戟", 5, new Toxic(2, 2, 2.0f)),
+                new Weapon("方天画戟", 5, Length.none, new Toxic(2, 2, 2.0f)),
                 new Armor(6));
         Player player = new Player("李四", 20, 8);
         game = Game.between(soldier, player);
@@ -117,7 +118,7 @@ public class GameTest {
     @Test
     public void over_procedure_should_have_proper_result() {
         Soldier soldier = new Soldier("张三", 10, 5,
-                new Weapon("方天画戟", 5, new Toxic(2, 2, 2.0f)),
+                new Weapon("方天画戟", 5, Length.none, new Toxic(2, 2, 2.0f)),
                 new Armor(6));
         Player player = new Player("李四", 20, 8);
         game = Game.between(soldier, player);

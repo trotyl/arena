@@ -6,7 +6,7 @@ import me.trotyl.arena.record.WeaponRecord;
 
 public class Weapon {
 
-    public static final Weapon none = new Weapon("", 0) {
+    public static final Weapon none = new Weapon("", 0, Length.none) {
         @Override
         public WeaponRecord record() {
             return WeaponRecord.none;
@@ -16,14 +16,16 @@ public class Weapon {
     private final int aggressivity;
     private final String name;
     private Attribute attribute;
+    private Length length;
 
-    public Weapon(String name, int aggressivity) {
-        this(name, aggressivity, Attribute.none);
+    public Weapon(String name, int aggressivity, Length length) {
+        this(name, aggressivity, length, Attribute.none);
     }
 
-    public Weapon(String name, int aggressivity, Attribute attribute) {
+    public Weapon(String name, int aggressivity, Length length, Attribute attribute) {
         this.name = name;
         this.aggressivity = aggressivity;
+        this.length = length;
         this.attribute = attribute;
     }
 
@@ -45,5 +47,9 @@ public class Weapon {
 
     public Attribute attribute() {
         return attribute;
+    }
+
+    public Length length() {
+        return length;
     }
 }

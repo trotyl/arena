@@ -5,6 +5,7 @@ import me.trotyl.arena.armor.Armor;
 import me.trotyl.arena.attribute.*;
 import me.trotyl.arena.role.Player;
 import me.trotyl.arena.role.Soldier;
+import me.trotyl.arena.weapon.Length;
 import me.trotyl.arena.weapon.Weapon;
 import org.json.JSONObject;
 
@@ -38,13 +39,13 @@ public class Parser {
         String name = object.getString("name");
         int aggressivity = object.getInt("aggressivity");
         if (!object.has("attribute")) {
-            return new Weapon(name, aggressivity);
+            return new Weapon(name, aggressivity, Length.none);
         }
 
         JSONObject attrObject = object.getJSONObject("attribute");
         Attribute attribute = parseAttribute(attrObject);
 
-        return new Weapon(name, aggressivity, attribute);
+        return new Weapon(name, aggressivity, Length.none, attribute);
     }
 
     public Armor parseArmor(JSONObject object) {

@@ -1,6 +1,7 @@
 package me.trotyl.arena.role;
 
 import me.trotyl.arena.armor.Armor;
+import me.trotyl.arena.weapon.Length;
 import me.trotyl.arena.weapon.Weapon;
 import me.trotyl.arena.attribute.Attribute;
 import me.trotyl.arena.attribute.Genre;
@@ -36,7 +37,7 @@ public class SoldierTest {
 
     @Test
     public void equip_should_have_proper_result() {
-        Weapon weapon = new Weapon("我真剑", 2);
+        Weapon weapon = new Weapon("我真剑", 2, Length.none);
         Armor armor = new Armor(3);
 
         assertThat(soldier0.weapon, is(Weapon.none));
@@ -50,7 +51,7 @@ public class SoldierTest {
         assertThat(soldier0.weapon, is(weapon));
         assertThat(soldier0.armor, is(armor));
 
-        Weapon newWeapon = new Weapon("优质木棒", 4);
+        Weapon newWeapon = new Weapon("优质木棒", 4, Length.none);
         Armor newArmor = new Armor(4);
 
         soldier0.equip(newArmor);
@@ -73,7 +74,7 @@ public class SoldierTest {
         when(effect.take(soldier2)).thenReturn(new DamageRecord(2));
         when(effect.sway(soldier2, soldier3, attribute)).thenReturn(new DamageRecord(3));
         soldier2.effect = effect;
-        soldier2.weapon = spy(new Weapon("玄铁重剑", 3, attribute));
+        soldier2.weapon = spy(new Weapon("玄铁重剑", 3, Length.none, attribute));
 
         Pair<EffectProcedure, AttackProcedure> pair = soldier2.attack(soldier3);
         EffectProcedure effectProcedure = pair.getValue0();
@@ -106,7 +107,7 @@ public class SoldierTest {
     public void aggressivity_should_have_proper_result() {
         assertThat(soldier0.aggressivity(), is(5));
 
-        soldier0.equip(new Weapon("我真剑", 5));
+        soldier0.equip(new Weapon("我真剑", 5, Length.none));
         assertThat(soldier0.aggressivity(), is(10));
     }
 
@@ -128,7 +129,7 @@ public class SoldierTest {
         assertThat(record.weapon(), is(WeaponRecord.none));
         assertThat(record.armor(), is(ArmorRecord.none));
 
-        soldier0.equip(new Weapon("我真剑", 5));
+        soldier0.equip(new Weapon("我真剑", 5, Length.none));
         soldier0.equip(new Armor(5));
         PlayerRecord newRecord = soldier0.record();
 
