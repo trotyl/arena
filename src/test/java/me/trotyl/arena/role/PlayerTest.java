@@ -26,24 +26,23 @@ public class PlayerTest {
     }
 
     @Test
+    public void alive_should_have_proper_result() {
+        assertThat(player1.alive(), is(true));
+
+        Player player3 = new Player("王二", 1, 1);
+        assertThat(player3.alive(), is(true));
+
+        Player player4 = new Player("麻子", 0, 1);
+        assertThat(player4.alive(), is(false));
+    }
+
+    @Test
     public void should_be_alive_when_health_is_greater_than_zero() throws Exception {
         Player player = new Player("张三", 1, 5);
 
         boolean isAlive = player.alive();
 
         assertThat(isAlive, is(true));
-    }
-
-    @Test
-    public void should_not_be_alive_when_health_is_not_greater_than_zero() throws Exception {
-        Player player1 = new Player("张三", 0, 5);
-        Player player2 = new Player("李四", -1, 5);
-
-        boolean isPlayer1Alive = player1.alive();
-        boolean isPlayer2Alive = player2.alive();
-
-        assertThat(isPlayer1Alive, is(false));
-        assertThat(isPlayer2Alive, is(false));
     }
 
     @Test
