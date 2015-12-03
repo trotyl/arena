@@ -5,6 +5,7 @@ public class Type {
     public static final Type toxin = new Type();
     public static final Type none = new Type();
     public static final Type swoon = new Type();
+    public static final Type fire = new Type();
 
     @Override
     public String toString() {

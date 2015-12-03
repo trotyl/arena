@@ -12,7 +12,7 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 
-public class ToxinTest {
+public class ToxinUnitTest {
 
     @Before
     public void setUp() throws Exception {

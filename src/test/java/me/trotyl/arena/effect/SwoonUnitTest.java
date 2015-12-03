@@ -13,7 +13,7 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 
-public class SwoonTest {
+public class SwoonUnitTest {
 
     @Before
     public void setUp() throws Exception {
