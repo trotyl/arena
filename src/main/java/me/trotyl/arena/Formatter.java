@@ -14,7 +14,7 @@ public class Formatter {
         String result = String.format("%s%s%s攻击了%s%s, %s受到了%d点伤害, %s剩余生命: %d",
                 procedure.attacker.role(), procedure.attacker.name(), weaponPart,
                 procedure.attackable.role(), procedure.attackable.name(),
-                procedure.attackable.name(), procedure.damage.damage,
+                procedure.attackable.name(), procedure.damage.extent,
                 procedure.attackable.name(), procedure.attackable.health());
 
         return result;
