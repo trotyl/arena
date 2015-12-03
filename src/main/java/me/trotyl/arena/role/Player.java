@@ -65,4 +65,12 @@ public class Player implements Attacker, Attackable {
 
         return new Pair<>(effectProcedure, attackProcedure);
     }
+
+    public String name() {
+        return name;
+    }
+
+    public int health() {
+        return health;
+    }
 }

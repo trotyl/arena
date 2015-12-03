@@ -1,6 +1,7 @@
 package me.trotyl.arena;
 
 import me.trotyl.arena.attribute.*;
+import me.trotyl.arena.role.Player;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.junit.After;
@@ -151,6 +152,24 @@ public class ParserTest {
         assertThat(weapon.aggressivity(), is(5));
         assertThat(weapon.name(), is("优质木棒"));
         assertThat(weapon.attribute, instanceOf(Dizzy.class));
+    }
+
+    @Test
+    public void parse_player_should_have_proper_result_for_normal_player() {
+        String json = "" +
+                "{" +
+                "  \"name\": \"张三\"," +
+                "  \"role\": \"normal\"," +
+                "  \"health\": 10," +
+                "  \"aggressivity\": 5" +
+                "}";
+
+        JSONObject object = getObject(json);
+        Player player = parser.parsePlayer(object);
+
+        assertThat(player.name(), is("张三"));
+        assertThat(player.health(), is(10));
+        assertThat(player.aggressivity(), is(5));
     }
 
     private JSONObject getObject(String json) {
