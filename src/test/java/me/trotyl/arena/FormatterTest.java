@@ -2,6 +2,7 @@ package me.trotyl.arena;
 
 import me.trotyl.arena.attribute.Genre;
 import me.trotyl.arena.procedure.AttackProcedure;
+import me.trotyl.arena.procedure.OverProcedure;
 import me.trotyl.arena.record.ArmorRecord;
 import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.record.PlayerRecord;
@@ -75,5 +76,15 @@ public class FormatterTest {
         String result = formatter.formatAttack(procedure);
 
         assertThat(result, is("战士张三用优质木棒攻击了普通人李四, 李四受到了5点伤害, 李四中毒了, 李四剩余生命: 20"));
+    }
+
+    @Test
+    public void format_over_should_have_proper_result() {
+        OverProcedure procedure = new OverProcedure(new PlayerRecord("张三", 10, Role.soldier),
+                                                    new PlayerRecord("李四", 20, Role.normal));
+
+        String result = formatter.formatOver(procedure);
+
+        assertThat(result, is("李四被打败了."));
     }
 }
