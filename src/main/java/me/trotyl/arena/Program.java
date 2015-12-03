@@ -47,7 +47,7 @@ public class Program {
 
     public void run() {
         while (!game.over()) {
-            Pair<EffectProcedure, AttackProcedure> pair = game.runStep();
+            Pair<EffectProcedure, AttackProcedure> pair = game.run();
 
             String effect = formatter.formatEffect(pair.getValue0());
             if (effect != null) {

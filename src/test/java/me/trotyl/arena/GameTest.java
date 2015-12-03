@@ -1,19 +1,18 @@
 package me.trotyl.arena;
 
-import me.trotyl.arena.role.Player;
-import me.trotyl.arena.role.Role;
-import me.trotyl.arena.role.Soldier;
+import me.trotyl.arena.attribute.Toxic;
+import me.trotyl.arena.effect.Type;
 import me.trotyl.arena.procedure.AttackProcedure;
-import me.trotyl.arena.procedure.OverProcedure;
-import me.trotyl.arena.procedure.Procedure;
-import org.hamcrest.core.Is;
+import me.trotyl.arena.procedure.EffectProcedure;
+import me.trotyl.arena.record.DamageRecord;
+import me.trotyl.arena.record.EffectRecord;
+import me.trotyl.arena.role.Player;
+import me.trotyl.arena.role.Soldier;
+import org.javatuples.Pair;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.List;
-
-import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
@@ -25,15 +24,7 @@ public class GameTest {
 
     @Before
     public void setUp() throws Exception {
-        Soldier player1 = new Soldier("张三", 10, 8);
-        Weapon weapon = new Weapon("优质木棒", 2);
-        player1.equip(weapon);
-        Armor armor = new Armor(5);
-        player1.equip(armor);
 
-        Player player2 = new Player("李四", 20, 9);
-
-        game = Game.between(player1, player2);
     }
 
     @After
@@ -42,54 +33,57 @@ public class GameTest {
     }
 
     @Test
-    public void should_between_exact_players() throws Exception {
+    public void between_should_have_proper_result(){
         Player player1 = mock(Player.class);
         Player player2 = mock(Player.class);
 
         Game game = Game.between(player1, player2);
 
-        assertThat(game.getPlayer1(), Is.is(player1));
-        assertThat(game.getPlayer2(), Is.is(player2));
+        assertThat(game.player1, is(player1));
+        assertThat(game.player2, is(player2));
     }
 
 
     @Test
-    public void should_produce_the_right_procedure() throws Exception {
-        List<Procedure> procedures = game.run();
+    public void run_should_have_proper_result() throws Exception {
+        Soldier soldier = new Soldier("张三", 10, 5,
+                new Weapon("方天画戟", 5, new Toxic(2, 2, 2.0f)),
+                new Armor(6));
+        Player player = new Player("李四", 20, 8);
+        game = Game.between(soldier, player);
 
-        assertThat(procedures.size(), is(7));
+        Pair<EffectProcedure, AttackProcedure> pair;
+        EffectProcedure effectProcedure;
+        AttackProcedure attackProcedure;
 
-        Procedure procedure0 = procedures.get(1);
-        assertThat(procedure0, instanceOf(AttackProcedure.class));
-        AttackProcedure attackProcedure0 = (AttackProcedure)procedure0;
-        assertThat(attackProcedure0.attacker.role(), is(Role.soldier));
-        assertThat(attackProcedure0.attacker.name(), is("张三"));
-        assertThat(attackProcedure0.attacker.weapon().name(), is("优质木棒"));
-        assertThat(attackProcedure0.attackable.role(), is(Role.normal));
-        assertThat(attackProcedure0.attackable.name(), is("李四"));
-        assertThat(attackProcedure0.attackable.health(), is(10));
-        assertThat(attackProcedure0.damage.extent, is(10));
+        pair = game.run();
+        effectProcedure = pair.getValue0();
+        attackProcedure = pair.getValue1();
 
-        Procedure procedure1 = procedures.get(3);
-        assertThat(procedure1, instanceOf(AttackProcedure.class));
-        AttackProcedure attackProcedure1 = (AttackProcedure)procedure1;
-        assertThat(attackProcedure1.attacker.name(), is("李四"));
-        assertThat(attackProcedure1.attackable.name(), is("张三"));
-        assertThat(attackProcedure1.attackable.health(), is(6));
-        assertThat(attackProcedure1.damage.extent, is(4));
+        assertThat(effectProcedure.effect, is(EffectRecord.none));
+        assertThat(effectProcedure.damage, is(DamageRecord.none));
+        assertThat(attackProcedure.attacker.name(), is("张三"));
+        assertThat(attackProcedure.attackable.name(), is("李四"));
+        assertThat(attackProcedure.attackable.health(), is(10));
+        assertThat(attackProcedure.damage.extent, is(10));
 
-        Procedure procedure2 = procedures.get(5);
-        assertThat(procedure2, instanceOf(AttackProcedure.class));
-        AttackProcedure attackProcedure2 = (AttackProcedure)procedure2;
-        assertThat(attackProcedure2.attacker.name(), is("张三"));
-        assertThat(attackProcedure2.attackable.name(), is("李四"));
-        assertThat(attackProcedure2.attackable.health(), is(0));
-        assertThat(attackProcedure2.damage.extent, is(10));
+        pair = game.run();
+        effectProcedure = pair.getValue0();
+        attackProcedure = pair.getValue1();
 
-        Procedure procedure4 = procedures.get(6);
-        assertThat(procedure4, instanceOf(OverProcedure.class));
-        OverProcedure overProcedure = (OverProcedure)procedure4;
-        assertThat(overProcedure.winner.name(), is("张三"));
-        assertThat(overProcedure.loser.name(), is("李四"));
+        assertThat(effectProcedure.effect.type, is(Type.toxin));
+        assertThat(effectProcedure.damage.extent, is(2));
+        assertThat(attackProcedure.attacker.name(), is("李四"));
+        assertThat(attackProcedure.attackable.name(), is("张三"));
+        assertThat(attackProcedure.attackable.health(), is(8));
+        assertThat(attackProcedure.damage.extent, is(2));
+
+        pair = game.run();
+        effectProcedure = pair.getValue0();
+        attackProcedure = pair.getValue1();
+
+        assertThat(effectProcedure.effect, is(EffectRecord.none));
+        assertThat(effectProcedure.damage, is(DamageRecord.none));
+        assertThat(attackProcedure.attackable.health(), is(-2));
     }
 }
