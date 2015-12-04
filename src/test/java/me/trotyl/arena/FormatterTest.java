@@ -92,17 +92,6 @@ public class FormatterTest {
     }
 
     @Test
-    public void format_over_should_have_proper_result() {
-
-        OverProcedure procedure = OverProcedure.create(PlayerRecord.create("张三", 10, Role.fighter),
-                                                       PlayerRecord.create("李四", 20, Role.normal));
-
-        String result = formatter.formatOver(procedure);
-
-        assertThat(result, is("李四被打败了."));
-    }
-
-    @Test
     public void format_effect_should_have_proper_result_for_toxin() {
 
         EffectProcedure procedure = EffectProcedure.create(PlayerRecord.create("张三", 10, Role.fighter),
@@ -148,5 +137,16 @@ public class FormatterTest {
         String result = formatter.formatEffect(procedure);
 
         assertThat(result, is("张三晕倒了, 无法攻击, 眩晕还剩: 2轮"));
+    }
+
+    @Test
+    public void format_over_should_have_proper_result() {
+
+        OverProcedure procedure = OverProcedure.create(PlayerRecord.create("张三", 10, Role.fighter),
+                PlayerRecord.create("李四", 20, Role.normal));
+
+        String result = formatter.formatOver(procedure);
+
+        assertThat(result, is("李四被打败了."));
     }
 }

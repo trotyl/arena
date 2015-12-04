@@ -49,10 +49,6 @@ public class Formatter {
         return format("%s%s%s, ", damagePart, procedure.attackable.name(), attributePart);
     }
 
-    public String formatOver(OverProcedure procedure) {
-        return format("%s被打败了.", procedure.loser.name());
-    }
-
     public String formatEffect(EffectProcedure procedure) {
         if (procedure.effect.type.equals(Type.toxin)) {
             return format("%s受到%d点毒性伤害, %s剩余生命: %d",
@@ -76,6 +72,10 @@ public class Formatter {
         }
 
         return null;
+    }
+
+    public String formatOver(OverProcedure procedure) {
+        return format("%s被打败了.", procedure.loser.name());
     }
 
     private String formatRole(Role role) {
