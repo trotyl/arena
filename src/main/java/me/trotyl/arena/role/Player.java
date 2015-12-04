@@ -62,7 +62,7 @@ public class Player implements Attacker, Attackable {
         DamageRecord effectDamage = effect.take(this);
         EffectProcedure effectProcedure = new EffectProcedure(record(), effect.record(), effectDamage);
         DamageRecord attackDamage = effect.sway(this, attackable, attribute);
-        AttackProcedure attackProcedure = new AttackProcedure(record(), attackable.record(), attackDamage);
+        AttackProcedure attackProcedure = AttackProcedure.create(record(), attackable.record(), attackDamage);
 
         if (!effect.valid()) {
             effect = Effect.none;

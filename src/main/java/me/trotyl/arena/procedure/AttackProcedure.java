@@ -13,11 +13,16 @@ public class AttackProcedure extends Procedure {
             PlayerRecord.none,
             DamageRecord.none);
 
+    public static AttackProcedure create(AttackerRecord attacker, AttackableRecord attackable, DamageRecord damage) {
+        return new AttackProcedure(attacker, attackable, damage);
+    }
+
     public AttackerRecord attacker;
     public AttackableRecord attackable;
     public DamageRecord damage;
 
-    public AttackProcedure(AttackerRecord attacker, AttackableRecord attackable, DamageRecord damage) {
+    protected AttackProcedure(AttackerRecord attacker, AttackableRecord attackable, DamageRecord damage) {
+
         super();
 
         this.attacker = attacker;
