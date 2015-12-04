@@ -108,7 +108,7 @@ public class FormatterTest {
     public void format_effect_should_have_proper_result_for_toxin() {
 
         EffectProcedure procedure = EffectProcedure.create(new PlayerRecord("张三", 10, Role.fighter),
-                                                           new EffectRecord(Type.toxin),
+                                                           EffectRecord.create(Type.toxin),
                                                            DamageRecord.create(5));
 
         String result = formatter.formatEffect(procedure);
@@ -120,7 +120,7 @@ public class FormatterTest {
     public void format_effect_should_have_proper_result_for_fire() {
 
         EffectProcedure procedure = EffectProcedure.create(new PlayerRecord("张三", 10, Role.fighter),
-                                                           new EffectRecord(Type.fire),
+                                                           EffectRecord.create(Type.fire),
                                                            DamageRecord.create(5));
 
         String result = formatter.formatEffect(procedure);
@@ -132,7 +132,7 @@ public class FormatterTest {
     public void format_effect_should_have_proper_result_for_freeze() {
 
         EffectProcedure procedure = EffectProcedure.create(new PlayerRecord("张三", 10, Role.fighter),
-                                                           new EffectRecord(Type.freeze, 1),
+                                                           EffectRecord.create(Type.freeze, 1),
                                                            DamageRecord.create(5));
 
         String result = formatter.formatEffect(procedure);
@@ -144,7 +144,7 @@ public class FormatterTest {
     public void format_effect_should_have_proper_result_for_swoon() {
 
         EffectProcedure procedure = EffectProcedure.create(new PlayerRecord("张三", 10, Role.fighter),
-                                                           new EffectRecord(Type.swoon, 2),
+                                                           EffectRecord.create(Type.swoon, 2),
                                                            DamageRecord.create(5));
 
         String result = formatter.formatEffect(procedure);

@@ -24,7 +24,7 @@ public class Swoon extends Effect {
 
     @Override
     public EffectRecord record() {
-        return new EffectRecord(Type.swoon, remain);
+        return EffectRecord.create(Type.swoon, remain);
     }
 
     @Override

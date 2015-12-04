@@ -29,7 +29,7 @@ public class Freeze extends Effect {
 
     @Override
     public EffectRecord record() {
-        return new EffectRecord(Type.freeze, remain);
+        return EffectRecord.create(Type.freeze, remain);
     }
 
     @Override

@@ -29,7 +29,7 @@ public class Fire extends Effect {
 
     @Override
     public EffectRecord record() {
-        return new EffectRecord(Type.fire, remain);
+        return EffectRecord.create(Type.fire, remain);
     }
 
     @Override

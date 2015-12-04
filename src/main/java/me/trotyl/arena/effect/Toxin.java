@@ -32,7 +32,7 @@ public class Toxin extends Effect {
 
     @Override
     public EffectRecord record() {
-        return new EffectRecord(Type.toxin, remain);
+        return EffectRecord.create(Type.toxin, remain);
     }
 
     @Override
