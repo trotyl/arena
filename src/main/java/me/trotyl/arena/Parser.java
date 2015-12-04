@@ -76,7 +76,7 @@ public class Parser {
         if (genre.equals("dizzy")) {
             return Dizzy.create(rate);
         } if (genre.equals("striking")) {
-            return new Striking(rate);
+            return Striking.create(rate);
         }
 
         int limit = object.getInt("limit");

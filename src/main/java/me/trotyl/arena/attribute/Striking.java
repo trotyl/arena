@@ -8,7 +8,11 @@ import me.trotyl.arena.role.Attacker;
 
 public class Striking extends Attribute {
 
-    public Striking(float rate) {
+    public static Striking create(float rate) {
+        return new Striking(rate);
+    }
+
+    protected Striking(float rate) {
         super(-1, rate);
     }
 
