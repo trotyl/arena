@@ -76,8 +76,8 @@ public class SoldierTest {
         Effect effect = mock(Effect.class);
         when(effect.valid()).thenReturn(true);
         when(effect.record()).thenReturn(EffectRecord.none);
-        when(effect.take(soldier2)).thenReturn(new DamageRecord(2));
-        when(effect.sway(soldier2, soldier3, attribute)).thenReturn(new DamageRecord(3));
+        when(effect.take(soldier2)).thenReturn(DamageRecord.create(2));
+        when(effect.sway(soldier2, soldier3, attribute)).thenReturn(DamageRecord.create(3));
 
         soldier2.effect = effect;
         soldier2.weapon = spy(new Weapon("玄铁重剑", 3, Length.none, attribute));

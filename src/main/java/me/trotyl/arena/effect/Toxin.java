@@ -24,8 +24,10 @@ public class Toxin extends Effect {
 
     @Override
     public DamageRecord take(Attackable attackable) {
+
         attackable.suffer(extent, Effect.none);
-        return new DamageRecord(Genre.effect, extent);
+
+        return DamageRecord.create(extent, Genre.effect);
     }
 
     @Override

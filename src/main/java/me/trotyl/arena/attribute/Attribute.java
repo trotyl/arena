@@ -45,14 +45,14 @@ public abstract class Attribute {
         int damage = attacker.aggressivity() - attackable.defence();
         attackable.suffer(damage, effect);
 
-        return new DamageRecord(genre, damage);
+        return DamageRecord.create(damage, genre);
     }
 
     protected DamageRecord applyNoEffect(Attacker attacker, Attackable attackable) {
         int damage = attacker.aggressivity() - attackable.defence();
         attackable.suffer(damage, Effect.none);
 
-        return new DamageRecord(damage);
+        return DamageRecord.create(damage);
     }
 
     public float rate() {

@@ -31,10 +31,9 @@ public class FormatterTest {
     @Test
     public void format_attack_should_have_proper_result_without_weapon_nor_attribute() {
 
-        AttackProcedure procedure = AttackProcedure.create(
-                new PlayerRecord("张三", 10, Role.fighter),
-                new PlayerRecord("李四", 20, Role.normal),
-                new DamageRecord(5));
+        AttackProcedure procedure = AttackProcedure.create(new PlayerRecord("张三", 10, Role.fighter),
+                                                           new PlayerRecord("李四", 20, Role.normal),
+                                                           DamageRecord.create(5));
 
         String result = formatter.formatAttack(procedure);
 
@@ -47,7 +46,7 @@ public class FormatterTest {
         AttackProcedure procedure = AttackProcedure.create(
                 new PlayerRecord("张三", 10, Role.fighter, new WeaponRecord("优质木棒"), ArmorRecord.none),
                 new PlayerRecord("李四", 20, Role.normal),
-                new DamageRecord(5));
+                DamageRecord.create(5));
 
         String result = formatter.formatAttack(procedure);
 
@@ -56,10 +55,11 @@ public class FormatterTest {
 
     @Test
     public void format_attack_should_have_proper_result_with_normal_effect() {
+
         AttackProcedure procedure = AttackProcedure.create(
                 new PlayerRecord("张三", 10, Role.fighter),
                 new PlayerRecord("李四", 20, Role.normal),
-                new DamageRecord(Genre.toxic, 5));
+                DamageRecord.create(5, Genre.toxic));
 
         String result = formatter.formatAttack(procedure);
 
@@ -72,7 +72,7 @@ public class FormatterTest {
         AttackProcedure procedure = AttackProcedure.create(
                 new PlayerRecord("张三", 10, Role.fighter),
                 new PlayerRecord("李四", 20, Role.normal),
-                new DamageRecord(Genre.striking, 5));
+                DamageRecord.create(5, Genre.striking));
 
         String result = formatter.formatAttack(procedure);
 
@@ -86,7 +86,7 @@ public class FormatterTest {
         AttackProcedure procedure = AttackProcedure.create(
                 new PlayerRecord("张三", 10, Role.fighter, new WeaponRecord("优质木棒"), ArmorRecord.none),
                 new PlayerRecord("李四", 20, Role.normal),
-                new DamageRecord(Genre.toxic, 5));
+                DamageRecord.create(5, Genre.toxic));
 
         String result = formatter.formatAttack(procedure);
 
@@ -109,7 +109,7 @@ public class FormatterTest {
 
         EffectProcedure procedure = EffectProcedure.create(new PlayerRecord("张三", 10, Role.fighter),
                                                            new EffectRecord(Type.toxin),
-                                                           new DamageRecord(5));
+                                                           DamageRecord.create(5));
 
         String result = formatter.formatEffect(procedure);
 
@@ -121,7 +121,7 @@ public class FormatterTest {
 
         EffectProcedure procedure = EffectProcedure.create(new PlayerRecord("张三", 10, Role.fighter),
                                                            new EffectRecord(Type.fire),
-                                                           new DamageRecord(5));
+                                                           DamageRecord.create(5));
 
         String result = formatter.formatEffect(procedure);
 
@@ -133,7 +133,7 @@ public class FormatterTest {
 
         EffectProcedure procedure = EffectProcedure.create(new PlayerRecord("张三", 10, Role.fighter),
                                                            new EffectRecord(Type.freeze, 1),
-                                                           new DamageRecord(5));
+                                                           DamageRecord.create(5));
 
         String result = formatter.formatEffect(procedure);
 
@@ -145,7 +145,7 @@ public class FormatterTest {
 
         EffectProcedure procedure = EffectProcedure.create(new PlayerRecord("张三", 10, Role.fighter),
                                                            new EffectRecord(Type.swoon, 2),
-                                                           new DamageRecord(5));
+                                                           DamageRecord.create(5));
 
         String result = formatter.formatEffect(procedure);
 
