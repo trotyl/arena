@@ -17,7 +17,7 @@ public class AssassinTest {
 
     @Before
     public void setUp() throws Exception {
-        assassin = new Assassin("张三", 10, 5);
+        assassin = Assassin.create("张三", 10, 5);
     }
 
     @After

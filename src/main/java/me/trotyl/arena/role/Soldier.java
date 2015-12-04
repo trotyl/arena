@@ -10,14 +10,19 @@ import org.javatuples.Pair;
 
 public class Soldier extends Player {
 
+    public static Soldier create(String name, int health, int aggressivity) {
+        return new Soldier(name, health, aggressivity, Weapon.none, Armor.none);
+    }
+
+    public static Soldier create(String name, int health, int aggressivity, Weapon weapon, Armor armor) {
+        return new Soldier(name, health, aggressivity, weapon, armor);
+    }
+
     protected Weapon weapon;
     protected Armor armor;
 
-    public Soldier(String name, int health, int aggressivity) {
-        this(name, health, aggressivity, Weapon.none, Armor.none);
-    }
+    protected Soldier(String name, int health, int aggressivity, Weapon weapon, Armor armor) {
 
-    public Soldier(String name, int health, int aggressivity, Weapon weapon, Armor armor) {
         super(name, health, aggressivity);
 
         this.weapon = weapon;

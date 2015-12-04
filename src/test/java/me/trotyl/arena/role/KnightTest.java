@@ -17,7 +17,7 @@ public class KnightTest {
 
     @Before
     public void setUp() throws Exception {
-        knight = new Knight("张三", 10, 5);
+        knight = Knight.create("张三", 10, 5);
     }
 
     @After

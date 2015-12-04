@@ -28,8 +28,8 @@ public class SoldierTest {
     @Before
     public void setUp() throws Exception {
 
-        soldier0 = new Soldier("张三", 10, 5);
-        soldier1 = new Soldier("李四", 20, 8);
+        soldier0 = Soldier.create("张三", 10, 5);
+        soldier1 = Soldier.create("李四", 20, 8);
     }
 
     @After

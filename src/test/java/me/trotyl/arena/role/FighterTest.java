@@ -17,7 +17,7 @@ public class FighterTest {
 
     @Before
     public void setUp() throws Exception {
-        fighter = new Fighter("张三", 10, 5);
+        fighter = Fighter.create("张三", 10, 5);
     }
 
     @After

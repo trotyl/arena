@@ -1,6 +1,7 @@
 package me.trotyl.arena.role;
 
 
+import me.trotyl.arena.armor.Armor;
 import me.trotyl.arena.record.PlayerRecord;
 import me.trotyl.arena.weapon.Length;
 import me.trotyl.arena.weapon.Weapon;
@@ -8,11 +9,15 @@ import me.trotyl.arena.weapon.Weapon;
 public class Fighter extends Soldier {
 
     public static Fighter create(String name, int health, int aggressivity) {
-        return new Fighter(name, health, aggressivity);
+        return new Fighter(name, health, aggressivity, Weapon.none, Armor.none);
     }
 
-    protected Fighter(String name, int health, int aggressivity) {
-        super(name, health, aggressivity);
+    public static Fighter create(String name, int health, int aggressivity, Weapon weapon, Armor armor) {
+        return new Fighter(name, health, aggressivity, weapon, armor);
+    }
+
+    protected Fighter(String name, int health, int aggressivity, Weapon weapon, Armor armor) {
+        super(name, health, aggressivity, weapon, armor);
     }
 
     @Override

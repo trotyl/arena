@@ -25,7 +25,7 @@ public class Parser {
         Soldier soldier = role.equals("assassin")? Assassin.create(name, health, aggressivity):
                 role.equals("fighter")? Fighter.create(name, health, aggressivity):
                 role.equals("knight")? Knight.create(name, health, aggressivity):
-                new Soldier(name, health, aggressivity);
+                Soldier.create(name, health, aggressivity);
 
         if (object.has("weapon")) {
             JSONObject weaponObject = object.getJSONObject("weapon");
