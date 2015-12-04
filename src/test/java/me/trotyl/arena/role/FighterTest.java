@@ -1,9 +1,13 @@
 package me.trotyl.arena.role;
 
 import me.trotyl.arena.attribute.Attribute;
+import me.trotyl.arena.attribute.Genre;
 import me.trotyl.arena.attribute.Toxic;
+import me.trotyl.arena.procedure.AttackProcedure;
+import me.trotyl.arena.procedure.EffectProcedure;
 import me.trotyl.arena.weapon.Length;
 import me.trotyl.arena.weapon.Weapon;
+import org.javatuples.Pair;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,6 +47,19 @@ public class FighterTest {
     @After
     public void tearDown() throws Exception {
 
+    }
+
+    @Test
+    public void attack_should_have_proper_result_with_medium_weapon() {
+
+        Player player = Player.create("王二", 10, 5);
+
+        fighter.equip(mediumWeapon);
+
+        Pair<EffectProcedure, AttackProcedure> pair = fighter.attack(player);
+        AttackProcedure procedure = pair.getValue1();
+
+        assertThat(procedure.damage.genre, is(Genre.toxic));
     }
 
     @Test
