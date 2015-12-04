@@ -36,12 +36,9 @@ public class AssassinTest {
 
         assertThat(assassin.weapon, is(shortWeapon));
 
-        try {
-            assassin.equip(middleWeapon);
-            fail();
-        } catch (IllegalArgumentException e) {
-            assertThat(e.getMessage(), is("Assassin can only equip short weapon!"));
-        }
+        assassin.equip(middleWeapon);
+
+        assertThat(assassin.weapon, is(middleWeapon));
 
         try {
             assassin.equip(longWeapon);
