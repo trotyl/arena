@@ -17,7 +17,9 @@ public class Flame extends Effect {
     private int extent;
 
     protected Flame(int extent, int limit) {
+
         super(limit);
+
         this.extent = extent;
     }
 
@@ -28,12 +30,15 @@ public class Flame extends Effect {
 
     @Override
     public DamageRecord sway(Attacker attacker, Attackable attackable, Attribute attribute) {
+
         remain--;
+
         return super.sway(attacker, attackable, attribute);
     }
 
     @Override
     public DamageRecord take(Attackable attackable) {
+
         attackable.suffer(extent, Effect.none);
         return DamageRecord.create(extent, Genre.effect);
     }

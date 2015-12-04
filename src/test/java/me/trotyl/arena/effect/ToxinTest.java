@@ -27,6 +27,7 @@ public class ToxinTest {
 
     @Before
     public void setUp() throws Exception {
+
         toxin = new Toxin(2, 2);
 
         player1 = spy(Player.create("张三", 10, 5));
@@ -47,6 +48,7 @@ public class ToxinTest {
 
     @Test
     public void record_should_have_proper_result() {
+
         EffectRecord record = toxin.record();
 
         assertThat(record.type, is(Type.toxin));
@@ -55,6 +57,7 @@ public class ToxinTest {
 
     @Test
     public void sway_should_have_proper_result() {
+
         DamageRecord damage = toxin.sway(player1, player2, attribute);
 
         assertThat(damage, is(DamageRecord.none));
@@ -62,6 +65,7 @@ public class ToxinTest {
 
     @Test
     public void sway_should_have_proper_invocation() {
+
         toxin.sway(player1, player2, attribute);
 
         verifyZeroInteractions(player1);
@@ -69,12 +73,15 @@ public class ToxinTest {
 
         InOrder inOrder = inOrder(attribute);
         inOrder.verify(attribute).apply(player1, player2);
+
         verifyNoMoreInteractions(attribute);
     }
 
     @Test
     public void take_should_have_proper_result() {
+
         DamageRecord damage = toxin.take(player1);
+
         PlayerRecord player1Record = player1.record();
         PlayerRecord player2Record = player2.record();
 
@@ -87,15 +94,18 @@ public class ToxinTest {
 
     @Test
     public void take_should_have_proper_invocation() {
+
         toxin.take(player1);
 
         InOrder inOrder = inOrder(player1);
         inOrder.verify(player1).suffer(2, Effect.none);
+
         verifyNoMoreInteractions(player1);
     }
 
     @Test
     public void valid_should_have_proper_result() {
+
         assertThat(toxin.valid(), is(true));
 
         toxin.sway(player1, player2, attribute);

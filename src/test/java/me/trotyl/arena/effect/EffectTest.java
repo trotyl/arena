@@ -26,6 +26,7 @@ public class EffectTest {
 
     @Before
     public void setUp() throws Exception {
+
         effect = Effect.none;
 
         player1 = spy(Player.create("张三", 10, 5));
@@ -47,6 +48,7 @@ public class EffectTest {
 
     @Test
     public void record_should_have_proper_result() {
+
         EffectRecord record = effect.record();
 
         assertThat(record, is(EffectRecord.none));
@@ -54,6 +56,7 @@ public class EffectTest {
 
     @Test
     public void sway_should_have_proper_result() {
+
         DamageRecord damage = effect.sway(player1, player2, attribute);
 
         assertThat(damage, is(DamageRecord.none));
@@ -61,6 +64,7 @@ public class EffectTest {
 
     @Test
     public void sway_should_have_proper_invocation() {
+
         effect.sway(player1, player2, attribute);
 
         verifyZeroInteractions(player1);
@@ -68,12 +72,15 @@ public class EffectTest {
 
         InOrder inOrder = inOrder(attribute);
         inOrder.verify(attribute).apply(player1, player2);
+
         verifyNoMoreInteractions(attribute);
     }
 
     @Test
     public void take_should_have_proper_result() {
+
         DamageRecord damage = effect.take(player1);
+
         PlayerRecord player1Record = player1.record();
         PlayerRecord player2Record = player2.record();
 

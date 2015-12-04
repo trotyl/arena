@@ -115,6 +115,7 @@ public class GameTest {
         inOrder.verify(player1).alive();
         inOrder.verify(player0).alive();
         inOrder.verify(player1).alive();
+
         verifyNoMoreInteractions(player0, player1);
     }
 
@@ -166,6 +167,7 @@ public class GameTest {
         inOrder.verify(player0).alive();
         inOrder.verify(player0).record();
         inOrder.verify(player1).record();
+
         verifyNoMoreInteractions(player0, player1);
     }
 
@@ -190,6 +192,7 @@ public class GameTest {
         inOrder.verify(player0).alive();
         inOrder.verify(player1).alive();
         inOrder.verify(player1).attack(player0);
+
         verifyNoMoreInteractions(player0, player1);
     }
 }

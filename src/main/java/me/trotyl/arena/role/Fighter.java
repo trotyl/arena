@@ -22,9 +22,11 @@ public class Fighter extends Soldier {
 
     @Override
     public void equip(Weapon weapon) {
+
         if (weapon != Weapon.none && weapon.length() != Length.medium) {
             throw new IllegalArgumentException("Fighter can only equip medium weapon!");
         }
+
         super.equip(weapon);
     }
 

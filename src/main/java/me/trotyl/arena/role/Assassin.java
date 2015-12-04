@@ -22,9 +22,11 @@ public class Assassin extends Soldier {
 
     @Override
     public void equip(Weapon weapon) {
+
         if (weapon != Weapon.none && weapon.length() != Length.shorter) {
             throw new IllegalArgumentException("Assassin can only equip short weapon!");
         }
+
         super.equip(weapon);
     }
 

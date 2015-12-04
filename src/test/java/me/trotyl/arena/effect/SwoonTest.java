@@ -26,6 +26,7 @@ public class SwoonTest {
 
     @Before
     public void setUp() throws Exception {
+
         swoon = new Swoon(2);
 
         player1 = spy(Player.create("张三", 10, 5));
@@ -46,6 +47,7 @@ public class SwoonTest {
 
     @Test
     public void record_should_have_proper_result() {
+
         EffectRecord record = swoon.record();
 
         assertThat(record.type, is(Type.swoon));
@@ -54,6 +56,7 @@ public class SwoonTest {
 
     @Test
     public void sway_should_have_proper_result() {
+
         DamageRecord damage = swoon.sway(player1, player2, attribute);
 
         assertThat(damage, is(DamageRecord.none));
@@ -61,6 +64,7 @@ public class SwoonTest {
 
     @Test
     public void sway_should_have_proper_invocation() {
+
         swoon.sway(player1, player2, attribute);
 
         verifyZeroInteractions(player1);
@@ -76,6 +80,7 @@ public class SwoonTest {
 
     @Test
     public void take_should_have_proper_result() {
+
         DamageRecord damage = swoon.take(player1);
         PlayerRecord player1Record = player1.record();
         PlayerRecord player2Record = player2.record();
@@ -88,6 +93,7 @@ public class SwoonTest {
 
     @Test
     public void take_should_have_proper_invocation() {
+
         swoon.take(player1);
 
         verifyZeroInteractions(player1);
@@ -95,6 +101,7 @@ public class SwoonTest {
 
     @Test
     public void valid_should_have_proper_result() {
+
         assertThat(swoon.valid(), is(true));
 
         swoon.sway(player1, player2, attribute);

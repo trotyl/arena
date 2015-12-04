@@ -29,6 +29,7 @@ public class ProgramTest {
 
     @Test
     public void should_print_the_final_result() throws Exception {
+
         in = new FileInputStream("./fixture/config0.json");
         Program program = new Program(in, out, new Parser(), new Formatter());
         program.run();
@@ -39,6 +40,7 @@ public class ProgramTest {
         inOrder.verify(out).println("普通人张三攻击了普通人李四, 李四受到了5点伤害, 李四剩余生命: 10");
         inOrder.verify(out).println("普通人李四攻击了普通人张三, 张三受到了8点伤害, 张三剩余生命: -6");
         inOrder.verify(out).println("张三被打败了.");
+
         verifyNoMoreInteractions(out);
     }
 }

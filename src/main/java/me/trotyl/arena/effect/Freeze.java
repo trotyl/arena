@@ -29,6 +29,7 @@ public class Freeze extends Effect {
 
     @Override
     public DamageRecord sway(Attacker attacker, Attackable attackable, Attribute attribute) {
+
         remain--;
         DamageRecord damage = frozen ? DamageRecord.none : super.sway(attacker, attackable, attribute);
         frozen = !frozen;

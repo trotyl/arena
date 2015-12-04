@@ -21,6 +21,7 @@ public class Player implements Attacker, Attackable {
     protected Effect effect;
 
     protected Player(String name, int health, int aggressivity) {
+
         this.name = name;
         this.health = health;
         this.aggressivity = aggressivity;
@@ -61,6 +62,7 @@ public class Player implements Attacker, Attackable {
 
     @Override
     public void suffer(int damage, Effect effect) {
+
         health -= damage;
 
         if (effect.equals(this.effect)) {
@@ -74,6 +76,7 @@ public class Player implements Attacker, Attackable {
 
         DamageRecord effectDamage = effect.take(this);
         EffectProcedure effectProcedure = EffectProcedure.create(record(), effect.record(), effectDamage);
+
         DamageRecord attackDamage = effect.sway(this, attackable, attribute);
         AttackProcedure attackProcedure = AttackProcedure.create(record(), attackable.record(), attackDamage);
 

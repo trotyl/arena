@@ -26,6 +26,7 @@ public class FreezeTest {
 
     @Before
     public void setUp() throws Exception {
+
         freeze = new Freeze(2);
 
         player1 = spy(Player.create("张三", 10, 5));
@@ -46,6 +47,7 @@ public class FreezeTest {
 
     @Test
     public void record_should_have_proper_result() {
+
         EffectRecord record = freeze.record();
 
         assertThat(record.type, is(Type.freeze));
@@ -54,6 +56,7 @@ public class FreezeTest {
 
     @Test
     public void sway_should_have_proper_result() {
+
         DamageRecord damage = freeze.sway(player1, player2, attribute);
 
         assertThat(damage, is(DamageRecord.none));
@@ -61,6 +64,7 @@ public class FreezeTest {
 
     @Test
     public void sway_should_have_proper_invocation() {
+
         freeze.sway(player1, player2, attribute);
 
         verifyZeroInteractions(player1);
@@ -81,6 +85,7 @@ public class FreezeTest {
 
     @Test
     public void take_should_have_proper_result() {
+
         DamageRecord damage = freeze.take(player1);
         PlayerRecord player1Record = player1.record();
         PlayerRecord player2Record = player2.record();
@@ -93,6 +98,7 @@ public class FreezeTest {
 
     @Test
     public void take_should_have_proper_invocation() {
+
         freeze.take(player1);
 
         verifyZeroInteractions(player1);
@@ -100,6 +106,7 @@ public class FreezeTest {
 
     @Test
     public void valid_should_have_proper_result() {
+
         assertThat(freeze.valid(), is(true));
 
         freeze.sway(player1, player2, attribute);

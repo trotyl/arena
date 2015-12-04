@@ -22,6 +22,7 @@ public class Weapon {
     private Length length;
 
     protected Weapon(String name, int aggressivity, Length length, Attribute attribute) {
+
         this.name = name;
         this.aggressivity = aggressivity;
         this.length = length;

@@ -25,6 +25,7 @@ public class WeaponTest {
 
     @Test
     public void record_should_have_proper_result() {
+
         WeaponRecord record = weapon.record();
 
         assertThat(record.name(), is("优质木棒"));

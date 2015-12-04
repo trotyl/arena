@@ -26,6 +26,7 @@ public class Swoon extends Effect {
     public DamageRecord sway(Attacker attacker, Attackable attackable, Attribute attribute) {
 
         remain--;
+
         return DamageRecord.none;
     }
 }

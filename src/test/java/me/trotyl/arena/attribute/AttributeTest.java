@@ -24,8 +24,10 @@ public class AttributeTest {
 
     @Before
     public void setUp() throws Exception {
+
         Random random = mock(Random.class);
         when(random.nextFloat()).thenReturn(0.0f);
+
         Attribute.config(random);
 
         attribute = Attribute.none;
@@ -41,7 +43,9 @@ public class AttributeTest {
 
     @Test
     public void apply_should_have_proper_result() {
+
         DamageRecord damage = attribute.apply(player1, player2);
+
         PlayerRecord player1Record = player1.record();
         PlayerRecord player2Record = player2.record();
 
@@ -54,12 +58,14 @@ public class AttributeTest {
 
     @Test
     public void apply_should_have_proper_invocation() {
+
         attribute.apply(player1, player2);
 
         InOrder inOrder = inOrder(player1, player2);
         inOrder.verify(player1).aggressivity();
         inOrder.verify(player2).defence();
         inOrder.verify(player2).suffer(5, Effect.none);
+
         verifyNoMoreInteractions(player1, player2);
     }
 }

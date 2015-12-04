@@ -27,8 +27,10 @@ public class FlamingTest {
 
     @Before
     public void setUp() throws Exception {
+
         random = mock(Random.class);
         when(random.nextFloat()).thenReturn(0.0f);
+
         Attribute.config(random);
 
         flaming = new Flaming(2, 2, 0.5f);
@@ -44,7 +46,9 @@ public class FlamingTest {
 
     @Test
     public void apply_should_have_proper_result() {
+
         DamageRecord damage = flaming.apply(player1, player2);
+
         PlayerRecord player1Record = player1.record();
         PlayerRecord player2Record = player2.record();
 
@@ -57,17 +61,20 @@ public class FlamingTest {
 
     @Test
     public void apply_should_have_proper_invocation_with_effect() {
+
         flaming.apply(player1, player2);
 
         InOrder inOrder = inOrder(player1, player2);
         inOrder.verify(player1).aggressivity();
         inOrder.verify(player2).defence();
         inOrder.verify(player2).suffer(eq(5), argThat(instanceOf(Flame.class)));
+
         verifyNoMoreInteractions(player1, player2);
     }
 
     @Test
     public void apply_should_have_proper_invocation_without_effect() {
+
         when(random.nextFloat()).thenReturn(2.0f);
         flaming.apply(player1, player2);
 
@@ -75,6 +82,7 @@ public class FlamingTest {
         inOrder.verify(player1).aggressivity();
         inOrder.verify(player2).defence();
         inOrder.verify(player2).suffer(5, Effect.none);
+
         verifyNoMoreInteractions(player1, player2);
     }
 }

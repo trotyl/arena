@@ -27,8 +27,10 @@ public class FreezingTest {
 
     @Before
     public void setUp() throws Exception {
+
         random = mock(Random.class);
         when(random.nextFloat()).thenReturn(0.0f);
+
         Attribute.config(random);
 
         freezing = new Freezing(2, 0.5f);
@@ -44,7 +46,9 @@ public class FreezingTest {
 
     @Test
     public void apply_should_have_proper_result() {
+
         DamageRecord damage = freezing.apply(player1, player2);
+
         PlayerRecord player1Record = player1.record();
         PlayerRecord player2Record = player2.record();
 
@@ -57,17 +61,20 @@ public class FreezingTest {
 
     @Test
     public void apply_should_have_proper_invocation_with_effect() {
+
         freezing.apply(player1, player2);
 
         InOrder inOrder = inOrder(player1, player2);
         inOrder.verify(player1).aggressivity();
         inOrder.verify(player2).defence();
         inOrder.verify(player2).suffer(eq(5), argThat(instanceOf(Freeze.class)));
+
         verifyNoMoreInteractions(player1, player2);
     }
 
     @Test
     public void apply_should_have_proper_invocation_without_effect() {
+
         when(random.nextFloat()).thenReturn(2.0f);
         freezing.apply(player1, player2);
 
@@ -75,6 +82,7 @@ public class FreezingTest {
         inOrder.verify(player1).aggressivity();
         inOrder.verify(player2).defence();
         inOrder.verify(player2).suffer(5, Effect.none);
+
         verifyNoMoreInteractions(player1, player2);
     }
 }

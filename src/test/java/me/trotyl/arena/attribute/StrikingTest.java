@@ -25,8 +25,10 @@ public class StrikingTest {
 
     @Before
     public void setUp() throws Exception {
+
         random = mock(Random.class);
         when(random.nextFloat()).thenReturn(0.0f);
+
         Attribute.config(random);
 
         striking = new Striking(0.5f);
@@ -42,7 +44,9 @@ public class StrikingTest {
 
     @Test
     public void apply_should_have_proper_result() {
+
         DamageRecord damage = striking.apply(player1, player2);
+
         PlayerRecord player1Record = player1.record();
         PlayerRecord player2Record = player2.record();
 
@@ -55,17 +59,20 @@ public class StrikingTest {
 
     @Test
     public void apply_should_have_proper_invocation_with_effect() {
+
         striking.apply(player1, player2);
 
         InOrder inOrder = inOrder(player1, player2);
         inOrder.verify(player1).aggressivity();
         inOrder.verify(player2).defence();
         inOrder.verify(player2).suffer(15, Effect.none);
+
         verifyNoMoreInteractions(player1, player2);
     }
 
     @Test
     public void apply_should_have_proper_invocation_without_effect() {
+
         when(random.nextFloat()).thenReturn(2.0f);
         striking.apply(player1, player2);
 
@@ -73,6 +80,7 @@ public class StrikingTest {
         inOrder.verify(player1).aggressivity();
         inOrder.verify(player2).defence();
         inOrder.verify(player2).suffer(5, Effect.none);
+
         verifyNoMoreInteractions(player1, player2);
     }
 }

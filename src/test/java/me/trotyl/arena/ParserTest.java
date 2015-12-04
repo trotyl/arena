@@ -33,6 +33,7 @@ public class ParserTest {
 
     @Test
     public void parse_armor_should_have_proper_result() {
+
         String json = "" +
                 "{" +
                 "  \"defence\": 5" +
@@ -46,6 +47,7 @@ public class ParserTest {
 
     @Test
     public void parse_attribute_should_have_proper_result_for_toxic() {
+
         String json = "" +
                 "{" +
                 "  \"genre\": \"toxic\"," +
@@ -67,6 +69,7 @@ public class ParserTest {
 
     @Test
     public void parse_attribute_should_have_proper_result_for_flaming() {
+
         String json = "" +
                 "{" +
                 "  \"genre\": \"flaming\"," +
@@ -88,6 +91,7 @@ public class ParserTest {
 
     @Test
     public void parse_attribute_should_have_proper_result_for_freezing() {
+
         String json = "" +
                 "{" +
                 "  \"genre\": \"freezing\"," +
@@ -107,6 +111,7 @@ public class ParserTest {
 
     @Test
     public void parse_attribute_should_have_proper_result_for_dizzy() {
+
         String json = "" +
                 "{" +
                 "  \"genre\": \"dizzy\"," +
@@ -124,6 +129,7 @@ public class ParserTest {
 
     @Test
     public void parse_player_should_have_proper_result_for_normal_player() {
+
         String json = "" +
                 "{" +
                 "  \"name\": \"张三\"," +
@@ -143,6 +149,7 @@ public class ParserTest {
 
     @Test
     public void parse_player_should_have_proper_result_for_assassin() {
+
         String json = "" +
                 "{" +
                 "  \"name\": \"张三\"," +
@@ -165,6 +172,7 @@ public class ParserTest {
 
     @Test
     public void parse_player_should_have_proper_result_for_fighter() {
+
         String json = "" +
                 "{" +
                 "  \"name\": \"张三\"," +
@@ -187,6 +195,7 @@ public class ParserTest {
 
     @Test
     public void parse_player_should_have_proper_result_for_knight() {
+
         String json = "" +
                 "{" +
                 "  \"name\": \"张三\"," +
@@ -209,6 +218,7 @@ public class ParserTest {
 
     @Test
     public void parse_player_should_have_proper_result_for_fighter_with_equipment() {
+
         String json = "" +
                 "{" +
                 "  \"name\": \"张三\"," +
@@ -243,6 +253,7 @@ public class ParserTest {
 
     @Test
     public void parse_weapon_should_have_proper_result_without_attribute() {
+
         String json = "" +
                 "{" +
                 "  \"name\": \"优质木棒\"," +
@@ -260,6 +271,7 @@ public class ParserTest {
 
     @Test
     public void parse_weapon_should_have_proper_result_with_attribute() {
+
         String json = "" +
                 "{" +
                 "  \"name\": \"优质木棒\"," +
@@ -282,6 +294,7 @@ public class ParserTest {
     }
 
     private JSONObject getObject(String json) {
+
         JSONTokener tokener = new JSONTokener(json);
         return (JSONObject) tokener.nextValue();
     }

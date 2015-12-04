@@ -19,6 +19,7 @@ public class DamageRecord implements Record {
     public final int extent;
 
     protected DamageRecord(int extent, Genre genre) {
+
         this.genre = genre;
         this.extent = extent;
     }

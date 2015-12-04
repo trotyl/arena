@@ -22,9 +22,11 @@ public class Knight extends Soldier {
 
     @Override
     public void equip(Weapon weapon) {
+
         if (weapon != Weapon.none && weapon.length() != Length.longer) {
             throw new IllegalArgumentException("Knight can only equip long weapon!");
         }
+
         super.equip(weapon);
     }
 

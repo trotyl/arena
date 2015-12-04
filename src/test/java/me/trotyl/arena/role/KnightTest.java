@@ -27,6 +27,7 @@ public class KnightTest {
 
     @Test
     public void equip_should_have_proper_result() {
+
         Weapon shortWeapon = Weapon.create("诸葛连弩", 3, Length.shorter);
         Weapon middleWeapon = Weapon.create("雌雄双股剑", 4, Length.medium);
         Weapon longWeapon = Weapon.create("方天画戟", 5, Length.longer);

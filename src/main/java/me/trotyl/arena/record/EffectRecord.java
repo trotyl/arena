@@ -19,6 +19,7 @@ public class EffectRecord implements Record {
     public int remain;
 
     protected EffectRecord(Type type, int remain) {
+
         this.type = type;
         this.remain = remain;
     }
