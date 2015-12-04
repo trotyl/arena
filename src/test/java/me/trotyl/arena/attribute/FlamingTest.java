@@ -1,7 +1,7 @@
 package me.trotyl.arena.attribute;
 
 import me.trotyl.arena.effect.Effect;
-import me.trotyl.arena.effect.Fire;
+import me.trotyl.arena.effect.Flame;
 import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.record.PlayerRecord;
 import me.trotyl.arena.role.Player;
@@ -62,7 +62,7 @@ public class FlamingTest {
         InOrder inOrder = inOrder(player1, player2);
         inOrder.verify(player1).aggressivity();
         inOrder.verify(player2).defence();
-        inOrder.verify(player2).suffer(eq(5), argThat(instanceOf(Fire.class)));
+        inOrder.verify(player2).suffer(eq(5), argThat(instanceOf(Flame.class)));
         verifyNoMoreInteractions(player1, player2);
     }
 

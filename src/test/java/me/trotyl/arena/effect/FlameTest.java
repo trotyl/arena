@@ -18,16 +18,16 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
 
-public class FireTest {
+public class FlameTest {
 
-    private Fire fire;
+    private Flame flame;
     private Player player1;
     private Player player2;
     private Attribute attribute;
 
     @Before
     public void setUp() throws Exception {
-        fire = new Fire(2, 2);
+        flame = new Flame(2, 2);
 
         player1 = spy(Player.create("张三", 10, 5));
         player2 = spy(Player.create("李四", 20, 8));
@@ -47,7 +47,7 @@ public class FireTest {
 
     @Test
     public void take_should_have_proper_result() {
-        DamageRecord damage = fire.take(player1);
+        DamageRecord damage = flame.take(player1);
         PlayerRecord player1Record = player1.record();
         PlayerRecord player2Record = player2.record();
 
@@ -60,7 +60,7 @@ public class FireTest {
 
     @Test
     public void take_should_have_proper_invocation() {
-        fire.take(player1);
+        flame.take(player1);
 
         InOrder inOrder = inOrder(player1);
         inOrder.verify(player1).suffer(2, Effect.none);
@@ -69,22 +69,22 @@ public class FireTest {
 
     @Test
     public void record_should_have_proper_result() {
-        EffectRecord record = fire.record();
+        EffectRecord record = flame.record();
 
-        assertThat(record.type, is(Type.fire));
+        assertThat(record.type, is(Type.flame));
         assertThat(record.remain, is(2));
     }
 
     @Test
     public void sway_should_have_proper_result() {
-        DamageRecord damage = fire.sway(player1, player2, attribute);
+        DamageRecord damage = flame.sway(player1, player2, attribute);
 
         assertThat(damage, is(DamageRecord.none));
     }
 
     @Test
     public void sway_should_have_proper_invocation() {
-        fire.sway(player1, player2, attribute);
+        flame.sway(player1, player2, attribute);
 
         verifyZeroInteractions(player1);
         verifyZeroInteractions(player2);
@@ -96,12 +96,12 @@ public class FireTest {
 
     @Test
     public void valid_should_have_proper_result() {
-        assertThat(fire.valid(), is(true));
+        assertThat(flame.valid(), is(true));
 
-        fire.sway(player1, player2, attribute);
-        assertThat(fire.valid(), is(true));
+        flame.sway(player1, player2, attribute);
+        assertThat(flame.valid(), is(true));
 
-        fire.sway(player1, player2, attribute);
-        assertThat(fire.valid(), is(false));
+        flame.sway(player1, player2, attribute);
+        assertThat(flame.valid(), is(false));
     }
 }

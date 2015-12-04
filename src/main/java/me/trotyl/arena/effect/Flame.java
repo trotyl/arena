@@ -8,15 +8,15 @@ import me.trotyl.arena.record.EffectRecord;
 import me.trotyl.arena.role.Attackable;
 import me.trotyl.arena.role.Attacker;
 
-public class Fire extends Effect {
+public class Flame extends Effect {
 
-    public static Fire create(int extent, int limit) {
-        return new Fire(extent, limit);
+    public static Flame create(int extent, int limit) {
+        return new Flame(extent, limit);
     }
 
     private int extent;
 
-    protected Fire(int extent, int limit) {
+    protected Flame(int extent, int limit) {
         super(limit);
         this.extent = extent;
     }
@@ -29,7 +29,7 @@ public class Fire extends Effect {
 
     @Override
     public EffectRecord record() {
-        return EffectRecord.create(Type.fire, remain);
+        return EffectRecord.create(Type.flame, remain);
     }
 
     @Override

@@ -2,7 +2,7 @@ package me.trotyl.arena.role;
 
 import me.trotyl.arena.attribute.Genre;
 import me.trotyl.arena.effect.Effect;
-import me.trotyl.arena.effect.Fire;
+import me.trotyl.arena.effect.Flame;
 import me.trotyl.arena.effect.Toxin;
 import me.trotyl.arena.procedure.AttackProcedure;
 import me.trotyl.arena.procedure.EffectProcedure;
@@ -62,10 +62,10 @@ public class PlayerTest {
         PlayerRecord record2 = player1.record();
         assertThat(record2.health(), is(0));
 
-        Fire fire = spy(Fire.create(2, 2));
+        Flame flame = spy(Flame.create(2, 2));
 
-        player2.suffer(1, fire);
-        assertThat(player2.effect, is(fire));
+        player2.suffer(1, flame);
+        assertThat(player2.effect, is(flame));
 
         Toxin toxin = spy(Toxin.create(2, 2));
 

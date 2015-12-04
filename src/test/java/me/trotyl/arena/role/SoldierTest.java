@@ -76,7 +76,7 @@ public class SoldierTest {
 
         Effect effect = mock(Effect.class);
         when(effect.valid()).thenReturn(true);
-        when(effect.record()).thenReturn(EffectRecord.create(Type.fire));
+        when(effect.record()).thenReturn(EffectRecord.create(Type.flame));
         when(effect.take(soldier2)).thenReturn(DamageRecord.create(2, Genre.effect));
         when(effect.sway(soldier2, soldier3, attribute)).thenReturn(DamageRecord.create(3));
 

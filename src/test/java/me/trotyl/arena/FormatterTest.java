@@ -115,10 +115,10 @@ public class FormatterTest {
     }
 
     @Test
-    public void format_effect_should_have_proper_result_for_fire() {
+    public void format_effect_should_have_proper_result_for_flame() {
 
         EffectProcedure procedure = EffectProcedure.create(PlayerRecord.create("张三", 10, Role.fighter),
-                                                           EffectRecord.create(Type.fire),
+                                                           EffectRecord.create(Type.flame),
                                                            DamageRecord.create(5));
 
         String result = formatter.formatEffect(procedure);

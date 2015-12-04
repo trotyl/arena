@@ -60,7 +60,7 @@ public class Formatter {
                     procedure.attackable.name(), procedure.attackable.health());
         }
 
-        if (procedure.effect.type.equals(Type.fire)) {
+        if (procedure.effect.type.equals(Type.flame)) {
             return format("%s受到%d点火焰伤害, %s剩余生命: %d",
                     procedure.attackable.name(), procedure.damage.extent,
                     procedure.attackable.name(), procedure.attackable.health());
