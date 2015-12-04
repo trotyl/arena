@@ -18,6 +18,6 @@ public class Freezing extends Attribute {
 
     @Override
     public DamageRecord apply(Attacker attacker, Attackable attackable) {
-        return applyByEffect(attacker, attackable, new Freeze(limit), Genre.freezing);
+        return applyByEffect(attacker, attackable, Freeze.create(limit), Genre.freezing);
     }
 }

@@ -24,6 +24,7 @@ public class PlayerTest {
 
     @Before
     public void setUp() throws Exception {
+
         player1 = new Player("张三", 10, 5);
         player2 = new Player("李四", 20, 8);
     }
@@ -35,6 +36,7 @@ public class PlayerTest {
 
     @Test
     public void alive_should_have_proper_result() {
+
         assertThat(player1.alive(), is(true));
 
         Player player3 = new Player("王二", 1, 1);
@@ -46,6 +48,7 @@ public class PlayerTest {
 
     @Test
     public void suffer_should_have_proper_result() {
+
         PlayerRecord record0 = player1.record();
         assertThat(record0.health(), is(10));
 
@@ -77,6 +80,7 @@ public class PlayerTest {
 
     @Test
     public void record_should_have_proper_result() {
+
         PlayerRecord record = player1.record();
 
         assertThat(record.name(), is("张三"));
@@ -88,18 +92,21 @@ public class PlayerTest {
 
     @Test
     public void defence_should_have_proper_result() {
+
         assertThat(player1.defence(), is(0));
         assertThat(player2.defence(), is(0));
     }
 
     @Test
     public void aggressivity_should_have_proper_result() {
+
         assertThat(player1.aggressivity(), is(5));
         assertThat(player2.aggressivity(), is(8));
     }
 
     @Test
     public void attack_should_have_proper_result() {
+
         Player player3 = spy(player1);
         Player player4 = spy(player2);
 

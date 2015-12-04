@@ -9,9 +9,14 @@ import me.trotyl.arena.role.Attacker;
 
 public class Freeze extends Effect {
 
+    public static Freeze create(int limit) {
+        return new Freeze(limit);
+    }
+
     private boolean frozen;
 
-    public Freeze(int limit) {
+    protected Freeze(int limit) {
+
         super(limit);
 
         frozen = true;
