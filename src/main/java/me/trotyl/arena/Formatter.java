@@ -6,7 +6,6 @@ import me.trotyl.arena.effect.Type;
 import me.trotyl.arena.procedure.AttackProcedure;
 import me.trotyl.arena.procedure.EffectProcedure;
 import me.trotyl.arena.procedure.OverProcedure;
-import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.record.WeaponRecord;
 import me.trotyl.arena.role.Role;
 
@@ -15,7 +14,8 @@ import static java.lang.String.format;
 public class Formatter {
 
     public String formatAttack(AttackProcedure procedure) {
-        if (procedure.damage.equals(DamageRecord.none)) {
+
+        if (procedure.equals(AttackProcedure.none)) {
             return null;
         }
 
@@ -31,6 +31,7 @@ public class Formatter {
     }
 
     private String formatAttribute(AttackProcedure procedure) {
+
         String damagePart = format("%s受到了%d点伤害, ", procedure.attackable.name(), procedure.damage.extent);
 
         if (procedure.damage.genre.equals(Genre.none)) {
@@ -50,6 +51,7 @@ public class Formatter {
     }
 
     public String formatEffect(EffectProcedure procedure) {
+
         if (procedure.effect.type.equals(Type.toxin)) {
             return format("%s受到%d点毒性伤害, %s剩余生命: %d",
                     procedure.attackable.name(), procedure.damage.extent,

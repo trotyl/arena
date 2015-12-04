@@ -15,6 +15,7 @@ public class OverProcedure extends Procedure {
     public PlayerRecord loser;
 
     protected OverProcedure(PlayerRecord winner, PlayerRecord loser) {
+
         this.winner = winner;
         this.loser = loser;
     }
