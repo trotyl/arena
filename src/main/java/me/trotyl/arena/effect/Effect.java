@@ -23,8 +23,12 @@ public abstract class Effect {
         this.remain = remain;
     }
 
-    public DamageRecord take(Attackable attackable) {
-        return DamageRecord.none;
+    public int remain() {
+        return remain;
+    }
+
+    public void append(int remain) {
+        this.remain += remain;
     }
 
     public EffectRecord record() {
@@ -35,15 +39,11 @@ public abstract class Effect {
         return attribute.apply(attacker, attackable);
     }
 
+    public DamageRecord take(Attackable attackable) {
+        return DamageRecord.none;
+    }
+
     public boolean valid() {
         return remain > 0;
-    }
-
-    public int remain() {
-        return remain;
-    }
-
-    public void append(int remain) {
-        this.remain += remain;
     }
 }
