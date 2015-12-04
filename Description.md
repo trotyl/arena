@@ -108,7 +108,7 @@ class Player {
 }
 ```
 
-4\. String 格式化
+4\. String Format
 
 在 C# 中，String 格式化采用 Indexed-based 模板，可以多次插入同一内容：
 
@@ -142,7 +142,7 @@ String result = format("%s晕倒了, 无法攻击, 眩晕还剩: %d轮", procedu
                                                             procedure.attackable.getRemain());
 ```
 
-5\. 对象 Null 检查
+5\. 引用类型 Null 检查
 
 在 C# 中，对于深层对象调用，可以使用空条件运算符无视 Null 情况：
 
@@ -186,7 +186,7 @@ var @short = new Weapon("...", 0, Length.@short); //枚举本应该使用大写�
 Weapon thisIsShort = new Weapon("...", 0, Length.iMeanShort);
 ```
 
-7\. Switch
+7\. 模式匹配
 
 在 C# 中，可以直接使用 Switch 匹配任何类型：
 
@@ -232,6 +232,84 @@ public String printEffect(Effect effect) {
         return "";
     }
 }
+```
+
+8\. 默认参数
+
+在 C# 中，可以为方法的参数提供默认值，调用时可以忽略：
+
+```C#
+public create(string name, int aggressivity=0, int health=1, Role role=Role.Normal, Weapon weapon=null, Armor armor=null)
+{
+    // Todo
+}
+```
+
+而在 Java 中，必须为每种调用方式提供重载：
+
+```Java
+public create(String name) {
+    // Todo
+}
+
+public create(String name, int aggressitity, int health) {
+    // Todo
+}
+
+public create(String name, int aggressitity, int health, Role role) {
+    // Todo
+}
+
+public create(String name, int aggressitity, int health, Role role, Weapon weapon, Armor armor) {
+    // Todo
+}
+```
+
+9\. 字符串字面值
+
+在 C# 中，可以直接使用字面值来创建多行文本：
+
+```C#
+var json = @"
+{
+    ""name"": ""张三"",
+    ""role"": ""fighter"",
+    ""health"": 10,
+    ""aggressivity"": 5,
+    ""weapon"": 
+    {
+        ""name"": ""优质木棒"",
+        ""aggressivity"": 5,
+        ""length"": ""medium""
+    },
+    ""armor"":
+    {
+        ""defence"": 8
+    }
+}
+"
+```
+
+而在 Java 中，需要进行人肉拼接：
+
+```Java
+String json = "" +
+"{" +
+"  \"name\": \"张三\"," +
+"  \"role\": \"fighter\"," +
+"  \"health\": 10," +
+"  \"aggressivity\": 5," +
+"  \"weapon\": " +
+"  {" +
+"    \"name\": \"优质木棒\"," +
+"    \"aggressivity\": 5," +
+"    \"length\": \"medium\"" +
+"  }," +
+"  \"armor\": " +
+"  {" +
+"    \"defence\": 8" +
+"  }" +
+"}";
 ```
 
 ---
