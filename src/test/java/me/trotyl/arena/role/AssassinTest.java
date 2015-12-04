@@ -50,25 +50,6 @@ public class AssassinTest {
     }
 
     @Test
-    public void equip_should_have_proper_result() {
-
-        assassin.equip(shortWeapon);
-
-        assertThat(assassin.weapon, is(shortWeapon));
-
-        assassin.equip(mediumWeapon);
-
-        assertThat(assassin.weapon, is(mediumWeapon));
-
-        try {
-            assassin.equip(longWeapon);
-            fail();
-        } catch (IllegalArgumentException e) {
-            assertThat(e.getMessage(), is("Assassin can only equip short weapon!"));
-        }
-    }
-
-    @Test
     public void attack_should_have_proper_result_with_short_weapon() {
 
         Player player = Player.create("王二", 10, 5);
@@ -92,5 +73,24 @@ public class AssassinTest {
         AttackProcedure procedure = pair.getValue1();
 
         assertThat(procedure.damage.genre, is(Genre.none));
+    }
+
+    @Test
+    public void equip_should_have_proper_result() {
+
+        assassin.equip(shortWeapon);
+
+        assertThat(assassin.weapon, is(shortWeapon));
+
+        assassin.equip(mediumWeapon);
+
+        assertThat(assassin.weapon, is(mediumWeapon));
+
+        try {
+            assassin.equip(longWeapon);
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertThat(e.getMessage(), is("Assassin can only equip short weapon!"));
+        }
     }
 }

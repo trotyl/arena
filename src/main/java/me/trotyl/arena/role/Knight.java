@@ -2,9 +2,13 @@ package me.trotyl.arena.role;
 
 
 import me.trotyl.arena.armor.Armor;
+import me.trotyl.arena.attribute.Attribute;
+import me.trotyl.arena.procedure.AttackProcedure;
+import me.trotyl.arena.procedure.EffectProcedure;
 import me.trotyl.arena.record.PlayerRecord;
 import me.trotyl.arena.weapon.Length;
 import me.trotyl.arena.weapon.Weapon;
+import org.javatuples.Pair;
 
 public class Knight extends Soldier {
 
@@ -21,9 +25,21 @@ public class Knight extends Soldier {
     }
 
     @Override
+    public Pair<EffectProcedure, AttackProcedure> attack(Attackable attackable) {
+
+        if (!weapon.length().equals(Length.longer)) {
+            return attackByAttribute(attackable, Attribute.none);
+        }
+
+        return super.attack(attackable);
+    }
+
+    @Override
     public void equip(Weapon weapon) {
 
-        if (weapon != Weapon.none && weapon.length() != Length.longer) {
+        if (weapon != Weapon.none &&
+            weapon.length() != Length.longer &&
+            weapon.length() != Length.medium) {
             throw new IllegalArgumentException("Knight can only equip long weapon!");
         }
 
