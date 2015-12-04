@@ -40,7 +40,7 @@ public class Player implements Attacker, Attackable {
 
     @Override
     public PlayerRecord record() {
-        return new PlayerRecord(name, health, Role.normal);
+        return PlayerRecord.create(name, health);
     }
 
     @Override

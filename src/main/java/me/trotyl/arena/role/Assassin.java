@@ -21,6 +21,6 @@ public class Assassin extends Soldier {
 
     @Override
     public PlayerRecord record() {
-        return new PlayerRecord(name, health, Role.assassin, weapon.record(), armor.record());
+        return PlayerRecord.create(name, health, Role.assassin, weapon.record(), armor.record());
     }
 }

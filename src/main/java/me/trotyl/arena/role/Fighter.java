@@ -21,6 +21,6 @@ public class Fighter extends Soldier {
 
     @Override
     public PlayerRecord record() {
-        return new PlayerRecord(name, health, Role.fighter, weapon.record(), armor.record());
+        return PlayerRecord.create(name, health, Role.fighter, weapon.record(), armor.record());
     }
 }

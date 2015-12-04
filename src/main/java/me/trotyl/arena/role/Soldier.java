@@ -49,7 +49,7 @@ public class Soldier extends Player {
 
     @Override
     public PlayerRecord record() {
-        return new PlayerRecord(name, health, Role.soldier, weapon.record(), armor.record());
+        return PlayerRecord.create(name, health, Role.soldier, weapon.record(), armor.record());
     }
 
     public Weapon weapon() {
