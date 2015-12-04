@@ -19,7 +19,7 @@ public class Striking extends Attribute {
     @Override
     public DamageRecord apply(Attacker attacker, Attackable attackable) {
         if (!works()) {
-            return applyNoEffect(attacker, attackable);
+            return super.apply(attacker, attackable);
         }
 
         int damage = 3 * (attacker.aggressivity() - attackable.defence());

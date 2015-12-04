@@ -16,12 +16,7 @@ public abstract class Attribute {
         Attribute.random = random;
     }
 
-    public static Attribute none = new Attribute(-1, 0.0f) {
-        @Override
-        public DamageRecord apply(Attacker attacker, Attackable attackable) {
-            return applyNoEffect(attacker, attackable);
-        }
-    };
+    public static Attribute none = new Attribute(-1, 0.0f) {};
 
     protected int limit;
     protected float rate;
@@ -31,7 +26,12 @@ public abstract class Attribute {
         this.rate = rate;
     }
 
-    public abstract DamageRecord apply(Attacker attacker, Attackable attackable);
+    public DamageRecord apply(Attacker attacker, Attackable attackable) {
+        int damage = attacker.aggressivity() - attackable.defence();
+        attackable.suffer(damage, Effect.none);
+
+        return DamageRecord.create(damage);
+    }
 
     protected boolean works() {
         return random.nextFloat() < rate;
@@ -39,20 +39,13 @@ public abstract class Attribute {
 
     protected DamageRecord applyByEffect(Attacker attacker, Attackable attackable, Effect effect, Genre genre) {
         if (!works()) {
-            return applyNoEffect(attacker, attackable);
+            return none.apply(attacker, attackable);
         }
 
         int damage = attacker.aggressivity() - attackable.defence();
         attackable.suffer(damage, effect);
 
         return DamageRecord.create(damage, genre);
-    }
-
-    protected DamageRecord applyNoEffect(Attacker attacker, Attackable attackable) {
-        int damage = attacker.aggressivity() - attackable.defence();
-        attackable.suffer(damage, Effect.none);
-
-        return DamageRecord.create(damage);
     }
 
     public float rate() {
