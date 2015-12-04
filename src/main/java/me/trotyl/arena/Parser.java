@@ -82,7 +82,7 @@ public class Parser {
         int limit = object.getInt("limit");
 
         if (genre.equals("freezing")) {
-            return new Freezing(limit, rate);
+            return Freezing.create(limit, rate);
         }
 
         int extent = object.getInt("extent");

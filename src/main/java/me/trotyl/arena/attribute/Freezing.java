@@ -8,7 +8,11 @@ import me.trotyl.arena.role.Attacker;
 
 public class Freezing extends Attribute {
 
-    public Freezing(int limit, float rate) {
+    public static Freezing create(int limit, float rate) {
+        return new Freezing(limit, rate);
+    }
+
+    protected Freezing(int limit, float rate) {
         super(limit, rate);
     }
 
