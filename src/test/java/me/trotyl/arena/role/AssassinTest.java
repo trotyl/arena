@@ -27,9 +27,9 @@ public class AssassinTest {
 
     @Test
     public void equip_should_have_proper_result() {
-        Weapon shortWeapon = new Weapon("诸葛连弩", 3, Length.shorter);
-        Weapon middleWeapon = new Weapon("雌雄双股剑", 4, Length.medium);
-        Weapon longWeapon = new Weapon("方天画戟", 5, Length.longer);
+        Weapon shortWeapon = Weapon.create("诸葛连弩", 3, Length.shorter);
+        Weapon middleWeapon = Weapon.create("雌雄双股剑", 4, Length.medium);
+        Weapon longWeapon = Weapon.create("方天画戟", 5, Length.longer);
 
         assassin.equip(shortWeapon);
 

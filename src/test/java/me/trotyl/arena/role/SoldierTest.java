@@ -40,7 +40,7 @@ public class SoldierTest {
     @Test
     public void equip_should_have_proper_result() {
 
-        Weapon weapon = new Weapon("我真剑", 2, Length.none);
+        Weapon weapon = Weapon.create("我真剑", 2, Length.none);
         Armor armor = Armor.create(3);
 
         assertThat(soldier0.weapon, is(Weapon.none));
@@ -54,7 +54,7 @@ public class SoldierTest {
         assertThat(soldier0.weapon, is(weapon));
         assertThat(soldier0.armor, is(armor));
 
-        Weapon newWeapon = new Weapon("优质木棒", 4, Length.none);
+        Weapon newWeapon = Weapon.create("优质木棒", 4, Length.none);
         Armor newArmor = Armor.create(4);
 
         soldier0.equip(newArmor);
@@ -81,7 +81,7 @@ public class SoldierTest {
         when(effect.sway(soldier2, soldier3, attribute)).thenReturn(DamageRecord.create(3));
 
         soldier2.effect = effect;
-        soldier2.weapon = spy(new Weapon("玄铁重剑", 3, Length.none, attribute));
+        soldier2.weapon = spy(Weapon.create("玄铁重剑", 3, Length.none, attribute));
 
         Pair<EffectProcedure, AttackProcedure> pair = soldier2.attack(soldier3);
         EffectProcedure effectProcedure = pair.getValue0();
@@ -117,7 +117,7 @@ public class SoldierTest {
 
         assertThat(soldier0.aggressivity(), is(5));
 
-        soldier0.equip(new Weapon("我真剑", 5, Length.none));
+        soldier0.equip(Weapon.create("我真剑", 5, Length.none));
         assertThat(soldier0.aggressivity(), is(10));
     }
 
@@ -141,7 +141,7 @@ public class SoldierTest {
         assertThat(record.weapon(), is(WeaponRecord.none));
         assertThat(record.armor(), is(ArmorRecord.none));
 
-        soldier0.equip(new Weapon("我真剑", 5, Length.none));
+        soldier0.equip(Weapon.create("我真剑", 5, Length.none));
         soldier0.equip(Armor.create(5));
         PlayerRecord newRecord = soldier0.record();
 

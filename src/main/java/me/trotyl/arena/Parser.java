@@ -52,13 +52,13 @@ public class Parser {
                 Length.none;
 
         if (!object.has("attribute")) {
-            return new Weapon(name, aggressivity, length);
+            return Weapon.create(name, aggressivity, length);
         }
 
         JSONObject attrObject = object.getJSONObject("attribute");
         Attribute attribute = parseAttribute(attrObject);
 
-        return new Weapon(name, aggressivity, length, attribute);
+        return Weapon.create(name, aggressivity, length, attribute);
     }
 
     public Armor parseArmor(JSONObject object) {
