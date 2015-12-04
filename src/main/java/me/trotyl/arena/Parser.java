@@ -90,7 +90,7 @@ public class Parser {
         if (genre.equals("flaming")) {
             return Flaming.create(extent, limit, rate);
         } if (genre.equals("toxic")) {
-            return new Toxic(extent, limit, rate);
+            return Toxic.create(extent, limit, rate);
         }
 
         return Attribute.none;

@@ -54,7 +54,7 @@ public class GameTest {
     public void run_should_have_proper_result() throws Exception {
 
         Soldier soldier = new Soldier("张三", 10, 5,
-                new Weapon("方天画戟", 5, Length.none, new Toxic(2, 2, 2.0f)),
+                new Weapon("方天画戟", 5, Length.none, Toxic.create(2, 2, 2.0f)),
                 Armor.create(6));
         Player player = new Player("李四", 20, 8);
         game = Game.between(soldier, player);
@@ -122,7 +122,7 @@ public class GameTest {
     public void over_procedure_should_have_proper_result() {
 
         Soldier soldier = new Soldier("张三", 10, 5,
-                new Weapon("方天画戟", 5, Length.none, new Toxic(2, 2, 2.0f)),
+                new Weapon("方天画戟", 5, Length.none, Toxic.create(2, 2, 2.0f)),
                 Armor.create(6));
 
         Player player = new Player("李四", 20, 8);
