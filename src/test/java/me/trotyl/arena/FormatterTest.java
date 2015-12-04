@@ -107,9 +107,9 @@ public class FormatterTest {
     @Test
     public void format_effect_should_have_proper_result_for_toxin() {
 
-        EffectProcedure procedure = new EffectProcedure(new PlayerRecord("张三", 10, Role.fighter),
-                                                        new EffectRecord(Type.toxin),
-                                                        new DamageRecord(5));
+        EffectProcedure procedure = EffectProcedure.create(new PlayerRecord("张三", 10, Role.fighter),
+                                                           new EffectRecord(Type.toxin),
+                                                           new DamageRecord(5));
 
         String result = formatter.formatEffect(procedure);
 
@@ -119,9 +119,9 @@ public class FormatterTest {
     @Test
     public void format_effect_should_have_proper_result_for_fire() {
 
-        EffectProcedure procedure = new EffectProcedure(new PlayerRecord("张三", 10, Role.fighter),
-                new EffectRecord(Type.fire),
-                new DamageRecord(5));
+        EffectProcedure procedure = EffectProcedure.create(new PlayerRecord("张三", 10, Role.fighter),
+                                                           new EffectRecord(Type.fire),
+                                                           new DamageRecord(5));
 
         String result = formatter.formatEffect(procedure);
 
@@ -131,9 +131,9 @@ public class FormatterTest {
     @Test
     public void format_effect_should_have_proper_result_for_freeze() {
 
-        EffectProcedure procedure = new EffectProcedure(new PlayerRecord("张三", 10, Role.fighter),
-                new EffectRecord(Type.freeze, 1),
-                new DamageRecord(5));
+        EffectProcedure procedure = EffectProcedure.create(new PlayerRecord("张三", 10, Role.fighter),
+                                                           new EffectRecord(Type.freeze, 1),
+                                                           new DamageRecord(5));
 
         String result = formatter.formatEffect(procedure);
 
@@ -143,9 +143,9 @@ public class FormatterTest {
     @Test
     public void format_effect_should_have_proper_result_for_swoon() {
 
-        EffectProcedure procedure = new EffectProcedure(new PlayerRecord("张三", 10, Role.fighter),
-                new EffectRecord(Type.swoon, 2),
-                new DamageRecord(5));
+        EffectProcedure procedure = EffectProcedure.create(new PlayerRecord("张三", 10, Role.fighter),
+                                                           new EffectRecord(Type.swoon, 2),
+                                                           new DamageRecord(5));
 
         String result = formatter.formatEffect(procedure);
 
