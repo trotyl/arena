@@ -123,46 +123,6 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_weapon_should_have_proper_result_without_attribute() {
-        String json = "" +
-                "{" +
-                "  \"name\": \"优质木棒\"," +
-                "  \"aggressivity\": 5," +
-                "  \"length\": \"medium\"" +
-                "}";
-
-        JSONObject object = getObject(json);
-        Weapon weapon = parser.parseWeapon(object);
-
-        assertThat(weapon.aggressivity(), is(5));
-        assertThat(weapon.name(), is("优质木棒"));
-        assertThat(weapon.length(), is(Length.medium));
-    }
-
-    @Test
-    public void parse_weapon_should_have_proper_result_with_attribute() {
-        String json = "" +
-                "{" +
-                "  \"name\": \"优质木棒\"," +
-                "  \"aggressivity\": 5," +
-                "  \"length\": \"medium\"," +
-                "  \"attribute\": " +
-                "  {" +
-                "    \"genre\": \"dizzy\"," +
-                "    \"rate\": 0.5" +
-                "  }" +
-                "}";
-
-        JSONObject object = getObject(json);
-        Weapon weapon = parser.parseWeapon(object);
-
-        assertThat(weapon.aggressivity(), is(5));
-        assertThat(weapon.name(), is("优质木棒"));
-        assertThat(weapon.length(), is(Length.medium));
-        assertThat(weapon.attribute(), instanceOf(Dizzy.class));
-    }
-
-    @Test
     public void parse_player_should_have_proper_result_for_normal_player() {
         String json = "" +
                 "{" +
@@ -281,6 +241,45 @@ public class ParserTest {
         assertThat(soldier.armor().defence(), is(8));
     }
 
+    @Test
+    public void parse_weapon_should_have_proper_result_without_attribute() {
+        String json = "" +
+                "{" +
+                "  \"name\": \"优质木棒\"," +
+                "  \"aggressivity\": 5," +
+                "  \"length\": \"medium\"" +
+                "}";
+
+        JSONObject object = getObject(json);
+        Weapon weapon = parser.parseWeapon(object);
+
+        assertThat(weapon.aggressivity(), is(5));
+        assertThat(weapon.name(), is("优质木棒"));
+        assertThat(weapon.length(), is(Length.medium));
+    }
+
+    @Test
+    public void parse_weapon_should_have_proper_result_with_attribute() {
+        String json = "" +
+                "{" +
+                "  \"name\": \"优质木棒\"," +
+                "  \"aggressivity\": 5," +
+                "  \"length\": \"medium\"," +
+                "  \"attribute\": " +
+                "  {" +
+                "    \"genre\": \"dizzy\"," +
+                "    \"rate\": 0.5" +
+                "  }" +
+                "}";
+
+        JSONObject object = getObject(json);
+        Weapon weapon = parser.parseWeapon(object);
+
+        assertThat(weapon.aggressivity(), is(5));
+        assertThat(weapon.name(), is("优质木棒"));
+        assertThat(weapon.length(), is(Length.medium));
+        assertThat(weapon.attribute(), instanceOf(Dizzy.class));
+    }
 
     private JSONObject getObject(String json) {
         JSONTokener tokener = new JSONTokener(json);

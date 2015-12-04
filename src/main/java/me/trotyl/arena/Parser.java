@@ -10,6 +10,41 @@ import org.json.JSONObject;
 
 public class Parser {
 
+    public Armor parseArmor(JSONObject object) {
+
+        int defence = object.getInt("defence");
+
+        return Armor.create(defence);
+    }
+
+    public Attribute parseAttribute(JSONObject object) {
+
+        String genre = object.getString("genre");
+        float rate = (float) object.getDouble("rate");
+
+        if (genre.equals("dizzy")) {
+            return Dizzy.create(rate);
+        } if (genre.equals("striking")) {
+            return Striking.create(rate);
+        }
+
+        int limit = object.getInt("limit");
+
+        if (genre.equals("freezing")) {
+            return Freezing.create(limit, rate);
+        }
+
+        int extent = object.getInt("extent");
+
+        if (genre.equals("flaming")) {
+            return Flaming.create(extent, limit, rate);
+        } if (genre.equals("toxic")) {
+            return Toxic.create(extent, limit, rate);
+        }
+
+        return Attribute.none;
+    }
+
     public Player parsePlayer(JSONObject object) {
 
         String name = object.getString("name");
@@ -59,40 +94,5 @@ public class Parser {
         Attribute attribute = parseAttribute(attrObject);
 
         return Weapon.create(name, aggressivity, length, attribute);
-    }
-
-    public Armor parseArmor(JSONObject object) {
-
-        int defence = object.getInt("defence");
-
-        return Armor.create(defence);
-    }
-
-    public Attribute parseAttribute(JSONObject object) {
-
-        String genre = object.getString("genre");
-        float rate = (float) object.getDouble("rate");
-
-        if (genre.equals("dizzy")) {
-            return Dizzy.create(rate);
-        } if (genre.equals("striking")) {
-            return Striking.create(rate);
-        }
-
-        int limit = object.getInt("limit");
-
-        if (genre.equals("freezing")) {
-            return Freezing.create(limit, rate);
-        }
-
-        int extent = object.getInt("extent");
-
-        if (genre.equals("flaming")) {
-            return Flaming.create(extent, limit, rate);
-        } if (genre.equals("toxic")) {
-            return Toxic.create(extent, limit, rate);
-        }
-
-        return Attribute.none;
     }
 }
