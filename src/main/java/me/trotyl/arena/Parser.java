@@ -74,7 +74,7 @@ public class Parser {
         float rate = (float) object.getDouble("rate");
 
         if (genre.equals("dizzy")) {
-            return new Dizzy(rate);
+            return Dizzy.create(rate);
         } if (genre.equals("striking")) {
             return new Striking(rate);
         }

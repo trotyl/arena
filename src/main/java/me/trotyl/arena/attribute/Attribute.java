@@ -26,7 +26,7 @@ public abstract class Attribute {
     protected int limit;
     protected float rate;
 
-    public Attribute(int limit, float rate) {
+    protected Attribute(int limit, float rate) {
         this.limit = limit;
         this.rate = rate;
     }

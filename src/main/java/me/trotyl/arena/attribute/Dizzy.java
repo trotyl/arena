@@ -8,7 +8,11 @@ import me.trotyl.arena.role.Attacker;
 
 public class Dizzy extends Attribute {
 
-    public Dizzy(float rate) {
+    public static Dizzy create(float rate) {
+        return new Dizzy(rate);
+    }
+
+    protected Dizzy(float rate) {
         super(2, rate);
     }
 
