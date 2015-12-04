@@ -35,8 +35,8 @@ public class PlayerRecord implements AttackerRecord, AttackableRecord {
     }
 
     @Override
-    public String name() {
-        return name;
+    public ArmorRecord armor() {
+        return armor;
     }
 
     @Override
@@ -45,8 +45,8 @@ public class PlayerRecord implements AttackerRecord, AttackableRecord {
     }
 
     @Override
-    public ArmorRecord armor() {
-        return armor;
+    public String name() {
+        return name;
     }
 
     @Override
