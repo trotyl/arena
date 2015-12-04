@@ -18,11 +18,6 @@ public class Swoon extends Effect {
     }
 
     @Override
-    public DamageRecord take(Attackable attackable) {
-        return DamageRecord.none;
-    }
-
-    @Override
     public EffectRecord record() {
         return EffectRecord.create(Type.swoon, remain);
     }
@@ -32,10 +27,5 @@ public class Swoon extends Effect {
 
         remain--;
         return DamageRecord.none;
-    }
-
-    @Override
-    public boolean valid() {
-        return remain > 0;
     }
 }

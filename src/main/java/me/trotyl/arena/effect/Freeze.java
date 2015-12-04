@@ -23,11 +23,6 @@ public class Freeze extends Effect {
     }
 
     @Override
-    public DamageRecord take(Attackable attackable) {
-        return DamageRecord.none;
-    }
-
-    @Override
     public EffectRecord record() {
         return EffectRecord.create(Type.freeze, remain);
     }
@@ -35,14 +30,9 @@ public class Freeze extends Effect {
     @Override
     public DamageRecord sway(Attacker attacker, Attackable attackable, Attribute attribute) {
         remain--;
-        DamageRecord damage = frozen ? DamageRecord.none : Effect.none.sway(attacker, attackable, attribute);
+        DamageRecord damage = frozen ? DamageRecord.none : super.sway(attacker, attackable, attribute);
         frozen = !frozen;
 
         return damage;
-    }
-
-    @Override
-    public boolean valid() {
-        return remain > 0;
     }
 }

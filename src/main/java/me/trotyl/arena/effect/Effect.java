@@ -12,21 +12,6 @@ public abstract class Effect {
     public static final Effect none = new Effect(0) {
 
         @Override
-        public DamageRecord take(Attackable attackable) {
-            return DamageRecord.none;
-        }
-
-        @Override
-        public EffectRecord record() {
-            return EffectRecord.none;
-        }
-
-        @Override
-        public DamageRecord sway(Attacker attacker, Attackable attackable, Attribute attribute) {
-            return attribute.apply(attacker, attackable);
-        }
-
-        @Override
         public boolean valid() {
             return true;
         }
@@ -38,13 +23,21 @@ public abstract class Effect {
         this.remain = remain;
     }
 
-    public abstract DamageRecord take(Attackable attackable);
+    public DamageRecord take(Attackable attackable) {
+        return DamageRecord.none;
+    }
 
-    public abstract EffectRecord record();
+    public EffectRecord record() {
+        return EffectRecord.none;
+    }
 
-    public abstract DamageRecord sway(Attacker attacker, Attackable attackable, Attribute attribute);
+    public DamageRecord sway(Attacker attacker, Attackable attackable, Attribute attribute) {
+        return attribute.apply(attacker, attackable);
+    }
 
-    public abstract boolean valid();
+    public boolean valid() {
+        return remain > 0;
+    }
 
     public int remain() {
         return remain;
