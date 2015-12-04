@@ -38,7 +38,7 @@ public class Weapon {
     }
 
     public WeaponRecord record() {
-        return new WeaponRecord(name);
+        return WeaponRecord.create(name);
     }
 
     public void with(Attribute attribute) {

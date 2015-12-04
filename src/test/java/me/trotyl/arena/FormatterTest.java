@@ -44,7 +44,7 @@ public class FormatterTest {
     public void format_attack_should_have_proper_result_with_weapon() {
 
         AttackProcedure procedure = AttackProcedure.create(
-                PlayerRecord.create("张三", 10, Role.fighter, new WeaponRecord("优质木棒"), ArmorRecord.none),
+                PlayerRecord.create("张三", 10, Role.fighter, WeaponRecord.create("优质木棒"), ArmorRecord.none),
                 PlayerRecord.create("李四", 20, Role.normal),
                 DamageRecord.create(5));
 
@@ -56,10 +56,9 @@ public class FormatterTest {
     @Test
     public void format_attack_should_have_proper_result_with_normal_effect() {
 
-        AttackProcedure procedure = AttackProcedure.create(
-                PlayerRecord.create("张三", 10, Role.fighter),
-                PlayerRecord.create("李四", 20, Role.normal),
-                DamageRecord.create(5, Genre.toxic));
+        AttackProcedure procedure = AttackProcedure.create(PlayerRecord.create("张三", 10, Role.fighter),
+                                                           PlayerRecord.create("李四", 20, Role.normal),
+                                                           DamageRecord.create(5, Genre.toxic));
 
         String result = formatter.formatAttack(procedure);
 
@@ -69,10 +68,9 @@ public class FormatterTest {
     @Test
     public void format_attack_should_have_proper_result_with_striking() {
 
-        AttackProcedure procedure = AttackProcedure.create(
-                PlayerRecord.create("张三", 10, Role.fighter),
-                PlayerRecord.create("李四", 20, Role.normal),
-                DamageRecord.create(5, Genre.striking));
+        AttackProcedure procedure = AttackProcedure.create(PlayerRecord.create("张三", 10, Role.fighter),
+                                                           PlayerRecord.create("李四", 20, Role.normal),
+                                                           DamageRecord.create(5, Genre.striking));
 
         String result = formatter.formatAttack(procedure);
 
@@ -84,7 +82,7 @@ public class FormatterTest {
     public void format_attack_should_have_proper_result_with_weapon_and_effect() {
 
         AttackProcedure procedure = AttackProcedure.create(
-                PlayerRecord.create("张三", 10, Role.fighter, new WeaponRecord("优质木棒"), ArmorRecord.none),
+                PlayerRecord.create("张三", 10, Role.fighter, WeaponRecord.create("优质木棒"), ArmorRecord.none),
                 PlayerRecord.create("李四", 20, Role.normal),
                 DamageRecord.create(5, Genre.toxic));
 
