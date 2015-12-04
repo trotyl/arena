@@ -137,10 +137,98 @@ var result = $"{ procedure.Attackable.Name }晕倒了, 无法攻击, 眩晕还�
 
 ```Java
 String result = format("%s晕倒了, 无法攻击, 眩晕还剩: %d轮", procedure.attackable.getName(), 
-                                                             procedure.attackable.getRemain());
+                                                            procedure.attackable.getRemain());
 ```
-
 
 5\. 对象 Null 检查
 
+在 C# 中，对于深层对象调用，可以使用空条件运算符无视 Null 情况：
+
+```C#
+var type = game?.Player1?.Weapon?.Attribute?.Effect?.Type;
+```
+
+而在 Java 中，需要手动检查或创建大量的特殊对象：
+
+```C#
+MyType type = null;
+if (game != null && game.player1? != null && game.player1.weapon != null && game.player.weapon.attribute != null && game.player1.weapon.attribute.effect != null) {
+    type = game.player1.weapon.attribute.effect.type;
+} 
+```
+
+在 C# 中，可以使用空接合运算符来设置默认值：
+
+```C#
+var prop = expression ?? new Prop();
+```
+
+而在 Java 中，需要使用条件语句或条件表达式：
+
+```Java
+SomeType prop = expression;
+prop = (prop != null? prop : new Prop());
+```
+
+6\. 关键字
+
+在 C# 中，可以使用语言关键字作为变量名：
+
+```C#
+var @short = new Weapon("...", 0, Length.@short); //枚举本应该使用大写，此处仅为用法说明
+```
+
+而在 Java 中，不能使用语言关键字：
+
+```Java
+Weapon thisIsShort = new Weapon("...", 0, Length.iMeanShort);
+```
+
+7\. Switch
+
+在 C# 中，可以直接使用 Switch 匹配任何类型：
+
+```C#
+public String PrintEffect(Effect effect) 
+{
+    switch(effect) 
+    {
+        case Toxin toxin:
+            return $"...{toxin.SomeThing}...毒性伤害...";
+        cese Flame flame:
+            return $"...{flame.SomeThing}...火焰伤害...";
+        case Freeze freeze when freeze.Works:
+            reutrn $"...{freeze.SomeThing}...冻僵了, 无法攻击...";
+        case Swoon swoon:
+            reutrn $"...{swoon.SomeThing}...晕倒了, 无法攻击, 眩晕还剩...";
+        default:
+            return "";
+    }
+}
+```
+
+而在 Java 中，自定义类型必须手动判断或者使用 Map 查找：
+
+```Java
+public String printEffect(Effect effect) {
+    if (effect instanceof Toxin) {
+        Toxin toxin = (Toxin) effect;
+        return format("...毒性伤害...", toxin.someThing);
+    } else if (effect instanceof Flame) {
+        Flame flame = (Flame) effect;
+        return format("...火焰伤害...", flame.someThing);
+    } else if (effect instanceof Freeze) {
+        Freeze freeze = (Freeze) effect;
+        if (freeze.works()) {
+            return format("...冻僵了, 无法攻击...", freeze.someThing);
+        }
+        return "";
+    } else if (effect instanceof Swoon) {
+        Swoon swoon = (Swoon) effect;
+        return format("...晕倒了, 无法攻击, 眩晕还剩...", swoon.someThing);
+    } else {
+        return "";
+    }
+}
+```
 
