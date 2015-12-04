@@ -22,7 +22,7 @@ public class Parser {
             return new Player(name, health, aggressivity);
         }
 
-        Soldier soldier = role.equals("assassin")? new Assassin(name, health, aggressivity):
+        Soldier soldier = role.equals("assassin")? Assassin.create(name, health, aggressivity):
                 role.equals("fighter")? new Fighter(name, health, aggressivity):
                 role.equals("knight")? new Knight(name, health, aggressivity):
                 new Soldier(name, health, aggressivity);
