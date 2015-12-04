@@ -378,7 +378,7 @@ String attackString = formatter.formatAttack(attack);
 攻击者的攻击力可能低于被攻击者的防御力，如果不做检查，可能会产生加血效果。
 
 
-3\. 事件倒置
+3\. 时光倒流
 
 部分事件（中毒、着火、冻僵、晕倒）出现在伤害事件之后，如：
 
