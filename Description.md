@@ -195,7 +195,7 @@ public String PrintEffect(Effect effect)
     {
         case Toxin toxin:
             return $"...{toxin.SomeThing}...毒性伤害...";
-        cese Flame flame:
+        case Flame flame:
             return $"...{flame.SomeThing}...火焰伤害...";
         case Freeze freeze when freeze.Works:
             reutrn $"...{freeze.SomeThing}...冻僵了, 无法攻击...";
