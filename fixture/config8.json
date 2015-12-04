@@ -1,0 +1,39 @@
+{
+  "player1": {
+    "name": "张三",
+    "health": 16429,
+    "aggressivity": 82,
+    "role": "knight",
+    "weapon": {
+      "name": "青龙偃月刀",
+      "aggressivity": 54,
+      "length": "long",
+      "attribute": {
+        "genre": "striking",
+        "rate": 0.2
+      }
+    },
+    "armor": {
+      "defence": 58
+    }
+  },
+  "player2": {
+    "name": "李四",
+    "health": 14728,
+    "aggressivity": 97,
+    "role": "fighter",
+    "weapon": {
+      "name": "寒冰剑",
+      "aggressivity": 47,
+      "length": "medium",
+      "attribute": {
+        "genre": "freezing",
+        "rate": 0.2,
+        "limit": 4
+      }
+    },
+    "armor": {
+      "defence": 44
+    }
+  }
+}

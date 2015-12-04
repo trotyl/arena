@@ -13,6 +13,7 @@ import org.junit.Test;
 import org.mockito.InOrder;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
@@ -27,15 +28,15 @@ public class FreezeTest {
     @Before
     public void setUp() throws Exception {
 
-        freeze = new Freeze(2);
+        freeze = new Freeze(5);
 
         player1 = spy(Player.create("张三", 10, 5));
         player2 = spy(Player.create("李四", 20, 8));
 
-        attribute = spy(new Attribute(-1, 0.0f) {
+        attribute = spy(new Attribute(-1, -1.0f) {
             @Override
             public DamageRecord apply(Attacker attacker, Attackable attackable) {
-                return DamageRecord.none;
+                return DamageRecord.create(5);
             }
         });
     }
@@ -48,18 +49,52 @@ public class FreezeTest {
     @Test
     public void record_should_have_proper_result() {
 
-        EffectRecord record = freeze.record();
+        EffectRecord record;
+
+        record = freeze.record();
 
         assertThat(record.type, is(Type.freeze));
-        assertThat(record.remain, is(2));
+        assertThat(record.remain, is(5));
+
+        freeze.sway(Player.create("None", 0, 0), Player.create("None", 0, 0), Attribute.none);
+        record = freeze.record();
+
+        assertThat(record, is(EffectRecord.none));
+
+        freeze.sway(Player.create("None", 0, 0), Player.create("None", 0, 0), Attribute.none);
+        record = freeze.record();
+
+        assertThat(record.type, is(Type.freeze));
+        assertThat(record.remain, is(3));
+
+        freeze.sway(Player.create("None", 0, 0), Player.create("None", 0, 0), Attribute.none);
+        record = freeze.record();
+
+        assertThat(record, is(EffectRecord.none));
     }
 
     @Test
     public void sway_should_have_proper_result() {
 
-        DamageRecord damage = freeze.sway(player1, player2, attribute);
+        DamageRecord damage;
+
+        damage = freeze.sway(player1, player2, attribute);
 
         assertThat(damage, is(DamageRecord.none));
+
+        damage = freeze.sway(player1, player2, attribute);
+
+        assertThat(damage, not(DamageRecord.none));
+        assertThat(damage.extent, is(5));
+
+        damage = freeze.sway(player1, player2, attribute);
+
+        assertThat(damage, is(DamageRecord.none));
+
+        damage = freeze.sway(player1, player2, attribute);
+
+        assertThat(damage, not(DamageRecord.none));
+        assertThat(damage.extent, is(5));
     }
 
     @Test
@@ -107,6 +142,15 @@ public class FreezeTest {
     @Test
     public void valid_should_have_proper_result() {
 
+        assertThat(freeze.valid(), is(true));
+
+        freeze.sway(player1, player2, attribute);
+        assertThat(freeze.valid(), is(true));
+
+        freeze.sway(player1, player2, attribute);
+        assertThat(freeze.valid(), is(true));
+
+        freeze.sway(player1, player2, attribute);
         assertThat(freeze.valid(), is(true));
 
         freeze.sway(player1, player2, attribute);
