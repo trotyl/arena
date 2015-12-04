@@ -33,6 +33,6 @@ public class Armor {
     }
 
     public ArmorRecord record() {
-        return new ArmorRecord(defence);
+        return ArmorRecord.create(defence);
     }
 }
