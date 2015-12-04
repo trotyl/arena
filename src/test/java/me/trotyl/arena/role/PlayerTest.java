@@ -15,7 +15,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InOrder;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.spy;
@@ -80,6 +82,23 @@ public class PlayerTest {
         inOrder.verify(player4).suffer(5, Effect.none);
         inOrder.verify(player3).record();
         inOrder.verify(player4).record();
+
+        Player player5 = Player.create("王二", 1, 2);
+        Player player6 = spy(Player.create("麻子", 1, 2));
+        player5.suffer(0, Flame.create(5, 2));
+
+        assertThat(player5.health(), is(1));
+        assertThat(player6.health(), is(1));
+
+        assertThat(player5.effect, instanceOf(Flame.class));
+
+        Pair<EffectProcedure, AttackProcedure> attack = player5.attack(player6);
+
+        assertThat(player5.health(), is(-4));
+        assertThat(player6.health(), is(1));
+
+        assertThat(attack.getValue0(), not(EffectProcedure.none));
+        assertThat(attack.getValue1(), is(AttackProcedure.none));
     }
 
     @Test
