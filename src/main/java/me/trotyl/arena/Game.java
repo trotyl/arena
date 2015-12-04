@@ -11,10 +11,6 @@ import org.javatuples.Pair;
 
 public class Game {
 
-    protected Player player1;
-    protected Player player2;
-    private boolean inTurnOfPlayer1;
-
     public static Game between(Player player1, Player player2) {
 
         Game game = new Game();
@@ -24,8 +20,28 @@ public class Game {
         return game;
     }
 
+    protected Player player1;
+    protected Player player2;
+    private boolean inTurnOfPlayer1;
+
     public Game() {
         inTurnOfPlayer1 = true;
+    }
+
+    public boolean over() {
+        return !player1.alive() || !player2.alive();
+    }
+
+    public OverProcedure overProcedure() {
+
+        if (!over()) {
+            return OverProcedure.none;
+        }
+
+        Player winner = player1.alive()? player1: player2;
+        Player loser = winner.equals(player1)? player2: player1;
+
+        return OverProcedure.create(winner.record(), loser.record());
     }
 
     public Pair<EffectProcedure, AttackProcedure> run() {
@@ -41,21 +57,5 @@ public class Game {
         inTurnOfPlayer1 = ! inTurnOfPlayer1;
 
         return pair;
-    }
-
-    public OverProcedure overProcedure() {
-
-        if (!over()) {
-            return OverProcedure.none;
-        }
-
-        Player winner = player1.alive()? player1: player2;
-        Player loser = winner.equals(player1)? player2: player1;
-
-        return OverProcedure.create(winner.record(), loser.record());
-    }
-
-    public boolean over() {
-        return !player1.alive() || !player2.alive();
     }
 }
