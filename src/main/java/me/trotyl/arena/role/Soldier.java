@@ -25,8 +25,8 @@ public class Soldier extends Player {
 
         super(name, health, aggressivity);
 
-        this.weapon = weapon;
-        this.armor = armor;
+        this.equip(weapon);
+        this.equip(armor);
     }
 
     @Override
