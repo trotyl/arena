@@ -19,22 +19,20 @@
   },
   "player2": {
     "name": "李四",
-    "health": 15830,
+    "health": 14728,
     "aggressivity": 97,
-    "role": "knight",
+    "role": "assassin",
     "weapon": {
-      "name": "丈八蛇矛",
-      "aggressivity": 47,
-      "length": "long",
+      "name": "诸葛连弩",
+      "aggressivity": 39,
+      "length": "short",
       "attribute": {
-        "genre": "flaming",
-        "rate": 0.1,
-        "extent": 152,
-        "limit": 2
+        "genre": "dizzy",
+        "rate": 0.12
       }
     },
     "armor": {
-      "defence": 44
+      "defence": 67
     }
   }
 }
