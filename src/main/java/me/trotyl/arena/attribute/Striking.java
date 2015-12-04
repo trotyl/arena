@@ -18,6 +18,7 @@ public class Striking extends Attribute {
 
     @Override
     public DamageRecord apply(Attacker attacker, Attackable attackable) {
+
         if (!works()) {
             return super.apply(attacker, attackable);
         }

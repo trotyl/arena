@@ -19,12 +19,12 @@ public class Flaming extends Attribute {
         this.extent = extent;
     }
 
+    public int extent() {
+        return extent;
+    }
+
     @Override
     public DamageRecord apply(Attacker attacker, Attackable attackable) {
         return applyByEffect(attacker, attackable, Flame.create(extent, limit), Genre.flaming);
-    }
-
-    public int extent() {
-        return extent;
     }
 }

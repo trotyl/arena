@@ -21,12 +21,12 @@ public class Toxic extends Attribute {
         this.extent = extent;
     }
 
+    public int extent() {
+        return extent;
+    }
+
     @Override
     public DamageRecord apply(Attacker attacker, Attackable attackable) {
         return applyByEffect(attacker, attackable, Toxin.create(extent, limit), Genre.toxic);
-    }
-
-    public int extent() {
-        return extent;
     }
 }
