@@ -312,6 +312,43 @@ String json = "" +
 "}";
 ```
 
+10\. Tuple
+
+在 C# 中，可以直接使用 Tuple 作为函数返回值并隐式解封装：
+
+```C#
+public (EffectProcedure effect, AttackProcedure attack) Run() 
+{
+    // Todo
+    return (effect, attack);
+}
+```
+
+```C#
+(var effect, var attack) = game.Run();
+
+var effectString = formatter.FormatEffect(effect);
+var attackString = formatter.FormatAttack(attack);
+```
+
+而在 Java 中，必须要手动封装和解封装 Tuple：
+
+```Java
+public Tuple<EffectProcedure, AttackProcedure> run() {
+    // Todo
+    return new Tuple<>(effect, attack);
+}
+```
+
+```Java
+Tuple<EffectProcedure, AttackProcedure> tuple = game.run();
+EffectProcedure effect = tuple.getValue0();
+AttackProcedure attack = tuple.getValue1();
+
+String effectString = formatter.formatEffect(effect);
+String attackString = formatter.formatAttack(attack);
+```
+
 ---
 
 ## 题目中的逻辑陷阱
