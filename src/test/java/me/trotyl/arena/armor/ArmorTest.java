@@ -1,6 +1,5 @@
-package me.trotyl.arena;
+package me.trotyl.arena.armor;
 
-import me.trotyl.arena.armor.Armor;
 import me.trotyl.arena.record.ArmorRecord;
 import org.junit.After;
 import org.junit.Before;

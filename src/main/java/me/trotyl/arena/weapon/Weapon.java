@@ -32,6 +32,14 @@ public class Weapon {
         return aggressivity;
     }
 
+    public Attribute attribute() {
+        return attribute;
+    }
+
+    public Length length() {
+        return length;
+    }
+
     public String name() {
         return name;
     }
@@ -43,17 +51,5 @@ public class Weapon {
         }
 
         return WeaponRecord.create(name);
-    }
-
-    public void with(Attribute attribute) {
-        this.attribute = attribute;
-    }
-
-    public Attribute attribute() {
-        return attribute;
-    }
-
-    public Length length() {
-        return length;
     }
 }
