@@ -25,8 +25,8 @@ public class PlayerTest {
     @Before
     public void setUp() throws Exception {
 
-        player1 = new Player("张三", 10, 5);
-        player2 = new Player("李四", 20, 8);
+        player1 = Player.create("张三", 10, 5);
+        player2 = Player.create("李四", 20, 8);
     }
 
     @After
@@ -39,10 +39,10 @@ public class PlayerTest {
 
         assertThat(player1.alive(), is(true));
 
-        Player player3 = new Player("王二", 1, 1);
+        Player player3 = Player.create("王二", 1, 1);
         assertThat(player3.alive(), is(true));
 
-        Player player4 = new Player("麻子", 0, 1);
+        Player player4 = Player.create("麻子", 0, 1);
         assertThat(player4.alive(), is(false));
     }
 

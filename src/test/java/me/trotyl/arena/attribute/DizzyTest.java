@@ -33,8 +33,8 @@ public class DizzyTest {
 
         dizzy = new Dizzy(0.5f);
 
-        player1 = spy(new Player("张三", 10, 5));
-        player2 = spy(new Player("李四", 20, 8));
+        player1 = spy(Player.create("张三", 10, 5));
+        player2 = spy(Player.create("李四", 20, 8));
     }
 
     @After

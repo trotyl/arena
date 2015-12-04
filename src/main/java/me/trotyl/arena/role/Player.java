@@ -11,12 +11,16 @@ import org.javatuples.Pair;
 
 public class Player implements Attacker, Attackable {
 
+    public static Player create(String name, int health, int aggressivity) {
+        return new Player(name, health, aggressivity);
+    }
+
     protected String name;
     protected int health;
     protected int aggressivity;
     protected Effect effect;
 
-    public Player(String name, int health, int aggressivity) {
+    protected Player(String name, int health, int aggressivity) {
         this.name = name;
         this.health = health;
         this.aggressivity = aggressivity;

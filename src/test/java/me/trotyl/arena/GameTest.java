@@ -56,7 +56,7 @@ public class GameTest {
         Soldier soldier = new Soldier("张三", 10, 5,
                 new Weapon("方天画戟", 5, Length.none, Toxic.create(2, 2, 2.0f)),
                 Armor.create(6));
-        Player player = new Player("李四", 20, 8);
+        Player player = Player.create("李四", 20, 8);
         game = Game.between(soldier, player);
 
         Pair<EffectProcedure, AttackProcedure> pair;
@@ -125,7 +125,7 @@ public class GameTest {
                 new Weapon("方天画戟", 5, Length.none, Toxic.create(2, 2, 2.0f)),
                 Armor.create(6));
 
-        Player player = new Player("李四", 20, 8);
+        Player player = Player.create("李四", 20, 8);
         game = Game.between(soldier, player);
 
         OverProcedure procedure;

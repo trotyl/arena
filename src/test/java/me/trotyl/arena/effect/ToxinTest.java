@@ -29,8 +29,8 @@ public class ToxinTest {
     public void setUp() throws Exception {
         toxin = new Toxin(2, 2);
 
-        player1 = spy(new Player("张三", 10, 5));
-        player2 = spy(new Player("李四", 20, 8));
+        player1 = spy(Player.create("张三", 10, 5));
+        player2 = spy(Player.create("李四", 20, 8));
 
         attribute = spy(new Attribute(-1, 0.0f) {
             @Override

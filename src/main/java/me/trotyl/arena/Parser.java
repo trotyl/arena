@@ -19,7 +19,7 @@ public class Parser {
         String role = object.getString("role");
 
         if (role.equals("normal")) {
-            return new Player(name, health, aggressivity);
+            return Player.create(name, health, aggressivity);
         }
 
         Soldier soldier = role.equals("assassin")? Assassin.create(name, health, aggressivity):
