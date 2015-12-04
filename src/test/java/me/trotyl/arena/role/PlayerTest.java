@@ -6,7 +6,9 @@ import me.trotyl.arena.effect.Flame;
 import me.trotyl.arena.effect.Toxin;
 import me.trotyl.arena.procedure.AttackProcedure;
 import me.trotyl.arena.procedure.EffectProcedure;
-import me.trotyl.arena.record.*;
+import me.trotyl.arena.record.ArmorRecord;
+import me.trotyl.arena.record.PlayerRecord;
+import me.trotyl.arena.record.WeaponRecord;
 import org.javatuples.Pair;
 import org.junit.After;
 import org.junit.Before;
@@ -15,7 +17,8 @@ import org.mockito.InOrder;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.inOrder;
+import static org.mockito.Mockito.spy;
 
 
 public class PlayerTest {
@@ -35,6 +38,13 @@ public class PlayerTest {
     }
 
     @Test
+    public void aggressivity_should_have_proper_result() {
+
+        assertThat(player1.aggressivity(), is(5));
+        assertThat(player2.aggressivity(), is(8));
+    }
+
+    @Test
     public void alive_should_have_proper_result() {
 
         assertThat(player1.alive(), is(true));
@@ -44,6 +54,51 @@ public class PlayerTest {
 
         Player player4 = Player.create("麻子", 0, 1);
         assertThat(player4.alive(), is(false));
+    }
+
+    @Test
+    public void attack_should_have_proper_result() {
+
+        Player player3 = spy(player1);
+        Player player4 = spy(player2);
+
+        Pair<EffectProcedure, AttackProcedure> pair = player3.attack(player4);
+        EffectProcedure effectProcedure = pair.getValue0();
+        AttackProcedure attackProcedure = pair.getValue1();
+
+        assertThat(effectProcedure, is(EffectProcedure.none));
+        assertThat(attackProcedure.attacker.name(), is("张三"));
+        assertThat(attackProcedure.attackable.name(), is("李四"));
+        assertThat(attackProcedure.attackable.health(), is(15));
+        assertThat(attackProcedure.damage.genre, is(Genre.none));
+        assertThat(attackProcedure.damage.extent, is(5));
+
+        InOrder inOrder = inOrder(player3, player4);
+        inOrder.verify(player3).record();
+        inOrder.verify(player3).aggressivity();
+        inOrder.verify(player4).defence();
+        inOrder.verify(player4).suffer(5, Effect.none);
+        inOrder.verify(player3).record();
+        inOrder.verify(player4).record();
+    }
+
+    @Test
+    public void defence_should_have_proper_result() {
+
+        assertThat(player1.defence(), is(0));
+        assertThat(player2.defence(), is(0));
+    }
+
+    @Test
+    public void record_should_have_proper_result() {
+
+        PlayerRecord record = player1.record();
+
+        assertThat(record.name(), is("张三"));
+        assertThat(record.health(), is(10));
+        assertThat(record.armor(), is(ArmorRecord.none));
+        assertThat(record.weapon(), is(WeaponRecord.none));
+        assertThat(record.role(), is(Role.normal));
     }
 
     @Test
@@ -76,57 +131,5 @@ public class PlayerTest {
         player2.suffer(2, toxin);
         assertThat(player2.effect, is(toxin));
         assertThat(player2.effect.remain(), is(4));
-    }
-
-    @Test
-    public void record_should_have_proper_result() {
-
-        PlayerRecord record = player1.record();
-
-        assertThat(record.name(), is("张三"));
-        assertThat(record.health(), is(10));
-        assertThat(record.armor(), is(ArmorRecord.none));
-        assertThat(record.weapon(), is(WeaponRecord.none));
-        assertThat(record.role(), is(Role.normal));
-    }
-
-    @Test
-    public void defence_should_have_proper_result() {
-
-        assertThat(player1.defence(), is(0));
-        assertThat(player2.defence(), is(0));
-    }
-
-    @Test
-    public void aggressivity_should_have_proper_result() {
-
-        assertThat(player1.aggressivity(), is(5));
-        assertThat(player2.aggressivity(), is(8));
-    }
-
-    @Test
-    public void attack_should_have_proper_result() {
-
-        Player player3 = spy(player1);
-        Player player4 = spy(player2);
-
-        Pair<EffectProcedure, AttackProcedure> pair = player3.attack(player4);
-        EffectProcedure effectProcedure = pair.getValue0();
-        AttackProcedure attackProcedure = pair.getValue1();
-
-        assertThat(effectProcedure, is(EffectProcedure.none));
-        assertThat(attackProcedure.attacker.name(), is("张三"));
-        assertThat(attackProcedure.attackable.name(), is("李四"));
-        assertThat(attackProcedure.attackable.health(), is(15));
-        assertThat(attackProcedure.damage.genre, is(Genre.none));
-        assertThat(attackProcedure.damage.extent, is(5));
-
-        InOrder inOrder = inOrder(player3, player4);
-        inOrder.verify(player3).record();
-        inOrder.verify(player3).aggressivity();
-        inOrder.verify(player4).defence();
-        inOrder.verify(player4).suffer(5, Effect.none);
-        inOrder.verify(player3).record();
-        inOrder.verify(player4).record();
     }
 }

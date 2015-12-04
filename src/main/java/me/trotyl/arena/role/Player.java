@@ -27,8 +27,36 @@ public class Player implements Attacker, Attackable {
         this.effect = Effect.none;
     }
 
+    @Override
+    public int aggressivity() {
+        return aggressivity;
+    }
+
     public boolean alive() {
         return health > 0;
+    }
+
+    @Override
+    public int defence() {
+        return 0;
+    }
+
+    public int health() {
+        return health;
+    }
+
+    public String name() {
+        return name;
+    }
+
+    @Override
+    public Pair<EffectProcedure, AttackProcedure> attack(Attackable attackable) {
+        return attackByAttribute(attackable, Attribute.none);
+    }
+
+    @Override
+    public PlayerRecord record() {
+        return PlayerRecord.create(name, health);
     }
 
     @Override
@@ -40,26 +68,6 @@ public class Player implements Attacker, Attackable {
         } else if (!effect.equals(Effect.none)) {
             this.effect = effect;
         }
-    }
-
-    @Override
-    public PlayerRecord record() {
-        return PlayerRecord.create(name, health);
-    }
-
-    @Override
-    public int defence() {
-        return 0;
-    }
-
-    @Override
-    public int aggressivity() {
-        return aggressivity;
-    }
-
-    @Override
-    public Pair<EffectProcedure, AttackProcedure> attack(Attackable attackable) {
-        return attackByAttribute(attackable, Attribute.none);
     }
 
     protected Pair<EffectProcedure, AttackProcedure> attackByAttribute(Attackable attackable, Attribute attribute) {
@@ -74,13 +82,5 @@ public class Player implements Attacker, Attackable {
         }
 
         return new Pair<>(effectProcedure, attackProcedure);
-    }
-
-    public String name() {
-        return name;
-    }
-
-    public int health() {
-        return health;
     }
 }
