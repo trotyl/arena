@@ -14,6 +14,6 @@ public class Type {
             this.equals(none)? "None":
             this.equals(swoon)? "Swoon":
             this.equals(flame)? "Flame":
-            this.equals(freeze)? "Freeze": "Null";
+            this.equals(freeze)? "Freeze": "None";
     }
 }

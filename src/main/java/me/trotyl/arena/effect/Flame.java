@@ -22,12 +22,6 @@ public class Flame extends Effect {
     }
 
     @Override
-    public DamageRecord take(Attackable attackable) {
-        attackable.suffer(extent, Effect.none);
-        return DamageRecord.create(extent, Genre.effect);
-    }
-
-    @Override
     public EffectRecord record() {
         return EffectRecord.create(Type.flame, remain);
     }
@@ -36,5 +30,11 @@ public class Flame extends Effect {
     public DamageRecord sway(Attacker attacker, Attackable attackable, Attribute attribute) {
         remain--;
         return super.sway(attacker, attackable, attribute);
+    }
+
+    @Override
+    public DamageRecord take(Attackable attackable) {
+        attackable.suffer(extent, Effect.none);
+        return DamageRecord.create(extent, Genre.effect);
     }
 }

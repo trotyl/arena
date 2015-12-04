@@ -23,14 +23,6 @@ public class Toxin extends Effect {
     }
 
     @Override
-    public DamageRecord take(Attackable attackable) {
-
-        attackable.suffer(extent, Effect.none);
-
-        return DamageRecord.create(extent, Genre.effect);
-    }
-
-    @Override
     public EffectRecord record() {
         return EffectRecord.create(Type.toxin, remain);
     }
@@ -41,5 +33,13 @@ public class Toxin extends Effect {
         remain--;
 
         return super.sway(attacker, attackable, attribute);
+    }
+
+    @Override
+    public DamageRecord take(Attackable attackable) {
+
+        attackable.suffer(extent, Effect.none);
+
+        return DamageRecord.create(extent, Genre.effect);
     }
 }

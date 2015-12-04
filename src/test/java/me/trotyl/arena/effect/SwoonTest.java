@@ -45,25 +45,6 @@ public class SwoonTest {
     }
 
     @Test
-    public void take_should_have_proper_result() {
-        DamageRecord damage = swoon.take(player1);
-        PlayerRecord player1Record = player1.record();
-        PlayerRecord player2Record = player2.record();
-
-        assertThat(damage, is(DamageRecord.none));
-
-        assertThat(player1Record.health(), is(10));
-        assertThat(player2Record.health(), is(20));
-    }
-
-    @Test
-    public void take_should_have_proper_invocation() {
-        swoon.take(player1);
-
-        verifyZeroInteractions(player1);
-    }
-
-    @Test
     public void record_should_have_proper_result() {
         EffectRecord record = swoon.record();
 
@@ -91,6 +72,25 @@ public class SwoonTest {
         verifyZeroInteractions(player1);
         verifyZeroInteractions(player2);
         verifyZeroInteractions(attribute);
+    }
+
+    @Test
+    public void take_should_have_proper_result() {
+        DamageRecord damage = swoon.take(player1);
+        PlayerRecord player1Record = player1.record();
+        PlayerRecord player2Record = player2.record();
+
+        assertThat(damage, is(DamageRecord.none));
+
+        assertThat(player1Record.health(), is(10));
+        assertThat(player2Record.health(), is(20));
+    }
+
+    @Test
+    public void take_should_have_proper_invocation() {
+        swoon.take(player1);
+
+        verifyZeroInteractions(player1);
     }
 
     @Test

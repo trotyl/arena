@@ -46,28 +46,6 @@ public class FlameTest {
     }
 
     @Test
-    public void take_should_have_proper_result() {
-        DamageRecord damage = flame.take(player1);
-        PlayerRecord player1Record = player1.record();
-        PlayerRecord player2Record = player2.record();
-
-        assertThat(damage.genre, is(Genre.effect));
-        assertThat(damage.extent, is(2));
-
-        assertThat(player1Record.health(), is(8));
-        assertThat(player2Record.health(), is(20));
-    }
-
-    @Test
-    public void take_should_have_proper_invocation() {
-        flame.take(player1);
-
-        InOrder inOrder = inOrder(player1);
-        inOrder.verify(player1).suffer(2, Effect.none);
-        verifyNoMoreInteractions(player1);
-    }
-
-    @Test
     public void record_should_have_proper_result() {
         EffectRecord record = flame.record();
 
@@ -92,6 +70,28 @@ public class FlameTest {
         InOrder inOrder = inOrder(attribute);
         inOrder.verify(attribute).apply(player1, player2);
         verifyNoMoreInteractions(attribute);
+    }
+
+    @Test
+    public void take_should_have_proper_result() {
+        DamageRecord damage = flame.take(player1);
+        PlayerRecord player1Record = player1.record();
+        PlayerRecord player2Record = player2.record();
+
+        assertThat(damage.genre, is(Genre.effect));
+        assertThat(damage.extent, is(2));
+
+        assertThat(player1Record.health(), is(8));
+        assertThat(player2Record.health(), is(20));
+    }
+
+    @Test
+    public void take_should_have_proper_invocation() {
+        flame.take(player1);
+
+        InOrder inOrder = inOrder(player1);
+        inOrder.verify(player1).suffer(2, Effect.none);
+        verifyNoMoreInteractions(player1);
     }
 
     @Test
