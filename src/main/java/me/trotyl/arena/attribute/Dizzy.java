@@ -18,6 +18,6 @@ public class Dizzy extends Attribute {
 
     @Override
     public DamageRecord apply(Attacker attacker, Attackable attackable) {
-        return applyByEffect(attacker, attackable, new Swoon(limit), Genre.dizzy);
+        return applyByEffect(attacker, attackable, Swoon.create(limit), Genre.dizzy);
     }
 }

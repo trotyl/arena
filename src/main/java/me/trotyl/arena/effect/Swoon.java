@@ -9,7 +9,11 @@ import me.trotyl.arena.role.Attacker;
 
 public class Swoon extends Effect {
 
-    public Swoon(int limit) {
+    public static Swoon create(int limit) {
+        return new Swoon(limit);
+    }
+
+    protected Swoon(int limit) {
         super(limit);
     }
 
@@ -25,6 +29,7 @@ public class Swoon extends Effect {
 
     @Override
     public DamageRecord sway(Attacker attacker, Attackable attackable, Attribute attribute) {
+
         remain--;
         return DamageRecord.none;
     }
