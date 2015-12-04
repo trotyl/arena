@@ -28,13 +28,13 @@ public class Game {
         inTurnOfPlayer1 = true;
     }
 
-    public boolean over() {
+    public boolean end() {
         return !player1.alive() || !player2.alive();
     }
 
-    public OverProcedure overProcedure() {
+    public OverProcedure over() {
 
-        if (!over()) {
+        if (!end()) {
             return OverProcedure.none;
         }
 
@@ -46,7 +46,7 @@ public class Game {
 
     public Pair<EffectProcedure, AttackProcedure> run() {
 
-        if (over()) {
+        if (end()) {
             return new Pair<>(EffectProcedure.none, AttackProcedure.none);
         }
 

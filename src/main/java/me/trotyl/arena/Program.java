@@ -56,7 +56,7 @@ public class Program {
     }
 
     public void run() {
-        while (!game.over()) {
+        while (!game.end()) {
             Pair<EffectProcedure, AttackProcedure> pair = game.run();
 
             String effect = formatter.formatEffect(pair.getValue0());
@@ -70,7 +70,7 @@ public class Program {
             }
         }
 
-        OverProcedure procedure = game.overProcedure();
+        OverProcedure procedure = game.over();
 
         String output = formatter.formatOver(procedure);
 

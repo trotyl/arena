@@ -49,6 +49,83 @@ public class GameTest {
         assertThat(game.player2, is(player2));
     }
 
+    @Test
+    public void end_should_have_proper_result_and_invocation() {
+
+        Player player0 = mock(Player.class);
+        Player player1 = mock(Player.class);
+        when(player0.alive()).thenReturn(true);
+        when(player1.alive()).thenReturn(true, true, false);
+
+        game = Game.between(player0, player1);
+
+        assertThat(game.end(), is(false));
+        assertThat(game.end(), is(false));
+        assertThat(game.end(), is(true));
+
+        InOrder inOrder = inOrder(player0, player1);
+        inOrder.verify(player0).alive();
+        inOrder.verify(player1).alive();
+        inOrder.verify(player0).alive();
+        inOrder.verify(player1).alive();
+        inOrder.verify(player0).alive();
+        inOrder.verify(player1).alive();
+
+        verifyNoMoreInteractions(player0, player1);
+    }
+
+    @Test
+    public void over_should_have_proper_result() {
+
+        Soldier soldier = Soldier.create("张三", 10, 5,
+                Weapon.create("方天画戟", 5, Length.none, Toxic.create(2, 2, 2.0f)),
+                Armor.create(6));
+
+        Player player = Player.create("李四", 20, 8);
+        game = Game.between(soldier, player);
+
+        OverProcedure procedure;
+
+        procedure = game.over();
+        assertThat(procedure, is(OverProcedure.none));
+
+        game.run();
+        procedure = game.over();
+        assertThat(procedure, is(OverProcedure.none));
+
+        game.run();
+        procedure = game.over();
+        assertThat(procedure, is(OverProcedure.none));
+
+        game.run();
+        procedure = game.over();
+        assertThat(procedure.winner.name(), is("张三"));
+        assertThat(procedure.loser.name(), is("李四"));
+    }
+
+    @Test
+    public void over_should_have_proper_invocation() {
+
+        Player player0 = mock(Player.class);
+        Player player1 = mock(Player.class);
+        when(player0.alive()).thenReturn(true);
+        when(player1.alive()).thenReturn(false);
+        when(player0.attack(player1)).thenReturn(new Pair<>(EffectProcedure.none, AttackProcedure.none));
+        when(player1.attack(player0)).thenReturn(new Pair<>(EffectProcedure.none, AttackProcedure.none));
+
+        game = Game.between(player0, player1);
+        game.over();
+
+        InOrder inOrder = inOrder(player0, player1);
+        inOrder.verify(player0).alive();
+        inOrder.verify(player1).alive();
+        inOrder.verify(player0).alive();
+        inOrder.verify(player0).record();
+        inOrder.verify(player1).record();
+
+        verifyNoMoreInteractions(player0, player1);
+    }
+
 
     @Test
     public void run_should_have_proper_result() throws Exception {
@@ -92,83 +169,6 @@ public class GameTest {
         assertThat(effectProcedure.effect, is(EffectRecord.none));
         assertThat(effectProcedure.damage, is(DamageRecord.none));
         assertThat(attackProcedure.attackable.health(), is(-2));
-    }
-
-    @Test
-    public void over_should_have_proper_result_and_invocation() {
-
-        Player player0 = mock(Player.class);
-        Player player1 = mock(Player.class);
-        when(player0.alive()).thenReturn(true);
-        when(player1.alive()).thenReturn(true, true, false);
-
-        game = Game.between(player0, player1);
-
-        assertThat(game.over(), is(false));
-        assertThat(game.over(), is(false));
-        assertThat(game.over(), is(true));
-
-        InOrder inOrder = inOrder(player0, player1);
-        inOrder.verify(player0).alive();
-        inOrder.verify(player1).alive();
-        inOrder.verify(player0).alive();
-        inOrder.verify(player1).alive();
-        inOrder.verify(player0).alive();
-        inOrder.verify(player1).alive();
-
-        verifyNoMoreInteractions(player0, player1);
-    }
-
-    @Test
-    public void over_procedure_should_have_proper_result() {
-
-        Soldier soldier = Soldier.create("张三", 10, 5,
-                Weapon.create("方天画戟", 5, Length.none, Toxic.create(2, 2, 2.0f)),
-                Armor.create(6));
-
-        Player player = Player.create("李四", 20, 8);
-        game = Game.between(soldier, player);
-
-        OverProcedure procedure;
-
-        procedure = game.overProcedure();
-        assertThat(procedure, is(OverProcedure.none));
-
-        game.run();
-        procedure = game.overProcedure();
-        assertThat(procedure, is(OverProcedure.none));
-
-        game.run();
-        procedure = game.overProcedure();
-        assertThat(procedure, is(OverProcedure.none));
-
-        game.run();
-        procedure = game.overProcedure();
-        assertThat(procedure.winner.name(), is("张三"));
-        assertThat(procedure.loser.name(), is("李四"));
-    }
-
-    @Test
-    public void over_procedure_should_have_proper_invocation() {
-
-        Player player0 = mock(Player.class);
-        Player player1 = mock(Player.class);
-        when(player0.alive()).thenReturn(true);
-        when(player1.alive()).thenReturn(false);
-        when(player0.attack(player1)).thenReturn(new Pair<>(EffectProcedure.none, AttackProcedure.none));
-        when(player1.attack(player0)).thenReturn(new Pair<>(EffectProcedure.none, AttackProcedure.none));
-
-        game = Game.between(player0, player1);
-        game.overProcedure();
-
-        InOrder inOrder = inOrder(player0, player1);
-        inOrder.verify(player0).alive();
-        inOrder.verify(player1).alive();
-        inOrder.verify(player0).alive();
-        inOrder.verify(player0).record();
-        inOrder.verify(player1).record();
-
-        verifyNoMoreInteractions(player0, player1);
     }
 
     @Test
