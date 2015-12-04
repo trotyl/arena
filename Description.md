@@ -6,7 +6,7 @@
 
 ## 为什么说 Java 烂！
 
-1\. Property
+1\. Field-like Property (C# 1, C# 3)
 
 在 C# 中，Property 直接采用赋值语句进行存取：
 
@@ -24,7 +24,7 @@ obj1.setProp(obj2.getProp());
 obj2.setProp(tmp);
 ```
 
-在 C# 中，简单 Property 可以直接写成 Inline 形式：
+在 C# 中，简单 Property 可以直接写成 Inline 形式（自动属性）：
 
 ```C#
 class SomeClass
@@ -69,7 +69,7 @@ class SomeClass
 
 而在 Java 中，Property 的 Getter 和 Setter 是两个独立函数：（没变）
 
-2\. 类型推理
+2\. 类型推理 (C# 3)
 
 在 C# 中，除了类/结构的成员变量和函数接口外，所有变量都可使用隐式类型：
 
@@ -83,7 +83,7 @@ var result = someLongTypeObject.SomeMethod();
 SomeLongType result = someLongTypeObject.someMethod();
 ```
 
-3\. 成员方法
+3\. Lambda 表达式作为成员方法 (C# 6)
 
 在 C# 中，简单成员方法可以直接采用 Lambda 表达式声明：
 
@@ -108,7 +108,7 @@ class Player {
 }
 ```
 
-4\. String Format
+4\. String Format (C# 1, C# 6)
 
 在 C# 中，String 格式化采用 Indexed-based 模板，可以多次插入同一内容：
 
@@ -142,7 +142,7 @@ String result = format("%s晕倒了, 无法攻击, 眩晕还剩: %d轮", procedu
                                                             procedure.attackable.getRemain());
 ```
 
-5\. 引用类型 Null 检查
+5\. 引用类型 Null 检查 (C# 2, C# 6)
 
 在 C# 中，对于深层对象调用，可以使用空条件运算符无视 Null 情况：
 
@@ -172,7 +172,7 @@ SomeType prop = expression;
 prop = (prop != null? prop : new Prop());
 ```
 
-6\. 关键字
+6\. 关键字 （C# 1）
 
 在 C# 中，可以使用语言关键字作为变量名：
 
@@ -186,7 +186,7 @@ var @short = new Weapon("...", 0, Length.@short); //枚举本应该使用大写�
 Weapon thisIsShort = new Weapon("...", 0, Length.iMeanShort);
 ```
 
-7\. 模式匹配
+7\. 模式匹配 （C# 7）
 
 在 C# 中，可以直接使用 Switch 匹配任何类型：
 
@@ -234,7 +234,7 @@ public String printEffect(Effect effect) {
 }
 ```
 
-8\. 默认参数
+8\. 默认参数 （C# 4）
 
 在 C# 中，可以为方法的参数提供默认值，调用时可以忽略：
 
@@ -265,7 +265,7 @@ public create(String name, int aggressitity, int health, Role role, Weapon weapo
 }
 ```
 
-9\. 字符串字面值
+9\. 字符串字面值 （C# 1）
 
 在 C# 中，可以直接使用字面值来创建多行文本：
 
@@ -312,7 +312,7 @@ String json = "" +
 "}";
 ```
 
-10\. Tuple
+10\. Tuple （C# 7）
 
 在 C# 中，可以直接使用 Tuple 作为函数返回值并隐式解封装：
 
@@ -348,6 +348,14 @@ AttackProcedure attack = tuple.getValue1();
 String effectString = formatter.formatEffect(effect);
 String attackString = formatter.formatAttack(attack);
 ```
+
+// 11\. 值类型与可空值类型 (C# 1, C# 2)
+
+// 12\. 扩展方法 (C# 3)
+
+// 13\. 动态类型 (C# 4)
+
+// 14\. 异步语法 (C# 5)
 
 ---
 
