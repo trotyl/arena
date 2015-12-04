@@ -23,7 +23,7 @@ public class Toxic extends Attribute {
 
     @Override
     public DamageRecord apply(Attacker attacker, Attackable attackable) {
-        return applyByEffect(attacker, attackable, new Toxin(extent, limit), Genre.toxic);
+        return applyByEffect(attacker, attackable, Toxin.create(extent, limit), Genre.toxic);
     }
 
     public int extent() {

@@ -10,9 +10,13 @@ import me.trotyl.arena.role.Attacker;
 
 public class Toxin extends Effect {
 
+    public static Toxin create(int extent, int limit) {
+        return new Toxin(extent, limit);
+    }
+
     private int extent;
 
-    public Toxin(int extent, int limit) {
+    protected Toxin(int extent, int limit) {
         super(limit);
 
         this.extent = extent;

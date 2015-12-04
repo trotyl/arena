@@ -67,7 +67,7 @@ public class PlayerTest {
         player2.suffer(1, fire);
         assertThat(player2.effect, is(fire));
 
-        Toxin toxin = spy(new Toxin(2, 2));
+        Toxin toxin = spy(Toxin.create(2, 2));
 
         player2.suffer(2, toxin);
         assertThat(player2.effect, is(toxin));
