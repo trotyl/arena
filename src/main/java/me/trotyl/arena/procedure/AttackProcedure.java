@@ -8,10 +8,9 @@ import me.trotyl.arena.record.PlayerRecord;
 
 public class AttackProcedure extends Procedure {
 
-    public static final AttackProcedure none = new AttackProcedure(
-            PlayerRecord.none,
-            PlayerRecord.none,
-            DamageRecord.none);
+    public static final AttackProcedure none = new AttackProcedure(PlayerRecord.none,
+                                                                   PlayerRecord.none,
+                                                                   DamageRecord.none);
 
     public static AttackProcedure create(AttackerRecord attacker, AttackableRecord attackable, DamageRecord damage) {
 
