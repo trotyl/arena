@@ -10,9 +10,13 @@ import me.trotyl.arena.role.Attacker;
 
 public class Fire extends Effect {
 
+    public static Fire create(int extent, int limit) {
+        return new Fire(extent, limit);
+    }
+
     private int extent;
 
-    public Fire(int extent, int limit) {
+    protected Fire(int extent, int limit) {
         super(limit);
         this.extent = extent;
     }

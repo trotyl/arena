@@ -59,7 +59,7 @@ public class PlayerTest {
         PlayerRecord record2 = player1.record();
         assertThat(record2.health(), is(0));
 
-        Fire fire = spy(new Fire(2, 2));
+        Fire fire = spy(Fire.create(2, 2));
 
         player2.suffer(1, fire);
         assertThat(player2.effect, is(fire));

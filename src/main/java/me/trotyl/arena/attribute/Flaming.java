@@ -21,7 +21,7 @@ public class Flaming extends Attribute {
 
     @Override
     public DamageRecord apply(Attacker attacker, Attackable attackable) {
-        return applyByEffect(attacker, attackable, new Fire(extent, limit), Genre.flaming);
+        return applyByEffect(attacker, attackable, Fire.create(extent, limit), Genre.flaming);
     }
 
     public int extent() {
