@@ -1,14 +1,15 @@
 package me.trotyl.arena.role;
 
 import me.trotyl.arena.armor.Armor;
-import me.trotyl.arena.weapon.Length;
-import me.trotyl.arena.weapon.Weapon;
 import me.trotyl.arena.attribute.Attribute;
 import me.trotyl.arena.attribute.Genre;
 import me.trotyl.arena.effect.Effect;
+import me.trotyl.arena.effect.Type;
 import me.trotyl.arena.procedure.AttackProcedure;
 import me.trotyl.arena.procedure.EffectProcedure;
 import me.trotyl.arena.record.*;
+import me.trotyl.arena.weapon.Length;
+import me.trotyl.arena.weapon.Weapon;
 import org.javatuples.Pair;
 import org.junit.After;
 import org.junit.Before;
@@ -75,8 +76,8 @@ public class SoldierTest {
 
         Effect effect = mock(Effect.class);
         when(effect.valid()).thenReturn(true);
-        when(effect.record()).thenReturn(EffectRecord.none);
-        when(effect.take(soldier2)).thenReturn(DamageRecord.create(2));
+        when(effect.record()).thenReturn(EffectRecord.create(Type.fire));
+        when(effect.take(soldier2)).thenReturn(DamageRecord.create(2, Genre.effect));
         when(effect.sway(soldier2, soldier3, attribute)).thenReturn(DamageRecord.create(3));
 
         soldier2.effect = effect;
@@ -87,8 +88,6 @@ public class SoldierTest {
         AttackProcedure attackProcedure = pair.getValue1();
 
         assertThat(effectProcedure.attackable.name(), is("张三"));
-        assertThat(effectProcedure.attackable.health(), is(10));
-
         assertThat(effectProcedure.damage.extent, is(2));
 
         assertThat(attackProcedure.attacker.name(), is("张三"));

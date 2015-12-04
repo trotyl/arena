@@ -13,6 +13,11 @@ public class EffectProcedure extends Procedure {
                                                                    DamageRecord.none);
 
     public static EffectProcedure create(AttackableRecord attackable, EffectRecord effect, DamageRecord damage) {
+
+        if (effect.equals(EffectRecord.none)) {
+            return none;
+        }
+
         return new EffectProcedure(attackable, effect, damage);
     }
 

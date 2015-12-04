@@ -114,10 +114,7 @@ public class PlayerTest {
         EffectProcedure effectProcedure = pair.getValue0();
         AttackProcedure attackProcedure = pair.getValue1();
 
-        assertThat(effectProcedure.attackable.name(), is("张三"));
-        assertThat(effectProcedure.attackable.health(), is(10));
-        assertThat(effectProcedure.damage, is(DamageRecord.none));
-        assertThat(effectProcedure.effect, is(EffectRecord.none));
+        assertThat(effectProcedure, is(EffectProcedure.none));
         assertThat(attackProcedure.attacker.name(), is("张三"));
         assertThat(attackProcedure.attackable.name(), is("李四"));
         assertThat(attackProcedure.attackable.health(), is(15));

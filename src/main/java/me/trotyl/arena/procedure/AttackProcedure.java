@@ -14,6 +14,11 @@ public class AttackProcedure extends Procedure {
             DamageRecord.none);
 
     public static AttackProcedure create(AttackerRecord attacker, AttackableRecord attackable, DamageRecord damage) {
+
+        if (damage.equals(DamageRecord.none)) {
+            return none;
+        }
+
         return new AttackProcedure(attacker, attackable, damage);
     }
 
