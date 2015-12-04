@@ -96,8 +96,8 @@ public class FormatterTest {
     @Test
     public void format_over_should_have_proper_result() {
 
-        OverProcedure procedure = new OverProcedure(new PlayerRecord("张三", 10, Role.fighter),
-                                                    new PlayerRecord("李四", 20, Role.normal));
+        OverProcedure procedure = OverProcedure.create(new PlayerRecord("张三", 10, Role.fighter),
+                                                       new PlayerRecord("李四", 20, Role.normal));
 
         String result = formatter.formatOver(procedure);
 

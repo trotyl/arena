@@ -7,10 +7,14 @@ public class OverProcedure extends Procedure {
 
     public static final OverProcedure none = new OverProcedure(PlayerRecord.none, PlayerRecord.none);
 
+    public static OverProcedure create(PlayerRecord winner, PlayerRecord loser) {
+        return new OverProcedure(winner, loser);
+    }
+
     public PlayerRecord winner;
     public PlayerRecord loser;
 
-    public OverProcedure(PlayerRecord winner, PlayerRecord loser) {
+    protected OverProcedure(PlayerRecord winner, PlayerRecord loser) {
         this.winner = winner;
         this.loser = loser;
     }

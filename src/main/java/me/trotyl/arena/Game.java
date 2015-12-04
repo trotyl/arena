@@ -16,9 +16,11 @@ public class Game {
     private boolean inTurnOfPlayer1;
 
     public static Game between(Player player1, Player player2) {
+
         Game game = new Game();
         game.player1 = player1;
         game.player2 = player2;
+
         return game;
     }
 
@@ -27,6 +29,7 @@ public class Game {
     }
 
     public Pair<EffectProcedure, AttackProcedure> run() {
+
         if (over()) {
             return new Pair<>(EffectProcedure.none, AttackProcedure.none);
         }
@@ -41,6 +44,7 @@ public class Game {
     }
 
     public OverProcedure overProcedure() {
+
         if (!over()) {
             return OverProcedure.none;
         }
@@ -48,7 +52,7 @@ public class Game {
         Player winner = player1.alive()? player1: player2;
         Player loser = winner.equals(player1)? player2: player1;
 
-        return new OverProcedure(winner.record(), loser.record());
+        return OverProcedure.create(winner.record(), loser.record());
     }
 
     public boolean over() {
