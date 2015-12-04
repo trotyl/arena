@@ -24,7 +24,7 @@ public class Parser {
 
         Soldier soldier = role.equals("assassin")? Assassin.create(name, health, aggressivity):
                 role.equals("fighter")? Fighter.create(name, health, aggressivity):
-                role.equals("knight")? new Knight(name, health, aggressivity):
+                role.equals("knight")? Knight.create(name, health, aggressivity):
                 new Soldier(name, health, aggressivity);
 
         if (object.has("weapon")) {

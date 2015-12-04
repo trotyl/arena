@@ -7,7 +7,11 @@ import me.trotyl.arena.weapon.Weapon;
 
 public class Knight extends Soldier {
 
-    public Knight(String name, int health, int aggressivity) {
+    public static Knight create(String name, int health, int aggressivity) {
+        return new Knight(name, health, aggressivity);
+    }
+
+    protected Knight(String name, int health, int aggressivity) {
         super(name, health, aggressivity);
     }
 
