@@ -88,7 +88,7 @@ public class Parser {
         int extent = object.getInt("extent");
 
         if (genre.equals("flaming")) {
-            return new Flaming(extent, limit, rate);
+            return Flaming.create(extent, limit, rate);
         } if (genre.equals("toxic")) {
             return new Toxic(extent, limit, rate);
         }

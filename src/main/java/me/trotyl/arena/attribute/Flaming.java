@@ -8,9 +8,13 @@ import me.trotyl.arena.role.Attacker;
 
 public class Flaming extends Attribute {
 
+    public static Flaming create(int extent, int limit, float rate) {
+        return new Flaming(extent, limit, rate);
+    }
+
     protected int extent;
 
-    public Flaming(int extent, int limit, float rate) {
+    protected Flaming(int extent, int limit, float rate) {
         super(limit, rate);
         this.extent = extent;
     }
