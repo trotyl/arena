@@ -188,7 +188,7 @@ Weapon thisIsShort = new Weapon("...", 0, Length.iMeanShort);
 
 7\. 模式匹配 （C# 7）
 
-在 C# 中，可以直接使用 Switch 匹配任何类型：
+在 C# 中，可以直接使用模式匹配来判别：
 
 ```C#
 public String PrintEffect(Effect effect) => effect match (
