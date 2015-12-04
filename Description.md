@@ -1,10 +1,10 @@
-## 说明文档
+# 说明文档
 
 主要用于课程 Code Review 环节的讲解。
 
 ---
 
-### 为什么说 Java 烂！
+## 为什么说 Java 烂！
 
 1\. Property
 
@@ -236,7 +236,7 @@ public String printEffect(Effect effect) {
 
 ---
 
-### 题目中的逻辑陷阱
+## 题目中的逻辑陷阱
 
 1\. Walking Dead
 
@@ -271,4 +271,30 @@ public String printEffect(Effect effect) {
 
 如果不针对事件进行区分，可能会产生被攻击者先受伤，攻击者在发动攻击技能的情况。
 
+---
 
+## 项目中的实际问题
+
+1\. 用 Git 又不加 .gitignore
+
+可以自己 `git clone` 下感受下效果。
+
+2\. 所有项目放在同一个 Repository
+
+可以自己 `git clone` 下感受下效果。
+
+3\. Git config 的邮箱与 Github 的邮箱不同
+
+不会被记录到个人的 Contributions 中。
+
+4\. 直接使用 fork 的 Repository
+
+不会被记录到个人的 Contributions 中。
+
+5\. 把 main 方法当测试用
+
+main 方法是程序入口，应该提供真实输入输出，Hardcoding 看结果的事已经在测试中做过了，没有必要再做一遍。
+
+如果就是做类库，那就不要留 main 方法。
+
+6\. 待定
