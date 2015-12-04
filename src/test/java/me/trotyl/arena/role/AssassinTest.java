@@ -26,7 +26,7 @@ public class AssassinTest {
     private Assassin assassin;
 
     private Weapon shortWeapon;
-    private Weapon middleWeapon;
+    private Weapon mediumWeapon;
     private Weapon longWeapon;
 
     @Before
@@ -40,7 +40,7 @@ public class AssassinTest {
         assassin = Assassin.create("张三", 10, 5);
 
         shortWeapon = Weapon.create("诸葛连弩", 3, Length.shorter, Toxic.create(1, 2, 2.0f));
-        middleWeapon = Weapon.create("雌雄双股剑", 4, Length.medium, Toxic.create(2, 2, 2.0f));
+        mediumWeapon = Weapon.create("雌雄双股剑", 4, Length.medium, Toxic.create(2, 2, 2.0f));
         longWeapon = Weapon.create("方天画戟", 5, Length.longer, Toxic.create(3, 2, 2.0f));
     }
 
@@ -56,9 +56,9 @@ public class AssassinTest {
 
         assertThat(assassin.weapon, is(shortWeapon));
 
-        assassin.equip(middleWeapon);
+        assassin.equip(mediumWeapon);
 
-        assertThat(assassin.weapon, is(middleWeapon));
+        assertThat(assassin.weapon, is(mediumWeapon));
 
         try {
             assassin.equip(longWeapon);
@@ -79,5 +79,18 @@ public class AssassinTest {
         AttackProcedure procedure = pair.getValue1();
 
         assertThat(procedure.damage.genre, is(Genre.toxic));
+    }
+
+    @Test
+    public void attack_should_have_proper_result_with_medium_weapon() {
+
+        Player player = Player.create("王二", 10, 5);
+
+        assassin.equip(mediumWeapon);
+
+        Pair<EffectProcedure, AttackProcedure> pair = assassin.attack(player);
+        AttackProcedure procedure = pair.getValue1();
+
+        assertThat(procedure.damage.genre, is(Genre.none));
     }
 }
