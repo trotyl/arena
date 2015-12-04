@@ -39,6 +39,7 @@ public class GameTest {
 
     @Test
     public void between_should_have_proper_result(){
+
         Player player1 = mock(Player.class);
         Player player2 = mock(Player.class);
 
@@ -51,9 +52,10 @@ public class GameTest {
 
     @Test
     public void run_should_have_proper_result() throws Exception {
+
         Soldier soldier = new Soldier("张三", 10, 5,
                 new Weapon("方天画戟", 5, Length.none, new Toxic(2, 2, 2.0f)),
-                new Armor(6));
+                Armor.create(6));
         Player player = new Player("李四", 20, 8);
         game = Game.between(soldier, player);
 
@@ -94,6 +96,7 @@ public class GameTest {
 
     @Test
     public void run_should_have_proper_invocation() {
+
         Player player0 = mock(Player.class);
         Player player1 = mock(Player.class);
         when(player0.alive()).thenReturn(true);
@@ -117,9 +120,11 @@ public class GameTest {
 
     @Test
     public void over_procedure_should_have_proper_result() {
+
         Soldier soldier = new Soldier("张三", 10, 5,
                 new Weapon("方天画戟", 5, Length.none, new Toxic(2, 2, 2.0f)),
-                new Armor(6));
+                Armor.create(6));
+
         Player player = new Player("李四", 20, 8);
         game = Game.between(soldier, player);
 
@@ -144,6 +149,7 @@ public class GameTest {
 
     @Test
     public void over_procedure_should_have_proper_invocation() {
+
         Player player0 = mock(Player.class);
         Player player1 = mock(Player.class);
         when(player0.alive()).thenReturn(true);
@@ -165,6 +171,7 @@ public class GameTest {
 
     @Test
     public void over_should_have_proper_result_and_invocation() {
+
         Player player0 = mock(Player.class);
         Player player1 = mock(Player.class);
         when(player0.alive()).thenReturn(true);

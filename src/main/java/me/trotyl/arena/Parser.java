@@ -11,10 +11,13 @@ import org.json.JSONObject;
 public class Parser {
 
     public Player parsePlayer(JSONObject object) {
+
         String name = object.getString("name");
         int health = object.getInt("health");
         int aggressivity = object.getInt("aggressivity");
+
         String role = object.getString("role");
+
         if (role.equals("normal")) {
             return new Player(name, health, aggressivity);
         }
@@ -28,8 +31,7 @@ public class Parser {
             JSONObject weaponObject = object.getJSONObject("weapon");
             Weapon weapon = parseWeapon(weaponObject);
             soldier.equip(weapon);
-        }
-        if (object.has("armor")) {
+        } if (object.has("armor")) {
             JSONObject armorObject = object.getJSONObject("armor");
             Armor armor = parseArmor(armorObject);
             soldier.equip(armor);
@@ -39,13 +41,16 @@ public class Parser {
     }
 
     public Weapon parseWeapon(JSONObject object) {
+
         String name = object.getString("name");
         int aggressivity = object.getInt("aggressivity");
         String lengthStr = object.getString("length");
+
         Length length = lengthStr.equals("short")? Length.shorter:
                 lengthStr.equals("medium")? Length.medium:
                 lengthStr.equals("long")? Length.longer:
                 Length.none;
+
         if (!object.has("attribute")) {
             return new Weapon(name, aggressivity, length);
         }
@@ -57,31 +62,34 @@ public class Parser {
     }
 
     public Armor parseArmor(JSONObject object) {
+
         int defence = object.getInt("defence");
 
-        return new Armor(defence);
+        return Armor.create(defence);
     }
 
     public Attribute parseAttribute(JSONObject object) {
+
         String genre = object.getString("genre");
         float rate = (float) object.getDouble("rate");
+
         if (genre.equals("dizzy")) {
             return new Dizzy(rate);
-        }
-        if (genre.equals("striking")) {
+        } if (genre.equals("striking")) {
             return new Striking(rate);
         }
 
         int limit = object.getInt("limit");
+
         if (genre.equals("freezing")) {
             return new Freezing(limit, rate);
         }
 
         int extent = object.getInt("extent");
+
         if (genre.equals("flaming")) {
             return new Flaming(extent, limit, rate);
-        }
-        if (genre.equals("toxic")) {
+        } if (genre.equals("toxic")) {
             return new Toxic(extent, limit, rate);
         }
 

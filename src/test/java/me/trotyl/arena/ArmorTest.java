@@ -16,7 +16,7 @@ public class ArmorTest {
 
     @Before
     public void setUp() throws Exception {
-        armor = new Armor(5);
+        armor = Armor.create(5);
     }
 
     @After
@@ -31,6 +31,7 @@ public class ArmorTest {
 
     @Test
     public void record_should_have_proper_result() {
+
         ArmorRecord record = armor.record();
 
         assertThat(record.defence, is(5));
