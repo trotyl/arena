@@ -41,7 +41,7 @@ public class DizzyTest {
 
     @After
     public void tearDown() throws Exception {
-
+        Attribute.config(new Random());
     }
 
     @Test
