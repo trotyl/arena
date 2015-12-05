@@ -28,7 +28,7 @@ public class ProgramTest {
     }
 
     @Test
-    public void should_print_the_final_result() throws Exception {
+    public void run_should_have_proper_result() throws Exception {
 
         in = new FileInputStream("./fixture/config0.json");
         Program program = new Program(in, out, new Parser(), new Formatter());
