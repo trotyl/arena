@@ -42,7 +42,7 @@ public class ParserTest {
         JSONObject object = getObject(json);
         Armor armor = parser.parseArmor(object);
 
-        assertThat(armor.defence(), is(5));
+        assertThat(armor.getDefence(), is(5));
     }
 
     @Test
@@ -62,9 +62,9 @@ public class ParserTest {
         assertThat(attribute, instanceOf(Toxic.class));
 
         Toxic toxic = (Toxic) attribute;
-        assertThat(toxic.rate(), is(0.5f));
-        assertThat(toxic.extent(), is(4));
-        assertThat(toxic.limit(), is(2));
+        assertThat(toxic.getRate(), is(0.5f));
+        assertThat(toxic.getExtent(), is(4));
+        assertThat(toxic.getLimit(), is(2));
     }
 
     @Test
@@ -84,9 +84,9 @@ public class ParserTest {
         assertThat(attribute, instanceOf(Flaming.class));
 
         Flaming flaming = (Flaming) attribute;
-        assertThat(flaming.rate(), is(0.5f));
-        assertThat(flaming.extent(), is(4));
-        assertThat(flaming.limit(), is(2));
+        assertThat(flaming.getRate(), is(0.5f));
+        assertThat(flaming.getExtent(), is(4));
+        assertThat(flaming.getLimit(), is(2));
     }
 
     @Test
@@ -105,8 +105,8 @@ public class ParserTest {
         assertThat(attribute, instanceOf(Freezing.class));
 
         Freezing freezing = (Freezing) attribute;
-        assertThat(freezing.rate(), is(0.5f));
-        assertThat(freezing.limit(), is(2));
+        assertThat(freezing.getRate(), is(0.5f));
+        assertThat(freezing.getLimit(), is(2));
     }
 
     @Test
@@ -124,7 +124,7 @@ public class ParserTest {
         assertThat(attribute, instanceOf(Dizzy.class));
 
         Dizzy dizzy = (Dizzy) attribute;
-        assertThat(dizzy.rate(), is(0.5f));
+        assertThat(dizzy.getRate(), is(0.5f));
     }
 
     @Test
@@ -142,9 +142,9 @@ public class ParserTest {
         Player player = parser.parsePlayer(object);
 
         assertThat(player, not(instanceOf(Soldier.class)));
-        assertThat(player.name(), is("张三"));
-        assertThat(player.health(), is(10));
-        assertThat(player.aggressivity(), is(5));
+        assertThat(player.getName(), is("张三"));
+        assertThat(player.getHealth(), is(10));
+        assertThat(player.getAggressivity(), is(5));
     }
 
     @Test
@@ -165,9 +165,9 @@ public class ParserTest {
 
         Assassin assassin = (Assassin) player;
 
-        assertThat(assassin.name(), is("张三"));
-        assertThat(assassin.health(), is(10));
-        assertThat(assassin.aggressivity(), is(5));
+        assertThat(assassin.getName(), is("张三"));
+        assertThat(assassin.getHealth(), is(10));
+        assertThat(assassin.getAggressivity(), is(5));
     }
 
     @Test
@@ -188,9 +188,9 @@ public class ParserTest {
 
         Fighter fighter = (Fighter) player;
 
-        assertThat(fighter.name(), is("张三"));
-        assertThat(fighter.health(), is(10));
-        assertThat(fighter.aggressivity(), is(5));
+        assertThat(fighter.getName(), is("张三"));
+        assertThat(fighter.getHealth(), is(10));
+        assertThat(fighter.getAggressivity(), is(5));
     }
 
     @Test
@@ -211,9 +211,9 @@ public class ParserTest {
 
         Knight knight = (Knight) player;
 
-        assertThat(knight.name(), is("张三"));
-        assertThat(knight.health(), is(10));
-        assertThat(knight.aggressivity(), is(5));
+        assertThat(knight.getName(), is("张三"));
+        assertThat(knight.getHealth(), is(10));
+        assertThat(knight.getAggressivity(), is(5));
     }
 
     @Test
@@ -244,11 +244,11 @@ public class ParserTest {
 
         Soldier soldier = (Soldier) player;
 
-        assertThat(soldier.name(), is("张三"));
-        assertThat(soldier.health(), is(10));
-        assertThat(soldier.aggressivity(), is(10));
-        assertThat(soldier.weapon().name(), is("优质木棒"));
-        assertThat(soldier.armor().defence(), is(8));
+        assertThat(soldier.getName(), is("张三"));
+        assertThat(soldier.getHealth(), is(10));
+        assertThat(soldier.getAggressivity(), is(10));
+        assertThat(soldier.getWeapon().name(), is("优质木棒"));
+        assertThat(soldier.getArmor().getDefence(), is(8));
     }
 
     @Test

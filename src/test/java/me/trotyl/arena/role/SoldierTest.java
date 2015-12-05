@@ -40,10 +40,10 @@ public class SoldierTest {
     @Test
     public void aggressivity_should_have_proper_result() {
 
-        assertThat(soldier0.aggressivity(), is(5));
+        assertThat(soldier0.getAggressivity(), is(5));
 
         soldier0.equip(Weapon.create("我真剑", 5, Length.none));
-        assertThat(soldier0.aggressivity(), is(10));
+        assertThat(soldier0.getAggressivity(), is(10));
     }
 
     @Test
@@ -67,13 +67,13 @@ public class SoldierTest {
         EffectProcedure effectProcedure = pair.getValue0();
         AttackProcedure attackProcedure = pair.getValue1();
 
-        assertThat(effectProcedure.attackable.name(), is("张三"));
+        assertThat(effectProcedure.attackable.getName(), is("张三"));
         assertThat(effectProcedure.damage.extent, is(2));
 
-        assertThat(attackProcedure.attacker.name(), is("张三"));
+        assertThat(attackProcedure.attacker.getName(), is("张三"));
 
-        assertThat(attackProcedure.attackable.name(), is("李四"));
-        assertThat(attackProcedure.attackable.health(), is(20));
+        assertThat(attackProcedure.attackable.getName(), is("李四"));
+        assertThat(attackProcedure.attackable.getHealth(), is(20));
 
         assertThat(attackProcedure.damage.genre, is(Genre.none));
         assertThat(attackProcedure.damage.extent, is(3));
@@ -95,10 +95,10 @@ public class SoldierTest {
     @Test
     public void defence_should_have_proper_result() {
 
-        assertThat(soldier0.defence(), is(0));
+        assertThat(soldier0.getDefence(), is(0));
 
         soldier0.equip(Armor.create(5));
-        assertThat(soldier0.defence(), is(5));
+        assertThat(soldier0.getDefence(), is(5));
     }
 
     @Test
@@ -135,17 +135,17 @@ public class SoldierTest {
 
         PlayerRecord record = soldier0.record();
 
-        assertThat(record.name(), is("张三"));
-        assertThat(record.health(), is(10));
-        assertThat(record.role(), is(Role.soldier));
-        assertThat(record.weapon(), is(WeaponRecord.none));
-        assertThat(record.armor(), is(ArmorRecord.none));
+        assertThat(record.getName(), is("张三"));
+        assertThat(record.getHealth(), is(10));
+        assertThat(record.getRole(), is(Role.soldier));
+        assertThat(record.getWeapon(), is(WeaponRecord.none));
+        assertThat(record.getArmor(), is(ArmorRecord.none));
 
         soldier0.equip(Weapon.create("我真剑", 5, Length.none));
         soldier0.equip(Armor.create(5));
         PlayerRecord newRecord = soldier0.record();
 
-        assertThat(newRecord.weapon().name(), is("我真剑"));
-        assertThat(newRecord.armor().defence, is(5));
+        assertThat(newRecord.getWeapon().getName(), is("我真剑"));
+        assertThat(newRecord.getArmor().defence, is(5));
     }
 }

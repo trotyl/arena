@@ -53,8 +53,8 @@ public class StrikingTest {
         assertThat(damage.genre, is(Genre.striking));
         assertThat(damage.extent, is(15));
 
-        assertThat(player1Record.health(), is(10));
-        assertThat(player2Record.health(), is(5));
+        assertThat(player1Record.getHealth(), is(10));
+        assertThat(player2Record.getHealth(), is(5));
     }
 
     @Test
@@ -63,8 +63,8 @@ public class StrikingTest {
         striking.apply(player1, player2);
 
         InOrder inOrder = inOrder(player1, player2);
-        inOrder.verify(player1).aggressivity();
-        inOrder.verify(player2).defence();
+        inOrder.verify(player1).getAggressivity();
+        inOrder.verify(player2).getDefence();
         inOrder.verify(player2).suffer(15, Effect.none);
 
         verifyNoMoreInteractions(player1, player2);
@@ -77,8 +77,8 @@ public class StrikingTest {
         striking.apply(player1, player2);
 
         InOrder inOrder = inOrder(player1, player2);
-        inOrder.verify(player1).aggressivity();
-        inOrder.verify(player2).defence();
+        inOrder.verify(player1).getAggressivity();
+        inOrder.verify(player2).getDefence();
         inOrder.verify(player2).suffer(5, Effect.none);
 
         verifyNoMoreInteractions(player1, player2);

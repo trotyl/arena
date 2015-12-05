@@ -8,7 +8,7 @@ import org.javatuples.Pair;
 
 public interface Attacker {
 
-    public int aggressivity();
+    public int getAggressivity();
 
     public Pair<EffectProcedure, AttackProcedure> attack(Attackable attackable);
     public AttackerRecord record();

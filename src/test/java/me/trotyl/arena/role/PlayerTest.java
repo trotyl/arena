@@ -42,8 +42,8 @@ public class PlayerTest {
     @Test
     public void aggressivity_should_have_proper_result() {
 
-        assertThat(player1.aggressivity(), is(5));
-        assertThat(player2.aggressivity(), is(8));
+        assertThat(player1.getAggressivity(), is(5));
+        assertThat(player2.getAggressivity(), is(8));
     }
 
     @Test
@@ -69,16 +69,16 @@ public class PlayerTest {
         AttackProcedure attackProcedure = pair.getValue1();
 
         assertThat(effectProcedure, is(EffectProcedure.none));
-        assertThat(attackProcedure.attacker.name(), is("张三"));
-        assertThat(attackProcedure.attackable.name(), is("李四"));
-        assertThat(attackProcedure.attackable.health(), is(15));
+        assertThat(attackProcedure.attacker.getName(), is("张三"));
+        assertThat(attackProcedure.attackable.getName(), is("李四"));
+        assertThat(attackProcedure.attackable.getHealth(), is(15));
         assertThat(attackProcedure.damage.genre, is(Genre.none));
         assertThat(attackProcedure.damage.extent, is(5));
 
         InOrder inOrder = inOrder(player3, player4);
         inOrder.verify(player3).record();
-        inOrder.verify(player3).aggressivity();
-        inOrder.verify(player4).defence();
+        inOrder.verify(player3).getAggressivity();
+        inOrder.verify(player4).getDefence();
         inOrder.verify(player4).suffer(5, Effect.none);
         inOrder.verify(player3).record();
         inOrder.verify(player4).record();
@@ -87,15 +87,15 @@ public class PlayerTest {
         Player player6 = spy(Player.create("麻子", 1, 2));
         player5.suffer(0, Flame.create(5, 2));
 
-        assertThat(player5.health(), is(1));
-        assertThat(player6.health(), is(1));
+        assertThat(player5.getHealth(), is(1));
+        assertThat(player6.getHealth(), is(1));
 
         assertThat(player5.effect, instanceOf(Flame.class));
 
         Pair<EffectProcedure, AttackProcedure> attack = player5.attack(player6);
 
-        assertThat(player5.health(), is(-4));
-        assertThat(player6.health(), is(1));
+        assertThat(player5.getHealth(), is(-4));
+        assertThat(player6.getHealth(), is(1));
 
         assertThat(attack.getValue0(), not(EffectProcedure.none));
         assertThat(attack.getValue1(), is(AttackProcedure.none));
@@ -104,8 +104,8 @@ public class PlayerTest {
     @Test
     public void defence_should_have_proper_result() {
 
-        assertThat(player1.defence(), is(0));
-        assertThat(player2.defence(), is(0));
+        assertThat(player1.getDefence(), is(0));
+        assertThat(player2.getDefence(), is(0));
     }
 
     @Test
@@ -113,28 +113,28 @@ public class PlayerTest {
 
         PlayerRecord record = player1.record();
 
-        assertThat(record.name(), is("张三"));
-        assertThat(record.health(), is(10));
-        assertThat(record.armor(), is(ArmorRecord.none));
-        assertThat(record.weapon(), is(WeaponRecord.none));
-        assertThat(record.role(), is(Role.normal));
+        assertThat(record.getName(), is("张三"));
+        assertThat(record.getHealth(), is(10));
+        assertThat(record.getArmor(), is(ArmorRecord.none));
+        assertThat(record.getWeapon(), is(WeaponRecord.none));
+        assertThat(record.getRole(), is(Role.normal));
     }
 
     @Test
     public void suffer_should_have_proper_result() {
 
         PlayerRecord record0 = player1.record();
-        assertThat(record0.health(), is(10));
+        assertThat(record0.getHealth(), is(10));
 
         player1.suffer(5, Effect.none);
 
         PlayerRecord record1 = player1.record();
-        assertThat(record1.health(), is(5));
+        assertThat(record1.getHealth(), is(5));
 
         player1.suffer(5, Effect.none);
 
         PlayerRecord record2 = player1.record();
-        assertThat(record2.health(), is(0));
+        assertThat(record2.getHealth(), is(0));
 
         Flame flame = spy(Flame.create(2, 2));
 
@@ -145,10 +145,10 @@ public class PlayerTest {
 
         player2.suffer(2, toxin);
         assertThat(player2.effect, is(toxin));
-        assertThat(player2.effect.remain(), is(2));
+        assertThat(player2.effect.getRemain(), is(2));
 
         player2.suffer(2, toxin);
         assertThat(player2.effect, is(toxin));
-        assertThat(player2.effect.remain(), is(4));
+        assertThat(player2.effect.getRemain(), is(4));
     }
 }

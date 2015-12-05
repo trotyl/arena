@@ -26,17 +26,17 @@ public abstract class Attribute {
         this.rate = rate;
     }
 
-    public int limit() {
+    public int getLimit() {
         return limit;
     }
 
-    public float rate() {
+    public float getRate() {
         return rate;
     }
 
     public DamageRecord apply(Attacker attacker, Attackable attackable) {
 
-        int damage = attacker.aggressivity() - attackable.defence();
+        int damage = attacker.getAggressivity() - attackable.getDefence();
         attackable.suffer(damage, Effect.none);
 
         return DamageRecord.create(damage);
@@ -48,7 +48,7 @@ public abstract class Attribute {
             return none.apply(attacker, attackable);
         }
 
-        int damage = attacker.aggressivity() - attackable.defence();
+        int damage = attacker.getAggressivity() - attackable.getDefence();
         attackable.suffer(damage, effect);
 
         return DamageRecord.create(damage, genre);

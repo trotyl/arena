@@ -25,7 +25,7 @@ public class EffectRecord implements Record {
     }
 
     @Override
-    public String name() {
+    public String getName() {
         return type.toString();
     }
 }

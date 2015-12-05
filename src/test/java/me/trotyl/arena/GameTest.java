@@ -99,8 +99,8 @@ public class GameTest {
 
         game.run();
         procedure = game.over();
-        assertThat(procedure.winner.name(), is("张三"));
-        assertThat(procedure.loser.name(), is("李四"));
+        assertThat(procedure.winner.getName(), is("张三"));
+        assertThat(procedure.loser.getName(), is("李四"));
     }
 
     @Test
@@ -146,9 +146,9 @@ public class GameTest {
 
         assertThat(effectProcedure.effect, is(EffectRecord.none));
         assertThat(effectProcedure.damage, is(DamageRecord.none));
-        assertThat(attackProcedure.attacker.name(), is("张三"));
-        assertThat(attackProcedure.attackable.name(), is("李四"));
-        assertThat(attackProcedure.attackable.health(), is(10));
+        assertThat(attackProcedure.attacker.getName(), is("张三"));
+        assertThat(attackProcedure.attackable.getName(), is("李四"));
+        assertThat(attackProcedure.attackable.getHealth(), is(10));
         assertThat(attackProcedure.damage.extent, is(10));
 
         pair = game.run();
@@ -157,9 +157,9 @@ public class GameTest {
 
         assertThat(effectProcedure.effect.type, is(Type.toxin));
         assertThat(effectProcedure.damage.extent, is(2));
-        assertThat(attackProcedure.attacker.name(), is("李四"));
-        assertThat(attackProcedure.attackable.name(), is("张三"));
-        assertThat(attackProcedure.attackable.health(), is(8));
+        assertThat(attackProcedure.attacker.getName(), is("李四"));
+        assertThat(attackProcedure.attackable.getName(), is("张三"));
+        assertThat(attackProcedure.attackable.getHealth(), is(8));
         assertThat(attackProcedure.damage.extent, is(2));
 
         pair = game.run();
@@ -168,7 +168,7 @@ public class GameTest {
 
         assertThat(effectProcedure.effect, is(EffectRecord.none));
         assertThat(effectProcedure.damage, is(DamageRecord.none));
-        assertThat(attackProcedure.attackable.health(), is(-2));
+        assertThat(attackProcedure.attackable.getHealth(), is(-2));
     }
 
     @Test

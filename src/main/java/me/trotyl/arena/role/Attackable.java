@@ -6,7 +6,7 @@ import me.trotyl.arena.record.AttackableRecord;
 
 public interface Attackable {
 
-    public int defence();
+    public int getDefence();
 
     public AttackableRecord record();
     public void suffer(int injury, Effect effect);

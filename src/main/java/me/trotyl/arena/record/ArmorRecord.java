@@ -16,7 +16,7 @@ public class ArmorRecord implements Record {
     }
 
     @Override
-    public String name() {
+    public String getName() {
         return "ArmorRecord";
     }
 }

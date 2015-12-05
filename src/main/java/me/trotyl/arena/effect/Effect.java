@@ -23,7 +23,7 @@ public abstract class Effect {
         this.remain = remain;
     }
 
-    public int remain() {
+    public int getRemain() {
         return remain;
     }
 

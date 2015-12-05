@@ -23,7 +23,7 @@ public class Striking extends Attribute {
             return super.apply(attacker, attackable);
         }
 
-        int damage = 3 * (attacker.aggressivity() - attackable.defence());
+        int damage = 3 * (attacker.getAggressivity() - attackable.getDefence());
         attackable.suffer(damage, Effect.none);
 
         return DamageRecord.create(damage, Genre.striking);

@@ -16,7 +16,7 @@ public class WeaponRecord implements Record {
     }
 
     @Override
-    public String name() {
+    public String getName() {
         return name;
     }
 }

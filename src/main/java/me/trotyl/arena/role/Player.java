@@ -29,25 +29,25 @@ public class Player implements Attacker, Attackable {
     }
 
     @Override
-    public int aggressivity() {
+    public int getAggressivity() {
         return aggressivity;
+    }
+
+    @Override
+    public int getDefence() {
+        return 0;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public boolean alive() {
         return health > 0;
-    }
-
-    @Override
-    public int defence() {
-        return 0;
-    }
-
-    public int health() {
-        return health;
-    }
-
-    public String name() {
-        return name;
     }
 
     @Override
@@ -66,7 +66,7 @@ public class Player implements Attacker, Attackable {
         health -= damage;
 
         if (effect.equals(this.effect)) {
-            this.effect.append(effect.remain());
+            this.effect.append(effect.getRemain());
         } else if (!effect.equals(Effect.none)) {
             this.effect = effect;
         }

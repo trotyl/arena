@@ -30,20 +30,20 @@ public class Soldier extends Player {
     }
 
     @Override
-    public int aggressivity() {
+    public int getAggressivity() {
         return aggressivity + weapon.aggressivity();
     }
 
-    public Armor armor() {
+    public Armor getArmor() {
         return armor;
     }
 
     @Override
-    public int defence() {
-        return armor.defence();
+    public int getDefence() {
+        return armor.getDefence();
     }
 
-    public Weapon weapon() {
+    public Weapon getWeapon() {
         return weapon;
     }
 

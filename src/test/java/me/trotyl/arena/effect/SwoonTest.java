@@ -87,8 +87,8 @@ public class SwoonTest {
 
         assertThat(damage, is(DamageRecord.none));
 
-        assertThat(player1Record.health(), is(10));
-        assertThat(player2Record.health(), is(20));
+        assertThat(player1Record.getHealth(), is(10));
+        assertThat(player2Record.getHealth(), is(20));
     }
 
     @Test

@@ -21,7 +21,7 @@ public class Toxic extends Attribute {
         this.extent = extent;
     }
 
-    public int extent() {
+    public int getExtent() {
         return extent;
     }
 

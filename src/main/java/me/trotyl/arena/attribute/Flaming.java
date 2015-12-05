@@ -17,10 +17,11 @@ public class Flaming extends Attribute {
     protected Flaming(int extent, int limit, float rate) {
 
         super(limit, rate);
+
         this.extent = extent;
     }
 
-    public int extent() {
+    public int getExtent() {
         return extent;
     }
 

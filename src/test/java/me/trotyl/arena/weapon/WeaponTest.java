@@ -28,6 +28,6 @@ public class WeaponTest {
 
         WeaponRecord record = weapon.record();
 
-        assertThat(record.name(), is("优质木棒"));
+        assertThat(record.getName(), is("优质木棒"));
     }
 }

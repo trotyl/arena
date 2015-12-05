@@ -88,8 +88,8 @@ public class FlameTest {
         assertThat(damage.genre, is(Genre.effect));
         assertThat(damage.extent, is(2));
 
-        assertThat(player1Record.health(), is(8));
-        assertThat(player2Record.health(), is(20));
+        assertThat(player1Record.getHealth(), is(8));
+        assertThat(player2Record.getHealth(), is(20));
     }
 
     @Test

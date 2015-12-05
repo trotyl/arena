@@ -35,27 +35,27 @@ public class PlayerRecord implements AttackerRecord, AttackableRecord {
     }
 
     @Override
-    public ArmorRecord armor() {
+    public ArmorRecord getArmor() {
         return armor;
     }
 
     @Override
-    public int health() {
+    public int getHealth() {
         return health;
     }
 
     @Override
-    public String name() {
+    public String getName() {
         return name;
     }
 
     @Override
-    public Role role() {
+    public Role getRole() {
         return role;
     }
 
     @Override
-    public WeaponRecord weapon() {
+    public WeaponRecord getWeapon() {
         return weapon;
     }
 }

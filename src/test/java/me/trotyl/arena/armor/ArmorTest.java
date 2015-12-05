@@ -25,7 +25,7 @@ public class ArmorTest {
 
     @Test
     public void defence_should_have_proper_result() {
-        assertThat(armor.defence(), is(5));
+        assertThat(armor.getDefence(), is(5));
     }
 
     @Test

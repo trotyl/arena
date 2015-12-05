@@ -28,7 +28,7 @@ public class Armor {
         this.defence = defence;
     }
 
-    public int defence() {
+    public int getDefence() {
         return defence;
     }
 
