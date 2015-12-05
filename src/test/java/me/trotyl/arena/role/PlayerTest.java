@@ -141,7 +141,7 @@ public class PlayerTest {
         player2.suffer(1, flame);
         assertThat(player2.effect, is(flame));
 
-        Toxin toxin = spy(Toxin.create(2, 2));
+        Toxin toxin = Toxin.create(2, 2);
 
         player2.suffer(2, toxin);
         assertThat(player2.effect, is(toxin));
@@ -150,5 +150,9 @@ public class PlayerTest {
         player2.suffer(2, toxin);
         assertThat(player2.effect, is(toxin));
         assertThat(player2.effect.getRemain(), is(4));
+
+        player2.suffer(2, Toxin.create(2, 1));
+        assertThat(player2.effect, instanceOf(Toxin.class));
+        assertThat(player2.effect.getRemain(), is(5));
     }
 }
