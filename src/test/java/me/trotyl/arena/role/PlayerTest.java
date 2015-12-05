@@ -121,7 +121,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void suffer_should_have_proper_result() {
+    public void suffer_should_have_proper_result_for_health_reducing() {
 
         PlayerRecord record0 = player1.record();
         assertThat(record0.getHealth(), is(10));
@@ -135,8 +135,12 @@ public class PlayerTest {
 
         PlayerRecord record2 = player1.record();
         assertThat(record2.getHealth(), is(0));
+    }
 
-        Flame flame = spy(Flame.create(2, 2));
+    @Test
+    public void suffer_should_have_proper_result_for_effect_arising() {
+
+        Flame flame = Flame.create(2, 2);
 
         player2.suffer(1, flame);
         assertThat(player2.effect, is(flame));
@@ -146,13 +150,17 @@ public class PlayerTest {
         player2.suffer(2, toxin);
         assertThat(player2.effect, is(toxin));
         assertThat(player2.effect.getRemain(), is(2));
+    }
 
-        player2.suffer(2, toxin);
-        assertThat(player2.effect, is(toxin));
-        assertThat(player2.effect.getRemain(), is(4));
+    @Test
+    public void suffer_should_have_proper_result_for_effect_overlying() {
+
+        player2.suffer(2, Toxin.create(2, 2));
+        assertThat(player2.effect, instanceOf(Toxin.class));
+        assertThat(player2.effect.getRemain(), is(2));
 
         player2.suffer(2, Toxin.create(2, 1));
         assertThat(player2.effect, instanceOf(Toxin.class));
-        assertThat(player2.effect.getRemain(), is(5));
+        assertThat(player2.effect.getRemain(), is(3));
     }
 }
