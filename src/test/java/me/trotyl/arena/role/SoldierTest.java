@@ -130,7 +130,7 @@ public class SoldierTest {
     }
 
     @Test
-    public void equip_should_have_proper_result() {
+    public void equip_should_have_proper_result_for_first_call() {
 
         Weapon weapon = Weapon.create("我真剑", 2, Length.none);
         Armor armor = Armor.create(3);
@@ -145,15 +145,23 @@ public class SoldierTest {
         soldier0.equip(armor);
         assertThat(soldier0.weapon, is(weapon));
         assertThat(soldier0.armor, is(armor));
+    }
+
+    @Test
+    public void equip_should_have_proper_result_for_multi_call() {
+
+        Weapon weapon = Weapon.create("我真剑", 2, Length.none);
+        Armor armor = Armor.create(3);
+
+        soldier0.equip(weapon);
+        soldier0.equip(armor);
 
         Weapon newWeapon = Weapon.create("优质木棒", 4, Length.none);
         Armor newArmor = Armor.create(4);
 
         soldier0.equip(newArmor);
-        assertThat(soldier0.weapon, is(weapon));
-        assertThat(soldier0.armor, is(newArmor));
-
         soldier0.equip(newWeapon);
+
         assertThat(soldier0.weapon, is(newWeapon));
         assertThat(soldier0.armor, is(newArmor));
     }
