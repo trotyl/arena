@@ -9,10 +9,19 @@ import me.trotyl.arena.weapon.Weapon;
 public class Fighter extends Soldier {
 
     public static Fighter create(String name, int health, int aggressivity) {
-        return new Fighter(name, health, aggressivity, Weapon.none, Armor.none);
+        return Fighter.create(name, health, aggressivity, Weapon.none, Armor.none);
     }
 
     public static Fighter create(String name, int health, int aggressivity, Weapon weapon, Armor armor) {
+
+        checkParameters(name, health, aggressivity);
+
+        if (weapon == null) {
+            weapon = Weapon.none;
+        } if (armor == null) {
+            armor = Armor.none;
+        }
+
         return new Fighter(name, health, aggressivity, weapon, armor);
     }
 

@@ -12,7 +12,21 @@ import org.javatuples.Pair;
 public class Player implements Attacker, Attackable {
 
     public static Player create(String name, int health, int aggressivity) {
+
+        checkParameters(name, health, aggressivity);
+
         return new Player(name, health, aggressivity);
+    }
+
+    protected static void checkParameters(String name, int health, int aggressivity) {
+
+        if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("The name must be a valid string, but: " + name);
+        } else if (health <= 0) {
+            throw new IllegalArgumentException("The health must be greater than 0, but: " + health);
+        } else if (aggressivity < 0) {
+            throw new IllegalArgumentException("The aggressivity must not be less than 0, but: " + aggressivity);
+        }
     }
 
     protected String name;

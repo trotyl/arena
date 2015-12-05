@@ -13,10 +13,19 @@ import org.javatuples.Pair;
 public class Assassin extends Soldier {
 
     public static Assassin create(String name, int health, int aggressivity) {
-        return new Assassin(name, health, aggressivity, Weapon.none, Armor.none);
+        return Assassin.create(name, health, aggressivity, Weapon.none, Armor.none);
     }
 
     public static Assassin create(String name, int health, int aggressivity, Weapon weapon, Armor armor) {
+
+        checkParameters(name, health, aggressivity);
+
+        if (weapon == null) {
+            weapon = Weapon.none;
+        } if (armor == null) {
+            armor = Armor.none;
+        }
+
         return new Assassin(name, health, aggressivity, weapon, armor);
     }
 

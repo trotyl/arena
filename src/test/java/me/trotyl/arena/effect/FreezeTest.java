@@ -56,18 +56,18 @@ public class FreezeTest {
         assertThat(record.type, is(Type.freeze));
         assertThat(record.remain, is(5));
 
-        freeze.sway(Player.create("None", 0, 0), Player.create("None", 0, 0), Attribute.none);
+        freeze.sway(Player.create("None", 1, 0), Player.create("None", 1, 0), Attribute.none);
         record = freeze.record();
 
         assertThat(record, is(EffectRecord.none));
 
-        freeze.sway(Player.create("None", 0, 0), Player.create("None", 0, 0), Attribute.none);
+        freeze.sway(Player.create("None", 1, 0), Player.create("None", 1, 0), Attribute.none);
         record = freeze.record();
 
         assertThat(record.type, is(Type.freeze));
         assertThat(record.remain, is(3));
 
-        freeze.sway(Player.create("None", 0, 0), Player.create("None", 0, 0), Attribute.none);
+        freeze.sway(Player.create("None", 1, 0), Player.create("None", 1, 0), Attribute.none);
         record = freeze.record();
 
         assertThat(record, is(EffectRecord.none));

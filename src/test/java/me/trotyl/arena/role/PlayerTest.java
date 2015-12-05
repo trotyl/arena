@@ -53,9 +53,6 @@ public class PlayerTest {
 
         Player player2 = Player.create("王二", 1, 1);
         assertThat(player2.alive(), is(true));
-
-        Player player3 = Player.create("麻子", 0, 1);
-        assertThat(player3.alive(), is(false));
     }
 
     @Test
