@@ -16,7 +16,6 @@ import java.util.Random;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -71,22 +70,24 @@ public class KnightTest {
         assertThat(procedure.damage.genre, is(Genre.none));
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void equip_should_have_proper_result_for_short_weapon() {
+        knight.equip(shortWeapon);
+    }
+
+    @Test
+    public void equip_should_have_proper_result_for_medium_weapon() {
+
+        knight.equip(mediumWeapon);
+
+        assertThat(knight.weapon, is(mediumWeapon));
+    }
+
     @Test
     public void equip_should_have_proper_result() {
 
         knight.equip(longWeapon);
 
         assertThat(knight.weapon, is(longWeapon));
-
-        knight.equip(mediumWeapon);
-
-        assertThat(knight.weapon, is(mediumWeapon));
-
-        try {
-            knight.equip(shortWeapon);
-            fail();
-        } catch (IllegalArgumentException e) {
-            assertThat(e.getMessage(), is("Knight can only equip long weapon!"));
-        }
     }
 }
