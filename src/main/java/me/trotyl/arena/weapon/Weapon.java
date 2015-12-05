@@ -9,10 +9,23 @@ public class Weapon {
     public static final Weapon none = Weapon.create("None", 0, Length.none);
 
     public static Weapon create(String name, int aggressivity, Length length) {
-        return new Weapon(name, aggressivity, length, Attribute.none);
+        return Weapon.create(name, aggressivity, length, Attribute.none);
     }
 
     public static Weapon create(String name, int aggressivity, Length length, Attribute attribute) {
+
+        if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("The name must be a valid string, but: " + name);
+        }
+
+        if (length == null) {
+            length = Length.none;
+        }
+
+        if (attribute == null) {
+            attribute = Attribute.none;
+        }
+
         return new Weapon(name, aggressivity, length, attribute);
     }
 
