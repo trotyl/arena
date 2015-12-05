@@ -290,7 +290,7 @@ public class ParserTest {
         assertThat(weapon.aggressivity(), is(5));
         assertThat(weapon.name(), is("优质木棒"));
         assertThat(weapon.length(), is(Length.medium));
-        assertThat(weapon.attribute(), instanceOf(Dizzy.class));
+        assertThat(weapon.launch(), instanceOf(Dizzy.class));
     }
 
     private JSONObject getObject(String json) {

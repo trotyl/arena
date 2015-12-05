@@ -2,6 +2,7 @@ package me.trotyl.arena.weapon;
 
 
 import me.trotyl.arena.attribute.Attribute;
+import me.trotyl.arena.attribute.CompositeAttribute;
 import me.trotyl.arena.record.WeaponRecord;
 
 public class Weapon {
@@ -34,20 +35,17 @@ public class Weapon {
     private Attribute attribute;
     private Length length;
 
-    protected Weapon(String name, int aggressivity, Length length, Attribute attribute) {
+    protected Weapon(String name, int aggressivity, Length length, Attribute attributes) {
 
         this.name = name;
         this.aggressivity = aggressivity;
         this.length = length;
-        this.attribute = attribute;
+
+        this.attribute = attributes;
     }
 
     public int aggressivity() {
         return aggressivity;
-    }
-
-    public Attribute attribute() {
-        return attribute;
     }
 
     public Length length() {
@@ -65,5 +63,13 @@ public class Weapon {
         }
 
         return WeaponRecord.create(name);
+    }
+
+    public void raise(Attribute... attributes) {
+        this.attribute = CompositeAttribute.create(this.attribute, attributes);
+    }
+
+    public Attribute launch() {
+        return attribute;
     }
 }
