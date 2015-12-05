@@ -15,8 +15,8 @@ public class Armor {
 
     public static Armor create(int defence) {
 
-        if (defence <= 0) {
-            return Armor.none;
+        if (defence < 0) {
+            throw new IllegalArgumentException("The defence must not be less than 0, but: " + defence);
         }
 
         return new Armor(defence);

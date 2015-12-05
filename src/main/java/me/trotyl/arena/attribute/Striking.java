@@ -9,6 +9,11 @@ import me.trotyl.arena.role.Attacker;
 public class Striking extends Attribute {
 
     public static Striking create(float rate) {
+
+        if (rate < 0.0f || rate > 1.0f) {
+            throw new IllegalArgumentException("The rate of dizzy must be in range of 0 and 1, but: " + rate);
+        }
+
         return new Striking(rate);
     }
 

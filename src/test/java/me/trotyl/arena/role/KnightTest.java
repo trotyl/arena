@@ -38,9 +38,9 @@ public class KnightTest {
 
         knight = Knight.create("张三", 10, 5);
 
-        shortWeapon = Weapon.create("诸葛连弩", 3, Length.shorter, Toxic.create(1, 2, 2.0f));
-        mediumWeapon = Weapon.create("雌雄双股剑", 4, Length.medium, Toxic.create(2, 2, 2.0f));
-        longWeapon = Weapon.create("方天画戟", 5, Length.longer, Toxic.create(3, 2, 2.0f));
+        shortWeapon = Weapon.create("诸葛连弩", 3, Length.shorter, Toxic.create(1, 2, 1.0f));
+        mediumWeapon = Weapon.create("雌雄双股剑", 4, Length.medium, Toxic.create(2, 2, 1.0f));
+        longWeapon = Weapon.create("方天画戟", 5, Length.longer, Toxic.create(3, 2, 1.0f));
     }
 
     @After

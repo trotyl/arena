@@ -9,6 +9,13 @@ import me.trotyl.arena.role.Attacker;
 public class Freezing extends Attribute {
 
     public static Freezing create(int limit, float rate) {
+
+        if (limit < 0) {
+            throw new IllegalArgumentException("The extent must not be less than 0, but: " + limit);
+        } else if (rate < 0.0f || rate > 1.0f) {
+            throw new IllegalArgumentException("The rate of dizzy must be in range of 0 and 1, but: " + rate);
+        }
+
         return new Freezing(limit, rate);
     }
 
