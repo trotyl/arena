@@ -65,7 +65,7 @@ public class Player implements Attacker, Attackable {
 
         health -= damage;
 
-        if (effect.equals(this.effect)) {
+        if (effect.getClass().equals(this.effect.getClass())) {
             this.effect.append(effect.getRemain());
         } else if (!effect.equals(Effect.none)) {
             this.effect = effect;
