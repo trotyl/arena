@@ -136,7 +136,7 @@ public class FormatterTest {
 
         String result = formatter.formatEffect(procedure);
 
-        assertThat(result, is("张三晕倒了, 无法攻击, 眩晕还剩: 2轮"));
+        assertThat(result, is("张三晕倒了, 无法攻击, 眩晕还剩: 1轮"));
     }
 
     @Test

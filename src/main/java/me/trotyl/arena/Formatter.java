@@ -70,7 +70,7 @@ public class Formatter {
 
         if (procedure.effect.type.equals(Type.swoon)) {
             return format("%s晕倒了, 无法攻击, 眩晕还剩: %d轮",
-                    procedure.attackable.name(), procedure.effect.remain);
+                    procedure.attackable.name(), procedure.effect.remain - 1);
         }
 
         return null;
