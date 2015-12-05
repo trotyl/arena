@@ -188,25 +188,21 @@ Weapon thisIsShort = new Weapon("...", 0, Length.iMeanShort);
 
 7\. 模式匹配 （C# 7）
 
-在 C# 中，可以直接使用 Switch 匹配任何类型：
+在 C# 中，可以直接使用模式匹配来判别：
 
 ```C#
-public String PrintEffect(Effect effect) 
-{
-    switch(effect) 
-    {
-        case Toxin toxin:
-            return $"...{toxin.SomeThing}...毒性伤害...";
-        case Flame flame:
-            return $"...{flame.SomeThing}...火焰伤害...";
-        case Freeze freeze when freeze.Works:
-            reutrn $"...{freeze.SomeThing}...冻僵了, 无法攻击...";
-        case Swoon swoon:
-            reutrn $"...{swoon.SomeThing}...晕倒了, 无法攻击, 眩晕还剩...";
-        default:
-            return "";
-    }
-}
+public String PrintEffect(Effect effect) => effect match (
+    case Toxin toxin:
+        return $"...{toxin.SomeThing}...毒性伤害...";
+    case Flame flame:
+        return $"...{flame.SomeThing}...火焰伤害...";
+    case Freeze freeze when freeze.Works:
+        reutrn $"...{freeze.SomeThing}...冻僵了, 无法攻击...";
+    case Swoon swoon:
+        reutrn $"...{swoon.SomeThing}...晕倒了, 无法攻击, 眩晕还剩...";
+    case *:
+        return "";
+);
 ```
 
 而在 Java 中，自定义类型必须手动判断或者使用 Map 查找：
