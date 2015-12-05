@@ -52,11 +52,9 @@ public class AssassinTest {
     @Test
     public void attack_should_have_proper_result_with_short_weapon() {
 
-        Player player = Player.create("王二", 10, 5);
-
         assassin.equip(shortWeapon);
 
-        Pair<EffectProcedure, AttackProcedure> pair = assassin.attack(player);
+        Pair<EffectProcedure, AttackProcedure> pair = assassin.attack(Player.create("王二", 10, 5));
         AttackProcedure procedure = pair.getValue1();
 
         assertThat(procedure.damage.genre, is(Genre.toxic));
@@ -65,11 +63,9 @@ public class AssassinTest {
     @Test
     public void attack_should_have_proper_result_with_medium_weapon() {
 
-        Player player = Player.create("王二", 10, 5);
-
         assassin.equip(mediumWeapon);
 
-        Pair<EffectProcedure, AttackProcedure> pair = assassin.attack(player);
+        Pair<EffectProcedure, AttackProcedure> pair = assassin.attack(Player.create("王二", 10, 5));
         AttackProcedure procedure = pair.getValue1();
 
         assertThat(procedure.damage.genre, is(Genre.none));

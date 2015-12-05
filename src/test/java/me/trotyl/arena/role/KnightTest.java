@@ -52,11 +52,9 @@ public class KnightTest {
     @Test
     public void attack_should_have_proper_result_with_long_weapon() {
 
-        Player player = Player.create("王二", 10, 5);
-
         knight.equip(longWeapon);
 
-        Pair<EffectProcedure, AttackProcedure> pair = knight.attack(player);
+        Pair<EffectProcedure, AttackProcedure> pair = knight.attack(Player.create("王二", 10, 5));
         AttackProcedure procedure = pair.getValue1();
 
         assertThat(procedure.damage.genre, is(Genre.toxic));
@@ -65,11 +63,9 @@ public class KnightTest {
     @Test
     public void attack_should_have_proper_result_with_medium_weapon() {
 
-        Player player = Player.create("王二", 10, 5);
-
         knight.equip(mediumWeapon);
 
-        Pair<EffectProcedure, AttackProcedure> pair = knight.attack(player);
+        Pair<EffectProcedure, AttackProcedure> pair = knight.attack(Player.create("王二", 10, 5));
         AttackProcedure procedure = pair.getValue1();
 
         assertThat(procedure.damage.genre, is(Genre.none));

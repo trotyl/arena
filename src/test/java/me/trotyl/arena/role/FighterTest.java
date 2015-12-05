@@ -52,11 +52,9 @@ public class FighterTest {
     @Test
     public void attack_should_have_proper_result_with_medium_weapon() {
 
-        Player player = Player.create("王二", 10, 5);
-
         fighter.equip(mediumWeapon);
 
-        Pair<EffectProcedure, AttackProcedure> pair = fighter.attack(player);
+        Pair<EffectProcedure, AttackProcedure> pair = fighter.attack(Player.create("王二", 10, 5));
         AttackProcedure procedure = pair.getValue1();
 
         assertThat(procedure.damage.genre, is(Genre.toxic));
@@ -65,13 +63,9 @@ public class FighterTest {
     @Test
     public void equip_should_have_proper_result() {
 
-        Weapon shortWeapon = Weapon.create("诸葛连弩", 3, Length.shorter);
-        Weapon middleWeapon = Weapon.create("雌雄双股剑", 4, Length.medium);
-        Weapon longWeapon = Weapon.create("方天画戟", 5, Length.longer);
+        fighter.equip(mediumWeapon);
 
-        fighter.equip(middleWeapon);
-
-        assertThat(fighter.weapon, is(middleWeapon));
+        assertThat(fighter.weapon, is(mediumWeapon));
 
         try {
             fighter.equip(shortWeapon);
