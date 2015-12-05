@@ -4,6 +4,7 @@ import me.trotyl.arena.armor.Armor;
 import me.trotyl.arena.attribute.Attribute;
 import me.trotyl.arena.attribute.Genre;
 import me.trotyl.arena.effect.Effect;
+import me.trotyl.arena.effect.Flame;
 import me.trotyl.arena.effect.Type;
 import me.trotyl.arena.procedure.AttackProcedure;
 import me.trotyl.arena.procedure.EffectProcedure;
@@ -47,7 +48,47 @@ public class SoldierTest {
     }
 
     @Test
-    public void attack_should_have_proper_result() {
+    public void attack_should_have_proper_result_without_effect() {
+
+        Pair<EffectProcedure, AttackProcedure> pair = soldier0.attack(soldier1);
+        EffectProcedure effectProcedure = pair.getValue0();
+        AttackProcedure attackProcedure = pair.getValue1();
+
+        assertThat(effectProcedure, is(EffectProcedure.none));
+
+        assertThat(attackProcedure.attacker.getName(), is("张三"));
+
+        assertThat(attackProcedure.attackable.getName(), is("李四"));
+        assertThat(attackProcedure.attackable.getHealth(), is(15));
+
+        assertThat(attackProcedure.damage.genre, is(Genre.none));
+        assertThat(attackProcedure.damage.extent, is(5));
+    }
+
+    @Test
+    public void attack_should_have_proper_result_with_effect() {
+
+        soldier0.effect = Flame.create(2, 10);
+        soldier0.weapon = Weapon.create("玄铁重剑", 3, Length.none, Attribute.none);
+
+        Pair<EffectProcedure, AttackProcedure> pair = soldier0.attack(soldier1);
+        EffectProcedure effectProcedure = pair.getValue0();
+        AttackProcedure attackProcedure = pair.getValue1();
+
+        assertThat(effectProcedure.attackable.getName(), is("张三"));
+        assertThat(effectProcedure.damage.extent, is(2));
+
+        assertThat(attackProcedure.attacker.getName(), is("张三"));
+
+        assertThat(attackProcedure.attackable.getName(), is("李四"));
+        assertThat(attackProcedure.attackable.getHealth(), is(12));
+
+        assertThat(attackProcedure.damage.genre, is(Genre.none));
+        assertThat(attackProcedure.damage.extent, is(8));
+    }
+
+    @Test
+    public void attack_should_have_proper_invocation() {
 
         Soldier soldier2 = spy(soldier0);
         Soldier soldier3 = spy(soldier1);
@@ -63,20 +104,7 @@ public class SoldierTest {
         soldier2.effect = effect;
         soldier2.weapon = spy(Weapon.create("玄铁重剑", 3, Length.none, attribute));
 
-        Pair<EffectProcedure, AttackProcedure> pair = soldier2.attack(soldier3);
-        EffectProcedure effectProcedure = pair.getValue0();
-        AttackProcedure attackProcedure = pair.getValue1();
-
-        assertThat(effectProcedure.attackable.getName(), is("张三"));
-        assertThat(effectProcedure.damage.extent, is(2));
-
-        assertThat(attackProcedure.attacker.getName(), is("张三"));
-
-        assertThat(attackProcedure.attackable.getName(), is("李四"));
-        assertThat(attackProcedure.attackable.getHealth(), is(20));
-
-        assertThat(attackProcedure.damage.genre, is(Genre.none));
-        assertThat(attackProcedure.damage.extent, is(3));
+        soldier2.attack(soldier3);
 
         verifyZeroInteractions(attribute);
 
