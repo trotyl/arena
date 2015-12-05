@@ -54,7 +54,7 @@ public class FormatterTest {
     }
 
     @Test
-    public void format_attack_should_have_proper_result_with_normal_effect() {
+    public void format_attack_should_have_proper_result_with_toxic() {
 
         AttackProcedure procedure = AttackProcedure.create(PlayerRecord.create("张三", 10, Role.fighter),
                                                            PlayerRecord.create("李四", 20, Role.normal),
@@ -63,6 +63,42 @@ public class FormatterTest {
         String result = formatter.formatAttack(procedure);
 
         assertThat(result, is("战士张三攻击了普通人李四, 李四受到了5点伤害, 李四中毒了, 李四剩余生命: 20"));
+    }
+
+    @Test
+    public void format_attack_should_have_proper_result_with_flaming() {
+
+        AttackProcedure procedure = AttackProcedure.create(PlayerRecord.create("张三", 10, Role.fighter),
+                PlayerRecord.create("李四", 20, Role.normal),
+                DamageRecord.create(5, Genre.flaming));
+
+        String result = formatter.formatAttack(procedure);
+
+        assertThat(result, is("战士张三攻击了普通人李四, 李四受到了5点伤害, 李四着火了, 李四剩余生命: 20"));
+    }
+
+    @Test
+    public void format_attack_should_have_proper_result_with_freezing() {
+
+        AttackProcedure procedure = AttackProcedure.create(PlayerRecord.create("张三", 10, Role.fighter),
+                PlayerRecord.create("李四", 20, Role.normal),
+                DamageRecord.create(5, Genre.freezing));
+
+        String result = formatter.formatAttack(procedure);
+
+        assertThat(result, is("战士张三攻击了普通人李四, 李四受到了5点伤害, 李四冻僵了, 李四剩余生命: 20"));
+    }
+
+    @Test
+    public void format_attack_should_have_proper_result_with_dizzy() {
+
+        AttackProcedure procedure = AttackProcedure.create(PlayerRecord.create("张三", 10, Role.fighter),
+                PlayerRecord.create("李四", 20, Role.normal),
+                DamageRecord.create(5, Genre.dizzy));
+
+        String result = formatter.formatAttack(procedure);
+
+        assertThat(result, is("战士张三攻击了普通人李四, 李四受到了5点伤害, 李四晕倒了, 李四剩余生命: 20"));
     }
 
     @Test
@@ -95,6 +131,7 @@ public class FormatterTest {
     public void format_effect_should_have_proper_result_for_toxin() {
 
         EffectProcedure procedure = EffectProcedure.create(PlayerRecord.create("张三", 10, Role.fighter),
+                                                           PlayerRecord.create("李四", 8, Role.knight),
                                                            EffectRecord.create(Type.toxin),
                                                            DamageRecord.create(5));
 
@@ -107,6 +144,7 @@ public class FormatterTest {
     public void format_effect_should_have_proper_result_for_flame() {
 
         EffectProcedure procedure = EffectProcedure.create(PlayerRecord.create("张三", 10, Role.fighter),
+                                                           PlayerRecord.create("李四", 8, Role.knight),
                                                            EffectRecord.create(Type.flame),
                                                            DamageRecord.create(5));
 
@@ -119,18 +157,20 @@ public class FormatterTest {
     public void format_effect_should_have_proper_result_for_freeze() {
 
         EffectProcedure procedure = EffectProcedure.create(PlayerRecord.create("张三", 10, Role.fighter),
+                                                           PlayerRecord.create("李四", 8, Role.knight),
                                                            EffectRecord.create(Type.freeze, 1),
                                                            DamageRecord.create(5));
 
         String result = formatter.formatEffect(procedure);
 
-        assertThat(result, is("张三冻僵了, 无法攻击."));
+        assertThat(result, is("张三冻得直哆嗦, 没有击中李四"));
     }
 
     @Test
     public void format_effect_should_have_proper_result_for_swoon() {
 
         EffectProcedure procedure = EffectProcedure.create(PlayerRecord.create("张三", 10, Role.fighter),
+                                                           PlayerRecord.create("李四", 8, Role.knight),
                                                            EffectRecord.create(Type.swoon, 2),
                                                            DamageRecord.create(5));
 

@@ -89,7 +89,7 @@ public class Player implements Attacker, Attackable {
     protected Pair<EffectProcedure, AttackProcedure> attackByAttribute(Attackable attackable, Attribute attribute) {
 
         DamageRecord effectDamage = effect.take(this);
-        EffectProcedure effectProcedure = EffectProcedure.create(record(), effect.record(), effectDamage);
+        EffectProcedure effectProcedure = EffectProcedure.create(record(), attackable.record(), effect.record(), effectDamage);
 
         if (!alive()) {
             return new Pair<>(effectProcedure, AttackProcedure.none);

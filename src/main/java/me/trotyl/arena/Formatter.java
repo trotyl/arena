@@ -54,23 +54,23 @@ public class Formatter {
 
         if (procedure.effect.type.equals(Type.toxin)) {
             return format("%s受到%d点毒性伤害, %s剩余生命: %d",
-                    procedure.attackable.getName(), procedure.damage.extent,
-                    procedure.attackable.getName(), procedure.attackable.getHealth());
+                    procedure.host.getName(), procedure.damage.extent,
+                    procedure.host.getName(), procedure.host.getHealth());
         }
 
         if (procedure.effect.type.equals(Type.flame)) {
             return format("%s受到%d点火焰伤害, %s剩余生命: %d",
-                    procedure.attackable.getName(), procedure.damage.extent,
-                    procedure.attackable.getName(), procedure.attackable.getHealth());
+                    procedure.host.getName(), procedure.damage.extent,
+                    procedure.host.getName(), procedure.host.getHealth());
         }
 
         if (procedure.effect.type.equals(Type.freeze)) {
-            return format("%s冻僵了, 无法攻击.", procedure.attackable.getName());
+            return format("%s冻得直哆嗦, 没有击中%s", procedure.host.getName(), procedure.remote.getName());
         }
 
         if (procedure.effect.type.equals(Type.swoon)) {
             return format("%s晕倒了, 无法攻击, 眩晕还剩: %d轮",
-                    procedure.attackable.getName(), procedure.effect.remain - 1);
+                    procedure.host.getName(), procedure.effect.remain - 1);
         }
 
         return null;

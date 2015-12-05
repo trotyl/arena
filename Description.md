@@ -138,8 +138,8 @@ var result = $"{ procedure.Attackable.Name }晕倒了, 无法攻击, 眩晕还�
 而在 Java 中，所有格式化都必须调用响应函数并传递参数：
 
 ```Java
-String result = format("%s晕倒了, 无法攻击, 眩晕还剩: %d轮", procedure.attackable.getName(), 
-                                                            procedure.attackable.getRemain());
+String result = format("%s晕倒了, 无法攻击, 眩晕还剩: %d轮", procedure.host.getName(),
+                                                            procedure.host.getRemain());
 ```
 
 5\. 引用类型 Null 检查 (C# 2, C# 6)

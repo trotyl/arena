@@ -75,7 +75,7 @@ public class SoldierTest {
         EffectProcedure effectProcedure = pair.getValue0();
         AttackProcedure attackProcedure = pair.getValue1();
 
-        assertThat(effectProcedure.attackable.getName(), is("张三"));
+        assertThat(effectProcedure.host.getName(), is("张三"));
         assertThat(effectProcedure.damage.extent, is(2));
 
         assertThat(attackProcedure.attacker.getName(), is("张三"));
