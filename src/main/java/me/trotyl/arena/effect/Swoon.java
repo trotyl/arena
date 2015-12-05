@@ -10,6 +10,11 @@ import me.trotyl.arena.role.Attacker;
 public class Swoon extends Effect {
 
     public static Swoon create(int limit) {
+
+        if (limit < 0) {
+            throw new IllegalArgumentException("The extent must not be less than 0, but: " + limit);
+        }
+
         return new Swoon(limit);
     }
 

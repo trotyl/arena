@@ -11,6 +11,13 @@ import me.trotyl.arena.role.Attacker;
 public class Flame extends Effect {
 
     public static Flame create(int extent, int limit) {
+
+        if (extent < 0) {
+            throw new IllegalArgumentException("The extent must not be less than 0, but: " + extent);
+        } else if (limit < 0) {
+            throw new IllegalArgumentException("The extent must not be less than 0, but: " + limit);
+        }
+
         return new Flame(extent, limit);
     }
 

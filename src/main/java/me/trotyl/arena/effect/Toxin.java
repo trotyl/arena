@@ -11,6 +11,13 @@ import me.trotyl.arena.role.Attacker;
 public class Toxin extends Effect {
 
     public static Toxin create(int extent, int limit) {
+
+        if (extent < 0) {
+            throw new IllegalArgumentException("The extent must not be less than 0, but: " + extent);
+        } else if (limit < 0) {
+            throw new IllegalArgumentException("The extent must not be less than 0, but: " + limit);
+        }
+
         return new Toxin(extent, limit);
     }
 
