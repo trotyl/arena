@@ -1,8 +1,9 @@
 package me.trotyl.arena;
 
-import me.trotyl.arena.armor.Armor;
 import me.trotyl.arena.attribute.Toxic;
 import me.trotyl.arena.effect.Type;
+import me.trotyl.arena.equipment.Armor;
+import me.trotyl.arena.equipment.LongWeapon;
 import me.trotyl.arena.procedure.ActionProcedure;
 import me.trotyl.arena.procedure.EffectProcedure;
 import me.trotyl.arena.procedure.OverProcedure;
@@ -10,8 +11,6 @@ import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.record.EffectRecord;
 import me.trotyl.arena.role.Player;
 import me.trotyl.arena.role.Soldier;
-import me.trotyl.arena.weapon.Length;
-import me.trotyl.arena.weapon.Weapon;
 import org.javatuples.Pair;
 import org.junit.After;
 import org.junit.Before;
@@ -93,7 +92,7 @@ public class GameTest {
     public void over_should_have_proper_result() {
 
         Soldier soldier = Soldier.create("张三", 10, 5,
-                Weapon.create("方天画戟", 5, Length.none, Toxic.create(2, 2, 1.0f)),
+                LongWeapon.create("方天画戟", 5, 0, Toxic.create(2, 2, 1.0f)),
                 Armor.create(6));
 
         Player player = Player.create("李四", 20, 8);
@@ -146,7 +145,7 @@ public class GameTest {
     public void run_should_have_proper_result() throws Exception {
 
         Soldier soldier = Soldier.create("张三", 10, 5,
-                Weapon.create("方天画戟", 5, Length.none, Toxic.create(2, 2, 1.0f)),
+                LongWeapon.create("方天画戟", 5, 0, Toxic.create(2, 2, 1.0f)),
                 Armor.create(6));
         Player player = Player.create("李四", 20, 8);
         game = Game.between(soldier, player);

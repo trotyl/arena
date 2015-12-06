@@ -3,10 +3,9 @@ package me.trotyl.arena.role;
 import me.trotyl.arena.attribute.Attribute;
 import me.trotyl.arena.attribute.Genre;
 import me.trotyl.arena.attribute.Toxic;
+import me.trotyl.arena.equipment.*;
 import me.trotyl.arena.procedure.ActionProcedure;
 import me.trotyl.arena.procedure.EffectProcedure;
-import me.trotyl.arena.weapon.Length;
-import me.trotyl.arena.weapon.Weapon;
 import org.javatuples.Pair;
 import org.junit.After;
 import org.junit.Before;
@@ -38,9 +37,9 @@ public class AssassinTest {
 
         assassin = Assassin.create("张三", 10, 5);
 
-        shortWeapon = Weapon.create("诸葛连弩", 3, Length.shorter, Toxic.create(1, 2, 1.0f));
-        mediumWeapon = Weapon.create("雌雄双股剑", 4, Length.medium, Toxic.create(2, 2, 1.0f));
-        longWeapon = Weapon.create("方天画戟", 5, Length.longer, Toxic.create(3, 2, 1.0f));
+        shortWeapon = ShortWeapon.create("诸葛连弩", 3, Toxic.create(1, 2, 1.0f));
+        mediumWeapon = MediumWeapon.create("雌雄双股剑", 4, 0, Toxic.create(2, 2, 1.0f));
+        longWeapon = LongWeapon.create("方天画戟", 5, 0, Toxic.create(3, 2, 1.0f));
     }
 
     @After

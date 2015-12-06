@@ -3,8 +3,8 @@ package me.trotyl.arena.parser;
 import me.trotyl.arena.attribute.CompositeAttribute;
 import me.trotyl.arena.attribute.Dizzy;
 import me.trotyl.arena.attribute.Freezing;
-import me.trotyl.arena.weapon.Length;
-import me.trotyl.arena.weapon.Weapon;
+import me.trotyl.arena.equipment.Length;
+import me.trotyl.arena.equipment.Weapon;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.junit.After;
@@ -37,6 +37,7 @@ public class WeaponParserTest {
                 "{" +
                 "  \"name\": \"优质木棒\"," +
                 "  \"aggressivity\": 5," +
+                "  \"defence\": 0," +
                 "  \"length\": \"medium\"" +
                 "}";
 
@@ -55,6 +56,7 @@ public class WeaponParserTest {
                 "{" +
                 "  \"name\": \"优质木棒\"," +
                 "  \"aggressivity\": 5," +
+                "  \"defence\": 0," +
                 "  \"length\": \"medium\"," +
                 "  \"attributes\": " +
                 "  [{" +
@@ -79,6 +81,7 @@ public class WeaponParserTest {
                 "{" +
                 "  \"name\": \"优质木棒\"," +
                 "  \"aggressivity\": 5," +
+                "  \"defence\": 0," +
                 "  \"length\": \"medium\"," +
                 "  \"attributes\": " +
                 "  [{" +

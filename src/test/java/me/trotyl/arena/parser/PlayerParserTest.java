@@ -129,6 +129,7 @@ public class PlayerParserTest {
                 "  {" +
                 "    \"name\": \"优质木棒\"," +
                 "    \"aggressivity\": 5," +
+                "    \"defence\": 3," +
                 "    \"length\": \"medium\"" +
                 "  }," +
                 "  \"armor\": " +
@@ -147,6 +148,7 @@ public class PlayerParserTest {
         assertThat(soldier.getName(), is("张三"));
         assertThat(soldier.getHealth(), is(10));
         assertThat(soldier.getAggressivity(), is(10));
+        assertThat(soldier.getDefence(), is(8));
         assertThat(soldier.getWeapon().getName(), is("优质木棒"));
         assertThat(soldier.getArmor().getDefence(), is(8));
     }

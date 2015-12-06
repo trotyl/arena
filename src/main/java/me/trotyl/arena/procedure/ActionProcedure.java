@@ -12,7 +12,7 @@ public class ActionProcedure extends Procedure {
     public MoveProcedure move;
     public AttackProcedure attack;
 
-    public ActionProcedure(MoveProcedure move, AttackProcedure attack) {
+    protected ActionProcedure(MoveProcedure move, AttackProcedure attack) {
 
         this.move = move;
         this.attack = attack;

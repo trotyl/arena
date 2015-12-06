@@ -1,6 +1,6 @@
 package me.trotyl.arena.parser;
 
-import me.trotyl.arena.armor.Armor;
+import me.trotyl.arena.equipment.Armor;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.junit.After;

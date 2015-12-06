@@ -70,14 +70,6 @@ public class Player implements Attacker, Attackable {
         return name;
     }
 
-    public int getRange() {
-        return 1;
-    }
-
-    public int getVelocity() {
-        return 1;
-    }
-
     public boolean alive() {
         return health > 0;
     }
@@ -128,6 +120,14 @@ public class Player implements Attacker, Attackable {
         DamageRecord attackDamage = effect.sway(this, attackable, getAttribute());
 
         return AttackProcedure.create(record(), attackable.record(), attackDamage);
+    }
+
+    protected int getRange() {
+        return 1;
+    }
+
+    protected int getVelocity() {
+        return 1;
     }
 
     protected EffectProcedure impact(Attackable attackable) {

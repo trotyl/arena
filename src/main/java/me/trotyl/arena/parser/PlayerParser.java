@@ -1,9 +1,9 @@
 package me.trotyl.arena.parser;
 
 
-import me.trotyl.arena.armor.Armor;
+import me.trotyl.arena.equipment.Armor;
 import me.trotyl.arena.role.*;
-import me.trotyl.arena.weapon.Weapon;
+import me.trotyl.arena.equipment.Weapon;
 import org.json.JSONObject;
 
 public class PlayerParser extends Parser<JSONObject, Player> {

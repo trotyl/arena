@@ -11,7 +11,7 @@ public class MoveProcedure extends Procedure {
 
     public final int decrement;
 
-    public MoveProcedure(int decrement) {
+    protected MoveProcedure(int decrement) {
 
         this.decrement = decrement;
     }

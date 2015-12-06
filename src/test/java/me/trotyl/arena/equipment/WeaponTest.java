@@ -1,4 +1,4 @@
-package me.trotyl.arena.weapon;
+package me.trotyl.arena.equipment;
 
 import me.trotyl.arena.attribute.*;
 import me.trotyl.arena.record.WeaponRecord;
@@ -27,7 +27,7 @@ public class WeaponTest {
 
         Attribute.config(random);
 
-        weapon = Weapon.create("优质木棒", 5, Length.medium);
+        weapon = MediumWeapon.create("优质木棒", 5, 0);
     }
 
     @After
@@ -64,7 +64,7 @@ public class WeaponTest {
     @Test
     public void raise_should_have_proper_result_with_attribute_for_single_attribute() {
 
-        Weapon newWeapon = Weapon.create("炒鸡毒剑", 5, Length.medium, Toxic.create(8, 2, 1.0f));
+        Weapon newWeapon = MediumWeapon.create("炒鸡毒剑", 5, 0, Toxic.create(8, 2, 1.0f));
 
         newWeapon.raise(Dizzy.create(1.0f));
 
@@ -79,7 +79,7 @@ public class WeaponTest {
     @Test
     public void raise_should_have_proper_result_with_attribute_for_multiple_attribute() {
 
-        Weapon newWeapon = Weapon.create("炒鸡毒剑", 5, Length.medium, Toxic.create(8, 2, 1.0f));
+        Weapon newWeapon = MediumWeapon.create("炒鸡毒剑", 5, 0, Toxic.create(8, 2, 1.0f));
 
         newWeapon.raise(Dizzy.create(1.0f), Flaming.create(2, 1, 1.0f));
 

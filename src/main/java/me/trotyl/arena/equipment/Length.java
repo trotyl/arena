@@ -1,4 +1,4 @@
-package me.trotyl.arena.weapon;
+package me.trotyl.arena.equipment;
 
 
 public class Length {

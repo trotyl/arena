@@ -1,4 +1,4 @@
-package me.trotyl.arena.armor;
+package me.trotyl.arena.equipment;
 
 import me.trotyl.arena.record.ArmorRecord;
 import org.junit.After;

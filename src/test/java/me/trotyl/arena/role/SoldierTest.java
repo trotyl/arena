@@ -1,16 +1,16 @@
 package me.trotyl.arena.role;
 
-import me.trotyl.arena.armor.Armor;
 import me.trotyl.arena.attribute.Attribute;
 import me.trotyl.arena.attribute.Genre;
 import me.trotyl.arena.effect.Effect;
 import me.trotyl.arena.effect.Flame;
 import me.trotyl.arena.effect.Type;
+import me.trotyl.arena.equipment.Armor;
+import me.trotyl.arena.equipment.MediumWeapon;
+import me.trotyl.arena.equipment.Weapon;
 import me.trotyl.arena.procedure.ActionProcedure;
 import me.trotyl.arena.procedure.EffectProcedure;
 import me.trotyl.arena.record.*;
-import me.trotyl.arena.weapon.Length;
-import me.trotyl.arena.weapon.Weapon;
 import org.javatuples.Pair;
 import org.junit.After;
 import org.junit.Before;
@@ -43,7 +43,7 @@ public class SoldierTest {
 
         assertThat(soldier0.getAggressivity(), is(5));
 
-        soldier0.equip(Weapon.create("我真剑", 5, Length.none));
+        soldier0.equip(MediumWeapon.create("我真剑", 5, 0));
         assertThat(soldier0.getAggressivity(), is(10));
     }
 
@@ -69,7 +69,7 @@ public class SoldierTest {
     public void attack_should_have_proper_result_with_effect() {
 
         soldier0.effect = Flame.create(2, 10);
-        soldier0.weapon = Weapon.create("玄铁重剑", 3, Length.none, Attribute.none);
+        soldier0.weapon = MediumWeapon.create("玄铁重剑", 3, 0);
 
         Pair<EffectProcedure, ActionProcedure> pair = soldier0.action(soldier1, 1);
         EffectProcedure effectProcedure = pair.getValue0();
@@ -102,7 +102,7 @@ public class SoldierTest {
         when(effect.sway(soldier2, soldier3, attribute)).thenReturn(DamageRecord.create(3));
 
         soldier2.effect = effect;
-        soldier2.weapon = spy(Weapon.create("玄铁重剑", 3, Length.none, attribute));
+        soldier2.weapon = spy(MediumWeapon.create("玄铁重剑", 3, 0, attribute));
 
         soldier2.action(soldier3, 1);
 
@@ -132,7 +132,7 @@ public class SoldierTest {
     @Test
     public void equip_should_have_proper_result_for_first_call() {
 
-        Weapon weapon = Weapon.create("我真剑", 2, Length.none);
+        Weapon weapon = MediumWeapon.create("我真剑", 2, 0);
         Armor armor = Armor.create(3);
 
         assertThat(soldier0.weapon, is(Weapon.none));
@@ -150,13 +150,13 @@ public class SoldierTest {
     @Test
     public void equip_should_have_proper_result_for_multi_call() {
 
-        Weapon weapon = Weapon.create("我真剑", 2, Length.none);
+        Weapon weapon = MediumWeapon.create("我真剑", 2, 0);
         Armor armor = Armor.create(3);
 
         soldier0.equip(weapon);
         soldier0.equip(armor);
 
-        Weapon newWeapon = Weapon.create("优质木棒", 4, Length.none);
+        Weapon newWeapon = MediumWeapon.create("优质木棒", 4, 0);
         Armor newArmor = Armor.create(4);
 
         soldier0.equip(newArmor);
@@ -177,7 +177,7 @@ public class SoldierTest {
         assertThat(record.getWeapon(), is(WeaponRecord.none));
         assertThat(record.getArmor(), is(ArmorRecord.none));
 
-        soldier0.equip(Weapon.create("我真剑", 5, Length.none));
+        soldier0.equip(MediumWeapon.create("我真剑", 5, 0));
         soldier0.equip(Armor.create(5));
         PlayerRecord newRecord = soldier0.record();
 

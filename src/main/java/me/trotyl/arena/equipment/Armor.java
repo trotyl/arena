@@ -1,9 +1,9 @@
-package me.trotyl.arena.armor;
+package me.trotyl.arena.equipment;
 
 
 import me.trotyl.arena.record.ArmorRecord;
 
-public class Armor {
+public class Armor implements Defensive {
 
     public static final Armor none = new Armor(0) {
 

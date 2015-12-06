@@ -1,8 +1,7 @@
 package me.trotyl.arena.parser;
 
 import me.trotyl.arena.attribute.Attribute;
-import me.trotyl.arena.weapon.Length;
-import me.trotyl.arena.weapon.Weapon;
+import me.trotyl.arena.equipment.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -25,18 +24,47 @@ public class WeaponParser extends Parser<JSONObject, Weapon> {
         int aggressivity = object.getInt("aggressivity");
         String lengthStr = object.getString("length");
 
+
+
         Length length = lengthStr.equals("short")? Length.shorter:
                 lengthStr.equals("medium")? Length.medium:
                         lengthStr.equals("long")? Length.longer:
                                 Length.none;
 
-        if (!object.has("attributes")) {
-            return Weapon.create(name, aggressivity, length);
+        Attribute attribute;
+
+        if (object.has("attributes")) {
+
+            JSONArray attributeArray = object.getJSONArray("attributes");
+            List<Attribute> attributes = attributesParser.parse(attributeArray);
+
+            attribute = Attribute.create(attributes);
+        } else {
+
+            attribute = Attribute.none;
         }
 
-        JSONArray attributeArray = object.getJSONArray("attributes");
-        List<Attribute> attributes = attributesParser.parse(attributeArray);
+        switch (lengthStr) {
 
-        return Weapon.create(name, aggressivity, length, Attribute.create(attributes));
+            case "short":
+
+                return ShortWeapon.create(name, aggressivity, attribute);
+
+            case "medium":
+
+                int defence = object.getInt("defence");
+
+                return MediumWeapon.create(name, aggressivity, defence, attribute);
+
+            case "long":
+
+                int repel = object.getInt("repel");
+
+                return LongWeapon.create(name, aggressivity, repel, attribute);
+
+            default:
+
+                return Weapon.none;
+        }
     }
 }

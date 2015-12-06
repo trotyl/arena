@@ -1,10 +1,10 @@
 package me.trotyl.arena.role;
 
 
-import me.trotyl.arena.armor.Armor;
+import me.trotyl.arena.equipment.Armor;
 import me.trotyl.arena.record.PlayerRecord;
-import me.trotyl.arena.weapon.Length;
-import me.trotyl.arena.weapon.Weapon;
+import me.trotyl.arena.equipment.Length;
+import me.trotyl.arena.equipment.Weapon;
 
 public class Fighter extends Soldier {
 

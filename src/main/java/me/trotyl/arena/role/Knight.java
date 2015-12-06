@@ -1,11 +1,11 @@
 package me.trotyl.arena.role;
 
 
-import me.trotyl.arena.armor.Armor;
+import me.trotyl.arena.equipment.Armor;
 import me.trotyl.arena.attribute.Attribute;
 import me.trotyl.arena.record.PlayerRecord;
-import me.trotyl.arena.weapon.Length;
-import me.trotyl.arena.weapon.Weapon;
+import me.trotyl.arena.equipment.Length;
+import me.trotyl.arena.equipment.Weapon;
 
 public class Knight extends Soldier {
 
@@ -50,6 +50,11 @@ public class Knight extends Soldier {
         }
 
         super.equip(weapon);
+    }
+
+    @Override
+    protected int getVelocity() {
+        return 2;
     }
 
     @Override
