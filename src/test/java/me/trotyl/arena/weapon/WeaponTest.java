@@ -77,6 +77,26 @@ public class WeaponTest {
     }
 
     @Test
+    public void raise_should_have_proper_result_with_attribute_for_multiple_attribute() {
+
+        Weapon newWeapon = Weapon.create("炒鸡毒剑", 5, Length.medium, Toxic.create(8, 2, 1.0f));
+
+        newWeapon.raise(Dizzy.create(1.0f), Flaming.create(2, 1, 1.0f));
+
+        assertThat(newWeapon.attribute, instanceOf(CompositeAttribute.class));
+
+        CompositeAttribute composite = (CompositeAttribute) newWeapon.attribute;
+
+        assertThat(composite.getFirst(), instanceOf(Toxic.class));
+        assertThat(composite.getSecond(), instanceOf(CompositeAttribute.class));
+
+        CompositeAttribute innerComposite = (CompositeAttribute) composite.getSecond();
+
+        assertThat(innerComposite.getFirst(), instanceOf(Dizzy.class));
+        assertThat(innerComposite.getSecond(), instanceOf(Flaming.class));
+    }
+
+    @Test
     public void record_should_have_proper_result() {
 
         WeaponRecord record = weapon.record();
