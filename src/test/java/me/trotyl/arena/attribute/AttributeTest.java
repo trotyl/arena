@@ -11,6 +11,10 @@ import org.mockito.InOrder;
 
 import java.util.Random;
 
+import static java.util.Arrays.asList;
+import static java.util.Collections.emptyList;
+import static java.util.Collections.singletonList;
+import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
@@ -39,6 +43,57 @@ public class AttributeTest {
     @After
     public void tearDown() throws Exception {
         Attribute.config(new Random());
+    }
+
+    @Test
+    public void create0_should_have_proper_result_for_none_and_empty_list() {
+        assertThat(Attribute.create(Attribute.none, emptyList()), is(Attribute.none));
+    }
+
+    @Test
+    public void create0_should_have_proper_result_for_none_and_single_list() {
+
+        Dizzy dizzy = Dizzy.create(0.5f);
+
+        assertThat(Attribute.create(Attribute.none, singletonList(dizzy)), is(dizzy));
+    }
+
+    @Test
+    public void create0_should_have_proper_result_for_none_and_2_element_list() {
+
+        Dizzy dizzy = Dizzy.create(0.5f);
+        Striking striking = Striking.create(0.5f);
+
+        Attribute attribute = Attribute.create(Attribute.none, asList(dizzy, striking));
+
+        assertThat(attribute, instanceOf(CompositeAttribute.class));
+
+        CompositeAttribute composite = (CompositeAttribute) attribute;
+
+        assertThat(composite.getFirst(), is(dizzy));
+        assertThat(composite.getSecond(), is(striking));
+    }
+
+    @Test
+    public void create0_should_have_proper_result_for_none_and_multiple_element_list() {
+
+        Dizzy dizzy = Dizzy.create(0.5f);
+        Striking striking = Striking.create(0.5f);
+        Flaming flaming = Flaming.create(2, 2, 0.5f);
+
+        Attribute attribute = Attribute.create(Attribute.none, asList(dizzy, striking, flaming));
+
+        assertThat(attribute, instanceOf(CompositeAttribute.class));
+
+        CompositeAttribute composite = (CompositeAttribute) attribute;
+
+        assertThat(composite.getFirst(), is(dizzy));
+        assertThat(composite.getSecond(), instanceOf(CompositeAttribute.class));
+
+        CompositeAttribute innerComposite = (CompositeAttribute) composite.getSecond();
+
+        assertThat(innerComposite.getFirst(), is(striking));
+        assertThat(innerComposite.getSecond(), is(flaming));
     }
 
     @Test
