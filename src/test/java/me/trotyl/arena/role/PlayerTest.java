@@ -170,4 +170,16 @@ public class PlayerTest {
         assertThat(player1.effect, instanceOf(Toxin.class));
         assertThat(player1.effect.getRemain(), is(3));
     }
+
+    @Test
+    public void suffer_should_have_proper_result_for_effect_replacing() {
+
+        player1.suffer(2, Toxin.create(2, 2));
+        assertThat(player1.effect, instanceOf(Toxin.class));
+        assertThat(player1.effect.getRemain(), is(2));
+
+        player1.suffer(2, Flame.create(2, 4));
+        assertThat(player1.effect, instanceOf(Flame.class));
+        assertThat(player1.effect.getRemain(), is(4));
+    }
 }
