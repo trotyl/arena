@@ -1,11 +1,16 @@
 package me.trotyl.arena.role;
 
 
-import me.trotyl.arena.equipment.Armor;
 import me.trotyl.arena.attribute.Attribute;
-import me.trotyl.arena.record.PlayerRecord;
+import me.trotyl.arena.effect.Effect;
+import me.trotyl.arena.equipment.Armor;
 import me.trotyl.arena.equipment.Length;
 import me.trotyl.arena.equipment.Weapon;
+import me.trotyl.arena.procedure.ActionProcedure;
+import me.trotyl.arena.procedure.EffectProcedure;
+import me.trotyl.arena.procedure.MoveProcedure;
+import me.trotyl.arena.record.PlayerRecord;
+import org.javatuples.Pair;
 
 public class Knight extends Soldier {
 
@@ -28,6 +33,26 @@ public class Knight extends Soldier {
 
     protected Knight(String name, int health, int aggressivity, Weapon weapon, Armor armor) {
         super(name, health, aggressivity, weapon, armor);
+    }
+
+    @Override
+    public Pair<EffectProcedure, ActionProcedure> action(Attackable attackable, int distance) {
+
+        EffectProcedure effect = impact(attackable);
+
+        if (!alive()) {
+            return new Pair<>(effect, ActionProcedure.none);
+        }
+
+        MoveProcedure move = getRange() < distance ? MoveProcedure.create(getVelocity()) : MoveProcedure.none;
+
+        ActionProcedure action = ActionProcedure.create(move, attack(attackable));
+
+        if (!this.effect.valid()) {
+            this.effect = Effect.none;
+        }
+
+        return new Pair<>(effect, action);
     }
 
     @Override
