@@ -1,10 +1,8 @@
 package me.trotyl.arena.attribute;
 
 
+import me.trotyl.arena.effect.Effect;
 import me.trotyl.arena.effect.Flame;
-import me.trotyl.arena.record.DamageRecord;
-import me.trotyl.arena.role.Attackable;
-import me.trotyl.arena.role.Attacker;
 
 public class Flaming extends Attribute {
 
@@ -35,7 +33,12 @@ public class Flaming extends Attribute {
     }
 
     @Override
-    public DamageRecord apply(Attacker attacker, Attackable attackable, Attribute attribute) {
-        return applyByEffect(attacker, attackable, attribute, Flame.create(extent, limit), Genre.flaming);
+    protected Effect getEffect() {
+        return Flame.create(extent, limit);
+    }
+
+    @Override
+    protected Genre getGenre() {
+        return Genre.flaming;
     }
 }

@@ -35,7 +35,7 @@ public class FlameTest {
 
         attribute = spy(new Attribute(-1, 0.0f) {
             @Override
-            public DamageRecord apply(Attacker attacker, Attackable attackable, Attribute attribute) {
+            public DamageRecord apply(Attacker attacker, Attackable attackable, Attribute next) {
                 return DamageRecord.none;
             }
         });

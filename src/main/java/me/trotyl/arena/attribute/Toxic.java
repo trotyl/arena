@@ -1,9 +1,7 @@
 package me.trotyl.arena.attribute;
 
+import me.trotyl.arena.effect.Effect;
 import me.trotyl.arena.effect.Toxin;
-import me.trotyl.arena.record.DamageRecord;
-import me.trotyl.arena.role.Attackable;
-import me.trotyl.arena.role.Attacker;
 
 
 public class Toxic extends Attribute {
@@ -30,12 +28,18 @@ public class Toxic extends Attribute {
         this.extent = extent;
     }
 
+
     public int getExtent() {
         return extent;
     }
 
     @Override
-    public DamageRecord apply(Attacker attacker, Attackable attackable, Attribute attribute) {
-        return applyByEffect(attacker, attackable, attribute, Toxin.create(extent, limit), Genre.toxic);
+    protected Effect getEffect() {
+        return Toxin.create(extent, limit);
+    }
+
+    @Override
+    protected Genre getGenre() {
+        return Genre.toxic;
     }
 }

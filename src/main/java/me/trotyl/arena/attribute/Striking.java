@@ -1,8 +1,6 @@
 package me.trotyl.arena.attribute;
 
 
-import me.trotyl.arena.effect.Effect;
-import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.role.Attackable;
 import me.trotyl.arena.role.Attacker;
 
@@ -22,15 +20,12 @@ public class Striking extends Attribute {
     }
 
     @Override
-    public DamageRecord apply(Attacker attacker, Attackable attackable, Attribute attribute) {
+    protected int getDamage(Attacker attacker, Attackable attackable) {
+        return 3 * (attacker.getAggressivity() - attackable.getDefence());
+    }
 
-        if (!works()) {
-            return attribute.apply(attacker, attackable, Attribute.none);
-        }
-
-        int damage = 3 * (attacker.getAggressivity() - attackable.getDefence());
-        attackable.suffer(damage, Effect.none);
-
-        return DamageRecord.create(damage, Genre.striking);
+    @Override
+    protected Genre getGenre() {
+        return Genre.striking;
     }
 }

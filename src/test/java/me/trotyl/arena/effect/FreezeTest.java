@@ -35,7 +35,7 @@ public class FreezeTest {
 
         attribute = spy(new Attribute(-1, -1.0f) {
             @Override
-            public DamageRecord apply(Attacker attacker, Attackable attackable, Attribute attribute) {
+            public DamageRecord apply(Attacker attacker, Attackable attackable, Attribute next) {
                 return DamageRecord.create(5);
             }
         });

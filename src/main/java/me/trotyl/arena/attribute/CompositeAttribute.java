@@ -26,7 +26,7 @@ public class CompositeAttribute extends Attribute {
     }
 
     @Override
-    public DamageRecord apply(Attacker attacker, Attackable attackable, Attribute attribute) {
+    public DamageRecord apply(Attacker attacker, Attackable attackable, Attribute next) {
         return first.apply(attacker, attackable, second);
     }
 

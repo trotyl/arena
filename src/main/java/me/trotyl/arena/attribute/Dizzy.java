@@ -1,10 +1,8 @@
 package me.trotyl.arena.attribute;
 
 
+import me.trotyl.arena.effect.Effect;
 import me.trotyl.arena.effect.Swoon;
-import me.trotyl.arena.record.DamageRecord;
-import me.trotyl.arena.role.Attackable;
-import me.trotyl.arena.role.Attacker;
 
 public class Dizzy extends Attribute {
 
@@ -22,7 +20,12 @@ public class Dizzy extends Attribute {
     }
 
     @Override
-    public DamageRecord apply(Attacker attacker, Attackable attackable, Attribute attribute) {
-        return applyByEffect(attacker, attackable, attribute, Swoon.create(limit), Genre.dizzy);
+    protected Effect getEffect() {
+        return Swoon.create(limit);
+    }
+
+    @Override
+    protected Genre getGenre() {
+        return Genre.dizzy;
     }
 }

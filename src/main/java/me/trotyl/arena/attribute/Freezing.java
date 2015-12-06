@@ -1,10 +1,8 @@
 package me.trotyl.arena.attribute;
 
 
+import me.trotyl.arena.effect.Effect;
 import me.trotyl.arena.effect.Freeze;
-import me.trotyl.arena.record.DamageRecord;
-import me.trotyl.arena.role.Attackable;
-import me.trotyl.arena.role.Attacker;
 
 public class Freezing extends Attribute {
 
@@ -24,7 +22,12 @@ public class Freezing extends Attribute {
     }
 
     @Override
-    public DamageRecord apply(Attacker attacker, Attackable attackable, Attribute attribute) {
-        return applyByEffect(attacker, attackable, attribute, Freeze.create(limit), Genre.freezing);
+    protected Effect getEffect() {
+        return Freeze.create(limit);
+    }
+
+    @Override
+    protected Genre getGenre() {
+        return Genre.freezing;
     }
 }
