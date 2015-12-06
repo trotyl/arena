@@ -45,6 +45,26 @@ public class FreezingTest {
     }
 
     @Test
+    public void create_should_have_proper_result_when_valid() {
+        assertThat(Freezing.create(1, 0.5f), instanceOf(Freezing.class));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void create_should_have_proper_result_when_limit_less_than_0() {
+        Freezing.create(-1, 0.5f);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void create_should_have_proper_result_when_rate_less_than_0() {
+        Freezing.create(1, -0.125f);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void create_should_have_proper_result_when_rate_greater_than_1() {
+        Freezing.create(1, 1.125f);
+    }
+
+    @Test
     public void apply_should_have_proper_result() {
 
         DamageRecord damage = freezing.apply(player1, player2, Attribute.none);
