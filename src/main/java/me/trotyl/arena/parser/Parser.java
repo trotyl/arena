@@ -1,4 +1,4 @@
-package me.trotyl.arena;
+package me.trotyl.arena.parser;
 
 
 import me.trotyl.arena.armor.Armor;

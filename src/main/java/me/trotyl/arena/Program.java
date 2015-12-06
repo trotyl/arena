@@ -1,5 +1,6 @@
 package me.trotyl.arena;
 
+import me.trotyl.arena.parser.Parser;
 import me.trotyl.arena.procedure.AttackProcedure;
 import me.trotyl.arena.procedure.EffectProcedure;
 import me.trotyl.arena.procedure.OverProcedure;
