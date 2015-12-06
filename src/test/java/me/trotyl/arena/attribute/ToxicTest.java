@@ -45,6 +45,31 @@ public class ToxicTest {
     }
 
     @Test
+    public void create_should_have_proper_result_when_valid() {
+        assertThat(Toxic.create(1, 1, 0.5f), instanceOf(Toxic.class));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void create_should_have_proper_result_when_extent_less_than_0() {
+        Toxic.create(-1, 1, 0.5f);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void create_should_have_proper_result_when_limit_less_than_0() {
+        Toxic.create(1, -1, 0.5f);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void create_should_have_proper_result_when_rate_less_than_0() {
+        Toxic.create(1, 1, -0.125f);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void create_should_have_proper_result_when_rate_greater_than_1() {
+        Toxic.create(1, 1, 1.125f);
+    }
+
+    @Test
     public void apply_should_have_proper_result() {
 
         DamageRecord damage = toxic.apply(player1, player2, Attribute.none);
