@@ -11,6 +11,7 @@ import org.mockito.InOrder;
 
 import java.util.Random;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
@@ -40,6 +41,21 @@ public class StrikingTest {
     @After
     public void tearDown() throws Exception {
         Attribute.config(new Random());
+    }
+
+    @Test
+    public void create_should_have_proper_result_when_valid() {
+        assertThat(Striking.create(0.5f), instanceOf(Striking.class));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void create_should_have_proper_result_when_less_than_0() {
+        Striking.create(-0.125f);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void create_should_have_proper_result_when_greater_than_1() {
+        Striking.create(1.125f);
     }
 
     @Test
