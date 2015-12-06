@@ -53,4 +53,21 @@ public class CompositeAttributeTest {
         assertThat(player1Record.getHealth(), is(10));
         assertThat(player2Record.getHealth(), is(15));
     }
+
+    @Test
+    public void apply_should_have_proper_result_when_first_not_work() {
+
+        composite = new CompositeAttribute(Dizzy.create(0.0f), Flaming.create(3, 2, 1.0f));
+
+        DamageRecord damage = composite.apply(player1, player2, Attribute.none);
+
+        PlayerRecord player1Record = player1.record();
+        PlayerRecord player2Record = player2.record();
+
+        assertThat(damage.genre, is(Genre.flaming));
+        assertThat(damage.extent, is(5));
+
+        assertThat(player1Record.getHealth(), is(10));
+        assertThat(player2Record.getHealth(), is(15));
+    }
 }
