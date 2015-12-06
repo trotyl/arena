@@ -1,7 +1,6 @@
 package me.trotyl.arena.weapon;
 
-import me.trotyl.arena.attribute.Attribute;
-import me.trotyl.arena.attribute.Dizzy;
+import me.trotyl.arena.attribute.*;
 import me.trotyl.arena.record.WeaponRecord;
 import org.junit.After;
 import org.junit.Before;
@@ -37,13 +36,19 @@ public class WeaponTest {
     }
 
     @Test
-    public void launch_should_have_proper_result() {
+    public void raise_should_have_proper_result_for_single_attribute() {
 
         weapon.raise(Dizzy.create(1.0f));
 
-        Attribute attribute = weapon.launch();
+        assertThat(weapon.attribute, instanceOf(Dizzy.class));
+    }
 
-        assertThat(attribute, instanceOf(Dizzy.class));
+    @Test
+    public void raise_should_have_proper_result_for_multiple_attribute() {
+
+        weapon.raise(Dizzy.create(1.0f), Flaming.create(2, 1, 1.0f), Striking.create(1.0f));
+
+        assertThat(weapon.attribute, instanceOf(CompositeAttribute.class));
     }
 
     @Test

@@ -36,7 +36,7 @@ public class Knight extends Soldier {
     @Override
     public Pair<EffectProcedure, AttackProcedure> attack(Attackable attackable) {
 
-        if (!weapon.length().equals(Length.longer)) {
+        if (!weapon.getLength().equals(Length.longer)) {
             return attackByAttribute(attackable, Attribute.none);
         }
 
@@ -47,8 +47,8 @@ public class Knight extends Soldier {
     public void equip(Weapon weapon) {
 
         if (weapon != Weapon.none &&
-            weapon.length() != Length.longer &&
-            weapon.length() != Length.medium) {
+            weapon.getLength() != Length.longer &&
+            weapon.getLength() != Length.medium) {
             throw new IllegalArgumentException("Knight can only equip long weapon!");
         }
 

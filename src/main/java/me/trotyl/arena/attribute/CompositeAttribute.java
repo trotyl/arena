@@ -1,8 +1,13 @@
 package me.trotyl.arena.attribute;
 
 
+import me.trotyl.arena.record.DamageRecord;
+import me.trotyl.arena.role.Attackable;
+import me.trotyl.arena.role.Attacker;
+
 import java.util.List;
 
+import static java.util.Arrays.asList;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
 
@@ -10,34 +15,41 @@ public class CompositeAttribute extends Attribute {
 
     public static Attribute create(Attribute attribute, Attribute[] attributes) {
 
-        if (attributes.length == 0) {
-            return attribute;
-        } else if (attribute.equals(Attribute.none)) {
-            return CompositeAttribute.reduce(attributes);
+        Attribute composite = CompositeAttribute.reduce(stream(attributes).collect(toList()));
+
+        if (attribute.equals(Attribute.none)) {
+            return composite;
         } else {
-            Attribute[] tmp = {attribute, CompositeAttribute.reduce(attributes)};
-            return CompositeAttribute.reduce(tmp);
+            List<Attribute> list = asList(attribute, composite);
+            return CompositeAttribute.reduce(list);
         }
     }
 
-    protected static Attribute reduce(Attribute[] attributes) {
-        if (attributes.length == 0) {
+    protected static Attribute reduce(List<Attribute> attributes) {
+
+        if (attributes.size() == 0) {
             return Attribute.none;
-        } if (attributes.length == 1) {
-            return attributes[0];
+        } else if (attributes.size() == 1) {
+            return attributes.get(0);
         }
 
-        List<Attribute> attributeList = stream(attributes).collect(toList());
+        Attribute composite = reduce(attributes.subList(1, attributes.size()));
 
-        return new CompositeAttribute(attributeList);
+        return new CompositeAttribute(attributes.get(0), composite);
     }
 
-    private List<Attribute> attributes;
+    private Attribute attribute0;
+    private Attribute attribute1;
 
-    public CompositeAttribute(List<Attribute> attributes) {
+    public CompositeAttribute(Attribute attribute0, Attribute attribute1) {
         super(-1, 1.0f);
 
-        this.attributes = attributes;
+        this.attribute0 = attribute0;
+        this.attribute1 = attribute1;
     }
 
+    @Override
+    public DamageRecord apply(Attacker attacker, Attackable attackable, Attribute attribute) {
+        return attribute0.apply(attacker, attackable, attribute1);
+    }
 }

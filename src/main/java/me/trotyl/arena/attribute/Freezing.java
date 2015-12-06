@@ -24,7 +24,7 @@ public class Freezing extends Attribute {
     }
 
     @Override
-    public DamageRecord apply(Attacker attacker, Attackable attackable) {
-        return applyByEffect(attacker, attackable, Freeze.create(limit), Genre.freezing);
+    public DamageRecord apply(Attacker attacker, Attackable attackable, Attribute attribute) {
+        return applyByEffect(attacker, attackable, attribute, Freeze.create(limit), Genre.freezing);
     }
 }

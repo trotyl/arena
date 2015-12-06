@@ -36,7 +36,7 @@ public abstract class Effect {
     }
 
     public DamageRecord sway(Attacker attacker, Attackable attackable, Attribute attribute) {
-        return attribute.apply(attacker, attackable);
+        return attribute.apply(attacker, attackable, Attribute.none);
     }
 
     public DamageRecord take(Attackable attackable) {

@@ -103,7 +103,7 @@ class Player {
     private int aggressivity;
     private Weapon weapon;
     public int aggressivity() { 
-        return aggressivity + weapon.aggressivity();
+        return aggressivity + weapon.getAggressivity();
     }
 }
 ```
@@ -124,7 +124,7 @@ var result = Format("{2}{0}用晕锤攻击了{3}{1}, {1}受到了{4}点伤害, {
 ```Java
 String result = format("%s%s用晕锤攻击了%s%s, %s受到了%d点伤害, %s晕倒了, %s剩余生命：%d",
     procedure.getAttacker().getRole(), procedure.getAttacker().getName(), 
-    procedure.getAttacker().get()Role, procedure.getAttackable().getName(),
+    procedure.getAttacker().getRole(), procedure.getAttackable().getName(),
     procedure.getAttackable().getName(), procedure.getDamage().getExtent(), 
     procedure.getAttackable().getName(), procedure.getAttackable().getHealth());
 ```

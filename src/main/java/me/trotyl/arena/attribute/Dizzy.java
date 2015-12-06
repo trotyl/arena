@@ -22,7 +22,7 @@ public class Dizzy extends Attribute {
     }
 
     @Override
-    public DamageRecord apply(Attacker attacker, Attackable attackable) {
-        return applyByEffect(attacker, attackable, Swoon.create(limit), Genre.dizzy);
+    public DamageRecord apply(Attacker attacker, Attackable attackable, Attribute attribute) {
+        return applyByEffect(attacker, attackable, attribute, Swoon.create(limit), Genre.dizzy);
     }
 }

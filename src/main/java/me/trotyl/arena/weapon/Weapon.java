@@ -32,7 +32,7 @@ public class Weapon {
 
     private final int aggressivity;
     private final String name;
-    private Attribute attribute;
+    protected Attribute attribute;
     private Length length;
 
     protected Weapon(String name, int aggressivity, Length length, Attribute attributes) {
@@ -40,19 +40,22 @@ public class Weapon {
         this.name = name;
         this.aggressivity = aggressivity;
         this.length = length;
-
         this.attribute = attributes;
     }
 
-    public int aggressivity() {
+    public Attribute getAttribute() {
+        return attribute;
+    }
+
+    public int getAggressivity() {
         return aggressivity;
     }
 
-    public Length length() {
+    public Length getLength() {
         return length;
     }
 
-    public String name() {
+    public String getName() {
         return name;
     }
 
@@ -67,9 +70,5 @@ public class Weapon {
 
     public void raise(Attribute... attributes) {
         this.attribute = CompositeAttribute.create(this.attribute, attributes);
-    }
-
-    public Attribute launch() {
-        return attribute;
     }
 }

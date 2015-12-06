@@ -34,7 +34,7 @@ public class EffectTest {
 
         attribute = spy(new Attribute(-1, 0.0f) {
             @Override
-            public DamageRecord apply(Attacker attacker, Attackable attackable) {
+            public DamageRecord apply(Attacker attacker, Attackable attackable, Attribute attribute) {
                 return DamageRecord.none;
             }
         });
@@ -71,7 +71,7 @@ public class EffectTest {
         verifyZeroInteractions(player2);
 
         InOrder inOrder = inOrder(attribute);
-        inOrder.verify(attribute).apply(player1, player2);
+        inOrder.verify(attribute).apply(player1, player2, Attribute.none);
 
         verifyNoMoreInteractions(attribute);
     }

@@ -36,7 +36,7 @@ public class Assassin extends Soldier {
     @Override
     public Pair<EffectProcedure, AttackProcedure> attack(Attackable attackable) {
 
-        if (!weapon.length().equals(Length.shorter)) {
+        if (!weapon.getLength().equals(Length.shorter)) {
             return attackByAttribute(attackable, Attribute.none);
         }
 
@@ -47,8 +47,8 @@ public class Assassin extends Soldier {
     public void equip(Weapon weapon) {
 
         if (weapon != Weapon.none &&
-            weapon.length() != Length.shorter &&
-            weapon.length() != Length.medium) {
+            weapon.getLength() != Length.shorter &&
+            weapon.getLength() != Length.medium) {
             throw new IllegalArgumentException("Assassin can only equip short weapon!");
         }
 

@@ -34,7 +34,7 @@ public abstract class Attribute {
         return rate;
     }
 
-    public DamageRecord apply(Attacker attacker, Attackable attackable) {
+    public DamageRecord apply(Attacker attacker, Attackable attackable, Attribute attribute) {
 
         int damage = attacker.getAggressivity() - attackable.getDefence();
         attackable.suffer(damage, Effect.none);
@@ -42,10 +42,10 @@ public abstract class Attribute {
         return DamageRecord.create(damage);
     }
 
-    protected DamageRecord applyByEffect(Attacker attacker, Attackable attackable, Effect effect, Genre genre) {
+    protected DamageRecord applyByEffect(Attacker attacker, Attackable attackable, Attribute attribute, Effect effect, Genre genre) {
 
         if (!works()) {
-            return none.apply(attacker, attackable);
+            return attribute.apply(attacker, attackable, Attribute.none);
         }
 
         int damage = attacker.getAggressivity() - attackable.getDefence();

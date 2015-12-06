@@ -44,7 +44,7 @@ public class AttributeTest {
     @Test
     public void apply_should_have_proper_result() {
 
-        DamageRecord damage = attribute.apply(player1, player2);
+        DamageRecord damage = attribute.apply(player1, player2, Attribute.none);
 
         PlayerRecord player1Record = player1.record();
         PlayerRecord player2Record = player2.record();
@@ -59,7 +59,7 @@ public class AttributeTest {
     @Test
     public void apply_should_have_proper_invocation() {
 
-        attribute.apply(player1, player2);
+        attribute.apply(player1, player2, Attribute.none);
 
         InOrder inOrder = inOrder(player1, player2);
         inOrder.verify(player1).getAggressivity();

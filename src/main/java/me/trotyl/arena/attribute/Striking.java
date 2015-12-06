@@ -22,10 +22,10 @@ public class Striking extends Attribute {
     }
 
     @Override
-    public DamageRecord apply(Attacker attacker, Attackable attackable) {
+    public DamageRecord apply(Attacker attacker, Attackable attackable, Attribute attribute) {
 
         if (!works()) {
-            return super.apply(attacker, attackable);
+            return super.apply(attacker, attackable, attribute);
         }
 
         int damage = 3 * (attacker.getAggressivity() - attackable.getDefence());

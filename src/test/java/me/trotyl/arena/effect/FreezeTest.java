@@ -35,7 +35,7 @@ public class FreezeTest {
 
         attribute = spy(new Attribute(-1, -1.0f) {
             @Override
-            public DamageRecord apply(Attacker attacker, Attackable attackable) {
+            public DamageRecord apply(Attacker attacker, Attackable attackable, Attribute attribute) {
                 return DamageRecord.create(5);
             }
         });
@@ -109,7 +109,7 @@ public class FreezeTest {
         freeze.sway(player1, player2, attribute);
 
         InOrder inOrder = inOrder(attribute);
-        inOrder.verify(attribute).apply(player1, player2);
+        inOrder.verify(attribute).apply(player1, player2, Attribute.none);
 
         freeze.sway(player1, player2, attribute);
 

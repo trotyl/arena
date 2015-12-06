@@ -247,7 +247,7 @@ public class ParserTest {
         assertThat(soldier.getName(), is("张三"));
         assertThat(soldier.getHealth(), is(10));
         assertThat(soldier.getAggressivity(), is(10));
-        assertThat(soldier.getWeapon().name(), is("优质木棒"));
+        assertThat(soldier.getWeapon().getName(), is("优质木棒"));
         assertThat(soldier.getArmor().getDefence(), is(8));
     }
 
@@ -264,9 +264,9 @@ public class ParserTest {
         JSONObject object = getObject(json);
         Weapon weapon = parser.parseWeapon(object);
 
-        assertThat(weapon.aggressivity(), is(5));
-        assertThat(weapon.name(), is("优质木棒"));
-        assertThat(weapon.length(), is(Length.medium));
+        assertThat(weapon.getAggressivity(), is(5));
+        assertThat(weapon.getName(), is("优质木棒"));
+        assertThat(weapon.getLength(), is(Length.medium));
     }
 
     @Test
@@ -287,10 +287,10 @@ public class ParserTest {
         JSONObject object = getObject(json);
         Weapon weapon = parser.parseWeapon(object);
 
-        assertThat(weapon.aggressivity(), is(5));
-        assertThat(weapon.name(), is("优质木棒"));
-        assertThat(weapon.length(), is(Length.medium));
-        assertThat(weapon.launch(), instanceOf(Dizzy.class));
+        assertThat(weapon.getAggressivity(), is(5));
+        assertThat(weapon.getName(), is("优质木棒"));
+        assertThat(weapon.getLength(), is(Length.medium));
+        assertThat(weapon.getAttribute(), instanceOf(Dizzy.class));
     }
 
     private JSONObject getObject(String json) {

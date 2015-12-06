@@ -35,7 +35,7 @@ public class Toxic extends Attribute {
     }
 
     @Override
-    public DamageRecord apply(Attacker attacker, Attackable attackable) {
-        return applyByEffect(attacker, attackable, Toxin.create(extent, limit), Genre.toxic);
+    public DamageRecord apply(Attacker attacker, Attackable attackable, Attribute attribute) {
+        return applyByEffect(attacker, attackable, attribute, Toxin.create(extent, limit), Genre.toxic);
     }
 }
