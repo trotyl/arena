@@ -120,6 +120,56 @@ public class AttributeTest {
         assertThat(composite.getSecond(), is(striking));
     }
 
+    @Test
+    public void create1_should_have_proper_result_for_none_and_empty_list() {
+        assertThat(Attribute.create(emptyList()), is(Attribute.none));
+    }
+
+    @Test
+    public void create1_should_have_proper_result_for_none_and_single_list() {
+
+        Dizzy dizzy = Dizzy.create(0.5f);
+
+        assertThat(Attribute.create(singletonList(dizzy)), is(dizzy));
+    }
+
+    @Test
+    public void create1_should_have_proper_result_for_none_and_2_element_list() {
+
+        Dizzy dizzy = Dizzy.create(0.5f);
+        Striking striking = Striking.create(0.5f);
+
+        Attribute attribute = Attribute.create(asList(dizzy, striking));
+
+        assertThat(attribute, instanceOf(CompositeAttribute.class));
+
+        CompositeAttribute composite = (CompositeAttribute) attribute;
+
+        assertThat(composite.getFirst(), is(dizzy));
+        assertThat(composite.getSecond(), is(striking));
+    }
+
+    @Test
+    public void create1_should_have_proper_result_for_none_and_multiple_element_list() {
+
+        Dizzy dizzy = Dizzy.create(0.5f);
+        Striking striking = Striking.create(0.5f);
+        Flaming flaming = Flaming.create(2, 2, 0.5f);
+
+        Attribute attribute = Attribute.create(asList(dizzy, striking, flaming));
+
+        assertThat(attribute, instanceOf(CompositeAttribute.class));
+
+        CompositeAttribute composite = (CompositeAttribute) attribute;
+
+        assertThat(composite.getFirst(), is(dizzy));
+        assertThat(composite.getSecond(), instanceOf(CompositeAttribute.class));
+
+        CompositeAttribute innerComposite = (CompositeAttribute) composite.getSecond();
+
+        assertThat(innerComposite.getFirst(), is(striking));
+        assertThat(innerComposite.getSecond(), is(flaming));
+    }
 
     @Test
     public void apply_should_have_proper_result() {
