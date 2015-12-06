@@ -38,18 +38,26 @@ public class CompositeAttribute extends Attribute {
         return new CompositeAttribute(attributes.get(0), composite);
     }
 
-    private Attribute attribute0;
-    private Attribute attribute1;
+    private Attribute first;
+    private Attribute second;
 
-    public CompositeAttribute(Attribute attribute0, Attribute attribute1) {
+    public CompositeAttribute(Attribute first, Attribute second) {
         super(-1, 1.0f);
 
-        this.attribute0 = attribute0;
-        this.attribute1 = attribute1;
+        this.first = first;
+        this.second = second;
+    }
+
+    public Attribute getFirst() {
+        return first;
+    }
+
+    public Attribute getSecond() {
+        return second;
     }
 
     @Override
     public DamageRecord apply(Attacker attacker, Attackable attackable, Attribute attribute) {
-        return attribute0.apply(attacker, attackable, attribute1);
+        return first.apply(attacker, attackable, second);
     }
 }

@@ -36,7 +36,7 @@ public class WeaponTest {
     }
 
     @Test
-    public void raise_should_have_proper_result_for_single_attribute() {
+    public void raise_should_have_proper_result_without_attribute_for_single_attribute() {
 
         weapon.raise(Dizzy.create(1.0f));
 
@@ -44,11 +44,21 @@ public class WeaponTest {
     }
 
     @Test
-    public void raise_should_have_proper_result_for_multiple_attribute() {
+    public void raise_should_have_proper_result_without_attribute_for_multiple_attribute() {
 
         weapon.raise(Dizzy.create(1.0f), Flaming.create(2, 1, 1.0f), Striking.create(1.0f));
 
         assertThat(weapon.attribute, instanceOf(CompositeAttribute.class));
+
+        CompositeAttribute composite = (CompositeAttribute) weapon.attribute;
+
+        assertThat(composite.getFirst(), instanceOf(Dizzy.class));
+        assertThat(composite.getSecond(), instanceOf(CompositeAttribute.class));
+
+        CompositeAttribute innerComposite = (CompositeAttribute) composite.getSecond();
+
+        assertThat(innerComposite.getFirst(), instanceOf(Flaming.class));
+        assertThat(innerComposite.getSecond(), instanceOf(Striking.class));
     }
 
     @Test
