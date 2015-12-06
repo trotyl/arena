@@ -97,6 +97,31 @@ public class AttributeTest {
     }
 
     @Test
+    public void create0_should_have_proper_result_for_not_none_and_empty_list() {
+
+        Dizzy dizzy = Dizzy.create(0.5f);
+
+        assertThat(Attribute.create(dizzy, emptyList()), is(dizzy));
+    }
+
+    @Test
+    public void create0_should_have_proper_result_for_not_none_and_not_empty_list() {
+
+        Dizzy dizzy = Dizzy.create(0.5f);
+        Striking striking = Striking.create(0.5f);
+
+        Attribute attribute = Attribute.create(dizzy, singletonList(striking));
+
+        assertThat(attribute, instanceOf(CompositeAttribute.class));
+
+        CompositeAttribute composite = (CompositeAttribute) attribute;
+
+        assertThat(composite.getFirst(), is(dizzy));
+        assertThat(composite.getSecond(), is(striking));
+    }
+
+
+    @Test
     public void apply_should_have_proper_result() {
 
         DamageRecord damage = attribute.apply(player1, player2, Attribute.none);

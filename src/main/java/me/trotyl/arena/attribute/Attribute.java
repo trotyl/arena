@@ -28,6 +28,8 @@ public abstract class Attribute {
 
         if (attribute.equals(Attribute.none)) {
             return composite;
+        } else if (composite.equals(Attribute.none)) {
+            return attribute;
         } else {
             List<Attribute> list = asList(attribute, composite);
             return create(list);
