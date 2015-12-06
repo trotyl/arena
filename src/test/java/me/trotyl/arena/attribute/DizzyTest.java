@@ -45,6 +45,21 @@ public class DizzyTest {
     }
 
     @Test
+    public void create_should_have_proper_result_when_valid() {
+        assertThat(Dizzy.create(0.5f), instanceOf(Dizzy.class));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void create_should_have_proper_result_when_less_than_0() {
+        Dizzy.create(-0.125f);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void create_should_have_proper_result_when_greater_than_1() {
+        Dizzy.create(1.125f);
+    }
+
+    @Test
     public void apply_should_have_proper_result() {
 
         DamageRecord damage = dizzy.apply(player1, player2, Attribute.none);
