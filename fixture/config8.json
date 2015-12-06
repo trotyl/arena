@@ -8,10 +8,10 @@
       "name": "青龙偃月刀",
       "aggressivity": 54,
       "length": "long",
-      "attribute": {
+      "attributes": [{
         "genre": "striking",
         "rate": 0.2
-      }
+      }]
     },
     "armor": {
       "defence": 58
@@ -26,11 +26,11 @@
       "name": "寒冰剑",
       "aggressivity": 47,
       "length": "medium",
-      "attribute": {
+      "attributes": [{
         "genre": "freezing",
         "rate": 0.2,
         "limit": 4
-      }
+      }]
     },
     "armor": {
       "defence": 44

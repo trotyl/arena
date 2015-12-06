@@ -107,4 +107,22 @@ public class AttributeParserTest {
         Dizzy dizzy = (Dizzy) attribute;
         assertThat(dizzy.getRate(), is(0.5f));
     }
+
+    @Test
+    public void parse_should_have_proper_result_for_striking() {
+
+        String json = "" +
+                "{" +
+                "  \"genre\": \"striking\"," +
+                "  \"rate\": 0.5" +
+                "}";
+
+        JSONObject object = (JSONObject) new JSONTokener(json).nextValue();
+        Attribute attribute = parser.parse(object);
+
+        assertThat(attribute, instanceOf(Striking.class));
+
+        Striking striking = (Striking) attribute;
+        assertThat(striking.getRate(), is(0.5f));
+    }
 }

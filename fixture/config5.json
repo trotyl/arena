@@ -8,10 +8,10 @@
       "name": "优质木棒",
       "aggressivity": 5,
       "length": "medium",
-      "attribute": {
+      "attributes": [{
         "genre": "striking",
         "rate": 0.8
-      }
+      }]
     },
     "armor": {
       "defence": 5

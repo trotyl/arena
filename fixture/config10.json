@@ -2,7 +2,7 @@
   "player1": {
     "name": "张三",
     "health": 16429,
-    "aggressivity": 82,
+    "aggressivity": 108,
     "role": "knight",
     "weapon": {
       "name": "青龙偃月刀",
@@ -11,6 +11,10 @@
       "attributes": [{
         "genre": "striking",
         "rate": 0.2
+      },{
+        "genre": "freezing",
+        "rate": 0.16,
+        "limit": 4
       }]
     },
     "armor": {
@@ -29,6 +33,11 @@
       "attributes": [{
         "genre": "dizzy",
         "rate": 0.12
+      }, {
+        "genre": "flaming",
+        "rate": 0.18,
+        "extent": 110,
+        "limit": 3
       }]
     },
     "armor": {

@@ -3,16 +3,19 @@ package me.trotyl.arena.parser;
 import me.trotyl.arena.attribute.Attribute;
 import me.trotyl.arena.weapon.Length;
 import me.trotyl.arena.weapon.Weapon;
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.List;
 
 
 public class WeaponParser extends Parser<JSONObject, Weapon> {
 
-    private AttributeParser attributeParser;
+    private ArrayParser<Attribute> attributesParser;
 
     public WeaponParser(AttributeParser attributeParser) {
 
-        this.attributeParser = attributeParser;
+        this.attributesParser = new ArrayParser<Attribute>(attributeParser);
     }
 
     @Override
@@ -27,13 +30,13 @@ public class WeaponParser extends Parser<JSONObject, Weapon> {
                         lengthStr.equals("long")? Length.longer:
                                 Length.none;
 
-        if (!object.has("attribute")) {
+        if (!object.has("attributes")) {
             return Weapon.create(name, aggressivity, length);
         }
 
-        JSONObject attrObject = object.getJSONObject("attribute");
-        Attribute attribute = attributeParser.parse(attrObject);
+        JSONArray attributeArray = object.getJSONArray("attributes");
+        List<Attribute> attributes = attributesParser.parse(attributeArray);
 
-        return Weapon.create(name, aggressivity, length, attribute);
+        return Weapon.create(name, aggressivity, length, Attribute.create(attributes));
     }
 }

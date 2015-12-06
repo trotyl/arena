@@ -8,10 +8,10 @@
       "name": "青龙偃月刀",
       "aggressivity": 54,
       "length": "long",
-      "attribute": {
+      "attributes": [{
         "genre": "striking",
         "rate": 0.2
-      }
+      }]
     },
     "armor": {
       "defence": 58
@@ -26,12 +26,12 @@
       "name": "丈八蛇矛",
       "aggressivity": 47,
       "length": "long",
-      "attribute": {
+      "attributes": [{
         "genre": "flaming",
         "rate": 0.1,
         "extent": 152,
         "limit": 2
-      }
+      }]
     },
     "armor": {
       "defence": 44

@@ -8,12 +8,12 @@
       "name": "优质木棒",
       "aggressivity": 5,
       "length": "medium",
-      "attribute": {
+      "attributes": [{
         "genre": "toxic",
         "rate": 0.8,
         "extent": 2,
         "limit": 2
-      }
+      }]
     },
     "armor": {
       "defence": 5

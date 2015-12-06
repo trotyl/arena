@@ -25,7 +25,7 @@ public class Striking extends Attribute {
     public DamageRecord apply(Attacker attacker, Attackable attackable, Attribute attribute) {
 
         if (!works()) {
-            return super.apply(attacker, attackable, attribute);
+            return attribute.apply(attacker, attackable, Attribute.none);
         }
 
         int damage = 3 * (attacker.getAggressivity() - attackable.getDefence());

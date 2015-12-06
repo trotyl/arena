@@ -1,6 +1,8 @@
 package me.trotyl.arena.parser;
 
+import me.trotyl.arena.attribute.CompositeAttribute;
 import me.trotyl.arena.attribute.Dizzy;
+import me.trotyl.arena.attribute.Freezing;
 import me.trotyl.arena.weapon.Length;
 import me.trotyl.arena.weapon.Weapon;
 import org.json.JSONObject;
@@ -47,18 +49,18 @@ public class WeaponParserTest {
     }
 
     @Test
-    public void parse_should_have_proper_result_with_attribute() {
+    public void parse_should_have_proper_result_with_single_attribute() {
 
         String json = "" +
                 "{" +
                 "  \"name\": \"优质木棒\"," +
                 "  \"aggressivity\": 5," +
                 "  \"length\": \"medium\"," +
-                "  \"attribute\": " +
-                "  {" +
+                "  \"attributes\": " +
+                "  [{" +
                 "    \"genre\": \"dizzy\"," +
                 "    \"rate\": 0.5" +
-                "  }" +
+                "  }]" +
                 "}";
 
         JSONObject object = (JSONObject) new JSONTokener(json).nextValue();
@@ -68,5 +70,41 @@ public class WeaponParserTest {
         assertThat(weapon.getName(), is("优质木棒"));
         assertThat(weapon.getLength(), is(Length.medium));
         assertThat(weapon.getAttribute(), instanceOf(Dizzy.class));
+    }
+
+    @Test
+    public void parse_should_have_proper_result_with_multiple_attribute() {
+
+        String json = "" +
+                "{" +
+                "  \"name\": \"优质木棒\"," +
+                "  \"aggressivity\": 5," +
+                "  \"length\": \"medium\"," +
+                "  \"attributes\": " +
+                "  [{" +
+                "    \"genre\": \"dizzy\"," +
+                "    \"rate\": 0.5" +
+                "  }, {" +
+                "    \"genre\": \"freezing\"," +
+                "    \"rate\": 0.25," +
+                "    \"limit\": 3" +
+                "  }]" +
+                "}";
+
+        JSONObject object = (JSONObject) new JSONTokener(json).nextValue();
+        Weapon weapon = parser.parse(object);
+
+        assertThat(weapon.getAggressivity(), is(5));
+        assertThat(weapon.getName(), is("优质木棒"));
+        assertThat(weapon.getLength(), is(Length.medium));
+        assertThat(weapon.getAttribute(), instanceOf(CompositeAttribute.class));
+
+        CompositeAttribute composite = (CompositeAttribute) weapon.getAttribute();
+
+        assertThat(composite.getFirst(), instanceOf(Dizzy.class));
+        assertThat(composite.getFirst().getRate(), is(0.5f));
+        assertThat(composite.getSecond(), instanceOf(Freezing.class));
+        assertThat(composite.getSecond().getRate(), is(0.25f));
+        assertThat(composite.getSecond().getLimit(), is(3));
     }
 }

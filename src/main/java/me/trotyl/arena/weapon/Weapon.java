@@ -2,8 +2,10 @@ package me.trotyl.arena.weapon;
 
 
 import me.trotyl.arena.attribute.Attribute;
-import me.trotyl.arena.attribute.CompositeAttribute;
 import me.trotyl.arena.record.WeaponRecord;
+
+import static java.util.Arrays.stream;
+import static java.util.stream.Collectors.toList;
 
 public class Weapon {
 
@@ -69,6 +71,6 @@ public class Weapon {
     }
 
     public void raise(Attribute... attributes) {
-        this.attribute = CompositeAttribute.create(this.attribute, attributes);
+        this.attribute = Attribute.create(this.attribute, stream(attributes).collect(toList()));
     }
 }
