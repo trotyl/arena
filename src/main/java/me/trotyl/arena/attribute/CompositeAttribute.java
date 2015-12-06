@@ -29,9 +29,4 @@ public class CompositeAttribute extends Attribute {
     public DamageRecord apply(Attacker attacker, Attackable attackable, Attribute next) {
         return first.apply(attacker, attackable, second);
     }
-
-    @Override
-    protected boolean works() {
-        return true;
-    }
 }
