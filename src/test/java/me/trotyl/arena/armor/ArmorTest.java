@@ -5,6 +5,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -21,6 +22,16 @@ public class ArmorTest {
     @After
     public void tearDown() throws Exception {
 
+    }
+
+    @Test
+    public void create_should_have_proper_result_when_valid() {
+        assertThat(Armor.create(5), instanceOf(Armor.class));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void create_should_have_proper_result_when_invalid() {
+        Armor.create(-1);
     }
 
     @Test
