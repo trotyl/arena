@@ -1,6 +1,6 @@
 package me.trotyl.arena;
 
-import me.trotyl.arena.parser.Parser;
+import me.trotyl.arena.parser.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,7 +32,13 @@ public class ProgramTest {
     public void run_should_have_proper_result() throws Exception {
 
         in = new FileInputStream("./fixture/config0.json");
-        Program program = new Program(in, out, new Parser(), new Formatter());
+
+        Program program = new Program(
+                in,
+                out,
+                new PlayerParser(new ArmorParser(), new WeaponParser(new AttributeParser())),
+                new Formatter());
+
         program.run();
 
         InOrder inOrder = inOrder(out);

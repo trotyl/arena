@@ -1,6 +1,6 @@
 package me.trotyl.arena;
 
-import me.trotyl.arena.parser.Parser;
+import me.trotyl.arena.parser.*;
 import me.trotyl.arena.procedure.AttackProcedure;
 import me.trotyl.arena.procedure.EffectProcedure;
 import me.trotyl.arena.procedure.OverProcedure;
@@ -27,7 +27,12 @@ public class Program {
 
             FileInputStream in = new FileInputStream(path);
 
-            Program program = new Program(in, System.out, new Parser(), new Formatter());
+            Program program = new Program(
+                    in,
+                    System.out,
+                    new PlayerParser(new ArmorParser(), new WeaponParser(new AttributeParser())),
+                    new Formatter());
+
             program.run();
 
             System.out.println();
@@ -40,7 +45,7 @@ public class Program {
     private final Formatter formatter;
     private final Game game;
 
-    public Program(InputStream in, PrintStream out, Parser parser, Formatter formatter) {
+    public Program(InputStream in, PrintStream out, PlayerParser parser, Formatter formatter) {
         this.out = out;
         this.formatter = formatter;
 
@@ -48,10 +53,10 @@ public class Program {
         JSONObject configObject = (JSONObject) tokener.nextValue();
 
         JSONObject player1Object = configObject.getJSONObject("player1");
-        Player player1 = parser.parsePlayer(player1Object);
+        Player player1 = parser.parse(player1Object);
 
         JSONObject player2Object = configObject.getJSONObject("player2");
-        Player player2 = parser.parsePlayer(player2Object);
+        Player player2 = parser.parse(player2Object);
 
         game = Game.between(player1, player2);
     }
