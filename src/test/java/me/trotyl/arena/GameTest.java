@@ -3,7 +3,7 @@ package me.trotyl.arena;
 import me.trotyl.arena.armor.Armor;
 import me.trotyl.arena.attribute.Toxic;
 import me.trotyl.arena.effect.Type;
-import me.trotyl.arena.procedure.AttackProcedure;
+import me.trotyl.arena.procedure.ActionProcedure;
 import me.trotyl.arena.procedure.EffectProcedure;
 import me.trotyl.arena.procedure.OverProcedure;
 import me.trotyl.arena.record.DamageRecord;
@@ -125,8 +125,8 @@ public class GameTest {
         Player player1 = mock(Player.class);
         when(player0.alive()).thenReturn(true);
         when(player1.alive()).thenReturn(false);
-        when(player0.attack(player1)).thenReturn(new Pair<>(EffectProcedure.none, AttackProcedure.none));
-        when(player1.attack(player0)).thenReturn(new Pair<>(EffectProcedure.none, AttackProcedure.none));
+        when(player0.action(player1, 1)).thenReturn(new Pair<>(EffectProcedure.none, ActionProcedure.none));
+        when(player1.action(player0, 1)).thenReturn(new Pair<>(EffectProcedure.none, ActionProcedure.none));
 
         game = Game.between(player0, player1);
         game.over();
@@ -151,39 +151,39 @@ public class GameTest {
         Player player = Player.create("李四", 20, 8);
         game = Game.between(soldier, player);
 
-        Pair<EffectProcedure, AttackProcedure> pair;
+        Pair<EffectProcedure, ActionProcedure> pair;
         EffectProcedure effectProcedure;
-        AttackProcedure attackProcedure;
+        ActionProcedure actionProcedure;
 
         pair = game.run();
         effectProcedure = pair.getValue0();
-        attackProcedure = pair.getValue1();
+        actionProcedure = pair.getValue1();
 
         assertThat(effectProcedure.effect, is(EffectRecord.none));
         assertThat(effectProcedure.damage, is(DamageRecord.none));
-        assertThat(attackProcedure.attacker.getName(), is("张三"));
-        assertThat(attackProcedure.attackable.getName(), is("李四"));
-        assertThat(attackProcedure.attackable.getHealth(), is(10));
-        assertThat(attackProcedure.damage.extent, is(10));
+        assertThat(actionProcedure.attack.attacker.getName(), is("张三"));
+        assertThat(actionProcedure.attack.attackable.getName(), is("李四"));
+        assertThat(actionProcedure.attack.attackable.getHealth(), is(10));
+        assertThat(actionProcedure.attack.damage.extent, is(10));
 
         pair = game.run();
         effectProcedure = pair.getValue0();
-        attackProcedure = pair.getValue1();
+        actionProcedure = pair.getValue1();
 
         assertThat(effectProcedure.effect.type, is(Type.toxin));
         assertThat(effectProcedure.damage.extent, is(2));
-        assertThat(attackProcedure.attacker.getName(), is("李四"));
-        assertThat(attackProcedure.attackable.getName(), is("张三"));
-        assertThat(attackProcedure.attackable.getHealth(), is(8));
-        assertThat(attackProcedure.damage.extent, is(2));
+        assertThat(actionProcedure.attack.attacker.getName(), is("李四"));
+        assertThat(actionProcedure.attack.attackable.getName(), is("张三"));
+        assertThat(actionProcedure.attack.attackable.getHealth(), is(8));
+        assertThat(actionProcedure.attack.damage.extent, is(2));
 
         pair = game.run();
         effectProcedure = pair.getValue0();
-        attackProcedure = pair.getValue1();
+        actionProcedure = pair.getValue1();
 
         assertThat(effectProcedure.effect, is(EffectRecord.none));
         assertThat(effectProcedure.damage, is(DamageRecord.none));
-        assertThat(attackProcedure.attackable.getHealth(), is(-2));
+        assertThat(actionProcedure.attack.attackable.getHealth(), is(-2));
     }
 
     @Test
@@ -193,8 +193,8 @@ public class GameTest {
         Player player1 = mock(Player.class);
         when(player0.alive()).thenReturn(true);
         when(player1.alive()).thenReturn(true);
-        when(player0.attack(player1)).thenReturn(new Pair<>(EffectProcedure.none, AttackProcedure.none));
-        when(player1.attack(player0)).thenReturn(new Pair<>(EffectProcedure.none, AttackProcedure.none));
+        when(player0.action(player1, 1)).thenReturn(new Pair<>(EffectProcedure.none, ActionProcedure.none));
+        when(player1.action(player0, 1)).thenReturn(new Pair<>(EffectProcedure.none, ActionProcedure.none));
 
         game = Game.between(player0, player1);
         game.run();
@@ -203,10 +203,10 @@ public class GameTest {
         InOrder inOrder = inOrder(player0, player1);
         inOrder.verify(player0).alive();
         inOrder.verify(player1).alive();
-        inOrder.verify(player0).attack(player1);
+        inOrder.verify(player0).action(player1, 1);
         inOrder.verify(player0).alive();
         inOrder.verify(player1).alive();
-        inOrder.verify(player1).attack(player0);
+        inOrder.verify(player1).action(player0, 1);
 
         verifyNoMoreInteractions(player0, player1);
     }

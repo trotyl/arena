@@ -1,7 +1,7 @@
 package me.trotyl.arena;
 
 
-import me.trotyl.arena.procedure.AttackProcedure;
+import me.trotyl.arena.procedure.ActionProcedure;
 import me.trotyl.arena.procedure.EffectProcedure;
 import me.trotyl.arena.procedure.OverProcedure;
 import me.trotyl.arena.role.Attackable;
@@ -12,20 +12,21 @@ import org.javatuples.Pair;
 public class Game {
 
     public static Game between(Player player1, Player player2) {
-
-        Game game = new Game();
-        game.player1 = player1;
-        game.player2 = player2;
-
-        return game;
+        return new Game(player1, player2);
     }
 
-    protected Player player1;
-    protected Player player2;
-    private boolean inTurnOfPlayer1;
+    protected final Player player1;
+    protected final Player player2;
+    protected boolean inTurnOfPlayer1;
+    protected int distance;
 
-    public Game() {
+
+    public Game(Player player1, Player player2) {
+
+        this.player1 = player1;
+        this.player2 = player2;
         inTurnOfPlayer1 = true;
+        distance = 1;
     }
 
     public boolean end() {
@@ -44,17 +45,23 @@ public class Game {
         return OverProcedure.create(winner.record(), loser.record());
     }
 
-    public Pair<EffectProcedure, AttackProcedure> run() {
+    public Pair<EffectProcedure, ActionProcedure> run() {
 
         if (end()) {
-            return new Pair<>(EffectProcedure.none, AttackProcedure.none);
+            return new Pair<>(EffectProcedure.none, ActionProcedure.none);
         }
 
         Attacker attacker = inTurnOfPlayer1? player1: player2;
         Attackable attackable = attacker.equals(player1)? player2: player1;
 
-        Pair<EffectProcedure, AttackProcedure> pair = attacker.attack(attackable);
+        Pair<EffectProcedure, ActionProcedure> pair = attacker.action(attackable, distance);
+
         inTurnOfPlayer1 = ! inTurnOfPlayer1;
+
+        distance -= pair.getValue1().move.decrement;
+        if (distance < 1) {
+            distance = 1;
+        }
 
         return pair;
     }

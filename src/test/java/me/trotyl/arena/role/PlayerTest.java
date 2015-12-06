@@ -4,7 +4,7 @@ import me.trotyl.arena.attribute.Genre;
 import me.trotyl.arena.effect.Effect;
 import me.trotyl.arena.effect.Flame;
 import me.trotyl.arena.effect.Toxin;
-import me.trotyl.arena.procedure.AttackProcedure;
+import me.trotyl.arena.procedure.ActionProcedure;
 import me.trotyl.arena.procedure.EffectProcedure;
 import me.trotyl.arena.record.ArmorRecord;
 import me.trotyl.arena.record.PlayerRecord;
@@ -15,9 +15,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InOrder;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.spy;
@@ -58,16 +56,16 @@ public class PlayerTest {
     @Test
     public void attack_should_have_proper_result_without_effect() {
 
-        Pair<EffectProcedure, AttackProcedure> pair = player0.attack(player1);
+        Pair<EffectProcedure, ActionProcedure> pair = player0.action(player1, 1);
         EffectProcedure effectProcedure = pair.getValue0();
-        AttackProcedure attackProcedure = pair.getValue1();
+        ActionProcedure attackProcedure = pair.getValue1();
 
         assertThat(effectProcedure, is(EffectProcedure.none));
-        assertThat(attackProcedure.attacker.getName(), is("张三"));
-        assertThat(attackProcedure.attackable.getName(), is("李四"));
-        assertThat(attackProcedure.attackable.getHealth(), is(15));
-        assertThat(attackProcedure.damage.genre, is(Genre.none));
-        assertThat(attackProcedure.damage.extent, is(5));
+        assertThat(attackProcedure.attack.attacker.getName(), is("张三"));
+        assertThat(attackProcedure.attack.attackable.getName(), is("李四"));
+        assertThat(attackProcedure.attack.attackable.getHealth(), is(15));
+        assertThat(attackProcedure.attack.damage.genre, is(Genre.none));
+        assertThat(attackProcedure.attack.damage.extent, is(5));
     }
 
     @Test
@@ -82,13 +80,13 @@ public class PlayerTest {
 
         assertThat(player2.effect, instanceOf(Flame.class));
 
-        Pair<EffectProcedure, AttackProcedure> attack = player2.attack(player3);
+        Pair<EffectProcedure, ActionProcedure> attack = player2.action(player3, 1);
 
         assertThat(player2.getHealth(), is(-4));
         assertThat(player3.getHealth(), is(1));
 
         assertThat(attack.getValue0(), not(EffectProcedure.none));
-        assertThat(attack.getValue1(), is(AttackProcedure.none));
+        assertThat(attack.getValue1(), is(ActionProcedure.none));
     }
 
     @Test
@@ -97,7 +95,7 @@ public class PlayerTest {
         Player player3 = spy(player0);
         Player player4 = spy(player1);
 
-        player3.attack(player4);
+        player3.action(player4, 1);
 
         InOrder inOrder = inOrder(player3, player4);
         inOrder.verify(player3).record();

@@ -3,12 +3,9 @@ package me.trotyl.arena.role;
 
 import me.trotyl.arena.armor.Armor;
 import me.trotyl.arena.attribute.Attribute;
-import me.trotyl.arena.procedure.AttackProcedure;
-import me.trotyl.arena.procedure.EffectProcedure;
 import me.trotyl.arena.record.PlayerRecord;
 import me.trotyl.arena.weapon.Length;
 import me.trotyl.arena.weapon.Weapon;
-import org.javatuples.Pair;
 
 public class Assassin extends Soldier {
 
@@ -34,13 +31,13 @@ public class Assassin extends Soldier {
     }
 
     @Override
-    public Pair<EffectProcedure, AttackProcedure> attack(Attackable attackable) {
+    public Attribute getAttribute() {
 
         if (!weapon.getLength().equals(Length.shorter)) {
-            return attackByAttribute(attackable, Attribute.none);
+            return Attribute.none;
         }
 
-        return super.attack(attackable);
+        return weapon.getAttribute();
     }
 
     @Override

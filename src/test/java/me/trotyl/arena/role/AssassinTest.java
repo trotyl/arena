@@ -3,7 +3,7 @@ package me.trotyl.arena.role;
 import me.trotyl.arena.attribute.Attribute;
 import me.trotyl.arena.attribute.Genre;
 import me.trotyl.arena.attribute.Toxic;
-import me.trotyl.arena.procedure.AttackProcedure;
+import me.trotyl.arena.procedure.ActionProcedure;
 import me.trotyl.arena.procedure.EffectProcedure;
 import me.trotyl.arena.weapon.Length;
 import me.trotyl.arena.weapon.Weapon;
@@ -53,10 +53,10 @@ public class AssassinTest {
 
         assassin.equip(shortWeapon);
 
-        Pair<EffectProcedure, AttackProcedure> pair = assassin.attack(Player.create("王二", 10, 5));
-        AttackProcedure procedure = pair.getValue1();
+        Pair<EffectProcedure, ActionProcedure> pair = assassin.action(Player.create("王二", 10, 5), 1);
+        ActionProcedure procedure = pair.getValue1();
 
-        assertThat(procedure.damage.genre, is(Genre.toxic));
+        assertThat(procedure.attack.damage.genre, is(Genre.toxic));
     }
 
     @Test
@@ -64,10 +64,10 @@ public class AssassinTest {
 
         assassin.equip(mediumWeapon);
 
-        Pair<EffectProcedure, AttackProcedure> pair = assassin.attack(Player.create("王二", 10, 5));
-        AttackProcedure procedure = pair.getValue1();
+        Pair<EffectProcedure, ActionProcedure> pair = assassin.action(Player.create("王二", 10, 5), 1);
+        ActionProcedure procedure = pair.getValue1();
 
-        assertThat(procedure.damage.genre, is(Genre.none));
+        assertThat(procedure.attack.damage.genre, is(Genre.none));
     }
 
     @Test

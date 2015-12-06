@@ -6,7 +6,7 @@ import me.trotyl.arena.attribute.Genre;
 import me.trotyl.arena.effect.Effect;
 import me.trotyl.arena.effect.Flame;
 import me.trotyl.arena.effect.Type;
-import me.trotyl.arena.procedure.AttackProcedure;
+import me.trotyl.arena.procedure.ActionProcedure;
 import me.trotyl.arena.procedure.EffectProcedure;
 import me.trotyl.arena.record.*;
 import me.trotyl.arena.weapon.Length;
@@ -50,19 +50,19 @@ public class SoldierTest {
     @Test
     public void attack_should_have_proper_result_without_effect() {
 
-        Pair<EffectProcedure, AttackProcedure> pair = soldier0.attack(soldier1);
+        Pair<EffectProcedure, ActionProcedure> pair = soldier0.action(soldier1, 1);
         EffectProcedure effectProcedure = pair.getValue0();
-        AttackProcedure attackProcedure = pair.getValue1();
+        ActionProcedure actionProcedure = pair.getValue1();
 
         assertThat(effectProcedure, is(EffectProcedure.none));
 
-        assertThat(attackProcedure.attacker.getName(), is("张三"));
+        assertThat(actionProcedure.attack.attacker.getName(), is("张三"));
 
-        assertThat(attackProcedure.attackable.getName(), is("李四"));
-        assertThat(attackProcedure.attackable.getHealth(), is(15));
+        assertThat(actionProcedure.attack.attackable.getName(), is("李四"));
+        assertThat(actionProcedure.attack.attackable.getHealth(), is(15));
 
-        assertThat(attackProcedure.damage.genre, is(Genre.none));
-        assertThat(attackProcedure.damage.extent, is(5));
+        assertThat(actionProcedure.attack.damage.genre, is(Genre.none));
+        assertThat(actionProcedure.attack.damage.extent, is(5));
     }
 
     @Test
@@ -71,20 +71,20 @@ public class SoldierTest {
         soldier0.effect = Flame.create(2, 10);
         soldier0.weapon = Weapon.create("玄铁重剑", 3, Length.none, Attribute.none);
 
-        Pair<EffectProcedure, AttackProcedure> pair = soldier0.attack(soldier1);
+        Pair<EffectProcedure, ActionProcedure> pair = soldier0.action(soldier1, 1);
         EffectProcedure effectProcedure = pair.getValue0();
-        AttackProcedure attackProcedure = pair.getValue1();
+        ActionProcedure actionProcedure = pair.getValue1();
 
         assertThat(effectProcedure.host.getName(), is("张三"));
         assertThat(effectProcedure.damage.extent, is(2));
 
-        assertThat(attackProcedure.attacker.getName(), is("张三"));
+        assertThat(actionProcedure.attack.attacker.getName(), is("张三"));
 
-        assertThat(attackProcedure.attackable.getName(), is("李四"));
-        assertThat(attackProcedure.attackable.getHealth(), is(12));
+        assertThat(actionProcedure.attack.attackable.getName(), is("李四"));
+        assertThat(actionProcedure.attack.attackable.getHealth(), is(12));
 
-        assertThat(attackProcedure.damage.genre, is(Genre.none));
-        assertThat(attackProcedure.damage.extent, is(8));
+        assertThat(actionProcedure.attack.damage.genre, is(Genre.none));
+        assertThat(actionProcedure.attack.damage.extent, is(8));
     }
 
     @Test
@@ -104,7 +104,7 @@ public class SoldierTest {
         soldier2.effect = effect;
         soldier2.weapon = spy(Weapon.create("玄铁重剑", 3, Length.none, attribute));
 
-        soldier2.attack(soldier3);
+        soldier2.action(soldier3, 1);
 
         verifyZeroInteractions(attribute);
 

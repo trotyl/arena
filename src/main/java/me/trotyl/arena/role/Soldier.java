@@ -2,11 +2,9 @@ package me.trotyl.arena.role;
 
 
 import me.trotyl.arena.armor.Armor;
-import me.trotyl.arena.weapon.Weapon;
-import me.trotyl.arena.procedure.AttackProcedure;
-import me.trotyl.arena.procedure.EffectProcedure;
+import me.trotyl.arena.attribute.Attribute;
 import me.trotyl.arena.record.PlayerRecord;
-import org.javatuples.Pair;
+import me.trotyl.arena.weapon.Weapon;
 
 public class Soldier extends Player {
 
@@ -48,6 +46,11 @@ public class Soldier extends Player {
     }
 
     @Override
+    public Attribute getAttribute() {
+        return weapon.getAttribute();
+    }
+
+    @Override
     public int getDefence() {
         return armor.getDefence();
     }
@@ -63,11 +66,6 @@ public class Soldier extends Player {
 
     public void equip(Weapon weapon) {
         this.weapon = weapon;
-    }
-
-    @Override
-    public Pair<EffectProcedure, AttackProcedure> attack(Attackable attackable) {
-        return attackByAttribute(attackable, weapon.getAttribute());
     }
 
     @Override

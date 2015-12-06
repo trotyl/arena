@@ -2,9 +2,7 @@ package me.trotyl.arena;
 
 import me.trotyl.arena.attribute.Genre;
 import me.trotyl.arena.effect.Type;
-import me.trotyl.arena.procedure.AttackProcedure;
-import me.trotyl.arena.procedure.EffectProcedure;
-import me.trotyl.arena.procedure.OverProcedure;
+import me.trotyl.arena.procedure.*;
 import me.trotyl.arena.record.*;
 import me.trotyl.arena.role.Role;
 import org.junit.After;
@@ -35,7 +33,7 @@ public class FormatterTest {
                                                            PlayerRecord.create("李四", 20, Role.normal),
                                                            DamageRecord.create(5));
 
-        String result = formatter.formatAttack(procedure);
+        String result = formatter.formatAction(ActionProcedure.create(MoveProcedure.none, procedure));
 
         assertThat(result, is("战士张三攻击了普通人李四, 李四受到了5点伤害, 李四剩余生命: 20"));
     }
@@ -48,7 +46,7 @@ public class FormatterTest {
                 PlayerRecord.create("李四", 20, Role.normal),
                 DamageRecord.create(5));
 
-        String result = formatter.formatAttack(procedure);
+        String result = formatter.formatAction(ActionProcedure.create(MoveProcedure.none, procedure));
 
         assertThat(result, is("战士张三用优质木棒攻击了普通人李四, 李四受到了5点伤害, 李四剩余生命: 20"));
     }
@@ -60,7 +58,7 @@ public class FormatterTest {
                                                            PlayerRecord.create("李四", 20, Role.normal),
                                                            DamageRecord.create(5, Genre.toxic));
 
-        String result = formatter.formatAttack(procedure);
+        String result = formatter.formatAction(ActionProcedure.create(MoveProcedure.none, procedure));
 
         assertThat(result, is("战士张三攻击了普通人李四, 李四受到了5点伤害, 李四中毒了, 李四剩余生命: 20"));
     }
@@ -72,7 +70,7 @@ public class FormatterTest {
                 PlayerRecord.create("李四", 20, Role.normal),
                 DamageRecord.create(5, Genre.flaming));
 
-        String result = formatter.formatAttack(procedure);
+        String result = formatter.formatAction(ActionProcedure.create(MoveProcedure.none, procedure));
 
         assertThat(result, is("战士张三攻击了普通人李四, 李四受到了5点伤害, 李四着火了, 李四剩余生命: 20"));
     }
@@ -84,7 +82,7 @@ public class FormatterTest {
                 PlayerRecord.create("李四", 20, Role.normal),
                 DamageRecord.create(5, Genre.freezing));
 
-        String result = formatter.formatAttack(procedure);
+        String result = formatter.formatAction(ActionProcedure.create(MoveProcedure.none, procedure));
 
         assertThat(result, is("战士张三攻击了普通人李四, 李四受到了5点伤害, 李四冻僵了, 李四剩余生命: 20"));
     }
@@ -96,7 +94,7 @@ public class FormatterTest {
                 PlayerRecord.create("李四", 20, Role.normal),
                 DamageRecord.create(5, Genre.dizzy));
 
-        String result = formatter.formatAttack(procedure);
+        String result = formatter.formatAction(ActionProcedure.create(MoveProcedure.none, procedure));
 
         assertThat(result, is("战士张三攻击了普通人李四, 李四受到了5点伤害, 李四晕倒了, 李四剩余生命: 20"));
     }
@@ -108,7 +106,7 @@ public class FormatterTest {
                                                            PlayerRecord.create("李四", 20, Role.normal),
                                                            DamageRecord.create(5, Genre.striking));
 
-        String result = formatter.formatAttack(procedure);
+        String result = formatter.formatAction(ActionProcedure.create(MoveProcedure.none, procedure));
 
         assertThat(result, is("战士张三攻击了普通人李四, 张三发动了全力一击, 李四受到了5点伤害, 李四剩余生命: 20"));
     }
@@ -122,7 +120,7 @@ public class FormatterTest {
                 PlayerRecord.create("李四", 20, Role.normal),
                 DamageRecord.create(5, Genre.toxic));
 
-        String result = formatter.formatAttack(procedure);
+        String result = formatter.formatAction(ActionProcedure.create(MoveProcedure.none, procedure));
 
         assertThat(result, is("战士张三用优质木棒攻击了普通人李四, 李四受到了5点伤害, 李四中毒了, 李四剩余生命: 20"));
     }

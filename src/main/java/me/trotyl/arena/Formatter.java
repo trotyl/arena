@@ -3,6 +3,7 @@ package me.trotyl.arena;
 
 import me.trotyl.arena.attribute.Genre;
 import me.trotyl.arena.effect.Type;
+import me.trotyl.arena.procedure.ActionProcedure;
 import me.trotyl.arena.procedure.AttackProcedure;
 import me.trotyl.arena.procedure.EffectProcedure;
 import me.trotyl.arena.procedure.OverProcedure;
@@ -13,21 +14,21 @@ import static java.lang.String.format;
 
 public class Formatter {
 
-    public String formatAttack(AttackProcedure procedure) {
+    public String formatAction(ActionProcedure procedure) {
 
-        if (procedure.equals(AttackProcedure.none)) {
+        if (procedure.attack.equals(AttackProcedure.none)) {
             return null;
         }
 
-        String weaponPart = (procedure.attacker.getWeapon() != WeaponRecord.none) ?
-                format("用%s", procedure.attacker.getWeapon().getName()) : "";
+        String weaponPart = (procedure.attack.attacker.getWeapon() != WeaponRecord.none) ?
+                format("用%s", procedure.attack.attacker.getWeapon().getName()) : "";
 
-        String attributePart = formatAttribute(procedure);
+        String attributePart = formatAttribute(procedure.attack);
 
         return format("%s%s%s攻击了%s%s, %s%s剩余生命: %d",
-                formatRole(procedure.attacker.getRole()), procedure.attacker.getName(), weaponPart,
-                formatRole(procedure.attackable.getRole()), procedure.attackable.getName(),
-                attributePart, procedure.attackable.getName(), procedure.attackable.getHealth());
+                formatRole(procedure.attack.attacker.getRole()), procedure.attack.attacker.getName(), weaponPart,
+                formatRole(procedure.attack.attackable.getRole()), procedure.attack.attackable.getName(),
+                attributePart, procedure.attack.attackable.getName(), procedure.attack.attackable.getHealth());
     }
 
     private String formatAttribute(AttackProcedure procedure) {

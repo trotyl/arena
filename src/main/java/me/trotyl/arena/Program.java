@@ -1,7 +1,10 @@
 package me.trotyl.arena;
 
-import me.trotyl.arena.parser.*;
-import me.trotyl.arena.procedure.AttackProcedure;
+import me.trotyl.arena.parser.ArmorParser;
+import me.trotyl.arena.parser.AttributeParser;
+import me.trotyl.arena.parser.PlayerParser;
+import me.trotyl.arena.parser.WeaponParser;
+import me.trotyl.arena.procedure.ActionProcedure;
 import me.trotyl.arena.procedure.EffectProcedure;
 import me.trotyl.arena.procedure.OverProcedure;
 import me.trotyl.arena.role.Player;
@@ -63,14 +66,14 @@ public class Program {
 
     public void run() {
         while (!game.end()) {
-            Pair<EffectProcedure, AttackProcedure> pair = game.run();
+            Pair<EffectProcedure, ActionProcedure> pair = game.run();
 
             String effect = formatter.formatEffect(pair.getValue0());
             if (effect != null) {
                 out.println(effect);
             }
 
-            String attack = formatter.formatAttack(pair.getValue1());
+            String attack = formatter.formatAction(pair.getValue1());
             if (attack != null) {
                 out.println(attack);
             }

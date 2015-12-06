@@ -3,8 +3,10 @@ package me.trotyl.arena.role;
 
 import me.trotyl.arena.attribute.Attribute;
 import me.trotyl.arena.effect.Effect;
+import me.trotyl.arena.procedure.ActionProcedure;
 import me.trotyl.arena.procedure.AttackProcedure;
 import me.trotyl.arena.procedure.EffectProcedure;
+import me.trotyl.arena.procedure.MoveProcedure;
 import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.record.PlayerRecord;
 import org.javatuples.Pair;
@@ -29,9 +31,9 @@ public class Player implements Attacker, Attackable {
         }
     }
 
-    protected String name;
+    protected final String name;
     protected int health;
-    protected int aggressivity;
+    protected final int aggressivity;
     protected Effect effect;
 
     protected Player(String name, int health, int aggressivity) {
@@ -45,6 +47,10 @@ public class Player implements Attacker, Attackable {
     @Override
     public int getAggressivity() {
         return aggressivity;
+    }
+
+    public Attribute getAttribute() {
+        return Attribute.none;
     }
 
     @Override
@@ -64,13 +70,40 @@ public class Player implements Attacker, Attackable {
         return name;
     }
 
+    public int getRange() {
+        return 1;
+    }
+
+    public int getVelocity() {
+        return 1;
+    }
+
     public boolean alive() {
         return health > 0;
     }
 
     @Override
-    public Pair<EffectProcedure, AttackProcedure> attack(Attackable attackable) {
-        return attackByAttribute(attackable, Attribute.none);
+    public Pair<EffectProcedure, ActionProcedure> action(Attackable attackable, int distance) {
+
+        EffectProcedure effect = impact(attackable);
+
+        if (!alive()) {
+            return new Pair<>(effect, ActionProcedure.none);
+        }
+
+        ActionProcedure action;
+
+        if (getRange() < distance) {
+            action = ActionProcedure.create(MoveProcedure.create(getVelocity()), AttackProcedure.none);
+        } else {
+            action = ActionProcedure.create(MoveProcedure.none, attack(attackable));
+        }
+
+        if (!this.effect.valid()) {
+            this.effect = Effect.none;
+        }
+
+        return new Pair<>(effect, action);
     }
 
     @Override
@@ -90,22 +123,17 @@ public class Player implements Attacker, Attackable {
         }
     }
 
-    protected Pair<EffectProcedure, AttackProcedure> attackByAttribute(Attackable attackable, Attribute attribute) {
+    protected AttackProcedure attack(Attackable attackable) {
+
+        DamageRecord attackDamage = effect.sway(this, attackable, getAttribute());
+
+        return AttackProcedure.create(record(), attackable.record(), attackDamage);
+    }
+
+    protected EffectProcedure impact(Attackable attackable) {
 
         DamageRecord effectDamage = effect.take(this);
-        EffectProcedure effectProcedure = EffectProcedure.create(record(), attackable.record(), effect.record(), effectDamage);
 
-        if (!alive()) {
-            return new Pair<>(effectProcedure, AttackProcedure.none);
-        }
-
-        DamageRecord attackDamage = effect.sway(this, attackable, attribute);
-        AttackProcedure attackProcedure = AttackProcedure.create(record(), attackable.record(), attackDamage);
-
-        if (!effect.valid()) {
-            effect = Effect.none;
-        }
-
-        return new Pair<>(effectProcedure, attackProcedure);
+        return EffectProcedure.create(record(), attackable.record(), effect.record(), effectDamage);
     }
 }
