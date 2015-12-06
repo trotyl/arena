@@ -52,6 +52,10 @@ public class Player implements Attacker, Attackable {
         return 0;
     }
 
+    public Effect getEffect() {
+        return effect;
+    }
+
     public int getHealth() {
         return health;
     }

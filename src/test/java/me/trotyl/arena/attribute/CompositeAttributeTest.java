@@ -1,5 +1,7 @@
 package me.trotyl.arena.attribute;
 
+import me.trotyl.arena.effect.Effect;
+import me.trotyl.arena.effect.Flame;
 import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.record.PlayerRecord;
 import me.trotyl.arena.role.Player;
@@ -9,6 +11,7 @@ import org.junit.Test;
 
 import java.util.Random;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
@@ -38,7 +41,7 @@ public class CompositeAttributeTest {
     }
 
     @Test
-    public void apply_should_have_proper_result_when_first_work() {
+    public void apply_should_have_proper_result_for_different_attributes_when_first_work() {
 
         composite = new CompositeAttribute(Dizzy.create(1.0f), Flaming.create(3, 2, 1.0f));
 
@@ -55,7 +58,7 @@ public class CompositeAttributeTest {
     }
 
     @Test
-    public void apply_should_have_proper_result_when_first_not_work() {
+    public void apply_should_have_proper_result_for_different_attributes_when_first_not_work() {
 
         composite = new CompositeAttribute(Dizzy.create(0.0f), Flaming.create(3, 2, 1.0f));
 
@@ -72,7 +75,7 @@ public class CompositeAttributeTest {
     }
 
     @Test
-    public void apply_should_have_proper_result_when_neither_work() {
+    public void apply_should_have_proper_result_for_different_attributes_when_neither_work() {
 
         composite = new CompositeAttribute(Dizzy.create(0.0f), Flaming.create(3, 2, 0.0f));
 
@@ -86,5 +89,37 @@ public class CompositeAttributeTest {
 
         assertThat(player1Record.getHealth(), is(10));
         assertThat(player2Record.getHealth(), is(15));
+    }
+
+    @Test
+    public void apply_should_have_proper_result_for_same_attributes_when_first_work() {
+
+        composite = new CompositeAttribute(Flaming.create(5, 6, 1.0f), Flaming.create(3, 2, 1.0f));
+
+        composite.apply(player1, player2, Attribute.none);
+
+        assertThat(player2.getEffect(), instanceOf(Flame.class));
+        assertThat(player2.getEffect().getRemain(), is(6));
+    }
+
+    @Test
+    public void apply_should_have_proper_result_for_same_attributes_when_first_not_work() {
+
+        composite = new CompositeAttribute(Flaming.create(5, 6, 0.0f), Flaming.create(3, 2, 1.0f));
+
+        composite.apply(player1, player2, Attribute.none);
+
+        assertThat(player2.getEffect(), instanceOf(Flame.class));
+        assertThat(player2.getEffect().getRemain(), is(2));
+    }
+
+    @Test
+    public void apply_should_have_proper_result_for_same_attributes_when_neither_work() {
+
+        composite = new CompositeAttribute(Flaming.create(5, 6, 0.0f), Flaming.create(3, 2, 0.0f));
+
+        composite.apply(player1, player2, Attribute.none);
+
+        assertThat(player2.getEffect(), is(Effect.none));
     }
 }
