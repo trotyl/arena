@@ -66,8 +66,18 @@ public class ActionFormatter extends Formatter<ActionProcedure> {
     }
 
     private String formatRole(Role role) {
-        return role.equals(Role.assassin)? "刺客":
-                role.equals(Role.fighter)? "战士":
-                        role.equals(Role.knight)? "骑士": "普通人";
+
+        switch (role) {
+            case normal:
+                return "普通人";
+            case assassin:
+                return "刺客";
+            case fighter:
+                return "战士";
+            case knight:
+                return "骑士";
+            default:
+                throw new IllegalArgumentException("The genre is invalid in ths context.");
+        }
     }
 }

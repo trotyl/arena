@@ -1,9 +1,8 @@
 package me.trotyl.arena.role;
 
 
-import me.trotyl.arena.equipment.Armor;
 import me.trotyl.arena.attribute.Attribute;
-import me.trotyl.arena.record.PlayerRecord;
+import me.trotyl.arena.equipment.Armor;
 import me.trotyl.arena.equipment.Weapon;
 
 public class Soldier extends Player {
@@ -50,10 +49,4 @@ public class Soldier extends Player {
     public void equip(Weapon weapon) {
         this.weapon = weapon;
     }
-
-    @Override
-    public PlayerRecord record() {
-        return PlayerRecord.create(name, health, Role.soldier, weapon.record(), armor.record());
-    }
-
 }
