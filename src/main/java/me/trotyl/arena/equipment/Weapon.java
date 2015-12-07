@@ -52,6 +52,6 @@ public abstract class Weapon implements Aggressive {
     }
 
     public void raise(Attribute... attributes) {
-        this.attribute = Attribute.create(this.attribute, stream(attributes).collect(toList()));
+        this.attribute = Attribute.compose(this.attribute, stream(attributes).collect(toList()));
     }
 }

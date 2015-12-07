@@ -22,9 +22,9 @@ public abstract class Attribute {
     };
     protected static Random random = new Random();
 
-    public static Attribute create(Attribute attribute, List<Attribute> attributes) {
+    public static Attribute compose(Attribute attribute, List<Attribute> attributes) {
 
-        Attribute composite = create(attributes);
+        Attribute composite = compose(attributes);
 
         if (attribute.equals(Attribute.none)) {
             return composite;
@@ -32,11 +32,11 @@ public abstract class Attribute {
             return attribute;
         } else {
             List<Attribute> list = asList(attribute, composite);
-            return create(list);
+            return compose(list);
         }
     }
 
-    public static Attribute create(List<Attribute> attributes) {
+    public static Attribute compose(List<Attribute> attributes) {
 
         if (attributes.size() == 0) {
             return Attribute.none;
@@ -44,7 +44,7 @@ public abstract class Attribute {
             return attributes.get(0);
         }
 
-        Attribute composite = create(attributes.subList(1, attributes.size()));
+        Attribute composite = compose(attributes.subList(1, attributes.size()));
 
         return new CompositeAttribute(attributes.get(0), composite);
     }

@@ -46,25 +46,25 @@ public class AttributeTest {
     }
 
     @Test
-    public void create0_should_have_proper_result_for_none_and_empty_list() {
-        assertThat(Attribute.create(Attribute.none, emptyList()), is(Attribute.none));
+    public void compose0_should_have_proper_result_for_none_and_empty_list() {
+        assertThat(Attribute.compose(Attribute.none, emptyList()), is(Attribute.none));
     }
 
     @Test
-    public void create0_should_have_proper_result_for_none_and_single_list() {
+    public void compose0_should_have_proper_result_for_none_and_single_list() {
 
         Dizzy dizzy = Dizzy.create(0.5f);
 
-        assertThat(Attribute.create(Attribute.none, singletonList(dizzy)), is(dizzy));
+        assertThat(Attribute.compose(Attribute.none, singletonList(dizzy)), is(dizzy));
     }
 
     @Test
-    public void create0_should_have_proper_result_for_none_and_2_element_list() {
+    public void compose0_should_have_proper_result_for_none_and_2_element_list() {
 
         Dizzy dizzy = Dizzy.create(0.5f);
         Striking striking = Striking.create(0.5f);
 
-        Attribute attribute = Attribute.create(Attribute.none, asList(dizzy, striking));
+        Attribute attribute = Attribute.compose(Attribute.none, asList(dizzy, striking));
 
         assertThat(attribute, instanceOf(CompositeAttribute.class));
 
@@ -75,13 +75,13 @@ public class AttributeTest {
     }
 
     @Test
-    public void create0_should_have_proper_result_for_none_and_multiple_element_list() {
+    public void compose0_should_have_proper_result_for_none_and_multiple_element_list() {
 
         Dizzy dizzy = Dizzy.create(0.5f);
         Striking striking = Striking.create(0.5f);
         Flaming flaming = Flaming.create(2, 2, 0.5f);
 
-        Attribute attribute = Attribute.create(Attribute.none, asList(dizzy, striking, flaming));
+        Attribute attribute = Attribute.compose(Attribute.none, asList(dizzy, striking, flaming));
 
         assertThat(attribute, instanceOf(CompositeAttribute.class));
 
@@ -97,20 +97,20 @@ public class AttributeTest {
     }
 
     @Test
-    public void create0_should_have_proper_result_for_not_none_and_empty_list() {
+    public void compose0_should_have_proper_result_for_not_none_and_empty_list() {
 
         Dizzy dizzy = Dizzy.create(0.5f);
 
-        assertThat(Attribute.create(dizzy, emptyList()), is(dizzy));
+        assertThat(Attribute.compose(dizzy, emptyList()), is(dizzy));
     }
 
     @Test
-    public void create0_should_have_proper_result_for_not_none_and_not_empty_list() {
+    public void compose0_should_have_proper_result_for_not_none_and_not_empty_list() {
 
         Dizzy dizzy = Dizzy.create(0.5f);
         Striking striking = Striking.create(0.5f);
 
-        Attribute attribute = Attribute.create(dizzy, singletonList(striking));
+        Attribute attribute = Attribute.compose(dizzy, singletonList(striking));
 
         assertThat(attribute, instanceOf(CompositeAttribute.class));
 
@@ -121,25 +121,25 @@ public class AttributeTest {
     }
 
     @Test
-    public void create1_should_have_proper_result_for_none_and_empty_list() {
-        assertThat(Attribute.create(emptyList()), is(Attribute.none));
+    public void compose1_should_have_proper_result_for_none_and_empty_list() {
+        assertThat(Attribute.compose(emptyList()), is(Attribute.none));
     }
 
     @Test
-    public void create1_should_have_proper_result_for_none_and_single_list() {
+    public void compose1_should_have_proper_result_for_none_and_single_list() {
 
         Dizzy dizzy = Dizzy.create(0.5f);
 
-        assertThat(Attribute.create(singletonList(dizzy)), is(dizzy));
+        assertThat(Attribute.compose(singletonList(dizzy)), is(dizzy));
     }
 
     @Test
-    public void create1_should_have_proper_result_for_none_and_2_element_list() {
+    public void compose1_should_have_proper_result_for_none_and_2_element_list() {
 
         Dizzy dizzy = Dizzy.create(0.5f);
         Striking striking = Striking.create(0.5f);
 
-        Attribute attribute = Attribute.create(asList(dizzy, striking));
+        Attribute attribute = Attribute.compose(asList(dizzy, striking));
 
         assertThat(attribute, instanceOf(CompositeAttribute.class));
 
@@ -150,13 +150,13 @@ public class AttributeTest {
     }
 
     @Test
-    public void create1_should_have_proper_result_for_none_and_multiple_element_list() {
+    public void compose1_should_have_proper_result_for_none_and_multiple_element_list() {
 
         Dizzy dizzy = Dizzy.create(0.5f);
         Striking striking = Striking.create(0.5f);
         Flaming flaming = Flaming.create(2, 2, 0.5f);
 
-        Attribute attribute = Attribute.create(asList(dizzy, striking, flaming));
+        Attribute attribute = Attribute.compose(asList(dizzy, striking, flaming));
 
         assertThat(attribute, instanceOf(CompositeAttribute.class));
 

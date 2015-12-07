@@ -38,7 +38,7 @@ public class WeaponParser extends Parser<JSONObject, Weapon> {
             JSONArray attributeArray = object.getJSONArray("attributes");
             List<Attribute> attributes = attributesParser.parse(attributeArray);
 
-            attribute = Attribute.create(attributes);
+            attribute = Attribute.compose(attributes);
         } else {
 
             attribute = Attribute.none;
