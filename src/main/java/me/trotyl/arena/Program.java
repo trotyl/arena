@@ -1,9 +1,9 @@
 package me.trotyl.arena;
 
-import me.trotyl.arena.parser.ArmorParser;
-import me.trotyl.arena.parser.AttributeParser;
-import me.trotyl.arena.parser.PlayerParser;
-import me.trotyl.arena.parser.WeaponParser;
+import me.trotyl.arena.formatter.Formatter;
+import me.trotyl.arena.formatter.FormatterGroup;
+import me.trotyl.arena.parser.Parser;
+import me.trotyl.arena.parser.ParserGroup;
 import me.trotyl.arena.procedure.ActionProcedure;
 import me.trotyl.arena.procedure.EffectProcedure;
 import me.trotyl.arena.procedure.OverProcedure;
@@ -30,11 +30,7 @@ public class Program {
 
             FileInputStream in = new FileInputStream(path);
 
-            Program program = new Program(
-                    in,
-                    System.out,
-                    new PlayerParser(new ArmorParser(), new WeaponParser(new AttributeParser())),
-                    new Formatter());
+            Program program = new Program(in, System.out, Parser.defaults(), Formatter.defaults());
 
             program.run();
 
@@ -45,21 +41,21 @@ public class Program {
     }
 
     private final PrintStream out;
-    private final Formatter formatter;
+    private final FormatterGroup formatters;
     private final Game game;
 
-    public Program(InputStream in, PrintStream out, PlayerParser parser, Formatter formatter) {
+    public Program(InputStream in, PrintStream out, ParserGroup parsers, FormatterGroup formatters) {
         this.out = out;
-        this.formatter = formatter;
+        this.formatters = formatters;
 
         JSONTokener tokener = new JSONTokener(in);
         JSONObject configObject = (JSONObject) tokener.nextValue();
 
         JSONObject player1Object = configObject.getJSONObject("player1");
-        Player player1 = parser.parse(player1Object);
+        Player player1 = parsers.playerParser.parse(player1Object);
 
         JSONObject player2Object = configObject.getJSONObject("player2");
-        Player player2 = parser.parse(player2Object);
+        Player player2 = parsers.playerParser.parse(player2Object);
 
         game = Game.between(player1, player2);
     }
@@ -68,12 +64,12 @@ public class Program {
         while (!game.end()) {
             Pair<EffectProcedure, ActionProcedure> pair = game.run();
 
-            String effect = formatter.formatEffect(pair.getValue0());
+            String effect = formatters.effectFormatter.format(pair.getValue0());
             if (effect != null) {
                 out.println(effect);
             }
 
-            String attack = formatter.formatAction(pair.getValue1());
+            String attack = formatters.actionFormatter.format(pair.getValue1());
             if (attack != null) {
                 out.println(attack);
             }
@@ -81,7 +77,7 @@ public class Program {
 
         OverProcedure procedure = game.over();
 
-        String output = formatter.formatOver(procedure);
+        String output = formatters.overFormatter.format(procedure);
 
         out.println(output);
     }

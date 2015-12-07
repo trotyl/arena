@@ -1,5 +1,6 @@
 package me.trotyl.arena;
 
+import me.trotyl.arena.formatter.Formatter;
 import me.trotyl.arena.parser.*;
 import org.junit.After;
 import org.junit.Before;
@@ -33,11 +34,7 @@ public class ProgramTest {
 
         in = new FileInputStream("./fixture/config0.json");
 
-        Program program = new Program(
-                in,
-                out,
-                new PlayerParser(new ArmorParser(), new WeaponParser(new AttributeParser())),
-                new Formatter());
+        Program program = new Program(in, out, Parser.defaults(), Formatter.defaults());
 
         program.run();
 
