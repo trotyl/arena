@@ -4,10 +4,7 @@ import me.trotyl.arena.attribute.Genre;
 import me.trotyl.arena.procedure.ActionProcedure;
 import me.trotyl.arena.procedure.AttackProcedure;
 import me.trotyl.arena.procedure.MoveProcedure;
-import me.trotyl.arena.record.ArmorRecord;
-import me.trotyl.arena.record.DamageRecord;
-import me.trotyl.arena.record.PlayerRecord;
-import me.trotyl.arena.record.WeaponRecord;
+import me.trotyl.arena.record.*;
 import me.trotyl.arena.role.Role;
 import org.junit.After;
 import org.junit.Before;
@@ -120,11 +117,23 @@ public class ActionFormatterTest {
 
         AttackProcedure procedure = AttackProcedure.create(PlayerRecord.create("张三", 10, Role.fighter),
                 PlayerRecord.create("李四", 20, Role.normal),
-                DamageRecord.create(5, 2, Genre.repel));
+                RepelDamageRecord.create(2, DamageRecord.create(5)));
 
         String result = formatter.format(ActionProcedure.create(MoveProcedure.none, procedure));
 
         assertThat(result, is("战士张三攻击了普通人李四, 李四受到了5点伤害, 李四被击退了, 李四剩余生命: 20"));
+    }
+
+    @Test
+    public void format_should_have_proper_result_with_repel_and_toxic() {
+
+        AttackProcedure procedure = AttackProcedure.create(PlayerRecord.create("张三", 10, Role.fighter),
+                PlayerRecord.create("李四", 20, Role.normal),
+                RepelDamageRecord.create(2, DamageRecord.create(5, Genre.toxic)));
+
+        String result = formatter.format(ActionProcedure.create(MoveProcedure.none, procedure));
+
+        assertThat(result, is("战士张三攻击了普通人李四, 李四受到了5点伤害, 李四中毒了, 李四被击退了, 李四剩余生命: 20"));
     }
 
     @Test
