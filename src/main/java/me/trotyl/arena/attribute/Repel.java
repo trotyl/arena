@@ -1,8 +1,8 @@
 package me.trotyl.arena.attribute;
 
 
-import me.trotyl.arena.effect.Effect;
 import me.trotyl.arena.record.DamageRecord;
+import me.trotyl.arena.record.RepelDamageRecord;
 import me.trotyl.arena.role.Attackable;
 import me.trotyl.arena.role.Attacker;
 
@@ -27,13 +27,12 @@ public class Repel extends Attribute {
     @Override
     public DamageRecord apply(Attacker attacker, Attackable attackable, Attribute next) {
 
+        DamageRecord record = next.apply(attacker, attackable, Attribute.none);
+
         if (!works()) {
-            return next.apply(attacker, attackable, Attribute.none);
+            return record;
         }
 
-        int damage = getDamage(attacker, attackable);
-        attackable.suffer(damage, Effect.none);
-
-        return DamageRecord.create(damage, distance, Genre.repel);
+        return RepelDamageRecord.create(distance, record);
     }
 }

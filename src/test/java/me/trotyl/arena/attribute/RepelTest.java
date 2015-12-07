@@ -3,6 +3,7 @@ package me.trotyl.arena.attribute;
 import me.trotyl.arena.effect.Effect;
 import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.record.PlayerRecord;
+import me.trotyl.arena.record.RepelDamageRecord;
 import me.trotyl.arena.role.Player;
 import org.junit.After;
 import org.junit.Before;
@@ -62,8 +63,14 @@ public class RepelTest {
         PlayerRecord player2Record = player2.record();
 
         assertThat(damage.genre, is(Genre.repel));
-        assertThat(damage.extent, is(5));
+        assertThat(damage.extent, is(0));
         assertThat(damage.distance, is(2));
+        assertThat(damage, instanceOf(RepelDamageRecord.class));
+
+        RepelDamageRecord repelDamage = (RepelDamageRecord) damage;
+
+        assertThat(repelDamage.inner.genre, is(Genre.none));
+        assertThat(repelDamage.inner.extent, is(5));
 
         assertThat(player1Record.getHealth(), is(10));
         assertThat(player2Record.getHealth(), is(15));
