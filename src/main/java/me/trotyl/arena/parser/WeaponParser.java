@@ -14,7 +14,7 @@ public class WeaponParser extends Parser<JSONObject, Weapon> {
 
     public WeaponParser(AttributeParser attributeParser) {
 
-        this.attributesParser = new ArrayParser<Attribute>(attributeParser);
+        this.attributesParser = new ArrayParser<>(attributeParser);
     }
 
     @Override

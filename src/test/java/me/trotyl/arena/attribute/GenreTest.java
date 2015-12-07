@@ -22,7 +22,6 @@ public class GenreTest {
 
     @Test
     public void toString_should_have_proper_result() {
-
-        assertThat(Genre.none.toString(), is("None"));
+        assertThat(Genre.none.toString(), is("none"));
     }
 }
