@@ -63,6 +63,11 @@ public class Game {
             distance = 1;
         }
 
+        int increment = pair.getValue1().attack.damage.distance;
+        if (increment > 0) {
+            distance += increment;
+        }
+
         return pair;
     }
 }

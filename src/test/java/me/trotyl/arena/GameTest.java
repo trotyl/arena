@@ -4,11 +4,14 @@ import me.trotyl.arena.attribute.Toxic;
 import me.trotyl.arena.effect.Type;
 import me.trotyl.arena.equipment.Armor;
 import me.trotyl.arena.equipment.LongWeapon;
+import me.trotyl.arena.equipment.MediumWeapon;
 import me.trotyl.arena.procedure.ActionProcedure;
+import me.trotyl.arena.procedure.AttackProcedure;
 import me.trotyl.arena.procedure.EffectProcedure;
 import me.trotyl.arena.procedure.OverProcedure;
 import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.record.EffectRecord;
+import me.trotyl.arena.role.Fighter;
 import me.trotyl.arena.role.Player;
 import me.trotyl.arena.role.Soldier;
 import org.javatuples.Pair;
@@ -140,14 +143,15 @@ public class GameTest {
         verifyNoMoreInteractions(player0, player1);
     }
 
-
     @Test
     public void run_should_have_proper_result() throws Exception {
 
         Soldier soldier = Soldier.create("张三", 10, 5,
                 LongWeapon.create("方天画戟", 5, 0, Toxic.create(2, 2, 1.0f)),
                 Armor.create(6));
+
         Player player = Player.create("李四", 20, 8);
+
         game = Game.between(soldier, player);
 
         Pair<EffectProcedure, ActionProcedure> pair;
@@ -183,6 +187,40 @@ public class GameTest {
         assertThat(effectProcedure.effect, is(EffectRecord.none));
         assertThat(effectProcedure.damage, is(DamageRecord.none));
         assertThat(actionProcedure.attack.attackable.getHealth(), is(-2));
+    }
+
+    @Test
+    public void run_should_have_proper_result_when_move() {
+
+        Fighter soldier = Fighter.create("张三", 10, 5,
+                MediumWeapon.create("雌雄双股剑", 5, 0),
+                Armor.create(6));
+
+        Player player = Player.create("李四", 20, 8);
+
+        game = Game.between(soldier, player);
+        game.distance = 3;
+
+        Pair<EffectProcedure, ActionProcedure> pair;
+        ActionProcedure actionProcedure;
+
+        pair = game.run();
+        actionProcedure = pair.getValue1();
+
+        assertThat(actionProcedure.move.decrement, is(1));
+        assertThat(actionProcedure.attack, is(AttackProcedure.none));
+
+        pair = game.run();
+        actionProcedure = pair.getValue1();
+
+        assertThat(actionProcedure.move.decrement, is(1));
+        assertThat(actionProcedure.attack, is(AttackProcedure.none));
+
+        pair = game.run();
+        actionProcedure = pair.getValue1();
+
+        assertThat(actionProcedure.attack.attacker.getName(), is("张三"));
+        assertThat(actionProcedure.attack.attackable.getName(), is("李四"));
     }
 
     @Test
