@@ -1,6 +1,9 @@
 package me.trotyl.arena.equipment;
 
 import me.trotyl.arena.attribute.Attribute;
+import me.trotyl.arena.attribute.Repel;
+
+import static java.util.Collections.singletonList;
 
 
 public class LongWeapon extends Weapon {
@@ -21,14 +24,16 @@ public class LongWeapon extends Weapon {
             attribute = Attribute.none;
         }
 
-        return new LongWeapon(name, aggressivity, repel, attribute);
+        Attribute composite = Attribute.compose(Repel.create(repel), singletonList(attribute));
+
+        return new LongWeapon(name, aggressivity, repel, composite);
     }
 
     protected final int repel;
 
-    protected LongWeapon(String name, int aggressivity, int repel, Attribute attributes) {
+    protected LongWeapon(String name, int aggressivity, int repel, Attribute attribute) {
 
-        super(name, aggressivity, attributes);
+        super(name, aggressivity, attribute);
 
         this.repel = repel;
     }

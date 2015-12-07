@@ -1,17 +1,16 @@
 package me.trotyl.arena;
 
+import me.trotyl.arena.attribute.Attribute;
 import me.trotyl.arena.attribute.Toxic;
 import me.trotyl.arena.effect.Type;
 import me.trotyl.arena.equipment.Armor;
 import me.trotyl.arena.equipment.LongWeapon;
 import me.trotyl.arena.equipment.MediumWeapon;
-import me.trotyl.arena.procedure.ActionProcedure;
-import me.trotyl.arena.procedure.AttackProcedure;
-import me.trotyl.arena.procedure.EffectProcedure;
-import me.trotyl.arena.procedure.OverProcedure;
+import me.trotyl.arena.procedure.*;
 import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.record.EffectRecord;
 import me.trotyl.arena.role.Fighter;
+import me.trotyl.arena.role.Knight;
 import me.trotyl.arena.role.Player;
 import me.trotyl.arena.role.Soldier;
 import org.javatuples.Pair;
@@ -19,6 +18,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InOrder;
+
+import java.util.Random;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -28,15 +29,20 @@ import static org.mockito.Mockito.*;
 public class GameTest {
 
     private Game game;
+    Random random;
 
     @Before
     public void setUp() throws Exception {
 
+        random = mock(Random.class);
+        when(random.nextFloat()).thenReturn(0.5f);
+
+        Attribute.config(random);
     }
 
     @After
     public void tearDown() throws Exception {
-
+        Attribute.config(new Random());
     }
 
     @Test
@@ -207,20 +213,46 @@ public class GameTest {
         pair = game.run();
         actionProcedure = pair.getValue1();
 
-        assertThat(actionProcedure.move.decrement, is(1));
         assertThat(actionProcedure.attack, is(AttackProcedure.none));
+        assertThat(game.distance, is(2));
 
         pair = game.run();
         actionProcedure = pair.getValue1();
 
-        assertThat(actionProcedure.move.decrement, is(1));
         assertThat(actionProcedure.attack, is(AttackProcedure.none));
+        assertThat(game.distance, is(1));
 
         pair = game.run();
         actionProcedure = pair.getValue1();
 
         assertThat(actionProcedure.attack.attacker.getName(), is("张三"));
         assertThat(actionProcedure.attack.attackable.getName(), is("李四"));
+    }
+
+    @Test
+    public void run_should_have_proper_result_when_repel() {
+
+        random = mock(Random.class);
+        when(random.nextFloat()).thenReturn(0.0f);
+
+        Attribute.config(random);
+
+        Knight soldier = Knight.create("张三", 10, 5,
+                LongWeapon.create("丈八蛇矛", 5, 1),
+                Armor.create(6));
+
+        Player player = Player.create("李四", 20, 8);
+
+        game = Game.between(soldier, player);
+
+        Pair<EffectProcedure, ActionProcedure> pair;
+        ActionProcedure actionProcedure;
+
+        pair = game.run();
+        actionProcedure = pair.getValue1();
+
+        assertThat(actionProcedure.move, is(MoveProcedure.none));
+        assertThat(game.distance, is(2));
     }
 
     @Test

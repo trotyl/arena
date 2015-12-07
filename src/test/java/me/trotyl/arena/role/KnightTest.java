@@ -31,7 +31,7 @@ public class KnightTest {
     public void setUp() throws Exception {
 
         Random random = mock(Random.class);
-        when(random.nextFloat()).thenReturn(0.0f);
+        when(random.nextFloat()).thenReturn(0.5f);
 
         Attribute.config(random);
 
