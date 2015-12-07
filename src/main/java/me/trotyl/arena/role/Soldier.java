@@ -8,23 +8,6 @@ import me.trotyl.arena.equipment.Weapon;
 
 public class Soldier extends Player {
 
-    public static Soldier create(String name, int health, int aggressivity) {
-        return Soldier.create(name, health, aggressivity, Weapon.none, Armor.none);
-    }
-
-    public static Soldier create(String name, int health, int aggressivity, Weapon weapon, Armor armor) {
-
-        checkParameters(name, health, aggressivity);
-
-        if (weapon == null) {
-            weapon = Weapon.none;
-        } if (armor == null) {
-            armor = Armor.none;
-        }
-
-        return new Soldier(name, health, aggressivity, weapon, armor);
-    }
-
     protected Weapon weapon;
     protected Armor armor;
 

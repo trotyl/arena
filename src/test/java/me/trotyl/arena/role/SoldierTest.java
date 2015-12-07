@@ -29,8 +29,8 @@ public class SoldierTest {
     @Before
     public void setUp() throws Exception {
 
-        soldier0 = Soldier.create("张三", 10, 5);
-        soldier1 = Soldier.create("李四", 20, 8);
+        soldier0 = Fighter.create("张三", 10, 5);
+        soldier1 = Fighter.create("李四", 20, 8);
     }
 
     @After
@@ -173,7 +173,6 @@ public class SoldierTest {
 
         assertThat(record.getName(), is("张三"));
         assertThat(record.getHealth(), is(10));
-        assertThat(record.getRole(), is(Role.soldier));
         assertThat(record.getWeapon(), is(WeaponRecord.none));
         assertThat(record.getArmor(), is(ArmorRecord.none));
 

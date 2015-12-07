@@ -115,7 +115,6 @@ public class ActionFormatterTest {
         assertThat(result, is("战士张三攻击了普通人李四, 张三发动了全力一击, 李四受到了5点伤害, 李四剩余生命: 20"));
     }
 
-
     @Test
     public void format_should_have_proper_result_with_weapon_and_effect() {
 

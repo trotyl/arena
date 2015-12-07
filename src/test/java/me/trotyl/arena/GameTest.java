@@ -12,7 +12,6 @@ import me.trotyl.arena.record.EffectRecord;
 import me.trotyl.arena.role.Fighter;
 import me.trotyl.arena.role.Knight;
 import me.trotyl.arena.role.Player;
-import me.trotyl.arena.role.Soldier;
 import org.javatuples.Pair;
 import org.junit.After;
 import org.junit.Before;
@@ -100,7 +99,7 @@ public class GameTest {
     @Test
     public void over_should_have_proper_result() {
 
-        Soldier soldier = Soldier.create("张三", 10, 5,
+        Knight soldier = Knight.create("张三", 10, 5,
                 LongWeapon.create("方天画戟", 5, 0, Toxic.create(2, 2, 1.0f)),
                 Armor.create(6));
 
@@ -152,7 +151,7 @@ public class GameTest {
     @Test
     public void run_should_have_proper_result() throws Exception {
 
-        Soldier soldier = Soldier.create("张三", 10, 5,
+        Knight soldier = Knight.create("张三", 10, 5,
                 LongWeapon.create("方天画戟", 5, 0, Toxic.create(2, 2, 1.0f)),
                 Armor.create(6));
 

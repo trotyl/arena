@@ -22,49 +22,29 @@ public class WeaponParser extends Parser<JSONObject, Weapon> {
 
         String name = object.getString("name");
         int aggressivity = object.getInt("aggressivity");
-        String lengthStr = object.getString("length");
-
-
-
-        Length length = lengthStr.equals("short")? Length.shorter:
-                lengthStr.equals("medium")? Length.medium:
-                        lengthStr.equals("long")? Length.longer:
-                                Length.none;
+        String length = object.getString("length");
 
         Attribute attribute;
 
         if (object.has("attributes")) {
-
             JSONArray attributeArray = object.getJSONArray("attributes");
             List<Attribute> attributes = attributesParser.parse(attributeArray);
-
             attribute = Attribute.compose(attributes);
         } else {
-
             attribute = Attribute.none;
         }
 
-        switch (lengthStr) {
-
+        switch (length) {
             case "short":
-
                 return ShortWeapon.create(name, aggressivity, attribute);
-
             case "medium":
-
                 int defence = object.getInt("defence");
-
                 return MediumWeapon.create(name, aggressivity, defence, attribute);
-
             case "long":
-
                 int repel = object.getInt("repel");
-
                 return LongWeapon.create(name, aggressivity, repel, attribute);
-
             default:
-
-                return Weapon.none;
+                throw new IllegalArgumentException("The weapon is not of any valid length.");
         }
     }
 }

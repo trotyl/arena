@@ -14,7 +14,7 @@ public class AttributeParser extends Parser<JSONObject, Attribute> {
 
         if (genre.equals("dizzy")) {
             return Dizzy.create(rate);
-        } if (genre.equals("striking")) {
+        } else if (genre.equals("striking")) {
             return Striking.create(rate);
         }
 
@@ -28,10 +28,10 @@ public class AttributeParser extends Parser<JSONObject, Attribute> {
 
         if (genre.equals("flaming")) {
             return Flaming.create(extent, limit, rate);
-        } if (genre.equals("toxic")) {
+        } else if (genre.equals("toxic")) {
             return Toxic.create(extent, limit, rate);
         }
 
-        return Attribute.none;
+        throw new IllegalArgumentException("The attribute is not of any valid type.");
     }
 }
