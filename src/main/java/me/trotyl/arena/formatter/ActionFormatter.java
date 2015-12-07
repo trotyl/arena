@@ -46,6 +46,8 @@ public class ActionFormatter extends Formatter<ActionProcedure> {
                 return damagePart;
             case striking:
                 return String.format("%s发动了全力一击, %s", procedure.attacker.getName(), damagePart);
+            case repel:
+                return String.format("%s%s被击退了, ", damagePart, procedure.attackable.getName());
             case toxic:
                 statusPart = "中毒了";
                 break;
