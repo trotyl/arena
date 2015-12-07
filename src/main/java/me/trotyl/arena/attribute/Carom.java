@@ -2,26 +2,19 @@ package me.trotyl.arena.attribute;
 
 
 import me.trotyl.arena.effect.Effect;
+import me.trotyl.arena.record.CaromDamageRecord;
 import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.role.Attackable;
 import me.trotyl.arena.role.Attacker;
 
-public class Repel extends Attribute {
+public class Carom extends Attribute {
 
-    public static Repel create(int distance) {
-
-        if (distance < 0) {
-            throw new IllegalArgumentException("The distance must be greater than 0, but: " + distance);
-        }
-
-        return new Repel(distance);
+    public static Carom create() {
+        return new Carom();
     }
 
-    protected final int distance;
-
-    protected Repel(int distance) {
+    protected Carom() {
         super(-1, 0.25f);
-        this.distance = distance;
     }
 
     @Override
@@ -34,6 +27,9 @@ public class Repel extends Attribute {
         int damage = getDamage(attacker, attackable);
         attackable.suffer(damage, Effect.none);
 
-        return DamageRecord.create(damage, distance, Genre.repel);
+        int anotherDamage = getDamage(attacker, attackable);
+        attackable.suffer(damage, Effect.none);
+
+        return CaromDamageRecord.create(damage, anotherDamage);
     }
 }

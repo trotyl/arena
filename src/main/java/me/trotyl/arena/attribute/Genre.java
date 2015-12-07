@@ -12,6 +12,7 @@ public class Genre {
     public static final Genre flaming = new Genre("Flaming");
     public static final Genre freezing = new Genre("Freezing");
     public static final Genre repel = new Genre("Repel");
+    public static final Genre carom = new Genre("Carom");
 
     private String name;
 
