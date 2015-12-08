@@ -75,8 +75,4 @@ public abstract class AggressiveAttribute extends Attribute {
     protected Genre getGenre() {
         return Genre.none;
     }
-
-    protected boolean works() {
-        return random.nextFloat() < rate;
-    }
 }

@@ -29,4 +29,8 @@ public abstract class Attribute {
         this.limit = limit;
         this.rate = rate;
     }
+
+    protected boolean works() {
+        return random.nextFloat() < rate;
+    }
 }

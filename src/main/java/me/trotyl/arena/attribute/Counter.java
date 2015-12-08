@@ -8,13 +8,29 @@ import me.trotyl.arena.role.Player;
 
 public class Counter extends DefensiveAttribute {
 
-    protected Counter() {
+    protected final int defence;
+
+    protected Counter(int defence) {
+
         super(-1, 0.25f);
+
+        this.defence = defence;
     }
 
     public DamageRecord apply(DamageRecord damage, Effect effect, Player attacker, Player defender) {
 
-        DamageRecord original = super.apply(damage, effect, attacker, defender);
+        if (!works()) {
+            return super.apply(damage, effect, attacker, defender);
+        }
+
+        int extent = damage.extent - defence;
+
+        if (extent < 0) {
+            extent = 0;
+        }
+
+        DamageRecord newDamage = DamageRecord.create(extent, damage.distance, damage.genre);
+        DamageRecord original = super.apply(newDamage, effect, attacker, defender);
 
         if (!defender.alive()) {
             return original;

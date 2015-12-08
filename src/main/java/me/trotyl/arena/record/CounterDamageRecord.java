@@ -9,8 +9,8 @@ public class CounterDamageRecord extends DamageRecord {
         return new CounterDamageRecord(original, counter);
     }
 
-    private final DamageRecord original;
-    private final DamageRecord counter;
+    public final DamageRecord original;
+    public final DamageRecord counter;
 
     protected CounterDamageRecord(DamageRecord original, DamageRecord counter) {
 
