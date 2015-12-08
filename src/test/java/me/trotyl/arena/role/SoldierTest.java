@@ -4,7 +4,6 @@ import me.trotyl.arena.attribute.Attribute;
 import me.trotyl.arena.attribute.Genre;
 import me.trotyl.arena.effect.Effect;
 import me.trotyl.arena.effect.Flame;
-import me.trotyl.arena.effect.Type;
 import me.trotyl.arena.equipment.Armor;
 import me.trotyl.arena.equipment.MediumWeapon;
 import me.trotyl.arena.equipment.Weapon;
@@ -98,7 +97,7 @@ public class SoldierTest {
 
         Effect effect = mock(Effect.class);
         when(effect.valid()).thenReturn(true);
-        when(effect.record()).thenReturn(EffectRecord.create(Type.flame));
+        when(effect.record(any())).thenReturn(EffectRecord.create(Genre.flaming, Action.none));
         when(effect.take(soldier2)).thenReturn(DamageRecord.create(2, Genre.effect));
         when(effect.sway(soldier2, soldier3, attribute)).thenReturn(DamageRecord.create(3));
 
@@ -112,7 +111,7 @@ public class SoldierTest {
         InOrder inOrder = inOrder(soldier2, soldier3, effect);
         inOrder.verify(effect).take(soldier2);
         inOrder.verify(soldier2).record();
-        inOrder.verify(effect).record();
+        inOrder.verify(effect).record(Action.attack);
         inOrder.verify(effect).sway(soldier2, soldier3, attribute);
         inOrder.verify(soldier2).record();
         inOrder.verify(soldier3).record();

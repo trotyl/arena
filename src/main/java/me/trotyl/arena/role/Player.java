@@ -6,6 +6,7 @@ import me.trotyl.arena.effect.Effect;
 import me.trotyl.arena.procedure.AttackProcedure;
 import me.trotyl.arena.procedure.EffectProcedure;
 import me.trotyl.arena.procedure.MoveProcedure;
+import me.trotyl.arena.record.Action;
 import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.record.PlayerRecord;
 import org.javatuples.Triplet;
@@ -76,7 +77,8 @@ public class Player implements Attacker, Attackable {
     @Override
     public Triplet<EffectProcedure, MoveProcedure, AttackProcedure> action(Attackable attackable, int distance) {
 
-        EffectProcedure effect = impact(attackable);
+        Action action = getRange() < distance? Action.move: Action.attack;
+        EffectProcedure effect = impact(attackable, action);
 
         if (!alive()) {
             return new Triplet<>(effect, MoveProcedure.none, AttackProcedure.none);
@@ -85,7 +87,7 @@ public class Player implements Attacker, Attackable {
         MoveProcedure move = MoveProcedure.none;
         AttackProcedure attack = AttackProcedure.none;
 
-        if (getRange() < distance) {
+        if (action.equals(Action.move)) {
             move = MoveProcedure.create(getVelocity(), record(), attackable.record());
         } else {
             attack = attack(attackable);
@@ -130,10 +132,10 @@ public class Player implements Attacker, Attackable {
         return 1;
     }
 
-    protected EffectProcedure impact(Attackable attackable) {
+    protected EffectProcedure impact(Attackable attackable, Action next) {
 
         DamageRecord effectDamage = effect.take(this);
 
-        return EffectProcedure.create(record(), attackable.record(), effect.record(), effectDamage);
+        return EffectProcedure.create(record(), attackable.record(), effect.record(next), effectDamage);
     }
 }

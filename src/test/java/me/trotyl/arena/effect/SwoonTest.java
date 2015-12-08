@@ -1,6 +1,8 @@
 package me.trotyl.arena.effect;
 
 import me.trotyl.arena.attribute.Attribute;
+import me.trotyl.arena.attribute.Genre;
+import me.trotyl.arena.record.Action;
 import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.record.EffectRecord;
 import me.trotyl.arena.record.PlayerRecord;
@@ -48,9 +50,9 @@ public class SwoonTest {
     @Test
     public void record_should_have_proper_result() {
 
-        EffectRecord record = swoon.record();
+        EffectRecord record = swoon.record(Action.none);
 
-        assertThat(record.type, is(Type.swoon));
+        assertThat(record.genre, is(Genre.dizzy));
         assertThat(record.remain, is(2));
     }
 

@@ -1,6 +1,8 @@
 package me.trotyl.arena.effect;
 
 import me.trotyl.arena.attribute.Attribute;
+import me.trotyl.arena.attribute.Genre;
+import me.trotyl.arena.record.Action;
 import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.record.EffectRecord;
 import me.trotyl.arena.record.PlayerRecord;
@@ -51,24 +53,24 @@ public class FreezeTest {
 
         EffectRecord record;
 
-        record = freeze.record();
+        record = freeze.record(Action.none);
 
-        assertThat(record.type, is(Type.freeze));
+        assertThat(record.genre, is(Genre.freezing));
         assertThat(record.remain, is(5));
 
         freeze.sway(Player.create("None", 1, 0), Player.create("None", 1, 0), Attribute.none);
-        record = freeze.record();
+        record = freeze.record(Action.none);
 
         assertThat(record, is(EffectRecord.none));
 
         freeze.sway(Player.create("None", 1, 0), Player.create("None", 1, 0), Attribute.none);
-        record = freeze.record();
+        record = freeze.record(Action.none);
 
-        assertThat(record.type, is(Type.freeze));
+        assertThat(record.genre, is(Genre.freezing));
         assertThat(record.remain, is(3));
 
         freeze.sway(Player.create("None", 1, 0), Player.create("None", 1, 0), Attribute.none);
-        record = freeze.record();
+        record = freeze.record(Action.none);
 
         assertThat(record, is(EffectRecord.none));
     }

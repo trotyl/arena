@@ -9,6 +9,7 @@ import me.trotyl.arena.equipment.Weapon;
 import me.trotyl.arena.procedure.AttackProcedure;
 import me.trotyl.arena.procedure.EffectProcedure;
 import me.trotyl.arena.procedure.MoveProcedure;
+import me.trotyl.arena.record.Action;
 import me.trotyl.arena.record.PlayerRecord;
 import org.javatuples.Triplet;
 
@@ -38,7 +39,8 @@ public class Knight extends Soldier {
     @Override
     public Triplet<EffectProcedure, MoveProcedure, AttackProcedure> action(Attackable attackable, int distance) {
 
-        EffectProcedure effect = impact(attackable);
+        Action action = getRange() < distance? Action.move: Action.attack;
+        EffectProcedure effect = impact(attackable, action);
 
         if (!alive()) {
             return new Triplet<>(effect, MoveProcedure.none, AttackProcedure.none);

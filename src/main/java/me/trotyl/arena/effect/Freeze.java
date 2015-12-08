@@ -2,6 +2,8 @@ package me.trotyl.arena.effect;
 
 
 import me.trotyl.arena.attribute.Attribute;
+import me.trotyl.arena.attribute.Genre;
+import me.trotyl.arena.record.Action;
 import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.record.EffectRecord;
 import me.trotyl.arena.role.Attackable;
@@ -28,8 +30,8 @@ public class Freeze extends Effect {
     }
 
     @Override
-    public EffectRecord record() {
-        return frozen ? EffectRecord.create(Type.freeze, remain) : EffectRecord.none;
+    public EffectRecord record(Action next) {
+        return frozen? EffectRecord.create(getGenre(), getRemain(), next): EffectRecord.none;
     }
 
     @Override
@@ -42,5 +44,9 @@ public class Freeze extends Effect {
         frozen = !frozen;
 
         return damage;
+    }
+
+    protected Genre getGenre() {
+        return Genre.freezing;
     }
 }

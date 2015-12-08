@@ -1,8 +1,8 @@
 package me.trotyl.arena;
 
 import me.trotyl.arena.attribute.Attribute;
+import me.trotyl.arena.attribute.Genre;
 import me.trotyl.arena.attribute.Toxic;
-import me.trotyl.arena.effect.Type;
 import me.trotyl.arena.equipment.Armor;
 import me.trotyl.arena.equipment.LongWeapon;
 import me.trotyl.arena.equipment.MediumWeapon;
@@ -187,7 +187,7 @@ public class GameTest {
         moveProcedure = triplet.getValue1();
         attackProcedure = triplet.getValue2();
 
-        assertThat(effectProcedure.effect.type, is(Type.toxin));
+        assertThat(effectProcedure.effect.genre, is(Genre.toxic));
         assertThat(effectProcedure.damage.extent, is(2));
         assertThat(moveProcedure, is(MoveProcedure.none));
         assertThat(attackProcedure.attacker.getName(), is("李四"));
