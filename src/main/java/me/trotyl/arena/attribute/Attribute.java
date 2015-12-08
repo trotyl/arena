@@ -13,6 +13,8 @@ public abstract class Attribute {
         }
     };
 
+    public static DefensiveAttribute normalDefence = new DefensiveAttribute(-1, 0.0f) {};
+
     protected static Random random = new Random();
 
     public static void config(Random random) {

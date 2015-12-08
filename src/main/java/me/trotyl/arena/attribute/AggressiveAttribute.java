@@ -58,9 +58,11 @@ public abstract class AggressiveAttribute extends Attribute {
         }
 
         int damage = getDamage(attacker, defender);
-        defender.suffer(damage, getEffect());
+        DamageRecord damageRecord = DamageRecord.create(damage, getGenre());
 
-        return DamageRecord.create(damage, getGenre());
+        DefensiveAttribute defensiveAttribute = defender.getDefensiveAttribute();
+
+        return defensiveAttribute.apply(damageRecord, getEffect(), attacker, defender);
     }
 
     protected int getDamage(Player attacker, Player defender) {

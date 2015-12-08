@@ -88,8 +88,6 @@ public class FreezingTest {
         inOrder.verify(player1).getAggressivity();
         inOrder.verify(player2).getDefence();
         inOrder.verify(player2).suffer(eq(5), argThat(instanceOf(Freeze.class)));
-
-        verifyNoMoreInteractions(player1, player2);
     }
 
     @Test
@@ -102,7 +100,5 @@ public class FreezingTest {
         inOrder.verify(player1).getAggressivity();
         inOrder.verify(player2).getDefence();
         inOrder.verify(player2).suffer(5, Effect.none);
-
-        verifyNoMoreInteractions(player1, player2);
     }
 }

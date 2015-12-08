@@ -93,8 +93,6 @@ public class ToxicTest {
         inOrder.verify(player1).getAggressivity();
         inOrder.verify(player2).getDefence();
         inOrder.verify(player2).suffer(eq(5), argThat(instanceOf(Toxin.class)));
-
-        verifyNoMoreInteractions(player1, player2);
     }
 
     @Test
@@ -107,7 +105,5 @@ public class ToxicTest {
         inOrder.verify(player1).getAggressivity();
         inOrder.verify(player2).getDefence();
         inOrder.verify(player2).suffer(5, Effect.none);
-
-        verifyNoMoreInteractions(player1, player2);
     }
 }

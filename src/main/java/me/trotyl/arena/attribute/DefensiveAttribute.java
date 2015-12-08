@@ -1,14 +1,20 @@
 package me.trotyl.arena.attribute;
 
 
+import me.trotyl.arena.effect.Effect;
 import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.role.Player;
 
-public class DefensiveAttribute extends Attribute {
+public abstract class DefensiveAttribute extends Attribute {
 
     protected DefensiveAttribute(int limit, float rate) {
         super(limit, rate);
     }
 
-    public void apply(DamageRecord damage, Player attacker, Player defender) { }
+    public DamageRecord apply(DamageRecord damage, Effect effect, Player attacker, Player defender) {
+
+        defender.suffer(damage.extent, effect);
+
+        return damage;
+    }
 }

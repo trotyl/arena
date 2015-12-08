@@ -3,6 +3,7 @@ package me.trotyl.arena.role;
 
 import me.trotyl.arena.attribute.AggressiveAttribute;
 import me.trotyl.arena.attribute.Attribute;
+import me.trotyl.arena.attribute.DefensiveAttribute;
 import me.trotyl.arena.effect.Effect;
 import me.trotyl.arena.procedure.AttackProcedure;
 import me.trotyl.arena.procedure.EffectProcedure;
@@ -57,8 +58,8 @@ public class Player {
         return 0;
     }
 
-    public Attribute getDefensiveAttribute() {
-        return Attribute.normalAttack;
+    public DefensiveAttribute getDefensiveAttribute() {
+        return Attribute.normalDefence;
     }
 
     public Effect getEffect() {
