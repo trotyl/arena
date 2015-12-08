@@ -65,7 +65,8 @@ public class AttackFormatterTest {
     @Test
     public void format_should_have_proper_result_with_flaming() {
 
-        AttackProcedure procedure = AttackProcedure.create(PlayerRecord.create("张三", 10, Role.fighter),
+        AttackProcedure procedure = AttackProcedure.create(
+                PlayerRecord.create("张三", 10, Role.fighter),
                 PlayerRecord.create("李四", 20, Role.normal),
                 DamageRecord.create(5, Genre.flaming));
 
@@ -77,7 +78,8 @@ public class AttackFormatterTest {
     @Test
     public void format_should_have_proper_result_with_freezing() {
 
-        AttackProcedure procedure = AttackProcedure.create(PlayerRecord.create("张三", 10, Role.fighter),
+        AttackProcedure procedure = AttackProcedure.create(
+                PlayerRecord.create("张三", 10, Role.fighter),
                 PlayerRecord.create("李四", 20, Role.normal),
                 DamageRecord.create(5, Genre.freezing));
 
@@ -89,7 +91,8 @@ public class AttackFormatterTest {
     @Test
     public void format_should_have_proper_result_with_dizzy() {
 
-        AttackProcedure procedure = AttackProcedure.create(PlayerRecord.create("张三", 10, Role.fighter),
+        AttackProcedure procedure = AttackProcedure.create(
+                PlayerRecord.create("张三", 10, Role.fighter),
                 PlayerRecord.create("李四", 20, Role.normal),
                 DamageRecord.create(5, Genre.dizzy));
 
@@ -111,9 +114,23 @@ public class AttackFormatterTest {
     }
 
     @Test
+    public void format_should_have_proper_result_with_weapon_and_effect() {
+
+        AttackProcedure procedure = AttackProcedure.create(
+                PlayerRecord.create("张三", 10, Role.fighter, WeaponRecord.create("优质木棒"), ArmorRecord.none),
+                PlayerRecord.create("李四", 20, Role.normal),
+                DamageRecord.create(5, Genre.toxic));
+
+        String result = formatter.format(procedure);
+
+        assertThat(result, is("战士张三用优质木棒攻击了普通人李四, 李四受到了5点伤害, 李四中毒了, 李四剩余生命: 20"));
+    }
+
+    @Test
     public void format_should_have_proper_result_with_repel() {
 
-        AttackProcedure procedure = AttackProcedure.create(PlayerRecord.create("张三", 10, Role.fighter),
+        AttackProcedure procedure = AttackProcedure.create(
+                PlayerRecord.create("张三", 10, Role.fighter),
                 PlayerRecord.create("李四", 20, Role.normal),
                 RepelDamageRecord.create(2, DamageRecord.create(5)));
 
@@ -125,7 +142,8 @@ public class AttackFormatterTest {
     @Test
     public void format_should_have_proper_result_with_repel_and_toxic() {
 
-        AttackProcedure procedure = AttackProcedure.create(PlayerRecord.create("张三", 10, Role.fighter),
+        AttackProcedure procedure = AttackProcedure.create(
+                PlayerRecord.create("张三", 10, Role.fighter),
                 PlayerRecord.create("李四", 20, Role.normal),
                 RepelDamageRecord.create(2, DamageRecord.create(5, Genre.toxic)));
 
@@ -137,7 +155,8 @@ public class AttackFormatterTest {
     @Test
     public void format_should_have_proper_result_with_repel_and_striking() {
 
-        AttackProcedure procedure = AttackProcedure.create(PlayerRecord.create("张三", 10, Role.fighter),
+        AttackProcedure procedure = AttackProcedure.create(
+                PlayerRecord.create("张三", 10, Role.fighter),
                 PlayerRecord.create("李四", 20, Role.normal),
                 RepelDamageRecord.create(2, DamageRecord.create(15, Genre.striking)));
 
@@ -149,7 +168,8 @@ public class AttackFormatterTest {
     @Test
     public void format_should_have_proper_result_with_carom() {
 
-        AttackProcedure procedure = AttackProcedure.create(PlayerRecord.create("张三", 10, Role.fighter),
+        AttackProcedure procedure = AttackProcedure.create(
+                PlayerRecord.create("张三", 10, Role.fighter),
                 PlayerRecord.create("李四", 20, Role.normal),
                 CaromDamageRecord.create(DamageRecord.create(5), DamageRecord.create(5)));
 
@@ -161,7 +181,8 @@ public class AttackFormatterTest {
     @Test
     public void format_should_have_proper_result_with_carom_and_toxic_then_toxic() {
 
-        AttackProcedure procedure = AttackProcedure.create(PlayerRecord.create("张三", 10, Role.fighter),
+        AttackProcedure procedure = AttackProcedure.create(
+                PlayerRecord.create("张三", 10, Role.fighter),
                 PlayerRecord.create("李四", 20, Role.normal),
                 CaromDamageRecord.create(DamageRecord.create(5, Genre.toxic), DamageRecord.create(5, Genre.toxic)));
 
@@ -173,7 +194,8 @@ public class AttackFormatterTest {
     @Test
     public void format_should_have_proper_result_with_carom_and_toxic_then_striking() {
 
-        AttackProcedure procedure = AttackProcedure.create(PlayerRecord.create("张三", 10, Role.fighter),
+        AttackProcedure procedure = AttackProcedure.create(
+                PlayerRecord.create("张三", 10, Role.fighter),
                 PlayerRecord.create("李四", 20, Role.normal),
                 CaromDamageRecord.create(DamageRecord.create(5, Genre.toxic), DamageRecord.create(5, Genre.striking)));
 
@@ -185,7 +207,8 @@ public class AttackFormatterTest {
     @Test
     public void format_should_have_proper_result_with_counter() {
 
-        AttackProcedure procedure = AttackProcedure.create(PlayerRecord.create("张三", 10, Role.fighter),
+        AttackProcedure procedure = AttackProcedure.create(
+                PlayerRecord.create("张三", 10, Role.fighter),
                 PlayerRecord.create("李四", 20, Role.normal),
                 CounterDamageRecord.create(DamageRecord.create(5), DamageRecord.create(5)));
 
@@ -195,15 +218,23 @@ public class AttackFormatterTest {
     }
 
     @Test
-    public void format_should_have_proper_result_with_weapon_and_effect() {
+    public void format_should_have_proper_result_with_oracle() {
 
         AttackProcedure procedure = AttackProcedure.create(
-                PlayerRecord.create("张三", 10, Role.fighter, WeaponRecord.create("优质木棒"), ArmorRecord.none),
-                PlayerRecord.create("李四", 20, Role.normal),
-                DamageRecord.create(5, Genre.toxic));
+                PlayerRecord.create("张三", 11, Role.assassin, WeaponRecord.create("峨眉刺"), ArmorRecord.none),
+                PlayerRecord.create("李四", 3, Role.fighter),
+                CaromDamageRecord.create(
+                        CounterDamageRecord.create(
+                                DamageRecord.create(8, Genre.freezing),
+                                DamageRecord.create(9, Genre.flaming)
+                        ),
+                        CounterDamageRecord.create(
+                                DamageRecord.create(24, Genre.striking),
+                                DamageRecord.create(9, Genre.toxic)
+                        )));
 
         String result = formatter.format(procedure);
 
-        assertThat(result, is("战士张三用优质木棒攻击了普通人李四, 李四受到了5点伤害, 李四中毒了, 李四剩余生命: 20"));
+        assertThat(result, is("刺客张三用峨眉刺攻击了战士李四, 李四受到了8点伤害, 李四冻僵了, 李四发动了格挡反击, 张三受到了9点伤害, 张三着火了, 张三发动了连击, 张三发动了全力一击, 李四受到了24点伤害, 李四发动了格挡反击, 张三受到了9点伤害, 张三中毒了, 李四剩余生命: 3, 张三剩余生命: 11"));
     }
 }

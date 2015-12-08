@@ -9,6 +9,7 @@ public class AttackFormatter extends Formatter<AttackProcedure> {
 
     @Override
     public String format(AttackProcedure procedure) {
+
         if (procedure.equals(AttackProcedure.none)) {
             return null;
         }
@@ -90,11 +91,27 @@ public class AttackFormatter extends Formatter<AttackProcedure> {
     }
 
     private String formatStatus(DamageRecord damage, PlayerRecord attacker, PlayerRecord defender) {
+
         switch (damage.genre) {
             case counter:
                 return String.format("%s剩余生命: %d, %s剩余生命: %d",
                         defender.getName(), defender.getHealth(),
                         attacker.getName(), attacker.getHealth());
+            case carom:
+                DamageRecord first = ((CaromDamageRecord) damage).first;
+                DamageRecord second = ((CaromDamageRecord) damage).second;
+                switch (first.genre) {
+                    case counter:
+                        return formatStatus(first, attacker, defender);
+                    case carom:
+                        return formatStatus(first, attacker, defender);
+                }
+                switch (second.genre) {
+                    case counter:
+                        return formatStatus(first, attacker, defender);
+                    case carom:
+                        return formatStatus(first, attacker, defender);
+                }
             default:
                 return String.format("%s剩余生命: %d",
                         defender.getName(), defender.getHealth());
