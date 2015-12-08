@@ -2,6 +2,7 @@ package me.trotyl.arena.effect;
 
 import me.trotyl.arena.attribute.AggressiveAttribute;
 import me.trotyl.arena.attribute.Attribute;
+import me.trotyl.arena.attribute.DefensiveAttribute;
 import me.trotyl.arena.attribute.Genre;
 import me.trotyl.arena.record.Action;
 import me.trotyl.arena.record.DamageRecord;
@@ -36,7 +37,7 @@ public class ToxinTest {
         attribute = spy(new AggressiveAttribute(-1, 0.0f) {
 
             @Override
-            public DamageRecord apply(Player attacker, Player defender, AggressiveAttribute next) {
+            public DamageRecord apply(Player a, Player d, AggressiveAttribute aa, DefensiveAttribute da) {
                 return DamageRecord.none;
             }
         });
@@ -70,10 +71,10 @@ public class ToxinTest {
         toxin.sway(player1, player2, attribute);
 
         verifyZeroInteractions(player1);
-        verifyZeroInteractions(player2);
 
-        InOrder inOrder = inOrder(attribute);
-        inOrder.verify(attribute).apply(player1, player2, Attribute.normalAttack);
+        InOrder inOrder = inOrder(attribute, player2);
+        inOrder.verify(player2).getDefensiveAttribute();
+        inOrder.verify(attribute).apply(player1, player2, Attribute.normalAttack, Attribute.normalDefence);
 
         verifyNoMoreInteractions(attribute);
     }

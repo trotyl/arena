@@ -24,9 +24,9 @@ public class Repel extends AggressiveAttribute {
     }
 
     @Override
-    public DamageRecord apply(Player attacker, Player defender, AggressiveAttribute next) {
+    public DamageRecord apply(Player attacker, Player defender, AggressiveAttribute next, DefensiveAttribute echo) {
 
-        DamageRecord record = next.apply(attacker, defender, Attribute.normalAttack);
+        DamageRecord record = next.apply(attacker, defender, Attribute.normalAttack, echo);
 
         if (!works()) {
             return record;

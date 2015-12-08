@@ -51,18 +51,17 @@ public abstract class AggressiveAttribute extends Attribute {
         return rate;
     }
 
-    public DamageRecord apply(Player attacker, Player defender, AggressiveAttribute next) {
+
+    public DamageRecord apply(Player attacker, Player defender, AggressiveAttribute next, DefensiveAttribute echo) {
 
         if (!works()) {
-            return next.apply(attacker, defender, AggressiveAttribute.normalAttack);
+            return next.apply(attacker, defender, AggressiveAttribute.normalAttack, Attribute.normalDefence);
         }
 
         int damage = getDamage(attacker, defender);
         DamageRecord damageRecord = DamageRecord.create(damage, getGenre());
 
-        DefensiveAttribute defensiveAttribute = defender.getDefensiveAttribute();
-
-        return defensiveAttribute.apply(damageRecord, getEffect(), attacker, defender);
+        return echo.apply(damageRecord, getEffect(), attacker, defender);
     }
 
     protected int getDamage(Player attacker, Player defender) {

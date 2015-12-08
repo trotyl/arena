@@ -25,7 +25,7 @@ public class CompositeAttribute extends AggressiveAttribute {
     }
 
     @Override
-    public DamageRecord apply(Player attacker, Player defender, AggressiveAttribute next) {
-        return first.apply(attacker, defender, second);
+    public DamageRecord apply(Player attacker, Player defender, AggressiveAttribute next, DefensiveAttribute echo) {
+        return first.apply(attacker, defender, second, echo);
     }
 }

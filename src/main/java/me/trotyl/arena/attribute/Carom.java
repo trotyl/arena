@@ -16,15 +16,15 @@ public class Carom extends AggressiveAttribute {
     }
 
     @Override
-    public DamageRecord apply(Player attacker, Player defender, AggressiveAttribute next) {
+    public DamageRecord apply(Player attacker, Player defender, AggressiveAttribute next, DefensiveAttribute echo) {
 
-        DamageRecord first = next.apply(attacker, defender, Attribute.normalAttack);
+        DamageRecord first = next.apply(attacker, defender, Attribute.normalAttack, echo);
 
-        if (!works() || !defender.alive()) {
+        if (!works() || !defender.alive() || !attacker.alive()) {
             return first;
         }
 
-        DamageRecord second = next.apply(attacker, defender, Attribute.normalAttack);
+        DamageRecord second = next.apply(attacker, defender, Attribute.normalAttack, echo);
 
         return CaromDamageRecord.create(first, second);
     }

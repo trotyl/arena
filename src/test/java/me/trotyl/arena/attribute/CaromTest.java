@@ -52,7 +52,7 @@ public class CaromTest {
     @Test
     public void apply_should_have_proper_result() {
 
-        DamageRecord damage = carom.apply(player1, player2, Attribute.normalAttack);
+        DamageRecord damage = carom.apply(player1, player2, Attribute.normalAttack, Attribute.normalDefence);
 
         PlayerRecord player1Record = player1.record();
         PlayerRecord player2Record = player2.record();
@@ -77,7 +77,7 @@ public class CaromTest {
         player1 = spy(Player.create("张三", 1, 5));
         player2 = spy(Player.create("李四", 1, 8));
 
-        DamageRecord damage = carom.apply(player1, player2, Attribute.normalAttack);
+        DamageRecord damage = carom.apply(player1, player2, Attribute.normalAttack, Attribute.normalDefence);
 
         assertThat(damage.genre, is(Genre.none));
         assertThat(damage.extent, is(5));
@@ -87,7 +87,7 @@ public class CaromTest {
     @Test
     public void apply_should_have_proper_invocation_with_effect() {
 
-        carom.apply(player1, player2, Attribute.normalAttack);
+        carom.apply(player1, player2, Attribute.normalAttack, Attribute.normalDefence);
 
         InOrder inOrder = inOrder(player1, player2);
         inOrder.verify(player1).getAggressivity();
@@ -102,7 +102,7 @@ public class CaromTest {
     public void apply_should_have_proper_invocation_without_effect() {
 
         when(random.nextFloat()).thenReturn(2.0f);
-        carom.apply(player1, player2, Attribute.normalAttack);
+        carom.apply(player1, player2, Attribute.normalAttack, Attribute.normalDefence);
 
         InOrder inOrder = inOrder(player1, player2);
         inOrder.verify(player1).getAggressivity();

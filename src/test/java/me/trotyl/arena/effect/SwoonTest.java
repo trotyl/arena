@@ -1,6 +1,7 @@
 package me.trotyl.arena.effect;
 
 import me.trotyl.arena.attribute.AggressiveAttribute;
+import me.trotyl.arena.attribute.DefensiveAttribute;
 import me.trotyl.arena.attribute.Genre;
 import me.trotyl.arena.record.Action;
 import me.trotyl.arena.record.DamageRecord;
@@ -35,7 +36,7 @@ public class SwoonTest {
         attribute = spy(new AggressiveAttribute(-1, 0.0f) {
 
             @Override
-            public DamageRecord apply(Player attacker, Player defender, AggressiveAttribute next) {
+            public DamageRecord apply(Player a, Player d, AggressiveAttribute aa, DefensiveAttribute da) {
                 return DamageRecord.none;
             }
         });

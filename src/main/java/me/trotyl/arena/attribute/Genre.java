@@ -10,5 +10,6 @@ public enum Genre {
     flaming,
     freezing,
     repel,
-    carom
+    carom,
+    counter
 }

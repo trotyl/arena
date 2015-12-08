@@ -57,7 +57,7 @@ public class RepelTest {
     @Test
     public void apply_should_have_proper_result() {
 
-        DamageRecord damage = repel.apply(player1, player2, Attribute.normalAttack);
+        DamageRecord damage = repel.apply(player1, player2, Attribute.normalAttack, Attribute.normalDefence);
 
         PlayerRecord player1Record = player1.record();
         PlayerRecord player2Record = player2.record();
@@ -79,7 +79,7 @@ public class RepelTest {
     @Test
     public void apply_should_have_proper_invocation_with_effect() {
 
-        repel.apply(player1, player2, Attribute.normalAttack);
+        repel.apply(player1, player2, Attribute.normalAttack, Attribute.normalDefence);
 
         InOrder inOrder = inOrder(player1, player2);
         inOrder.verify(player1).getAggressivity();
@@ -91,7 +91,7 @@ public class RepelTest {
     public void apply_should_have_proper_invocation_without_effect() {
 
         when(random.nextFloat()).thenReturn(2.0f);
-        repel.apply(player1, player2, Attribute.normalAttack);
+        repel.apply(player1, player2, Attribute.normalAttack, Attribute.normalDefence);
 
         InOrder inOrder = inOrder(player1, player2);
         inOrder.verify(player1).getAggressivity();
