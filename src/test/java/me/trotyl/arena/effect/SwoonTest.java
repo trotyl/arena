@@ -117,10 +117,6 @@ public class SwoonTest {
 
         assertThat(swoon.valid(), is(true));
 
-        swoon.sway(player1, player2, attribute);
-        assertThat(swoon.valid(), is(true));
-
-        swoon.sway(player1, player2, attribute);
         assertThat(swoon.valid(), is(false));
     }
 }

@@ -46,6 +46,9 @@ public abstract class Effect {
     }
 
     public boolean valid() {
+
+        remain --;
+
         return remain > 0;
     }
 

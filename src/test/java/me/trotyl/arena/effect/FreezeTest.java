@@ -58,18 +58,18 @@ public class FreezeTest {
         assertThat(record.genre, is(Genre.freezing));
         assertThat(record.remain, is(5));
 
-        freeze.sway(Player.create("None", 1, 0), Player.create("None", 1, 0), Attribute.none);
+        freeze.valid();
         record = freeze.record(Action.none);
 
         assertThat(record, is(EffectRecord.none));
 
-        freeze.sway(Player.create("None", 1, 0), Player.create("None", 1, 0), Attribute.none);
+        freeze.valid();
         record = freeze.record(Action.none);
 
         assertThat(record.genre, is(Genre.freezing));
         assertThat(record.remain, is(3));
 
-        freeze.sway(Player.create("None", 1, 0), Player.create("None", 1, 0), Attribute.none);
+        freeze.valid();
         record = freeze.record(Action.none);
 
         assertThat(record, is(EffectRecord.none));
@@ -81,22 +81,22 @@ public class FreezeTest {
         int distance;
 
         distance = freeze.rein(player1);
-        freeze.sway(player1, player2, attribute);
+        freeze.valid();
 
         assertThat(distance, is(0));
 
         distance = freeze.rein(player1);
-        freeze.sway(player1, player2, attribute);
+        freeze.valid();
 
         assertThat(distance, is(1));
 
         distance = freeze.rein(player1);
-        freeze.sway(player1, player2, attribute);
+        freeze.valid();
 
         assertThat(distance, is(0));
 
         distance = freeze.rein(player1);
-        freeze.sway(player1, player2, attribute);
+        freeze.valid();
 
         assertThat(distance, is(1));
     }
@@ -107,19 +107,23 @@ public class FreezeTest {
         DamageRecord damage;
 
         damage = freeze.sway(player1, player2, attribute);
+        freeze.valid();
 
         assertThat(damage, is(DamageRecord.none));
 
         damage = freeze.sway(player1, player2, attribute);
+        freeze.valid();
 
         assertThat(damage, not(DamageRecord.none));
         assertThat(damage.extent, is(5));
 
         damage = freeze.sway(player1, player2, attribute);
+        freeze.valid();
 
         assertThat(damage, is(DamageRecord.none));
 
         damage = freeze.sway(player1, player2, attribute);
+        freeze.valid();
 
         assertThat(damage, not(DamageRecord.none));
         assertThat(damage.extent, is(5));
@@ -129,17 +133,20 @@ public class FreezeTest {
     public void sway_should_have_proper_invocation() {
 
         freeze.sway(player1, player2, attribute);
+        freeze.valid();
 
         verifyZeroInteractions(player1);
         verifyZeroInteractions(player2);
         verifyZeroInteractions(attribute);
 
         freeze.sway(player1, player2, attribute);
+        freeze.valid();
 
         InOrder inOrder = inOrder(attribute);
         inOrder.verify(attribute).apply(player1, player2, Attribute.none);
 
         freeze.sway(player1, player2, attribute);
+        freeze.valid();
 
         verifyZeroInteractions(player1);
         verifyZeroInteractions(player2);
@@ -172,19 +179,12 @@ public class FreezeTest {
 
         assertThat(freeze.valid(), is(true));
 
-        freeze.sway(player1, player2, attribute);
         assertThat(freeze.valid(), is(true));
 
-        freeze.sway(player1, player2, attribute);
         assertThat(freeze.valid(), is(true));
 
-        freeze.sway(player1, player2, attribute);
         assertThat(freeze.valid(), is(true));
 
-        freeze.sway(player1, player2, attribute);
-        assertThat(freeze.valid(), is(true));
-
-        freeze.sway(player1, player2, attribute);
         assertThat(freeze.valid(), is(false));
     }
 }

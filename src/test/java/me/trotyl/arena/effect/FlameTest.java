@@ -106,12 +106,9 @@ public class FlameTest {
 
     @Test
     public void valid_should_have_proper_result() {
+
         assertThat(flame.valid(), is(true));
 
-        flame.sway(player1, player2, attribute);
-        assertThat(flame.valid(), is(true));
-
-        flame.sway(player1, player2, attribute);
         assertThat(flame.valid(), is(false));
     }
 }

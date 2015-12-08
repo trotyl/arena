@@ -1,11 +1,9 @@
 package me.trotyl.arena.effect;
 
 
-import me.trotyl.arena.attribute.Attribute;
 import me.trotyl.arena.attribute.Genre;
 import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.role.Attackable;
-import me.trotyl.arena.role.Attacker;
 
 public class Flame extends Effect {
 
@@ -27,14 +25,6 @@ public class Flame extends Effect {
         super(limit);
 
         this.extent = extent;
-    }
-
-    @Override
-    public DamageRecord sway(Attacker attacker, Attackable attackable, Attribute attribute) {
-
-        remain--;
-
-        return super.sway(attacker, attackable, attribute);
     }
 
     @Override

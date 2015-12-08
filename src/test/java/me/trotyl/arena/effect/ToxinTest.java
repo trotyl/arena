@@ -109,10 +109,6 @@ public class ToxinTest {
 
         assertThat(toxin.valid(), is(true));
 
-        toxin.sway(player1, player2, attribute);
-        assertThat(toxin.valid(), is(true));
-
-        toxin.sway(player1, player2, attribute);
         assertThat(toxin.valid(), is(false));
     }
 }
