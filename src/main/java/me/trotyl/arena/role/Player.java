@@ -84,6 +84,8 @@ public class Player {
 
     public Triplet<EffectProcedure, MoveProcedure, AttackProcedure> action(Player defender, int distance) {
 
+        Effect currentEffect = this.effect;
+
         Action action = getRange() < distance? Action.move: Action.attack;
         EffectProcedure effect = impact(defender, action);
 
@@ -100,7 +102,7 @@ public class Player {
             attack = attack(defender);
         }
 
-        if (!this.effect.valid()) {
+        if (!currentEffect.valid()) {
             this.effect = Effect.none;
         }
 

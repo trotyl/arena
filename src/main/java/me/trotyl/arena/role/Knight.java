@@ -38,6 +38,8 @@ public class Knight extends Soldier {
     @Override
     public Triplet<EffectProcedure, MoveProcedure, AttackProcedure> action(Player defender, int distance) {
 
+        Effect currentEffect = this.effect;
+
         Action action = getRange() < distance? Action.move: Action.attack;
         EffectProcedure effect = impact(defender, action);
 
@@ -54,7 +56,7 @@ public class Knight extends Soldier {
         AttackProcedure attack = attack(defender);
 
 
-        if (!this.effect.valid()) {
+        if (!currentEffect.valid()) {
             this.effect = Effect.none;
         }
 
