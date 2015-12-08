@@ -5,15 +5,18 @@ import me.trotyl.arena.attribute.Genre;
 
 public class CaromDamageRecord extends DamageRecord {
 
-    public static CaromDamageRecord create(int damage, int another) {
-        return new CaromDamageRecord(damage, another);
+    public static CaromDamageRecord create(DamageRecord first, DamageRecord second) {
+        return new CaromDamageRecord(first, second);
     }
 
-    public final int another;
+    public final DamageRecord first;
+    public final DamageRecord second;
 
-    protected CaromDamageRecord(int extent, int another) {
-        super(extent, 0, Genre.carom);
+    protected CaromDamageRecord(DamageRecord first, DamageRecord second) {
 
-        this.another = another;
+        super(0, 0, Genre.carom);
+
+        this.first = first;
+        this.second = second;
     }
 }

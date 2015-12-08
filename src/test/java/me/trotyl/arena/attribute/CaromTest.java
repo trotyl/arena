@@ -58,13 +58,14 @@ public class CaromTest {
         PlayerRecord player2Record = player2.record();
 
         assertThat(damage.genre, is(Genre.carom));
-        assertThat(damage.extent, is(5));
+        assertThat(damage.extent, is(0));
         assertThat(damage.distance, is(0));
         assertThat(damage, instanceOf(CaromDamageRecord.class));
 
         CaromDamageRecord caromDamage = (CaromDamageRecord) damage;
 
-        assertThat(caromDamage.another, is(5));
+        assertThat(caromDamage.first.extent, is(5));
+        assertThat(caromDamage.second.extent, is(5));
 
         assertThat(player1Record.getHealth(), is(10));
         assertThat(player2Record.getHealth(), is(10));
