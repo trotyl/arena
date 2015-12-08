@@ -4,11 +4,12 @@ import me.trotyl.arena.formatter.Formatter;
 import me.trotyl.arena.formatter.FormatterGroup;
 import me.trotyl.arena.parser.Parser;
 import me.trotyl.arena.parser.ParserGroup;
-import me.trotyl.arena.procedure.ActionProcedure;
+import me.trotyl.arena.procedure.AttackProcedure;
 import me.trotyl.arena.procedure.EffectProcedure;
+import me.trotyl.arena.procedure.MoveProcedure;
 import me.trotyl.arena.procedure.OverProcedure;
 import me.trotyl.arena.role.Player;
-import org.javatuples.Pair;
+import org.javatuples.Triplet;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
@@ -62,14 +63,19 @@ public class Program {
 
     public void run() {
         while (!game.end()) {
-            Pair<EffectProcedure, ActionProcedure> pair = game.run();
+            Triplet<EffectProcedure, MoveProcedure, AttackProcedure> triplet = game.run();
 
-            String effect = formatters.effectFormatter.format(pair.getValue0());
+            String effect = formatters.effectFormatter.format(triplet.getValue0());
             if (effect != null) {
                 out.println(effect);
             }
 
-            String attack = formatters.actionFormatter.format(pair.getValue1());
+            String move = formatters.moveFormatter.format(triplet.getValue1());
+            if (move != null) {
+                out.println(move);
+            }
+
+            String attack = formatters.attackFormatter.format(triplet.getValue2());
             if (attack != null) {
                 out.println(attack);
             }

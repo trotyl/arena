@@ -6,11 +6,11 @@ import me.trotyl.arena.effect.Effect;
 import me.trotyl.arena.equipment.Armor;
 import me.trotyl.arena.equipment.Length;
 import me.trotyl.arena.equipment.Weapon;
-import me.trotyl.arena.procedure.ActionProcedure;
+import me.trotyl.arena.procedure.AttackProcedure;
 import me.trotyl.arena.procedure.EffectProcedure;
 import me.trotyl.arena.procedure.MoveProcedure;
 import me.trotyl.arena.record.PlayerRecord;
-import org.javatuples.Pair;
+import org.javatuples.Triplet;
 
 public class Knight extends Soldier {
 
@@ -36,23 +36,25 @@ public class Knight extends Soldier {
     }
 
     @Override
-    public Pair<EffectProcedure, ActionProcedure> action(Attackable attackable, int distance) {
+    public Triplet<EffectProcedure, MoveProcedure, AttackProcedure> action(Attackable attackable, int distance) {
 
         EffectProcedure effect = impact(attackable);
 
         if (!alive()) {
-            return new Pair<>(effect, ActionProcedure.none);
+            return new Triplet<>(effect, MoveProcedure.none, AttackProcedure.none);
         }
 
-        MoveProcedure move = getRange() < distance ? MoveProcedure.create(getVelocity()) : MoveProcedure.none;
+        MoveProcedure move = getRange() < distance ?
+                MoveProcedure.create(getVelocity(), record(), attackable.record()) :
+                MoveProcedure.none;
 
-        ActionProcedure action = ActionProcedure.create(move, attack(attackable));
+        AttackProcedure attack = attack(attackable);
 
         if (!this.effect.valid()) {
             this.effect = Effect.none;
         }
 
-        return new Pair<>(effect, action);
+        return new Triplet<>(effect, move, attack);
     }
 
     @Override

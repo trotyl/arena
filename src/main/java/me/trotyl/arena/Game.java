@@ -1,13 +1,14 @@
 package me.trotyl.arena;
 
 
-import me.trotyl.arena.procedure.ActionProcedure;
+import me.trotyl.arena.procedure.AttackProcedure;
 import me.trotyl.arena.procedure.EffectProcedure;
+import me.trotyl.arena.procedure.MoveProcedure;
 import me.trotyl.arena.procedure.OverProcedure;
 import me.trotyl.arena.role.Attackable;
 import me.trotyl.arena.role.Attacker;
 import me.trotyl.arena.role.Player;
-import org.javatuples.Pair;
+import org.javatuples.Triplet;
 
 public class Game {
 
@@ -45,29 +46,29 @@ public class Game {
         return OverProcedure.create(winner.record(), loser.record());
     }
 
-    public Pair<EffectProcedure, ActionProcedure> run() {
+    public Triplet<EffectProcedure, MoveProcedure, AttackProcedure> run() {
 
         if (end()) {
-            return new Pair<>(EffectProcedure.none, ActionProcedure.none);
+            return new Triplet<>(EffectProcedure.none, MoveProcedure.none, AttackProcedure.none);
         }
 
         Attacker attacker = inTurnOfPlayer1? player1: player2;
         Attackable attackable = attacker.equals(player1)? player2: player1;
 
-        Pair<EffectProcedure, ActionProcedure> pair = attacker.action(attackable, distance);
+        Triplet<EffectProcedure, MoveProcedure, AttackProcedure> triplet = attacker.action(attackable, distance);
 
         inTurnOfPlayer1 = ! inTurnOfPlayer1;
 
-        distance -= pair.getValue1().move.decrement;
+        distance -= triplet.getValue1().decrement;
         if (distance < 1) {
             distance = 1;
         }
 
-        int increment = pair.getValue1().attack.damage.distance;
+        int increment = triplet.getValue2().damage.distance;
         if (increment > 0) {
             distance += increment;
         }
 
-        return pair;
+        return triplet;
     }
 }

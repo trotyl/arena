@@ -3,10 +3,14 @@ package me.trotyl.arena.role;
 import me.trotyl.arena.attribute.Attribute;
 import me.trotyl.arena.attribute.Genre;
 import me.trotyl.arena.attribute.Toxic;
-import me.trotyl.arena.equipment.*;
-import me.trotyl.arena.procedure.ActionProcedure;
+import me.trotyl.arena.equipment.LongWeapon;
+import me.trotyl.arena.equipment.MediumWeapon;
+import me.trotyl.arena.equipment.ShortWeapon;
+import me.trotyl.arena.equipment.Weapon;
+import me.trotyl.arena.procedure.AttackProcedure;
 import me.trotyl.arena.procedure.EffectProcedure;
-import org.javatuples.Pair;
+import me.trotyl.arena.procedure.MoveProcedure;
+import org.javatuples.Triplet;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -52,10 +56,10 @@ public class AssassinTest {
 
         assassin.equip(shortWeapon);
 
-        Pair<EffectProcedure, ActionProcedure> pair = assassin.action(Player.create("王二", 10, 5), 1);
-        ActionProcedure procedure = pair.getValue1();
+        Triplet<EffectProcedure, MoveProcedure, AttackProcedure> triplet = assassin.action(Player.create("王二", 10, 5), 1);
+        AttackProcedure procedure = triplet.getValue2();
 
-        assertThat(procedure.attack.damage.genre, is(Genre.toxic));
+        assertThat(procedure.damage.genre, is(Genre.toxic));
     }
 
     @Test
@@ -63,10 +67,10 @@ public class AssassinTest {
 
         assassin.equip(mediumWeapon);
 
-        Pair<EffectProcedure, ActionProcedure> pair = assassin.action(Player.create("王二", 10, 5), 1);
-        ActionProcedure procedure = pair.getValue1();
+        Triplet<EffectProcedure, MoveProcedure, AttackProcedure> triplet = assassin.action(Player.create("王二", 10, 5), 1);
+        AttackProcedure procedure = triplet.getValue2();
 
-        assertThat(procedure.attack.damage.genre, is(Genre.none));
+        assertThat(procedure.damage.genre, is(Genre.none));
     }
 
     @Test

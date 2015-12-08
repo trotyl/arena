@@ -4,12 +4,13 @@ import me.trotyl.arena.attribute.Genre;
 import me.trotyl.arena.effect.Effect;
 import me.trotyl.arena.effect.Flame;
 import me.trotyl.arena.effect.Toxin;
-import me.trotyl.arena.procedure.ActionProcedure;
+import me.trotyl.arena.procedure.AttackProcedure;
 import me.trotyl.arena.procedure.EffectProcedure;
+import me.trotyl.arena.procedure.MoveProcedure;
 import me.trotyl.arena.record.ArmorRecord;
 import me.trotyl.arena.record.PlayerRecord;
 import me.trotyl.arena.record.WeaponRecord;
-import org.javatuples.Pair;
+import org.javatuples.Triplet;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -56,16 +57,16 @@ public class PlayerTest {
     @Test
     public void attack_should_have_proper_result_without_effect() {
 
-        Pair<EffectProcedure, ActionProcedure> pair = player0.action(player1, 1);
-        EffectProcedure effectProcedure = pair.getValue0();
-        ActionProcedure attackProcedure = pair.getValue1();
+        Triplet<EffectProcedure, MoveProcedure, AttackProcedure> triplet = player0.action(player1, 1);
+        EffectProcedure effectProcedure = triplet.getValue0();
+        AttackProcedure attackProcedure = triplet.getValue2();
 
         assertThat(effectProcedure, is(EffectProcedure.none));
-        assertThat(attackProcedure.attack.attacker.getName(), is("张三"));
-        assertThat(attackProcedure.attack.attackable.getName(), is("李四"));
-        assertThat(attackProcedure.attack.attackable.getHealth(), is(15));
-        assertThat(attackProcedure.attack.damage.genre, is(Genre.none));
-        assertThat(attackProcedure.attack.damage.extent, is(5));
+        assertThat(attackProcedure.attacker.getName(), is("张三"));
+        assertThat(attackProcedure.attackable.getName(), is("李四"));
+        assertThat(attackProcedure.attackable.getHealth(), is(15));
+        assertThat(attackProcedure.damage.genre, is(Genre.none));
+        assertThat(attackProcedure.damage.extent, is(5));
     }
 
     @Test
@@ -80,13 +81,13 @@ public class PlayerTest {
 
         assertThat(player2.effect, instanceOf(Flame.class));
 
-        Pair<EffectProcedure, ActionProcedure> attack = player2.action(player3, 1);
+        Triplet<EffectProcedure, MoveProcedure, AttackProcedure> triplet = player2.action(player3, 1);
 
         assertThat(player2.getHealth(), is(-4));
         assertThat(player3.getHealth(), is(1));
 
-        assertThat(attack.getValue0(), not(EffectProcedure.none));
-        assertThat(attack.getValue1(), is(ActionProcedure.none));
+        assertThat(triplet.getValue0(), not(EffectProcedure.none));
+        assertThat(triplet.getValue2(), is(AttackProcedure.none));
     }
 
     @Test

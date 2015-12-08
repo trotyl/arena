@@ -1,30 +1,29 @@
 package me.trotyl.arena.formatter;
 
-import me.trotyl.arena.procedure.ActionProcedure;
 import me.trotyl.arena.procedure.AttackProcedure;
 import me.trotyl.arena.record.*;
 import me.trotyl.arena.role.Role;
 
 
-public class ActionFormatter extends Formatter<ActionProcedure> {
+public class AttackFormatter extends Formatter<AttackProcedure> {
 
     @Override
-    public String format(ActionProcedure procedure) {
-        if (procedure.attack.equals(AttackProcedure.none)) {
+    public String format(AttackProcedure procedure) {
+        if (procedure.equals(AttackProcedure.none)) {
             return null;
         }
 
-        String weaponPart = (procedure.attack.attacker.getWeapon() != WeaponRecord.none) ?
-                String.format("用%s", procedure.attack.attacker.getWeapon().getName()) : "";
+        String weaponPart = (procedure.attacker.getWeapon() != WeaponRecord.none) ?
+                String.format("用%s", procedure.attacker.getWeapon().getName()) : "";
 
-        String attributePart = formatInner(procedure.attack.damage,
-                                           procedure.attack.attacker,
-                                           procedure.attack.attackable);
+        String attributePart = formatInner(procedure.damage,
+                procedure.attacker,
+                procedure.attackable);
 
         return String.format("%s%s%s攻击了%s%s, %s%s剩余生命: %d",
-                formatRole(procedure.attack.attacker.getRole()), procedure.attack.attacker.getName(), weaponPart,
-                formatRole(procedure.attack.attackable.getRole()), procedure.attack.attackable.getName(),
-                attributePart, procedure.attack.attackable.getName(), procedure.attack.attackable.getHealth());
+                formatRole(procedure.attacker.getRole()), procedure.attacker.getName(), weaponPart,
+                formatRole(procedure.attackable.getRole()), procedure.attackable.getName(),
+                attributePart, procedure.attackable.getName(), procedure.attackable.getHealth());
     }
 
     private String formatAttribute(DamageRecord damage, AttackerRecord attacker, AttackableRecord attackable) {

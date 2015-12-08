@@ -6,13 +6,16 @@ import me.trotyl.arena.effect.Type;
 import me.trotyl.arena.equipment.Armor;
 import me.trotyl.arena.equipment.LongWeapon;
 import me.trotyl.arena.equipment.MediumWeapon;
-import me.trotyl.arena.procedure.*;
+import me.trotyl.arena.procedure.AttackProcedure;
+import me.trotyl.arena.procedure.EffectProcedure;
+import me.trotyl.arena.procedure.MoveProcedure;
+import me.trotyl.arena.procedure.OverProcedure;
 import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.record.EffectRecord;
 import me.trotyl.arena.role.Fighter;
 import me.trotyl.arena.role.Knight;
 import me.trotyl.arena.role.Player;
-import org.javatuples.Pair;
+import org.javatuples.Triplet;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -132,8 +135,10 @@ public class GameTest {
         Player player1 = mock(Player.class);
         when(player0.alive()).thenReturn(true);
         when(player1.alive()).thenReturn(false);
-        when(player0.action(player1, 1)).thenReturn(new Pair<>(EffectProcedure.none, ActionProcedure.none));
-        when(player1.action(player0, 1)).thenReturn(new Pair<>(EffectProcedure.none, ActionProcedure.none));
+        when(player0.action(player1, 1))
+                .thenReturn(new Triplet<>(EffectProcedure.none, MoveProcedure.none, AttackProcedure.none));
+        when(player1.action(player0, 1))
+                .thenReturn(new Triplet<>(EffectProcedure.none, MoveProcedure.none, AttackProcedure.none));
 
         game = Game.between(player0, player1);
         game.over();
@@ -159,39 +164,45 @@ public class GameTest {
 
         game = Game.between(soldier, player);
 
-        Pair<EffectProcedure, ActionProcedure> pair;
+        Triplet<EffectProcedure, MoveProcedure, AttackProcedure> triplet;
         EffectProcedure effectProcedure;
-        ActionProcedure actionProcedure;
+        MoveProcedure moveProcedure;
+        AttackProcedure attackProcedure;
 
-        pair = game.run();
-        effectProcedure = pair.getValue0();
-        actionProcedure = pair.getValue1();
+        triplet = game.run();
+        effectProcedure = triplet.getValue0();
+        moveProcedure = triplet.getValue1();
+        attackProcedure = triplet.getValue2();
 
         assertThat(effectProcedure.effect, is(EffectRecord.none));
         assertThat(effectProcedure.damage, is(DamageRecord.none));
-        assertThat(actionProcedure.attack.attacker.getName(), is("张三"));
-        assertThat(actionProcedure.attack.attackable.getName(), is("李四"));
-        assertThat(actionProcedure.attack.attackable.getHealth(), is(10));
-        assertThat(actionProcedure.attack.damage.extent, is(10));
+        assertThat(moveProcedure, is(MoveProcedure.none));
+        assertThat(attackProcedure.attacker.getName(), is("张三"));
+        assertThat(attackProcedure.attackable.getName(), is("李四"));
+        assertThat(attackProcedure.attackable.getHealth(), is(10));
+        assertThat(attackProcedure.damage.extent, is(10));
 
-        pair = game.run();
-        effectProcedure = pair.getValue0();
-        actionProcedure = pair.getValue1();
+        triplet = game.run();
+        effectProcedure = triplet.getValue0();
+        moveProcedure = triplet.getValue1();
+        attackProcedure = triplet.getValue2();
 
         assertThat(effectProcedure.effect.type, is(Type.toxin));
         assertThat(effectProcedure.damage.extent, is(2));
-        assertThat(actionProcedure.attack.attacker.getName(), is("李四"));
-        assertThat(actionProcedure.attack.attackable.getName(), is("张三"));
-        assertThat(actionProcedure.attack.attackable.getHealth(), is(8));
-        assertThat(actionProcedure.attack.damage.extent, is(2));
+        assertThat(moveProcedure, is(MoveProcedure.none));
+        assertThat(attackProcedure.attacker.getName(), is("李四"));
+        assertThat(attackProcedure.attackable.getName(), is("张三"));
+        assertThat(attackProcedure.attackable.getHealth(), is(8));
+        assertThat(attackProcedure.damage.extent, is(2));
 
-        pair = game.run();
-        effectProcedure = pair.getValue0();
-        actionProcedure = pair.getValue1();
+        triplet = game.run();
+        effectProcedure = triplet.getValue0();
+        moveProcedure = triplet.getValue1();
+        attackProcedure = triplet.getValue2();
 
-        assertThat(effectProcedure.effect, is(EffectRecord.none));
-        assertThat(effectProcedure.damage, is(DamageRecord.none));
-        assertThat(actionProcedure.attack.attackable.getHealth(), is(-2));
+        assertThat(effectProcedure, is(EffectProcedure.none));
+        assertThat(moveProcedure, is(MoveProcedure.none));
+        assertThat(attackProcedure.attackable.getHealth(), is(-2));
     }
 
     @Test
@@ -206,26 +217,26 @@ public class GameTest {
         game = Game.between(soldier, player);
         game.distance = 3;
 
-        Pair<EffectProcedure, ActionProcedure> pair;
-        ActionProcedure actionProcedure;
+        Triplet<EffectProcedure, MoveProcedure, AttackProcedure> triplet;
+        AttackProcedure attackProcedure;
 
-        pair = game.run();
-        actionProcedure = pair.getValue1();
+        triplet = game.run();
+        attackProcedure = triplet.getValue2();
 
-        assertThat(actionProcedure.attack, is(AttackProcedure.none));
+        assertThat(attackProcedure, is(AttackProcedure.none));
         assertThat(game.distance, is(2));
 
-        pair = game.run();
-        actionProcedure = pair.getValue1();
+        triplet = game.run();
+        attackProcedure = triplet.getValue2();
 
-        assertThat(actionProcedure.attack, is(AttackProcedure.none));
+        assertThat(attackProcedure, is(AttackProcedure.none));
         assertThat(game.distance, is(1));
 
-        pair = game.run();
-        actionProcedure = pair.getValue1();
+        triplet = game.run();
+        attackProcedure = triplet.getValue2();
 
-        assertThat(actionProcedure.attack.attacker.getName(), is("张三"));
-        assertThat(actionProcedure.attack.attackable.getName(), is("李四"));
+        assertThat(attackProcedure.attacker.getName(), is("张三"));
+        assertThat(attackProcedure.attackable.getName(), is("李四"));
     }
 
     @Test
@@ -244,13 +255,13 @@ public class GameTest {
 
         game = Game.between(soldier, player);
 
-        Pair<EffectProcedure, ActionProcedure> pair;
-        ActionProcedure actionProcedure;
+        Triplet<EffectProcedure, MoveProcedure, AttackProcedure> triplet;
+        MoveProcedure moveProcedure;
 
-        pair = game.run();
-        actionProcedure = pair.getValue1();
+        triplet = game.run();
+        moveProcedure = triplet.getValue1();
 
-        assertThat(actionProcedure.move, is(MoveProcedure.none));
+        assertThat(moveProcedure, is(MoveProcedure.none));
         assertThat(game.distance, is(2));
     }
 
@@ -261,8 +272,10 @@ public class GameTest {
         Player player1 = mock(Player.class);
         when(player0.alive()).thenReturn(true);
         when(player1.alive()).thenReturn(true);
-        when(player0.action(player1, 1)).thenReturn(new Pair<>(EffectProcedure.none, ActionProcedure.none));
-        when(player1.action(player0, 1)).thenReturn(new Pair<>(EffectProcedure.none, ActionProcedure.none));
+        when(player0.action(player1, 1))
+                .thenReturn(new Triplet<>(EffectProcedure.none, MoveProcedure.none, AttackProcedure.none));
+        when(player1.action(player0, 1))
+                .thenReturn(new Triplet<>(EffectProcedure.none, MoveProcedure.none, AttackProcedure.none));
 
         game = Game.between(player0, player1);
         game.run();

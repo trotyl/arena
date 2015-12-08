@@ -8,10 +8,11 @@ import me.trotyl.arena.effect.Type;
 import me.trotyl.arena.equipment.Armor;
 import me.trotyl.arena.equipment.MediumWeapon;
 import me.trotyl.arena.equipment.Weapon;
-import me.trotyl.arena.procedure.ActionProcedure;
+import me.trotyl.arena.procedure.AttackProcedure;
 import me.trotyl.arena.procedure.EffectProcedure;
+import me.trotyl.arena.procedure.MoveProcedure;
 import me.trotyl.arena.record.*;
-import org.javatuples.Pair;
+import org.javatuples.Triplet;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -50,19 +51,19 @@ public class SoldierTest {
     @Test
     public void attack_should_have_proper_result_without_effect() {
 
-        Pair<EffectProcedure, ActionProcedure> pair = soldier0.action(soldier1, 1);
-        EffectProcedure effectProcedure = pair.getValue0();
-        ActionProcedure actionProcedure = pair.getValue1();
+        Triplet<EffectProcedure, MoveProcedure, AttackProcedure> triplet = soldier0.action(soldier1, 1);
+        EffectProcedure effectProcedure = triplet.getValue0();
+        AttackProcedure attackProcedure = triplet.getValue2();
 
         assertThat(effectProcedure, is(EffectProcedure.none));
 
-        assertThat(actionProcedure.attack.attacker.getName(), is("张三"));
+        assertThat(attackProcedure.attacker.getName(), is("张三"));
 
-        assertThat(actionProcedure.attack.attackable.getName(), is("李四"));
-        assertThat(actionProcedure.attack.attackable.getHealth(), is(15));
+        assertThat(attackProcedure.attackable.getName(), is("李四"));
+        assertThat(attackProcedure.attackable.getHealth(), is(15));
 
-        assertThat(actionProcedure.attack.damage.genre, is(Genre.none));
-        assertThat(actionProcedure.attack.damage.extent, is(5));
+        assertThat(attackProcedure.damage.genre, is(Genre.none));
+        assertThat(attackProcedure.damage.extent, is(5));
     }
 
     @Test
@@ -71,20 +72,20 @@ public class SoldierTest {
         soldier0.effect = Flame.create(2, 10);
         soldier0.weapon = MediumWeapon.create("玄铁重剑", 3, 0);
 
-        Pair<EffectProcedure, ActionProcedure> pair = soldier0.action(soldier1, 1);
-        EffectProcedure effectProcedure = pair.getValue0();
-        ActionProcedure actionProcedure = pair.getValue1();
+        Triplet<EffectProcedure, MoveProcedure, AttackProcedure> triplet = soldier0.action(soldier1, 1);
+        EffectProcedure effectProcedure = triplet.getValue0();
+        AttackProcedure attackProcedure = triplet.getValue2();
 
         assertThat(effectProcedure.host.getName(), is("张三"));
         assertThat(effectProcedure.damage.extent, is(2));
 
-        assertThat(actionProcedure.attack.attacker.getName(), is("张三"));
+        assertThat(attackProcedure.attacker.getName(), is("张三"));
 
-        assertThat(actionProcedure.attack.attackable.getName(), is("李四"));
-        assertThat(actionProcedure.attack.attackable.getHealth(), is(12));
+        assertThat(attackProcedure.attackable.getName(), is("李四"));
+        assertThat(attackProcedure.attackable.getHealth(), is(12));
 
-        assertThat(actionProcedure.attack.damage.genre, is(Genre.none));
-        assertThat(actionProcedure.attack.damage.extent, is(8));
+        assertThat(attackProcedure.damage.genre, is(Genre.none));
+        assertThat(attackProcedure.damage.extent, is(8));
     }
 
     @Test
