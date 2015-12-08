@@ -58,8 +58,8 @@ public class SoldierTest {
 
         assertThat(attackProcedure.attacker.getName(), is("张三"));
 
-        assertThat(attackProcedure.attackable.getName(), is("李四"));
-        assertThat(attackProcedure.attackable.getHealth(), is(15));
+        assertThat(attackProcedure.defender.getName(), is("李四"));
+        assertThat(attackProcedure.defender.getHealth(), is(15));
 
         assertThat(attackProcedure.damage.genre, is(Genre.none));
         assertThat(attackProcedure.damage.extent, is(5));
@@ -80,8 +80,8 @@ public class SoldierTest {
 
         assertThat(attackProcedure.attacker.getName(), is("张三"));
 
-        assertThat(attackProcedure.attackable.getName(), is("李四"));
-        assertThat(attackProcedure.attackable.getHealth(), is(12));
+        assertThat(attackProcedure.defender.getName(), is("李四"));
+        assertThat(attackProcedure.defender.getHealth(), is(12));
 
         assertThat(attackProcedure.damage.genre, is(Genre.none));
         assertThat(attackProcedure.damage.extent, is(8));

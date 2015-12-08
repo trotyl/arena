@@ -178,8 +178,8 @@ public class GameTest {
         assertThat(effectProcedure.damage, is(DamageRecord.none));
         assertThat(moveProcedure, is(MoveProcedure.none));
         assertThat(attackProcedure.attacker.getName(), is("张三"));
-        assertThat(attackProcedure.attackable.getName(), is("李四"));
-        assertThat(attackProcedure.attackable.getHealth(), is(10));
+        assertThat(attackProcedure.defender.getName(), is("李四"));
+        assertThat(attackProcedure.defender.getHealth(), is(10));
         assertThat(attackProcedure.damage.extent, is(10));
 
         triplet = game.run();
@@ -191,8 +191,8 @@ public class GameTest {
         assertThat(effectProcedure.damage.extent, is(2));
         assertThat(moveProcedure, is(MoveProcedure.none));
         assertThat(attackProcedure.attacker.getName(), is("李四"));
-        assertThat(attackProcedure.attackable.getName(), is("张三"));
-        assertThat(attackProcedure.attackable.getHealth(), is(8));
+        assertThat(attackProcedure.defender.getName(), is("张三"));
+        assertThat(attackProcedure.defender.getHealth(), is(8));
         assertThat(attackProcedure.damage.extent, is(2));
 
         triplet = game.run();
@@ -202,7 +202,7 @@ public class GameTest {
 
         assertThat(effectProcedure, is(EffectProcedure.none));
         assertThat(moveProcedure, is(MoveProcedure.none));
-        assertThat(attackProcedure.attackable.getHealth(), is(-2));
+        assertThat(attackProcedure.defender.getHealth(), is(-2));
     }
 
     @Test
@@ -236,7 +236,7 @@ public class GameTest {
         attackProcedure = triplet.getValue2();
 
         assertThat(attackProcedure.attacker.getName(), is("张三"));
-        assertThat(attackProcedure.attackable.getName(), is("李四"));
+        assertThat(attackProcedure.defender.getName(), is("李四"));
     }
 
     @Test
