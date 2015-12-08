@@ -10,13 +10,7 @@ import static java.util.stream.Collectors.toList;
 
 public abstract class Weapon implements Aggressive {
 
-    public static final Weapon none = new Weapon("None", 0, Attribute.normalAttack) {
-
-        @Override
-        public Length getLength() {
-            return Length.none;
-        }
-    };
+    public static final Weapon none = new Weapon("None", 0, Attribute.normalAttack) {};
 
     private final int aggressivity;
     private final String name;
@@ -36,8 +30,6 @@ public abstract class Weapon implements Aggressive {
     public int getAggressivity() {
         return aggressivity;
     }
-
-    public abstract Length getLength();
 
     public String getName() {
         return name;

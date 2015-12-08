@@ -3,9 +3,7 @@ package me.trotyl.arena.role;
 
 import me.trotyl.arena.attribute.AggressiveAttribute;
 import me.trotyl.arena.attribute.Attribute;
-import me.trotyl.arena.equipment.Armor;
-import me.trotyl.arena.equipment.Length;
-import me.trotyl.arena.equipment.Weapon;
+import me.trotyl.arena.equipment.*;
 import me.trotyl.arena.record.PlayerRecord;
 
 public class Assassin extends Soldier {
@@ -34,7 +32,7 @@ public class Assassin extends Soldier {
     @Override
     public AggressiveAttribute getAggressiveAttribute() {
 
-        if (!weapon.getLength().equals(Length.shorter)) {
+        if (!(weapon instanceof ShortWeapon)) {
             return Attribute.normalAttack;
         }
 
@@ -49,9 +47,7 @@ public class Assassin extends Soldier {
     @Override
     public void equip(Weapon weapon) {
 
-        if (weapon != Weapon.none &&
-            weapon.getLength() != Length.shorter &&
-            weapon.getLength() != Length.medium) {
+        if (weapon != Weapon.none && !(weapon instanceof ShortWeapon) && !(weapon instanceof MediumWeapon)) {
             throw new IllegalArgumentException("Assassin can only equip short weapon!");
         }
 

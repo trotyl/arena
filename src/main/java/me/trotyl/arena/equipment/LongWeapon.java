@@ -41,9 +41,4 @@ public class LongWeapon extends Weapon {
     public AggressiveAttribute getAttribute() {
         return attribute;
     }
-
-    @Override
-    public Length getLength() {
-        return Length.longer;
-    }
 }

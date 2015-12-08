@@ -1,10 +1,8 @@
 package me.trotyl.arena.role;
 
 
-import me.trotyl.arena.equipment.Armor;
+import me.trotyl.arena.equipment.*;
 import me.trotyl.arena.record.PlayerRecord;
-import me.trotyl.arena.equipment.Length;
-import me.trotyl.arena.equipment.Weapon;
 
 public class Fighter extends Soldier {
 
@@ -32,7 +30,7 @@ public class Fighter extends Soldier {
     @Override
     public void equip(Weapon weapon) {
 
-        if (weapon != Weapon.none && weapon.getLength() != Length.medium) {
+        if (weapon != Weapon.none && !(weapon instanceof MediumWeapon)) {
             throw new IllegalArgumentException("Fighter can only equip medium weapon!");
         }
 

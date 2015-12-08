@@ -29,9 +29,4 @@ public class ShortWeapon extends Weapon {
     protected ShortWeapon(String name, int aggressivity, AggressiveAttribute attribute) {
         super(name, aggressivity, AggressiveAttribute.compose(Carom.create(), singletonList(attribute)));
     }
-
-    @Override
-    public Length getLength() {
-        return Length.shorter;
-    }
 }

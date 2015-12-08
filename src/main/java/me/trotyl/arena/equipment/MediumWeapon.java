@@ -36,10 +36,4 @@ public class MediumWeapon extends Weapon implements Defensive {
     public int getDefence() {
         return defence;
     }
-
-    @Override
-    public Length getLength() {
-        return Length.medium;
-    }
-
 }

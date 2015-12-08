@@ -4,9 +4,7 @@ package me.trotyl.arena.role;
 import me.trotyl.arena.attribute.AggressiveAttribute;
 import me.trotyl.arena.attribute.Attribute;
 import me.trotyl.arena.effect.Effect;
-import me.trotyl.arena.equipment.Armor;
-import me.trotyl.arena.equipment.Length;
-import me.trotyl.arena.equipment.Weapon;
+import me.trotyl.arena.equipment.*;
 import me.trotyl.arena.procedure.AttackProcedure;
 import me.trotyl.arena.procedure.EffectProcedure;
 import me.trotyl.arena.procedure.MoveProcedure;
@@ -66,7 +64,7 @@ public class Knight extends Soldier {
     @Override
     public AggressiveAttribute getAggressiveAttribute() {
 
-        if (!weapon.getLength().equals(Length.longer)) {
+        if (!(weapon instanceof ShortWeapon)) {
             return Attribute.normalAttack;
         }
 
@@ -81,9 +79,7 @@ public class Knight extends Soldier {
     @Override
     public void equip(Weapon weapon) {
 
-        if (weapon != Weapon.none &&
-            weapon.getLength() != Length.longer &&
-            weapon.getLength() != Length.medium) {
+        if (weapon != Weapon.none && !(weapon instanceof LongWeapon) && !(weapon instanceof MediumWeapon)) {
             throw new IllegalArgumentException("Knight can only equip long weapon!");
         }
 

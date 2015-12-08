@@ -3,7 +3,7 @@ package me.trotyl.arena.parser;
 import me.trotyl.arena.attribute.CompositeAttribute;
 import me.trotyl.arena.attribute.Dizzy;
 import me.trotyl.arena.attribute.Freezing;
-import me.trotyl.arena.equipment.Length;
+import me.trotyl.arena.equipment.MediumWeapon;
 import me.trotyl.arena.equipment.Weapon;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -46,7 +46,7 @@ public class WeaponParserTest {
 
         assertThat(weapon.getAggressivity(), is(5));
         assertThat(weapon.getName(), is("优质木棒"));
-        assertThat(weapon.getLength(), is(Length.medium));
+        assertThat(weapon, instanceOf(MediumWeapon.class));
     }
 
     @Test
@@ -70,7 +70,7 @@ public class WeaponParserTest {
 
         assertThat(weapon.getAggressivity(), is(5));
         assertThat(weapon.getName(), is("优质木棒"));
-        assertThat(weapon.getLength(), is(Length.medium));
+        assertThat(weapon, instanceOf(MediumWeapon.class));
         assertThat(weapon.getAttribute(), instanceOf(Dizzy.class));
     }
 
@@ -99,7 +99,7 @@ public class WeaponParserTest {
 
         assertThat(weapon.getAggressivity(), is(5));
         assertThat(weapon.getName(), is("优质木棒"));
-        assertThat(weapon.getLength(), is(Length.medium));
+        assertThat(weapon, instanceOf(MediumWeapon.class));
         assertThat(weapon.getAttribute(), instanceOf(CompositeAttribute.class));
 
         CompositeAttribute composite = (CompositeAttribute) weapon.getAttribute();
