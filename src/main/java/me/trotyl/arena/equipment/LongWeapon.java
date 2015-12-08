@@ -24,16 +24,14 @@ public class LongWeapon extends Weapon {
             attribute = Attribute.none;
         }
 
-        Attribute composite = Attribute.compose(Repel.create(repel), singletonList(attribute));
-
-        return new LongWeapon(name, aggressivity, repel, composite);
+        return new LongWeapon(name, aggressivity, repel, attribute);
     }
 
     protected final int repel;
 
     protected LongWeapon(String name, int aggressivity, int repel, Attribute attribute) {
 
-        super(name, aggressivity, attribute);
+        super(name, aggressivity, Attribute.compose(Repel.create(repel), singletonList(attribute)));
 
         this.repel = repel;
     }

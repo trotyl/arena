@@ -1,6 +1,9 @@
 package me.trotyl.arena.equipment;
 
 import me.trotyl.arena.attribute.Attribute;
+import me.trotyl.arena.attribute.Carom;
+
+import static java.util.Collections.singletonList;
 
 
 public class ShortWeapon extends Weapon {
@@ -23,7 +26,7 @@ public class ShortWeapon extends Weapon {
     }
 
     protected ShortWeapon(String name, int aggressivity, Attribute attribute) {
-        super(name, aggressivity, attribute);
+        super(name, aggressivity, Attribute.compose(Carom.create(), singletonList(attribute)));
     }
 
     @Override
