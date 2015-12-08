@@ -55,7 +55,7 @@ public abstract class AggressiveAttribute extends Attribute {
     public DamageRecord apply(Player attacker, Player defender, AggressiveAttribute next, DefensiveAttribute echo) {
 
         if (!works()) {
-            return next.apply(attacker, defender, AggressiveAttribute.normalAttack, Attribute.normalDefence);
+            return next.apply(attacker, defender, AggressiveAttribute.normalAttack, echo);
         }
 
         int damage = getDamage(attacker, defender);
