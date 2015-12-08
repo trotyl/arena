@@ -5,7 +5,7 @@ import me.trotyl.arena.attribute.Attribute;
 import me.trotyl.arena.equipment.Armor;
 import me.trotyl.arena.equipment.Weapon;
 
-public class Soldier extends Player {
+public abstract class Soldier extends Player {
 
     protected Weapon weapon;
     protected Armor armor;
