@@ -64,7 +64,7 @@ public class Knight extends Soldier {
     @Override
     public AggressiveAttribute getAggressiveAttribute() {
 
-        if (!(weapon instanceof ShortWeapon)) {
+        if (!(weapon instanceof LongWeapon)) {
             return Attribute.normalAttack;
         }
 

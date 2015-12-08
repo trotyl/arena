@@ -36,9 +36,4 @@ public class LongWeapon extends Weapon {
 
         this.repel = repel;
     }
-
-    @Override
-    public AggressiveAttribute getAttribute() {
-        return attribute;
-    }
 }
