@@ -1,6 +1,6 @@
 package me.trotyl.arena.role;
 
-import me.trotyl.arena.attribute.Attribute;
+import me.trotyl.arena.attribute.AggressiveAttribute;
 import me.trotyl.arena.attribute.Genre;
 import me.trotyl.arena.effect.Effect;
 import me.trotyl.arena.effect.Flame;
@@ -93,7 +93,7 @@ public class SoldierTest {
         Soldier soldier2 = spy(soldier0);
         Soldier soldier3 = spy(soldier1);
 
-        Attribute attribute = mock(Attribute.class);
+        AggressiveAttribute attribute = mock(AggressiveAttribute.class);
 
         Effect effect = mock(Effect.class);
         when(effect.valid()).thenReturn(true);

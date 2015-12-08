@@ -72,7 +72,7 @@ public class FlamingTest {
     @Test
     public void apply_should_have_proper_result() {
 
-        DamageRecord damage = flaming.apply(player1, player2, Attribute.none);
+        DamageRecord damage = flaming.apply(player1, player2, Attribute.normalAttack);
 
         PlayerRecord player1Record = player1.record();
         PlayerRecord player2Record = player2.record();
@@ -87,7 +87,7 @@ public class FlamingTest {
     @Test
     public void apply_should_have_proper_invocation_with_effect() {
 
-        flaming.apply(player1, player2, Attribute.none);
+        flaming.apply(player1, player2, Attribute.normalAttack);
 
         InOrder inOrder = inOrder(player1, player2);
         inOrder.verify(player1).getAggressivity();
@@ -101,7 +101,7 @@ public class FlamingTest {
     public void apply_should_have_proper_invocation_without_effect() {
 
         when(random.nextFloat()).thenReturn(2.0f);
-        flaming.apply(player1, player2, Attribute.none);
+        flaming.apply(player1, player2, Attribute.normalAttack);
 
         InOrder inOrder = inOrder(player1, player2);
         inOrder.verify(player1).getAggressivity();

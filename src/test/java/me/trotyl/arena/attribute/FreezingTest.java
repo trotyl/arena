@@ -67,7 +67,7 @@ public class FreezingTest {
     @Test
     public void apply_should_have_proper_result() {
 
-        DamageRecord damage = freezing.apply(player1, player2, Attribute.none);
+        DamageRecord damage = freezing.apply(player1, player2, Attribute.normalAttack);
 
         PlayerRecord player1Record = player1.record();
         PlayerRecord player2Record = player2.record();
@@ -82,7 +82,7 @@ public class FreezingTest {
     @Test
     public void apply_should_have_proper_invocation_with_effect() {
 
-        freezing.apply(player1, player2, Attribute.none);
+        freezing.apply(player1, player2, Attribute.normalAttack);
 
         InOrder inOrder = inOrder(player1, player2);
         inOrder.verify(player1).getAggressivity();
@@ -96,7 +96,7 @@ public class FreezingTest {
     public void apply_should_have_proper_invocation_without_effect() {
 
         when(random.nextFloat()).thenReturn(2.0f);
-        freezing.apply(player1, player2, Attribute.none);
+        freezing.apply(player1, player2, Attribute.normalAttack);
 
         InOrder inOrder = inOrder(player1, player2);
         inOrder.verify(player1).getAggressivity();

@@ -1,5 +1,6 @@
 package me.trotyl.arena.equipment;
 
+import me.trotyl.arena.attribute.AggressiveAttribute;
 import me.trotyl.arena.attribute.Attribute;
 import me.trotyl.arena.attribute.Repel;
 
@@ -9,10 +10,10 @@ import static java.util.Collections.singletonList;
 public class LongWeapon extends Weapon {
 
     public static LongWeapon create(String name, int aggressivity, int repel) {
-        return LongWeapon.create(name, aggressivity, repel, Attribute.none);
+        return LongWeapon.create(name, aggressivity, repel, Attribute.normalAttack);
     }
 
-    public static LongWeapon create(String name, int aggressivity, int repel, Attribute attribute) {
+    public static LongWeapon create(String name, int aggressivity, int repel, AggressiveAttribute attribute) {
 
         if (name == null || name.isEmpty()) {
             throw new IllegalArgumentException("The name must be a valid string, but: " + name);
@@ -21,7 +22,7 @@ public class LongWeapon extends Weapon {
         }
 
         if (attribute == null) {
-            attribute = Attribute.none;
+            attribute = Attribute.normalAttack;
         }
 
         return new LongWeapon(name, aggressivity, repel, attribute);
@@ -29,15 +30,15 @@ public class LongWeapon extends Weapon {
 
     protected final int repel;
 
-    protected LongWeapon(String name, int aggressivity, int repel, Attribute attribute) {
+    protected LongWeapon(String name, int aggressivity, int repel, AggressiveAttribute attribute) {
 
-        super(name, aggressivity, Attribute.compose(Repel.create(repel), singletonList(attribute)));
+        super(name, aggressivity, AggressiveAttribute.compose(Repel.create(repel), singletonList(attribute)));
 
         this.repel = repel;
     }
 
     @Override
-    public Attribute getAttribute() {
+    public AggressiveAttribute getAttribute() {
         return attribute;
     }
 

@@ -4,28 +4,28 @@ package me.trotyl.arena.attribute;
 import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.role.Player;
 
-public class CompositeAttribute extends Attribute {
+public class CompositeAttribute extends AggressiveAttribute {
 
-    private Attribute first;
-    private Attribute second;
+    private AggressiveAttribute first;
+    private AggressiveAttribute second;
 
-    public CompositeAttribute(Attribute first, Attribute second) {
+    public CompositeAttribute(AggressiveAttribute first, AggressiveAttribute second) {
         super(-1, 1.0f);
 
         this.first = first;
         this.second = second;
     }
 
-    public Attribute getFirst() {
+    public AggressiveAttribute getFirst() {
         return first;
     }
 
-    public Attribute getSecond() {
+    public AggressiveAttribute getSecond() {
         return second;
     }
 
     @Override
-    public DamageRecord apply(Player attacker, Player defender, Attribute next) {
+    public DamageRecord apply(Player attacker, Player defender, AggressiveAttribute next) {
         return first.apply(attacker, defender, second);
     }
 }

@@ -5,7 +5,7 @@ import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.record.RepelDamageRecord;
 import me.trotyl.arena.role.Player;
 
-public class Repel extends Attribute {
+public class Repel extends AggressiveAttribute {
 
     public static Repel create(int distance) {
 
@@ -24,9 +24,9 @@ public class Repel extends Attribute {
     }
 
     @Override
-    public DamageRecord apply(Player attacker, Player defender, Attribute next) {
+    public DamageRecord apply(Player attacker, Player defender, AggressiveAttribute next) {
 
-        DamageRecord record = next.apply(attacker, defender, Attribute.none);
+        DamageRecord record = next.apply(attacker, defender, Attribute.normalAttack);
 
         if (!works()) {
             return record;

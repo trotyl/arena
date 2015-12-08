@@ -4,7 +4,7 @@ package me.trotyl.arena.attribute;
 import me.trotyl.arena.effect.Effect;
 import me.trotyl.arena.effect.Flame;
 
-public class Flaming extends Attribute {
+public class Flaming extends AggressiveAttribute {
 
     public static Flaming create(int extent, int limit, float rate) {
 

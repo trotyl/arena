@@ -5,7 +5,7 @@ import me.trotyl.arena.record.CaromDamageRecord;
 import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.role.Player;
 
-public class Carom extends Attribute {
+public class Carom extends AggressiveAttribute {
 
     public static Carom create() {
         return new Carom();
@@ -16,15 +16,15 @@ public class Carom extends Attribute {
     }
 
     @Override
-    public DamageRecord apply(Player attacker, Player defender, Attribute next) {
+    public DamageRecord apply(Player attacker, Player defender, AggressiveAttribute next) {
 
-        DamageRecord first = next.apply(attacker, defender, Attribute.none);
+        DamageRecord first = next.apply(attacker, defender, Attribute.normalAttack);
 
         if (!works()) {
             return first;
         }
 
-        DamageRecord second = next.apply(attacker, defender, Attribute.none);
+        DamageRecord second = next.apply(attacker, defender, Attribute.normalAttack);
 
         return CaromDamageRecord.create(first, second);
     }

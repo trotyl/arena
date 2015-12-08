@@ -1,5 +1,6 @@
 package me.trotyl.arena.effect;
 
+import me.trotyl.arena.attribute.AggressiveAttribute;
 import me.trotyl.arena.attribute.Attribute;
 import me.trotyl.arena.attribute.Genre;
 import me.trotyl.arena.record.Action;
@@ -23,7 +24,7 @@ public class FreezeTest {
     private Freeze freeze;
     private Player player1;
     private Player player2;
-    private Attribute attribute;
+    private AggressiveAttribute attribute;
 
     @Before
     public void setUp() throws Exception {
@@ -33,10 +34,10 @@ public class FreezeTest {
         player1 = spy(Player.create("张三", 10, 5));
         player2 = spy(Player.create("李四", 20, 8));
 
-        attribute = spy(new Attribute(-1, -1.0f) {
+        attribute = spy(new AggressiveAttribute(-1, -1.0f) {
 
             @Override
-            public DamageRecord apply(Player attacker, Player defender, Attribute next) {
+            public DamageRecord apply(Player attacker, Player defender, AggressiveAttribute next) {
                 return DamageRecord.create(5);
             }
         });
@@ -142,7 +143,7 @@ public class FreezeTest {
         freeze.valid();
 
         InOrder inOrder = inOrder(attribute);
-        inOrder.verify(attribute).apply(player1, player2, Attribute.none);
+        inOrder.verify(attribute).apply(player1, player2, Attribute.normalAttack);
 
         freeze.sway(player1, player2, attribute);
         freeze.valid();

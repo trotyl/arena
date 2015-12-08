@@ -1,7 +1,10 @@
 package me.trotyl.arena.parser;
 
-import me.trotyl.arena.attribute.Attribute;
-import me.trotyl.arena.equipment.*;
+import me.trotyl.arena.attribute.AggressiveAttribute;
+import me.trotyl.arena.equipment.LongWeapon;
+import me.trotyl.arena.equipment.MediumWeapon;
+import me.trotyl.arena.equipment.ShortWeapon;
+import me.trotyl.arena.equipment.Weapon;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -10,7 +13,7 @@ import java.util.List;
 
 public class WeaponParser extends Parser<JSONObject, Weapon> {
 
-    private ArrayParser<Attribute> attributesParser;
+    private ArrayParser<AggressiveAttribute> attributesParser;
 
     public WeaponParser(AttributeParser attributeParser) {
 
@@ -24,14 +27,14 @@ public class WeaponParser extends Parser<JSONObject, Weapon> {
         int aggressivity = object.getInt("aggressivity");
         String length = object.getString("length");
 
-        Attribute attribute;
+        AggressiveAttribute attribute;
 
         if (object.has("attributes")) {
             JSONArray attributeArray = object.getJSONArray("attributes");
-            List<Attribute> attributes = attributesParser.parse(attributeArray);
-            attribute = Attribute.compose(attributes);
+            List<AggressiveAttribute> attributes = attributesParser.parse(attributeArray);
+            attribute = AggressiveAttribute.compose(attributes);
         } else {
-            attribute = Attribute.none;
+            attribute = AggressiveAttribute.normalAttack;
         }
 
         switch (length) {

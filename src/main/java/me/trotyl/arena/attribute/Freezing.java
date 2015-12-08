@@ -4,7 +4,7 @@ package me.trotyl.arena.attribute;
 import me.trotyl.arena.effect.Effect;
 import me.trotyl.arena.effect.Freeze;
 
-public class Freezing extends Attribute {
+public class Freezing extends AggressiveAttribute {
 
     public static Freezing create(int limit, float rate) {
 

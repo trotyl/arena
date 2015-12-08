@@ -61,7 +61,7 @@ public class StrikingTest {
     @Test
     public void apply_should_have_proper_result() {
 
-        DamageRecord damage = striking.apply(player1, player2, Attribute.none);
+        DamageRecord damage = striking.apply(player1, player2, Attribute.normalAttack);
 
         PlayerRecord player1Record = player1.record();
         PlayerRecord player2Record = player2.record();
@@ -76,7 +76,7 @@ public class StrikingTest {
     @Test
     public void apply_should_have_proper_invocation_with_effect() {
 
-        striking.apply(player1, player2, Attribute.none);
+        striking.apply(player1, player2, Attribute.normalAttack);
 
         InOrder inOrder = inOrder(player1, player2);
         inOrder.verify(player1).getAggressivity();
@@ -90,7 +90,7 @@ public class StrikingTest {
     public void apply_should_have_proper_invocation_without_effect() {
 
         when(random.nextFloat()).thenReturn(2.0f);
-        striking.apply(player1, player2, Attribute.none);
+        striking.apply(player1, player2, Attribute.normalAttack);
 
         InOrder inOrder = inOrder(player1, player2);
         inOrder.verify(player1).getAggressivity();

@@ -1,11 +1,12 @@
 package me.trotyl.arena.role;
 
 
-import me.trotyl.arena.equipment.Armor;
+import me.trotyl.arena.attribute.AggressiveAttribute;
 import me.trotyl.arena.attribute.Attribute;
-import me.trotyl.arena.record.PlayerRecord;
+import me.trotyl.arena.equipment.Armor;
 import me.trotyl.arena.equipment.Length;
 import me.trotyl.arena.equipment.Weapon;
+import me.trotyl.arena.record.PlayerRecord;
 
 public class Assassin extends Soldier {
 
@@ -31,10 +32,10 @@ public class Assassin extends Soldier {
     }
 
     @Override
-    public Attribute getAggressiveAttribute() {
+    public AggressiveAttribute getAggressiveAttribute() {
 
         if (!weapon.getLength().equals(Length.shorter)) {
-            return Attribute.none;
+            return Attribute.normalAttack;
         }
 
         return weapon.getAttribute();

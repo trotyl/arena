@@ -1,7 +1,7 @@
 package me.trotyl.arena.effect;
 
 
-import me.trotyl.arena.attribute.Attribute;
+import me.trotyl.arena.attribute.AggressiveAttribute;
 import me.trotyl.arena.attribute.Genre;
 import me.trotyl.arena.record.Action;
 import me.trotyl.arena.record.DamageRecord;
@@ -39,7 +39,7 @@ public class Freeze extends Effect {
     }
 
     @Override
-    public DamageRecord sway(Player attacker, Player defender, Attribute attribute) {
+    public DamageRecord sway(Player attacker, Player defender, AggressiveAttribute attribute) {
         return frozen ? DamageRecord.none : super.sway(attacker, defender, attribute);
     }
 

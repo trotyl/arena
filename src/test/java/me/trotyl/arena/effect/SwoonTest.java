@@ -1,6 +1,6 @@
 package me.trotyl.arena.effect;
 
-import me.trotyl.arena.attribute.Attribute;
+import me.trotyl.arena.attribute.AggressiveAttribute;
 import me.trotyl.arena.attribute.Genre;
 import me.trotyl.arena.record.Action;
 import me.trotyl.arena.record.DamageRecord;
@@ -22,7 +22,7 @@ public class SwoonTest {
     private Swoon swoon;
     private Player player1;
     private Player player2;
-    private Attribute attribute;
+    private AggressiveAttribute attribute;
 
     @Before
     public void setUp() throws Exception {
@@ -32,10 +32,10 @@ public class SwoonTest {
         player1 = spy(Player.create("张三", 10, 5));
         player2 = spy(Player.create("李四", 20, 8));
 
-        attribute = spy(new Attribute(-1, 0.0f) {
+        attribute = spy(new AggressiveAttribute(-1, 0.0f) {
 
             @Override
-            public DamageRecord apply(Player attacker, Player defender, Attribute next) {
+            public DamageRecord apply(Player attacker, Player defender, AggressiveAttribute next) {
                 return DamageRecord.none;
             }
         });

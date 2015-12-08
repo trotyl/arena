@@ -4,10 +4,10 @@ package me.trotyl.arena.parser;
 import me.trotyl.arena.attribute.*;
 import org.json.JSONObject;
 
-public class AttributeParser extends Parser<JSONObject, Attribute> {
+public class AttributeParser extends Parser<JSONObject, AggressiveAttribute> {
 
     @Override
-    public Attribute parse(JSONObject object) {
+    public AggressiveAttribute parse(JSONObject object) {
 
         String genre = object.getString("genre");
         float rate = (float) object.getDouble("rate");

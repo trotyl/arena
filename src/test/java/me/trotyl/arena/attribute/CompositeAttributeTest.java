@@ -45,7 +45,7 @@ public class CompositeAttributeTest {
 
         composite = new CompositeAttribute(Dizzy.create(1.0f), Flaming.create(3, 2, 1.0f));
 
-        DamageRecord damage = composite.apply(player1, player2, Attribute.none);
+        DamageRecord damage = composite.apply(player1, player2, Attribute.normalAttack);
 
         PlayerRecord player1Record = player1.record();
         PlayerRecord player2Record = player2.record();
@@ -62,7 +62,7 @@ public class CompositeAttributeTest {
 
         composite = new CompositeAttribute(Dizzy.create(0.0f), Flaming.create(3, 2, 1.0f));
 
-        DamageRecord damage = composite.apply(player1, player2, Attribute.none);
+        DamageRecord damage = composite.apply(player1, player2, Attribute.normalAttack);
 
         PlayerRecord player1Record = player1.record();
         PlayerRecord player2Record = player2.record();
@@ -79,7 +79,7 @@ public class CompositeAttributeTest {
 
         composite = new CompositeAttribute(Dizzy.create(0.0f), Flaming.create(3, 2, 0.0f));
 
-        DamageRecord damage = composite.apply(player1, player2, Attribute.none);
+        DamageRecord damage = composite.apply(player1, player2, Attribute.normalAttack);
 
         PlayerRecord player1Record = player1.record();
         PlayerRecord player2Record = player2.record();
@@ -96,7 +96,7 @@ public class CompositeAttributeTest {
 
         composite = new CompositeAttribute(Flaming.create(5, 6, 1.0f), Flaming.create(3, 2, 1.0f));
 
-        composite.apply(player1, player2, Attribute.none);
+        composite.apply(player1, player2, Attribute.normalAttack);
 
         assertThat(player2.getEffect(), instanceOf(Flame.class));
         assertThat(player2.getEffect().getRemain(), is(6));
@@ -107,7 +107,7 @@ public class CompositeAttributeTest {
 
         composite = new CompositeAttribute(Flaming.create(5, 6, 0.0f), Flaming.create(3, 2, 1.0f));
 
-        composite.apply(player1, player2, Attribute.none);
+        composite.apply(player1, player2, Attribute.normalAttack);
 
         assertThat(player2.getEffect(), instanceOf(Flame.class));
         assertThat(player2.getEffect().getRemain(), is(2));
@@ -118,7 +118,7 @@ public class CompositeAttributeTest {
 
         composite = new CompositeAttribute(Flaming.create(5, 6, 0.0f), Flaming.create(3, 2, 0.0f));
 
-        composite.apply(player1, player2, Attribute.none);
+        composite.apply(player1, player2, Attribute.normalAttack);
 
         assertThat(player2.getEffect(), is(Effect.none));
     }

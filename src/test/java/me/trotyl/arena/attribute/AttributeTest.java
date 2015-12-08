@@ -22,7 +22,7 @@ import static org.mockito.Mockito.*;
 
 public class AttributeTest {
 
-    private Attribute attribute;
+    private AggressiveAttribute attribute;
     private Player player1;
     private Player player2;
 
@@ -34,7 +34,7 @@ public class AttributeTest {
 
         Attribute.config(random);
 
-        attribute = Attribute.none;
+        attribute = Attribute.normalAttack;
 
         player1 = spy(Player.create("张三", 10, 5));
         player2 = spy(Player.create("李四", 20, 8));
@@ -47,7 +47,7 @@ public class AttributeTest {
 
     @Test
     public void compose0_should_have_proper_result_for_none_and_empty_list() {
-        assertThat(Attribute.compose(Attribute.none, emptyList()), is(Attribute.none));
+        assertThat(AggressiveAttribute.compose(Attribute.normalAttack, emptyList()), is(Attribute.normalAttack));
     }
 
     @Test
@@ -55,7 +55,7 @@ public class AttributeTest {
 
         Dizzy dizzy = Dizzy.create(0.5f);
 
-        assertThat(Attribute.compose(Attribute.none, singletonList(dizzy)), is(dizzy));
+        assertThat(AggressiveAttribute.compose(Attribute.normalAttack, singletonList(dizzy)), is(dizzy));
     }
 
     @Test
@@ -64,7 +64,7 @@ public class AttributeTest {
         Dizzy dizzy = Dizzy.create(0.5f);
         Striking striking = Striking.create(0.5f);
 
-        Attribute attribute = Attribute.compose(Attribute.none, asList(dizzy, striking));
+        Attribute attribute = AggressiveAttribute.compose(Attribute.normalAttack, asList(dizzy, striking));
 
         assertThat(attribute, instanceOf(CompositeAttribute.class));
 
@@ -81,7 +81,7 @@ public class AttributeTest {
         Striking striking = Striking.create(0.5f);
         Flaming flaming = Flaming.create(2, 2, 0.5f);
 
-        Attribute attribute = Attribute.compose(Attribute.none, asList(dizzy, striking, flaming));
+        Attribute attribute = AggressiveAttribute.compose(Attribute.normalAttack, asList(dizzy, striking, flaming));
 
         assertThat(attribute, instanceOf(CompositeAttribute.class));
 
@@ -101,7 +101,7 @@ public class AttributeTest {
 
         Dizzy dizzy = Dizzy.create(0.5f);
 
-        assertThat(Attribute.compose(dizzy, emptyList()), is(dizzy));
+        assertThat(AggressiveAttribute.compose(dizzy, emptyList()), is(dizzy));
     }
 
     @Test
@@ -110,7 +110,7 @@ public class AttributeTest {
         Dizzy dizzy = Dizzy.create(0.5f);
         Striking striking = Striking.create(0.5f);
 
-        Attribute attribute = Attribute.compose(dizzy, singletonList(striking));
+        Attribute attribute = AggressiveAttribute.compose(dizzy, singletonList(striking));
 
         assertThat(attribute, instanceOf(CompositeAttribute.class));
 
@@ -122,7 +122,7 @@ public class AttributeTest {
 
     @Test
     public void compose1_should_have_proper_result_for_none_and_empty_list() {
-        assertThat(Attribute.compose(emptyList()), is(Attribute.none));
+        assertThat(AggressiveAttribute.compose(emptyList()), is(Attribute.normalAttack));
     }
 
     @Test
@@ -130,7 +130,7 @@ public class AttributeTest {
 
         Dizzy dizzy = Dizzy.create(0.5f);
 
-        assertThat(Attribute.compose(singletonList(dizzy)), is(dizzy));
+        assertThat(AggressiveAttribute.compose(singletonList(dizzy)), is(dizzy));
     }
 
     @Test
@@ -139,7 +139,7 @@ public class AttributeTest {
         Dizzy dizzy = Dizzy.create(0.5f);
         Striking striking = Striking.create(0.5f);
 
-        Attribute attribute = Attribute.compose(asList(dizzy, striking));
+        Attribute attribute = AggressiveAttribute.compose(asList(dizzy, striking));
 
         assertThat(attribute, instanceOf(CompositeAttribute.class));
 
@@ -156,7 +156,7 @@ public class AttributeTest {
         Striking striking = Striking.create(0.5f);
         Flaming flaming = Flaming.create(2, 2, 0.5f);
 
-        Attribute attribute = Attribute.compose(asList(dizzy, striking, flaming));
+        Attribute attribute = AggressiveAttribute.compose(asList(dizzy, striking, flaming));
 
         assertThat(attribute, instanceOf(CompositeAttribute.class));
 
@@ -174,7 +174,7 @@ public class AttributeTest {
     @Test
     public void apply_should_have_proper_result() {
 
-        DamageRecord damage = attribute.apply(player1, player2, Attribute.none);
+        DamageRecord damage = attribute.apply(player1, player2, Attribute.normalAttack);
 
         PlayerRecord player1Record = player1.record();
         PlayerRecord player2Record = player2.record();
@@ -189,7 +189,7 @@ public class AttributeTest {
     @Test
     public void apply_should_have_proper_invocation() {
 
-        attribute.apply(player1, player2, Attribute.none);
+        attribute.apply(player1, player2, Attribute.normalAttack);
 
         InOrder inOrder = inOrder(player1, player2);
         inOrder.verify(player1).getAggressivity();

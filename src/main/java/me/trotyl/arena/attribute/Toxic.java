@@ -4,7 +4,7 @@ import me.trotyl.arena.effect.Effect;
 import me.trotyl.arena.effect.Toxin;
 
 
-public class Toxic extends Attribute {
+public class Toxic extends AggressiveAttribute {
 
     public static Toxic create(int extent, int limit, float rate) {
 

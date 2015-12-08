@@ -1,6 +1,7 @@
 package me.trotyl.arena.effect;
 
 
+import me.trotyl.arena.attribute.AggressiveAttribute;
 import me.trotyl.arena.attribute.Attribute;
 import me.trotyl.arena.attribute.Genre;
 import me.trotyl.arena.record.Action;
@@ -36,8 +37,8 @@ public abstract class Effect {
         return EffectRecord.create(getGenre(), getRemain(), next);
     }
 
-    public DamageRecord sway(Player attacker, Player defender, Attribute attribute) {
-        return attribute.apply(attacker, defender, Attribute.none);
+    public DamageRecord sway(Player attacker, Player defender, AggressiveAttribute attribute) {
+        return attribute.apply(attacker, defender, Attribute.normalAttack);
     }
 
     public DamageRecord take(Player player) {

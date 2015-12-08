@@ -4,7 +4,7 @@ package me.trotyl.arena.attribute;
 import me.trotyl.arena.effect.Effect;
 import me.trotyl.arena.effect.Swoon;
 
-public class Dizzy extends Attribute {
+public class Dizzy extends AggressiveAttribute {
 
     public static Dizzy create(float rate) {
 

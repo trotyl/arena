@@ -1,7 +1,7 @@
 package me.trotyl.arena.role;
 
 
-import me.trotyl.arena.attribute.Attribute;
+import me.trotyl.arena.attribute.AggressiveAttribute;
 import me.trotyl.arena.equipment.Armor;
 import me.trotyl.arena.equipment.Weapon;
 
@@ -28,7 +28,7 @@ public abstract class Soldier extends Player {
     }
 
     @Override
-    public Attribute getAggressiveAttribute() {
+    public AggressiveAttribute getAggressiveAttribute() {
         return weapon.getAttribute();
     }
 

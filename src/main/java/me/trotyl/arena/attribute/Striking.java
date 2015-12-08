@@ -3,7 +3,7 @@ package me.trotyl.arena.attribute;
 
 import me.trotyl.arena.role.Player;
 
-public class Striking extends Attribute {
+public class Striking extends AggressiveAttribute {
 
     public static Striking create(float rate) {
 

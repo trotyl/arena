@@ -1,6 +1,7 @@
 package me.trotyl.arena.role;
 
 
+import me.trotyl.arena.attribute.AggressiveAttribute;
 import me.trotyl.arena.attribute.Attribute;
 import me.trotyl.arena.effect.Effect;
 import me.trotyl.arena.equipment.Armor;
@@ -63,10 +64,10 @@ public class Knight extends Soldier {
     }
 
     @Override
-    public Attribute getAggressiveAttribute() {
+    public AggressiveAttribute getAggressiveAttribute() {
 
         if (!weapon.getLength().equals(Length.longer)) {
-            return Attribute.none;
+            return Attribute.normalAttack;
         }
 
         return weapon.getAttribute();
