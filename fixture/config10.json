@@ -2,7 +2,7 @@
   "player1": {
     "name": "张三",
     "health": 16429,
-    "aggressivity": 108,
+    "aggressivity": 92,
     "role": "knight",
     "weapon": {
       "name": "青龙偃月刀",
