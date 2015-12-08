@@ -72,6 +72,19 @@ public class CaromTest {
     }
 
     @Test
+    public void apply_should_have_proper_result_when_defender_died_at_first() {
+
+        player1 = spy(Player.create("张三", 1, 5));
+        player2 = spy(Player.create("李四", 1, 8));
+
+        DamageRecord damage = carom.apply(player1, player2, Attribute.normalAttack);
+
+        assertThat(damage.genre, is(Genre.none));
+        assertThat(damage.extent, is(5));
+        assertThat(damage.distance, is(0));
+    }
+
+    @Test
     public void apply_should_have_proper_invocation_with_effect() {
 
         carom.apply(player1, player2, Attribute.normalAttack);
@@ -83,8 +96,6 @@ public class CaromTest {
         inOrder.verify(player1).getAggressivity();
         inOrder.verify(player2).getDefence();
         inOrder.verify(player2).suffer(5, Effect.none);
-
-        verifyNoMoreInteractions(player1, player2);
     }
 
     @Test

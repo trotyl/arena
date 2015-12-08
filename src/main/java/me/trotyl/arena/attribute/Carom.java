@@ -20,7 +20,7 @@ public class Carom extends AggressiveAttribute {
 
         DamageRecord first = next.apply(attacker, defender, Attribute.normalAttack);
 
-        if (!works()) {
+        if (!works() || !defender.alive()) {
             return first;
         }
 
