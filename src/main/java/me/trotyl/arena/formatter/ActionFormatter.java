@@ -36,6 +36,8 @@ public class ActionFormatter extends Formatter<ActionProcedure> {
                 return String.format("%s发动了全力一击, ", attacker.getName());
             case repel:
                 return String.format("%s被击退了, ", attackable.getName());
+            case carom:
+                return String.format("%s发动了连击, ", attacker.getName());
             case toxic:
                 return String.format("%s中毒了, ", attackable.getName());
             case flaming:
@@ -68,6 +70,12 @@ public class ActionFormatter extends Formatter<ActionProcedure> {
                 DamageRecord innerDamage = ((RepelDamageRecord) damage).inner;
                 String innerPart = formatInner(innerDamage, attacker, attackable);
                 return String.format("%s%s", innerPart, attributePart);
+            case carom:
+                DamageRecord firstDamage = ((CaromDamageRecord) damage).first;
+                DamageRecord secondDamage = ((CaromDamageRecord) damage).second;
+                String firstInnerPart = formatInner(firstDamage, attacker, attackable);
+                String secondInnerPart = formatInner(secondDamage, attacker, attackable);
+                return String.format("%s%s%s", firstInnerPart, attributePart, secondInnerPart);
             default:
                 throw new IllegalArgumentException("The genre is invalid in ths context.");
         }
