@@ -161,6 +161,18 @@ public class ActionFormatterTest {
     }
 
     @Test
+    public void format_should_have_proper_result_with_carom_and_toxic_then_toxic() {
+
+        AttackProcedure procedure = AttackProcedure.create(PlayerRecord.create("张三", 10, Role.fighter),
+                PlayerRecord.create("李四", 20, Role.normal),
+                CaromDamageRecord.create(DamageRecord.create(5, Genre.toxic), DamageRecord.create(5, Genre.toxic)));
+
+        String result = formatter.format(ActionProcedure.create(MoveProcedure.none, procedure));
+
+        assertThat(result, is("战士张三攻击了普通人李四, 李四受到了5点伤害, 李四中毒了, 张三发动了连击, 李四受到了5点伤害, 李四中毒了, 李四剩余生命: 20"));
+    }
+
+    @Test
     public void format_should_have_proper_result_with_weapon_and_effect() {
 
         AttackProcedure procedure = AttackProcedure.create(
