@@ -2,6 +2,8 @@ package me.trotyl.arena.equipment;
 
 import me.trotyl.arena.attribute.AggressiveAttribute;
 import me.trotyl.arena.attribute.Attribute;
+import me.trotyl.arena.attribute.Counter;
+import me.trotyl.arena.attribute.DefensiveAttribute;
 
 
 public class MediumWeapon extends Weapon implements Defensive {
@@ -24,16 +26,22 @@ public class MediumWeapon extends Weapon implements Defensive {
     }
 
     protected final int defence;
+    private DefensiveAttribute defensiveAttribute;
 
     protected MediumWeapon(String name, int aggressivity, int defence, AggressiveAttribute attribute) {
 
         super(name, aggressivity, attribute);
 
         this.defence = defence;
+        this.defensiveAttribute = Counter.create(defence);
     }
 
     @Override
     public int getDefence() {
         return defence;
+    }
+
+    public DefensiveAttribute getDefensiveAttribute() {
+        return defensiveAttribute;
     }
 }

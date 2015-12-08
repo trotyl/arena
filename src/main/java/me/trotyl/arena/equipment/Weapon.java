@@ -16,14 +16,12 @@ public abstract class Weapon implements Aggressive {
     private final int aggressivity;
     private final String name;
     protected AggressiveAttribute aggressiveAttribute;
-    private DefensiveAttribute defensiveAttribute;
 
     protected Weapon(String name, int aggressivity, AggressiveAttribute attribute) {
 
         this.name = name;
         this.aggressivity = aggressivity;
         this.aggressiveAttribute = attribute;
-        this.defensiveAttribute = Attribute.normalDefence;
     }
 
     public AggressiveAttribute getAggressiveAttribute() {
@@ -52,6 +50,6 @@ public abstract class Weapon implements Aggressive {
     }
 
     public DefensiveAttribute getDefensiveAttribute() {
-        return defensiveAttribute;
+        return Attribute.normalDefence;
     }
 }
