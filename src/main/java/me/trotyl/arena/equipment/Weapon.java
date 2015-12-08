@@ -3,6 +3,7 @@ package me.trotyl.arena.equipment;
 
 import me.trotyl.arena.attribute.AggressiveAttribute;
 import me.trotyl.arena.attribute.Attribute;
+import me.trotyl.arena.attribute.DefensiveAttribute;
 import me.trotyl.arena.record.WeaponRecord;
 
 import static java.util.Arrays.stream;
@@ -14,17 +15,19 @@ public abstract class Weapon implements Aggressive {
 
     private final int aggressivity;
     private final String name;
-    protected AggressiveAttribute attribute;
+    protected AggressiveAttribute aggressiveAttribute;
+    private DefensiveAttribute defensiveAttribute;
 
     protected Weapon(String name, int aggressivity, AggressiveAttribute attribute) {
 
         this.name = name;
         this.aggressivity = aggressivity;
-        this.attribute = attribute;
+        this.aggressiveAttribute = attribute;
+        this.defensiveAttribute = Attribute.normalDefence;
     }
 
-    public AggressiveAttribute getAttribute() {
-        return attribute;
+    public AggressiveAttribute getAggressiveAttribute() {
+        return aggressiveAttribute;
     }
 
     public int getAggressivity() {
@@ -45,6 +48,10 @@ public abstract class Weapon implements Aggressive {
     }
 
     public void raise(AggressiveAttribute... attributes) {
-        this.attribute = AggressiveAttribute.compose(this.attribute, stream(attributes).collect(toList()));
+        this.aggressiveAttribute = AggressiveAttribute.compose(this.aggressiveAttribute, stream(attributes).collect(toList()));
+    }
+
+    public DefensiveAttribute getDefensiveAttribute() {
+        return defensiveAttribute;
     }
 }

@@ -28,13 +28,13 @@ public class ShortWeaponTest {
 
         ShortWeapon newWeapon = ShortWeapon.create("青釭剑", 5);
 
-        assertThat(newWeapon.getAttribute(), instanceOf(Carom.class));
+        assertThat(newWeapon.getAggressiveAttribute(), instanceOf(Carom.class));
     }
 
     @Test
     public void getAttribute_should_have_proper_result_when_not_none() {
 
-        Attribute attribute = shortWeapon.getAttribute();
+        Attribute attribute = shortWeapon.getAggressiveAttribute();
 
         assertThat(attribute, instanceOf(CompositeAttribute.class));
 

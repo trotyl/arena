@@ -8,6 +8,10 @@ import me.trotyl.arena.role.Player;
 
 public class Counter extends DefensiveAttribute {
 
+    public static Counter create(int defence) {
+        return new Counter(defence);
+    }
+
     protected final int defence;
 
     protected Counter(int defence) {

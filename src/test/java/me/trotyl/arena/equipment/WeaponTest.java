@@ -40,7 +40,7 @@ public class WeaponTest {
 
         weapon.raise(Dizzy.create(1.0f));
 
-        assertThat(weapon.attribute, instanceOf(Dizzy.class));
+        assertThat(weapon.aggressiveAttribute, instanceOf(Dizzy.class));
     }
 
     @Test
@@ -48,9 +48,9 @@ public class WeaponTest {
 
         weapon.raise(Dizzy.create(1.0f), Flaming.create(2, 1, 1.0f), Striking.create(1.0f));
 
-        assertThat(weapon.attribute, instanceOf(CompositeAttribute.class));
+        assertThat(weapon.aggressiveAttribute, instanceOf(CompositeAttribute.class));
 
-        CompositeAttribute composite = (CompositeAttribute) weapon.attribute;
+        CompositeAttribute composite = (CompositeAttribute) weapon.aggressiveAttribute;
 
         assertThat(composite.getFirst(), instanceOf(Dizzy.class));
         assertThat(composite.getSecond(), instanceOf(CompositeAttribute.class));
@@ -68,9 +68,9 @@ public class WeaponTest {
 
         newWeapon.raise(Dizzy.create(1.0f));
 
-        assertThat(newWeapon.attribute, instanceOf(CompositeAttribute.class));
+        assertThat(newWeapon.aggressiveAttribute, instanceOf(CompositeAttribute.class));
 
-        CompositeAttribute composite = (CompositeAttribute) newWeapon.attribute;
+        CompositeAttribute composite = (CompositeAttribute) newWeapon.aggressiveAttribute;
 
         assertThat(composite.getFirst(), instanceOf(Toxic.class));
         assertThat(composite.getSecond(), instanceOf(Dizzy.class));
@@ -83,9 +83,9 @@ public class WeaponTest {
 
         newWeapon.raise(Dizzy.create(1.0f), Flaming.create(2, 1, 1.0f));
 
-        assertThat(newWeapon.attribute, instanceOf(CompositeAttribute.class));
+        assertThat(newWeapon.aggressiveAttribute, instanceOf(CompositeAttribute.class));
 
-        CompositeAttribute composite = (CompositeAttribute) newWeapon.attribute;
+        CompositeAttribute composite = (CompositeAttribute) newWeapon.aggressiveAttribute;
 
         assertThat(composite.getFirst(), instanceOf(Toxic.class));
         assertThat(composite.getSecond(), instanceOf(CompositeAttribute.class));

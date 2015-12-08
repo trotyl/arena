@@ -71,7 +71,7 @@ public class WeaponParserTest {
         assertThat(weapon.getAggressivity(), is(5));
         assertThat(weapon.getName(), is("优质木棒"));
         assertThat(weapon, instanceOf(MediumWeapon.class));
-        assertThat(weapon.getAttribute(), instanceOf(Dizzy.class));
+        assertThat(weapon.getAggressiveAttribute(), instanceOf(Dizzy.class));
     }
 
     @Test
@@ -100,9 +100,9 @@ public class WeaponParserTest {
         assertThat(weapon.getAggressivity(), is(5));
         assertThat(weapon.getName(), is("优质木棒"));
         assertThat(weapon, instanceOf(MediumWeapon.class));
-        assertThat(weapon.getAttribute(), instanceOf(CompositeAttribute.class));
+        assertThat(weapon.getAggressiveAttribute(), instanceOf(CompositeAttribute.class));
 
-        CompositeAttribute composite = (CompositeAttribute) weapon.getAttribute();
+        CompositeAttribute composite = (CompositeAttribute) weapon.getAggressiveAttribute();
 
         assertThat(composite.getFirst(), instanceOf(Dizzy.class));
         assertThat(composite.getFirst().getRate(), is(0.5f));

@@ -31,13 +31,13 @@ public class LongWeaponTest {
 
         LongWeapon newWeapon = LongWeapon.create("方天画戟", 5, 1);
 
-        assertThat(newWeapon.getAttribute(), instanceOf(Repel.class));
+        assertThat(newWeapon.getAggressiveAttribute(), instanceOf(Repel.class));
     }
 
     @Test
     public void getAttribute_should_have_proper_result_when_not_none() {
 
-        Attribute attribute = longWeapon.getAttribute();
+        Attribute attribute = longWeapon.getAggressiveAttribute();
 
         assertThat(attribute, instanceOf(CompositeAttribute.class));
 

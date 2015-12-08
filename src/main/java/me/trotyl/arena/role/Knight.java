@@ -68,7 +68,7 @@ public class Knight extends Soldier {
             return Attribute.normalAttack;
         }
 
-        return weapon.getAttribute();
+        return weapon.getAggressiveAttribute();
     }
 
     @Override
