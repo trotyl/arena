@@ -41,7 +41,6 @@ public abstract class Soldier extends Player {
         return weapon;
     }
 
-
     public void equip(Armor armor) {
         this.armor = armor;
     }
