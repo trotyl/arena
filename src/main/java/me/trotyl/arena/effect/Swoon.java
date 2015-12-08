@@ -23,6 +23,11 @@ public class Swoon extends Effect {
     }
 
     @Override
+    public int rein(Attacker attacker) {
+        return 0;
+    }
+
+    @Override
     public DamageRecord sway(Attacker attacker, Attackable attackable, Attribute attribute) {
 
         remain--;

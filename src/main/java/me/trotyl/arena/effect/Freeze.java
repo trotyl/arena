@@ -35,6 +35,11 @@ public class Freeze extends Effect {
     }
 
     @Override
+    public int rein(Attacker attacker) {
+        return frozen? 0: attacker.getVelocity();
+    }
+
+    @Override
     public DamageRecord sway(Attacker attacker, Attackable attackable, Attribute attribute) {
 
         remain--;

@@ -46,11 +46,14 @@ public class Knight extends Soldier {
             return new Triplet<>(effect, MoveProcedure.none, AttackProcedure.none);
         }
 
-        MoveProcedure move = getRange() < distance ?
-                MoveProcedure.create(getVelocity(), record(), attackable.record()) :
-                MoveProcedure.none;
+        MoveProcedure move = MoveProcedure.none;
+
+        if (action.equals(Action.move)) {
+            move = move(attackable);
+        }
 
         AttackProcedure attack = attack(attackable);
+
 
         if (!this.effect.valid()) {
             this.effect = Effect.none;
@@ -70,6 +73,11 @@ public class Knight extends Soldier {
     }
 
     @Override
+    public int getVelocity() {
+        return 2;
+    }
+
+    @Override
     public void equip(Weapon weapon) {
 
         if (weapon != Weapon.none &&
@@ -79,11 +87,6 @@ public class Knight extends Soldier {
         }
 
         super.equip(weapon);
-    }
-
-    @Override
-    protected int getVelocity() {
-        return 2;
     }
 
     @Override

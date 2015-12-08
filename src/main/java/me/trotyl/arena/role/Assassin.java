@@ -41,6 +41,11 @@ public class Assassin extends Soldier {
     }
 
     @Override
+    public int getVelocity() {
+        return 2;
+    }
+
+    @Override
     public void equip(Weapon weapon) {
 
         if (weapon != Weapon.none &&
@@ -50,11 +55,6 @@ public class Assassin extends Soldier {
         }
 
         super.equip(weapon);
-    }
-
-    @Override
-    protected int getVelocity() {
-        return 2;
     }
 
     @Override

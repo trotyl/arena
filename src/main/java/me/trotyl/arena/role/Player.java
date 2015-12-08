@@ -70,6 +70,11 @@ public class Player implements Attacker, Attackable {
         return name;
     }
 
+    @Override
+    public int getVelocity() {
+        return 1;
+    }
+
     public boolean alive() {
         return health > 0;
     }
@@ -88,7 +93,7 @@ public class Player implements Attacker, Attackable {
         AttackProcedure attack = AttackProcedure.none;
 
         if (action.equals(Action.move)) {
-            move = MoveProcedure.create(getVelocity(), record(), attackable.record());
+            move = move(attackable);
         } else {
             attack = attack(attackable);
         }
@@ -128,14 +133,17 @@ public class Player implements Attacker, Attackable {
         return 1;
     }
 
-    protected int getVelocity() {
-        return 1;
-    }
-
     protected EffectProcedure impact(Attackable attackable, Action next) {
 
         DamageRecord effectDamage = effect.take(this);
 
         return EffectProcedure.create(record(), attackable.record(), effect.record(next), effectDamage);
+    }
+
+    protected MoveProcedure move(Attackable attackable) {
+
+        int distance = effect.rein(this);
+
+        return MoveProcedure.create(distance, record(), attackable.record());
     }
 }

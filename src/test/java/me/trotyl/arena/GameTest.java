@@ -247,13 +247,13 @@ public class GameTest {
 
         Attribute.config(random);
 
-        Knight soldier = Knight.create("张三", 10, 5,
+        Knight knight = Knight.create("张三", 10, 5,
                 LongWeapon.create("丈八蛇矛", 5, 1),
                 Armor.create(6));
 
         Player player = Player.create("李四", 20, 8);
 
-        game = Game.between(soldier, player);
+        game = Game.between(knight, player);
 
         Triplet<EffectProcedure, MoveProcedure, AttackProcedure> triplet;
         MoveProcedure moveProcedure;

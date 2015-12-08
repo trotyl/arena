@@ -52,4 +52,8 @@ public abstract class Effect {
     protected Genre getGenre() {
         return Genre.none;
     }
+
+    public int rein(Attacker attacker) {
+        return attacker.getVelocity();
+    }
 }

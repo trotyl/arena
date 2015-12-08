@@ -10,6 +10,7 @@ import org.javatuples.Triplet;
 public interface Attacker {
 
     public int getAggressivity();
+    public int getVelocity();
 
     public Triplet<EffectProcedure, MoveProcedure, AttackProcedure> action(Attackable attackable, int distance);
     public AttackerRecord record();

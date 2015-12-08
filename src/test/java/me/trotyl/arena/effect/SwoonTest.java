@@ -57,6 +57,17 @@ public class SwoonTest {
     }
 
     @Test
+    public void rein_should_have_proper_result() {
+
+        int distance;
+
+        distance = swoon.rein(player1);
+        swoon.sway(player1, player2, attribute);
+
+        assertThat(distance, is(0));
+    }
+
+    @Test
     public void sway_should_have_proper_result() {
 
         DamageRecord damage = swoon.sway(player1, player2, attribute);

@@ -76,6 +76,32 @@ public class FreezeTest {
     }
 
     @Test
+    public void rein_should_have_proper_result() {
+
+        int distance;
+
+        distance = freeze.rein(player1);
+        freeze.sway(player1, player2, attribute);
+
+        assertThat(distance, is(0));
+
+        distance = freeze.rein(player1);
+        freeze.sway(player1, player2, attribute);
+
+        assertThat(distance, is(1));
+
+        distance = freeze.rein(player1);
+        freeze.sway(player1, player2, attribute);
+
+        assertThat(distance, is(0));
+
+        distance = freeze.rein(player1);
+        freeze.sway(player1, player2, attribute);
+
+        assertThat(distance, is(1));
+    }
+
+    @Test
     public void sway_should_have_proper_result() {
 
         DamageRecord damage;

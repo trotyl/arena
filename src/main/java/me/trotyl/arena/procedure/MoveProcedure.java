@@ -10,6 +10,11 @@ public class MoveProcedure extends Procedure {
     public static final MoveProcedure none = new MoveProcedure(0, PlayerRecord.none, PlayerRecord.none);
 
     public static MoveProcedure create(int decrement, AttackerRecord attacker, AttackableRecord attackable) {
+
+        if (decrement == 0) {
+            return none;
+        }
+        
         return new MoveProcedure(decrement, attacker, attackable);
     }
 
