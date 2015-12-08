@@ -28,7 +28,7 @@ public abstract class Soldier extends Player {
     }
 
     @Override
-    public Attribute getAttribute() {
+    public Attribute getAggressiveAttribute() {
         return weapon.getAttribute();
     }
 

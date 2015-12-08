@@ -1,8 +1,7 @@
 package me.trotyl.arena.attribute;
 
 
-import me.trotyl.arena.role.Attackable;
-import me.trotyl.arena.role.Attacker;
+import me.trotyl.arena.role.Player;
 
 public class Striking extends Attribute {
 
@@ -20,8 +19,8 @@ public class Striking extends Attribute {
     }
 
     @Override
-    protected int getDamage(Attacker attacker, Attackable attackable) {
-        return 3 * (attacker.getAggressivity() - attackable.getDefence());
+    protected int getDamage(Player attacker, Player defender) {
+        return 3 * (attacker.getAggressivity() - defender.getDefence());
     }
 
     @Override

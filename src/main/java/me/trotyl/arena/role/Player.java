@@ -11,7 +11,7 @@ import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.record.PlayerRecord;
 import org.javatuples.Triplet;
 
-public class Player implements Attacker, Attackable {
+public class Player {
 
     public static Player create(String name, int health, int aggressivity) {
 
@@ -44,18 +44,20 @@ public class Player implements Attacker, Attackable {
         this.effect = Effect.none;
     }
 
-    @Override
     public int getAggressivity() {
         return aggressivity;
     }
 
-    public Attribute getAttribute() {
+    public Attribute getAggressiveAttribute() {
         return Attribute.none;
     }
 
-    @Override
     public int getDefence() {
         return 0;
+    }
+
+    public Attribute getDefensiveAttribute() {
+        return Attribute.none;
     }
 
     public Effect getEffect() {
@@ -70,7 +72,6 @@ public class Player implements Attacker, Attackable {
         return name;
     }
 
-    @Override
     public int getVelocity() {
         return 1;
     }
@@ -79,11 +80,10 @@ public class Player implements Attacker, Attackable {
         return health > 0;
     }
 
-    @Override
-    public Triplet<EffectProcedure, MoveProcedure, AttackProcedure> action(Attackable attackable, int distance) {
+    public Triplet<EffectProcedure, MoveProcedure, AttackProcedure> action(Player defender, int distance) {
 
         Action action = getRange() < distance? Action.move: Action.attack;
-        EffectProcedure effect = impact(attackable, action);
+        EffectProcedure effect = impact(defender, action);
 
         if (!alive()) {
             return new Triplet<>(effect, MoveProcedure.none, AttackProcedure.none);
@@ -93,9 +93,9 @@ public class Player implements Attacker, Attackable {
         AttackProcedure attack = AttackProcedure.none;
 
         if (action.equals(Action.move)) {
-            move = move(attackable);
+            move = move(defender);
         } else {
-            attack = attack(attackable);
+            attack = attack(defender);
         }
 
         if (!this.effect.valid()) {
@@ -105,12 +105,10 @@ public class Player implements Attacker, Attackable {
         return new Triplet<>(effect, move, attack);
     }
 
-    @Override
     public PlayerRecord record() {
         return PlayerRecord.create(name, health);
     }
 
-    @Override
     public void suffer(int damage, Effect effect) {
 
         health -= damage;
@@ -122,28 +120,28 @@ public class Player implements Attacker, Attackable {
         }
     }
 
-    protected AttackProcedure attack(Attackable attackable) {
+    protected AttackProcedure attack(Player defender) {
 
-        DamageRecord attackDamage = effect.sway(this, attackable, getAttribute());
+        DamageRecord attackDamage = effect.sway(this, defender, getAggressiveAttribute());
 
-        return AttackProcedure.create(record(), attackable.record(), attackDamage);
+        return AttackProcedure.create(record(), defender.record(), attackDamage);
     }
 
     protected int getRange() {
         return 1;
     }
 
-    protected EffectProcedure impact(Attackable attackable, Action next) {
+    protected EffectProcedure impact(Player defender, Action next) {
 
         DamageRecord effectDamage = effect.take(this);
 
-        return EffectProcedure.create(record(), attackable.record(), effect.record(next), effectDamage);
+        return EffectProcedure.create(record(), defender.record(), effect.record(next), effectDamage);
     }
 
-    protected MoveProcedure move(Attackable attackable) {
+    protected MoveProcedure move(Player defender) {
 
         int distance = effect.rein(this);
 
-        return MoveProcedure.create(distance, record(), attackable.record());
+        return MoveProcedure.create(distance, record(), defender.record());
     }
 }

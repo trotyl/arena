@@ -4,8 +4,7 @@ package me.trotyl.arena.effect;
 import me.trotyl.arena.attribute.Attribute;
 import me.trotyl.arena.attribute.Genre;
 import me.trotyl.arena.record.DamageRecord;
-import me.trotyl.arena.role.Attackable;
-import me.trotyl.arena.role.Attacker;
+import me.trotyl.arena.role.Player;
 
 public class Swoon extends Effect {
 
@@ -23,12 +22,12 @@ public class Swoon extends Effect {
     }
 
     @Override
-    public int rein(Attacker attacker) {
+    public int rein(Player player) {
         return 0;
     }
 
     @Override
-    public DamageRecord sway(Attacker attacker, Attackable attackable, Attribute attribute) {
+    public DamageRecord sway(Player attacker, Player defender, Attribute attribute) {
         return DamageRecord.none;
     }
 

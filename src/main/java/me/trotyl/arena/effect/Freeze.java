@@ -6,8 +6,7 @@ import me.trotyl.arena.attribute.Genre;
 import me.trotyl.arena.record.Action;
 import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.record.EffectRecord;
-import me.trotyl.arena.role.Attackable;
-import me.trotyl.arena.role.Attacker;
+import me.trotyl.arena.role.Player;
 
 public class Freeze extends Effect {
 
@@ -35,13 +34,13 @@ public class Freeze extends Effect {
     }
 
     @Override
-    public int rein(Attacker attacker) {
-        return frozen? 0: attacker.getVelocity();
+    public int rein(Player player) {
+        return frozen? 0: player.getVelocity();
     }
 
     @Override
-    public DamageRecord sway(Attacker attacker, Attackable attackable, Attribute attribute) {
-        return frozen ? DamageRecord.none : super.sway(attacker, attackable, attribute);
+    public DamageRecord sway(Player attacker, Player defender, Attribute attribute) {
+        return frozen ? DamageRecord.none : super.sway(attacker, defender, attribute);
     }
 
     @Override

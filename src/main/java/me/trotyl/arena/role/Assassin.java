@@ -31,7 +31,7 @@ public class Assassin extends Soldier {
     }
 
     @Override
-    public Attribute getAttribute() {
+    public Attribute getAggressiveAttribute() {
 
         if (!weapon.getLength().equals(Length.shorter)) {
             return Attribute.none;

@@ -8,7 +8,7 @@
       "name": "青龙偃月刀",
       "aggressivity": 54,
       "length": "long",
-      "repel": 2,
+      "repel": 1,
       "attributes": [{
         "genre": "striking",
         "rate": 0.2
@@ -33,7 +33,7 @@
       "length": "short",
       "attributes": [{
         "genre": "dizzy",
-        "rate": 0.12
+        "rate": 0.14
       }, {
         "genre": "flaming",
         "rate": 0.18,

@@ -3,7 +3,7 @@ package me.trotyl.arena.effect;
 
 import me.trotyl.arena.attribute.Genre;
 import me.trotyl.arena.record.DamageRecord;
-import me.trotyl.arena.role.Attackable;
+import me.trotyl.arena.role.Player;
 
 public class Flame extends Effect {
 
@@ -28,9 +28,9 @@ public class Flame extends Effect {
     }
 
     @Override
-    public DamageRecord take(Attackable attackable) {
+    public DamageRecord take(Player player) {
 
-        attackable.suffer(extent, Effect.none);
+        player.suffer(extent, Effect.none);
         return DamageRecord.create(extent, Genre.effect);
     }
 

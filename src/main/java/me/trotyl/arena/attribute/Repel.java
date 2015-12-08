@@ -3,8 +3,7 @@ package me.trotyl.arena.attribute;
 
 import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.record.RepelDamageRecord;
-import me.trotyl.arena.role.Attackable;
-import me.trotyl.arena.role.Attacker;
+import me.trotyl.arena.role.Player;
 
 public class Repel extends Attribute {
 
@@ -25,9 +24,9 @@ public class Repel extends Attribute {
     }
 
     @Override
-    public DamageRecord apply(Attacker attacker, Attackable attackable, Attribute next) {
+    public DamageRecord apply(Player attacker, Player defender, Attribute next) {
 
-        DamageRecord record = next.apply(attacker, attackable, Attribute.none);
+        DamageRecord record = next.apply(attacker, defender, Attribute.none);
 
         if (!works()) {
             return record;

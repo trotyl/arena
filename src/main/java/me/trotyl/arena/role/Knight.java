@@ -37,10 +37,10 @@ public class Knight extends Soldier {
     }
 
     @Override
-    public Triplet<EffectProcedure, MoveProcedure, AttackProcedure> action(Attackable attackable, int distance) {
+    public Triplet<EffectProcedure, MoveProcedure, AttackProcedure> action(Player defender, int distance) {
 
         Action action = getRange() < distance? Action.move: Action.attack;
-        EffectProcedure effect = impact(attackable, action);
+        EffectProcedure effect = impact(defender, action);
 
         if (!alive()) {
             return new Triplet<>(effect, MoveProcedure.none, AttackProcedure.none);
@@ -49,10 +49,10 @@ public class Knight extends Soldier {
         MoveProcedure move = MoveProcedure.none;
 
         if (action.equals(Action.move)) {
-            move = move(attackable);
+            move = move(defender);
         }
 
-        AttackProcedure attack = attack(attackable);
+        AttackProcedure attack = attack(defender);
 
 
         if (!this.effect.valid()) {
@@ -63,7 +63,7 @@ public class Knight extends Soldier {
     }
 
     @Override
-    public Attribute getAttribute() {
+    public Attribute getAggressiveAttribute() {
 
         if (!weapon.getLength().equals(Length.longer)) {
             return Attribute.none;

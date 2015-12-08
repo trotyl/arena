@@ -3,8 +3,7 @@ package me.trotyl.arena.attribute;
 
 import me.trotyl.arena.effect.Effect;
 import me.trotyl.arena.record.DamageRecord;
-import me.trotyl.arena.role.Attackable;
-import me.trotyl.arena.role.Attacker;
+import me.trotyl.arena.role.Player;
 
 import java.util.List;
 import java.util.Random;
@@ -20,6 +19,7 @@ public abstract class Attribute {
             return true;
         }
     };
+
     protected static Random random = new Random();
 
     public static Attribute compose(Attribute attribute, List<Attribute> attributes) {
@@ -71,20 +71,20 @@ public abstract class Attribute {
         return rate;
     }
 
-    public DamageRecord apply(Attacker attacker, Attackable attackable, Attribute next) {
+    public DamageRecord apply(Player attacker, Player defender, Attribute next) {
 
         if (!works()) {
-            return next.apply(attacker, attackable, Attribute.none);
+            return next.apply(attacker, defender, Attribute.none);
         }
 
-        int damage = getDamage(attacker, attackable);
-        attackable.suffer(damage, getEffect());
+        int damage = getDamage(attacker, defender);
+        defender.suffer(damage, getEffect());
 
         return DamageRecord.create(damage, getGenre());
     }
 
-    protected int getDamage(Attacker attacker, Attackable attackable) {
-        return attacker.getAggressivity() - attackable.getDefence();
+    protected int getDamage(Player attacker, Player defender) {
+        return attacker.getAggressivity() - defender.getDefence();
     }
 
     protected Effect getEffect() {

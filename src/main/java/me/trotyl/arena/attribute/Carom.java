@@ -3,8 +3,7 @@ package me.trotyl.arena.attribute;
 
 import me.trotyl.arena.record.CaromDamageRecord;
 import me.trotyl.arena.record.DamageRecord;
-import me.trotyl.arena.role.Attackable;
-import me.trotyl.arena.role.Attacker;
+import me.trotyl.arena.role.Player;
 
 public class Carom extends Attribute {
 
@@ -17,15 +16,15 @@ public class Carom extends Attribute {
     }
 
     @Override
-    public DamageRecord apply(Attacker attacker, Attackable attackable, Attribute next) {
+    public DamageRecord apply(Player attacker, Player defender, Attribute next) {
 
-        DamageRecord first = next.apply(attacker, attackable, Attribute.none);
+        DamageRecord first = next.apply(attacker, defender, Attribute.none);
 
         if (!works()) {
             return first;
         }
 
-        DamageRecord second = next.apply(attacker, attackable, Attribute.none);
+        DamageRecord second = next.apply(attacker, defender, Attribute.none);
 
         return CaromDamageRecord.create(first, second);
     }

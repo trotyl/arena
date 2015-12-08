@@ -5,8 +5,6 @@ import me.trotyl.arena.procedure.AttackProcedure;
 import me.trotyl.arena.procedure.EffectProcedure;
 import me.trotyl.arena.procedure.MoveProcedure;
 import me.trotyl.arena.procedure.OverProcedure;
-import me.trotyl.arena.role.Attackable;
-import me.trotyl.arena.role.Attacker;
 import me.trotyl.arena.role.Player;
 import org.javatuples.Triplet;
 
@@ -52,10 +50,10 @@ public class Game {
             return new Triplet<>(EffectProcedure.none, MoveProcedure.none, AttackProcedure.none);
         }
 
-        Attacker attacker = inTurnOfPlayer1? player1: player2;
-        Attackable attackable = attacker.equals(player1)? player2: player1;
+        Player attacker = inTurnOfPlayer1? player1: player2;
+        Player defender = attacker.equals(player1)? player2: player1;
 
-        Triplet<EffectProcedure, MoveProcedure, AttackProcedure> triplet = attacker.action(attackable, distance);
+        Triplet<EffectProcedure, MoveProcedure, AttackProcedure> triplet = attacker.action(defender, distance);
 
         inTurnOfPlayer1 = ! inTurnOfPlayer1;
 

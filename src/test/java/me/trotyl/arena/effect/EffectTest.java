@@ -5,8 +5,6 @@ import me.trotyl.arena.record.Action;
 import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.record.EffectRecord;
 import me.trotyl.arena.record.PlayerRecord;
-import me.trotyl.arena.role.Attackable;
-import me.trotyl.arena.role.Attacker;
 import me.trotyl.arena.role.Player;
 import org.junit.After;
 import org.junit.Before;
@@ -34,8 +32,9 @@ public class EffectTest {
         player2 = spy(Player.create("李四", 20, 8));
 
         attribute = spy(new Attribute(-1, 0.0f) {
+
             @Override
-            public DamageRecord apply(Attacker attacker, Attackable attackable, Attribute next) {
+            public DamageRecord apply(Player attacker, Player defender, Attribute next) {
                 return DamageRecord.none;
             }
         });
