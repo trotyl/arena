@@ -137,6 +137,18 @@ public class ActionFormatterTest {
     }
 
     @Test
+    public void format_should_have_proper_result_with_repel_and_striking() {
+
+        AttackProcedure procedure = AttackProcedure.create(PlayerRecord.create("张三", 10, Role.fighter),
+                PlayerRecord.create("李四", 20, Role.normal),
+                RepelDamageRecord.create(2, DamageRecord.create(15, Genre.striking)));
+
+        String result = formatter.format(ActionProcedure.create(MoveProcedure.none, procedure));
+
+        assertThat(result, is("战士张三攻击了普通人李四, 张三发动了全力一击, 李四受到了15点伤害, 李四被击退了, 李四剩余生命: 20"));
+    }
+
+    @Test
     public void format_should_have_proper_result_with_weapon_and_effect() {
 
         AttackProcedure procedure = AttackProcedure.create(
