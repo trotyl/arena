@@ -2,6 +2,7 @@ package me.trotyl.arena.attribute;
 
 
 import me.trotyl.arena.effect.Effect;
+import me.trotyl.arena.procedure.AttackProcedure;
 import me.trotyl.arena.record.CounterDamageRecord;
 import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.role.Player;
@@ -39,15 +40,17 @@ public class Counter extends DefensiveAttribute {
             return original;
         }
 
-
         if (defender.getRange() < defender.getGame().getDistance()) {
             return CounterDamageRecord.create(original, DamageRecord.none);
         }
 
-        AggressiveAttribute aggressive = defender.getAggressiveAttribute();
-        DamageRecord counter = aggressive.apply(defender, attacker, Attribute.normalAttack, Attribute.normalDefence);
+        AttackProcedure attack = defender.attack(attacker);
 
-        return CounterDamageRecord.create(original, counter);
+        if (attack.equals(AttackProcedure.none)) {
+            return original;
+        }
+
+        return CounterDamageRecord.create(original, attack.damage);
     }
 
     @Override

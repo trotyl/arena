@@ -1,17 +1,15 @@
 package me.trotyl.arena;
 
-import me.trotyl.arena.attribute.*;
+import me.trotyl.arena.attribute.Attribute;
+import me.trotyl.arena.attribute.Genre;
+import me.trotyl.arena.attribute.Toxic;
 import me.trotyl.arena.equipment.Armor;
 import me.trotyl.arena.equipment.LongWeapon;
 import me.trotyl.arena.equipment.MediumWeapon;
-import me.trotyl.arena.equipment.ShortWeapon;
 import me.trotyl.arena.procedure.AttackProcedure;
 import me.trotyl.arena.procedure.EffectProcedure;
 import me.trotyl.arena.procedure.MoveProcedure;
 import me.trotyl.arena.procedure.OverProcedure;
-import me.trotyl.arena.record.CaromDamageRecord;
-import me.trotyl.arena.record.CounterDamageRecord;
-import me.trotyl.arena.role.Assassin;
 import me.trotyl.arena.role.Fighter;
 import me.trotyl.arena.role.Knight;
 import me.trotyl.arena.role.Player;
@@ -23,8 +21,6 @@ import org.mockito.InOrder;
 
 import java.util.Random;
 
-import static java.util.Arrays.asList;
-import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
@@ -201,66 +197,6 @@ public class GameTest {
         assertThat(moveProcedure, is(MoveProcedure.none));
         assertThat(attackProcedure.defender.getHealth(), is(-2));
     }
-
-    @Test
-    public void run_should_have_proper_result_for_oracle() throws Exception {
-
-        random = mock(Random.class);
-        when(random.nextFloat()).thenReturn(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f);
-        Attribute.config(random);
-
-        Assassin assassin = Assassin.create("张三", 29, 8,
-                ShortWeapon.create("峨眉刺", 0,
-                        AggressiveAttribute.compose(asList(
-                                Freezing.create(2, 0.25f),
-                                Striking.create(1.0f)))),
-                Armor.none);
-
-        Fighter fighter = Fighter.create("李四", 35, 9,
-                MediumWeapon.create("方天画戟", 0, 0,
-                        AggressiveAttribute.compose(asList(
-                                Flaming.create(2, 2, 0.25f),
-                                Toxic.create(2, 2, 1.0f)))),
-                Armor.none);
-
-        game = Game.between(assassin, fighter);
-
-        Triplet<EffectProcedure, MoveProcedure, AttackProcedure> triplet = game.run();
-        EffectProcedure effectProcedure = triplet.getValue0();
-        MoveProcedure moveProcedure = triplet.getValue1();
-        AttackProcedure attackProcedure = triplet.getValue2();
-
-        assertThat(effectProcedure, is(EffectProcedure.none));
-        assertThat(moveProcedure, is(MoveProcedure.none));
-        assertThat(attackProcedure.attacker.getName(), is("张三"));
-        assertThat(attackProcedure.defender.getName(), is("李四"));
-        assertThat(attackProcedure.attacker.getHealth(), is(11));
-        assertThat(attackProcedure.defender.getHealth(), is(3));
-        assertThat(attackProcedure.damage.genre, is(Genre.carom));
-        assertThat(attackProcedure.damage, instanceOf(CaromDamageRecord.class));
-
-        CaromDamageRecord caromRecord = (CaromDamageRecord) attackProcedure.damage;
-
-        assertThat(caromRecord.first.genre, is(Genre.counter));
-        assertThat(caromRecord.first, instanceOf(CounterDamageRecord.class));
-
-        CounterDamageRecord firstCounterRecord = (CounterDamageRecord) caromRecord.first;
-
-        assertThat(firstCounterRecord.original.genre, is(Genre.freezing));
-        assertThat(firstCounterRecord.original.extent, is(8));
-
-        assertThat(firstCounterRecord.counter.genre, is(Genre.flaming));
-        assertThat(firstCounterRecord.counter.extent, is(9));
-
-        CounterDamageRecord secondCounterRecord = (CounterDamageRecord) caromRecord.second;
-
-        assertThat(secondCounterRecord.original.genre, is(Genre.striking));
-        assertThat(secondCounterRecord.original.extent, is(24));
-
-        assertThat(secondCounterRecord.counter.genre, is(Genre.toxic));
-        assertThat(secondCounterRecord.counter.extent, is(9));
-    }
-
 
     @Test
     public void run_should_have_proper_result_when_move() {

@@ -1,0 +1,27 @@
+{
+  "name": "江江",
+  "health": 65536,
+  "aggressivity": 256,
+  "role": "knight",
+  "weapon": {
+    "name": "赤炎枪",
+    "aggressivity": 256,
+    "length": "long",
+    "repel": 2,
+    "attributes": [{
+      "genre": "striking",
+      "rate": 0.25
+    }, {
+      "genre": "flaming",
+      "rate": 0.25,
+      "extent": 128,
+      "limit": 4
+    }, {
+      "genre": "dizzy",
+      "rate": 0.25
+    }]
+  },
+  "armor": {
+    "defence": 64
+  }
+}

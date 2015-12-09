@@ -21,15 +21,31 @@ public class Program {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
         while (true) {
-            System.out.println("Please input the path of config file, empty to exit: ");
-            String path = reader.readLine();
+            System.out.println("Please input the path of player config files, separated by comma, empty to exit: ");
+            String pathString = reader.readLine();
 
-            if (path.isEmpty()) {
+            if (pathString.isEmpty()) {
                 System.out.println("Goodbye!");
                 break;
             }
 
-            FileInputStream in = new FileInputStream(path);
+            String[] pathTuple = pathString.split(",");
+            String player1Path = pathTuple[0];
+            String player2Path = pathTuple[1];
+
+            FileInputStream player1Stream;
+            FileInputStream player2Stream;
+
+            try {
+                player1Stream = new FileInputStream(player1Path);
+                player2Stream = new FileInputStream(player2Path);
+            } catch (FileNotFoundException ex) {
+                System.out.println(ex.getMessage());
+                System.out.println();
+                continue;
+            }
+
+            InputStream[] in = {player1Stream, player2Stream};
 
             Program program = new Program(in, System.out, Parser.defaults(), Formatter.defaults());
 
@@ -45,17 +61,17 @@ public class Program {
     private final FormatterGroup formatters;
     private final Game game;
 
-    public Program(InputStream in, PrintStream out, ParserGroup parsers, FormatterGroup formatters) {
+    public Program(InputStream[] in, PrintStream out, ParserGroup parsers, FormatterGroup formatters) {
         this.out = out;
         this.formatters = formatters;
 
-        JSONTokener tokener = new JSONTokener(in);
-        JSONObject configObject = (JSONObject) tokener.nextValue();
+        JSONTokener player1Tokener = new JSONTokener(in[0]);
+        JSONObject player1Object = (JSONObject) player1Tokener.nextValue();
 
-        JSONObject player1Object = configObject.getJSONObject("player1");
+        JSONTokener player2Tokener = new JSONTokener(in[1]);
+        JSONObject player2Object = (JSONObject) player2Tokener.nextValue();
+
         Player player1 = parsers.playerParser.parse(player1Object);
-
-        JSONObject player2Object = configObject.getJSONObject("player2");
         Player player2 = parsers.playerParser.parse(player2Object);
 
         game = Game.between(player1, player2);

@@ -115,6 +115,13 @@ public class Player {
         return new Triplet<>(effect, move, attack);
     }
 
+    public AttackProcedure attack(Player defender) {
+
+        DamageRecord attackDamage = effect.sway(this, defender, getAggressiveAttribute());
+
+        return AttackProcedure.create(record(), defender.record(), attackDamage);
+    }
+
     public PlayerRecord record() {
         return PlayerRecord.create(name, health);
     }
@@ -130,14 +137,6 @@ public class Player {
             this.effect = effect;
         }
     }
-
-    protected AttackProcedure attack(Player defender) {
-
-        DamageRecord attackDamage = effect.sway(this, defender, getAggressiveAttribute());
-
-        return AttackProcedure.create(record(), defender.record(), attackDamage);
-    }
-
 
     public Game getGame() {
         return game;

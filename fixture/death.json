@@ -1,0 +1,18 @@
+{
+  "name": "死神",
+  "health": 5000,
+  "aggressivity": 1000,
+  "role": "assassin",
+  "weapon": {
+    "name": "告死之匕首",
+    "aggressivity": 1000,
+    "length": "short",
+    "attributes": [{
+      "genre": "striking",
+      "rate": 0.5
+    }]
+  },
+  "armor": {
+    "defence": 20
+  }
+}

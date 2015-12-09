@@ -1,0 +1,26 @@
+{
+  "name": "王二",
+  "health": 13952,
+  "aggressivity": 126,
+  "role": "assassin",
+  "weapon": {
+    "name": "诸葛连弩",
+    "aggressivity": 41,
+    "length": "short",
+    "attributes": [{
+      "genre": "striking",
+      "rate": 0.18
+    }, {
+      "genre": "dizzy",
+      "rate": 0.14
+    }, {
+      "genre": "toxic",
+      "rate": 0.17,
+      "extent": 101,
+      "limit": 3
+    }]
+  },
+  "armor": {
+    "defence": 67
+  }
+}

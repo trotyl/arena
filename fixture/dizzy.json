@@ -1,0 +1,24 @@
+{
+  "name": "催眠大师",
+  "health": 5000,
+  "aggressivity": 100,
+  "role": "assassin",
+  "weapon": {
+    "name": "勾魂刺",
+    "aggressivity": 100,
+    "length": "short",
+    "attributes": [{
+      "genre": "dizzy",
+      "rate": 0.20
+    }, {
+      "genre": "dizzy",
+      "rate": 0.25
+    }, {
+      "genre": "dizzy",
+      "rate": 0.30
+    }]
+  },
+  "armor": {
+    "defence": 50
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "不死之身",
+  "health": 1073741823,
+  "aggressivity": 10,
+  "role": "fighter",
+  "weapon": {
+    "name": "智杖",
+    "aggressivity": 10,
+    "defence": 10000,
+    "length": "medium",
+    "attributes": []
+  },
+  "armor": {
+    "defence": 1000
+  }
+}
