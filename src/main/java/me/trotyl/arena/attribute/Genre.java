@@ -11,5 +11,6 @@ public enum Genre {
     freezing,
     repel,
     carom,
-    counter
+    counter,
+    track
 }

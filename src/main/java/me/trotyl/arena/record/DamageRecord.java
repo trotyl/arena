@@ -20,7 +20,7 @@ public class DamageRecord implements Record {
     }
 
     public final Genre genre;
-    public final int extent;
+    public int extent;
     public final int distance;
 
     protected DamageRecord(int extent, int distance, Genre genre) {
@@ -32,6 +32,10 @@ public class DamageRecord implements Record {
 
     @Override
     public String getName() {
-        return genre.toString();
+        return genre.toString()+ extent;
+    }
+
+    public void setExtent(int extent) {
+        this.extent = extent;
     }
 }

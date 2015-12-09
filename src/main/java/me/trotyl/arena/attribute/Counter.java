@@ -29,13 +29,13 @@ public class Counter extends DefensiveAttribute {
         }
 
         int extent = damage.extent - defence;
-
         if (extent < 0) {
             extent = 0;
         }
 
-        DamageRecord newDamage = DamageRecord.create(extent, damage.distance, damage.genre);
-        DamageRecord original = super.apply(newDamage, effect, attacker, defender);
+        damage.setExtent(extent);
+
+        DamageRecord original = super.apply(damage, effect, attacker, defender);
 
         if (!defender.alive()) {
             return original;

@@ -1,9 +1,9 @@
 package me.trotyl.arena.attribute;
 
 
-import me.trotyl.arena.effect.Effect;
 import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.record.RepelDamageRecord;
+import me.trotyl.arena.record.TrackDamageRecord;
 import me.trotyl.arena.role.Player;
 
 public class Repel extends AggressiveAttribute {
@@ -27,15 +27,13 @@ public class Repel extends AggressiveAttribute {
     @Override
     public DamageRecord apply(Player attacker, Player defender, AggressiveAttribute next, DefensiveAttribute echo) {
 
-        DamageRecord record = next.apply(attacker, defender, Attribute.normalAttack, echo);
-
         if (!works()) {
-            return record;
+            return next.apply(attacker, defender, Attribute.normalAttack, echo);
         }
 
-        RepelDamageRecord repel = RepelDamageRecord.create(distance, record);
-        defender.suffer(repel, Effect.none);
+        TrackDamageRecord track = (TrackDamageRecord) next.apply(attacker, defender, Attribute.normalAttack, Attribute.noDamage);
+        RepelDamageRecord repel = RepelDamageRecord.create(distance, track.damage);
 
-        return repel;
+        return echo.apply(repel, track.effect, attacker, defender);
     }
 }

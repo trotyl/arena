@@ -65,7 +65,7 @@ public class RepelTest {
         PlayerRecord player2Record = player2.record();
 
         assertThat(damage.genre, is(Genre.repel));
-        assertThat(damage.extent, is(0));
+        assertThat(damage.extent, is(5));
         assertThat(damage.distance, is(2));
         assertThat(damage, instanceOf(RepelDamageRecord.class));
 
@@ -86,7 +86,7 @@ public class RepelTest {
         InOrder inOrder = inOrder(player1, player2);
         inOrder.verify(player1).getAggressivity();
         inOrder.verify(player2).getDefence();
-        inOrder.verify(player2, times(2)).suffer(argThat(instanceOf(DamageRecord.class)), eq(Effect.none));
+        inOrder.verify(player2).suffer(argThat(instanceOf(DamageRecord.class)), eq(Effect.none));
     }
 
     @Test

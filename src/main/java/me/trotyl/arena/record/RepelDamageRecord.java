@@ -13,8 +13,15 @@ public class RepelDamageRecord extends DamageRecord {
 
     protected RepelDamageRecord(int distance, DamageRecord inner) {
 
-        super(0, distance, Genre.repel);
+        super(inner.extent, distance, Genre.repel);
 
         this.inner = inner;
+    }
+
+    @Override
+    public void setExtent(int extent) {
+
+        this.extent = extent;
+        this.inner.extent = extent;
     }
 }
