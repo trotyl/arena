@@ -38,6 +38,11 @@ public class Fighter extends Soldier {
     }
 
     @Override
+    public int getDefence() {
+        return weapon.getDefence() + armor.getDefence();
+    }
+
+    @Override
     public PlayerRecord record() {
         return PlayerRecord.create(name, health, Role.fighter, weapon.record(), armor.record());
     }

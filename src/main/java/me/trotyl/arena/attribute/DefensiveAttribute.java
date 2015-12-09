@@ -17,4 +17,8 @@ public abstract class DefensiveAttribute extends Attribute {
 
         return damage;
     }
+
+    public int getDefence() {
+        return 0;
+    }
 }

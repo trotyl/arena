@@ -206,7 +206,7 @@ public class GameTest {
     public void run_should_have_proper_result_for_oracle() throws Exception {
 
         random = mock(Random.class);
-        when(random.nextFloat()).thenReturn(0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+        when(random.nextFloat()).thenReturn(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f);
         Attribute.config(random);
 
         Assassin assassin = Assassin.create("张三", 29, 8,

@@ -52,4 +52,8 @@ public abstract class Weapon implements Aggressive {
     public DefensiveAttribute getDefensiveAttribute() {
         return Attribute.normalDefence;
     }
+
+    public int getDefence() {
+        return 0;
+    }
 }

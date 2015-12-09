@@ -1,5 +1,6 @@
 package me.trotyl.arena.parser;
 
+import me.trotyl.arena.attribute.Attribute;
 import me.trotyl.arena.role.*;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -7,10 +8,14 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Random;
+
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 
 public class PlayerParserTest {
@@ -118,6 +123,10 @@ public class PlayerParserTest {
 
     @Test
     public void parse_should_have_proper_result_for_fighter_with_equipment() {
+
+        Random random = mock(Random.class);
+        when(random.nextFloat()).thenReturn(1.0f);
+        Attribute.config(random);
 
         String json = "" +
                 "{" +

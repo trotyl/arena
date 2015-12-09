@@ -13,27 +13,25 @@ public class Counter extends DefensiveAttribute {
     }
 
     protected final int defence;
+    private  boolean works;
 
     protected Counter(int defence) {
 
         super(-1, 0.25f);
 
         this.defence = defence;
+        works = works();
     }
 
     @Override
     public DamageRecord apply(DamageRecord damage, Effect effect, Player attacker, Player defender) {
 
-        if (!works()) {
+        boolean currentWorks = works;
+        works = works();
+
+        if (!currentWorks) {
             return super.apply(damage, effect, attacker, defender);
         }
-
-        int extent = damage.extent - defence;
-        if (extent < 0) {
-            extent = 0;
-        }
-
-        damage.setExtent(extent);
 
         DamageRecord original = super.apply(damage, effect, attacker, defender);
 
@@ -50,5 +48,10 @@ public class Counter extends DefensiveAttribute {
         DamageRecord counter = aggressive.apply(defender, attacker, Attribute.normalAttack, Attribute.normalDefence);
 
         return CounterDamageRecord.create(original, counter);
+    }
+
+    @Override
+    public int getDefence() {
+        return works? defence: 0;
     }
 }

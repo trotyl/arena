@@ -9,7 +9,7 @@ import me.trotyl.arena.attribute.DefensiveAttribute;
 public class MediumWeapon extends Weapon implements Defensive {
 
     public static MediumWeapon create(String name, int aggressivity, int defence) {
-        return MediumWeapon.create(name, aggressivity, 0, Attribute.normalAttack);
+        return MediumWeapon.create(name, aggressivity, defence, Attribute.normalAttack);
     }
 
     public static MediumWeapon create(String name, int aggressivity, int defence, AggressiveAttribute attribute) {
@@ -38,7 +38,7 @@ public class MediumWeapon extends Weapon implements Defensive {
 
     @Override
     public int getDefence() {
-        return defence;
+        return defensiveAttribute.getDefence();
     }
 
     public DefensiveAttribute getDefensiveAttribute() {
