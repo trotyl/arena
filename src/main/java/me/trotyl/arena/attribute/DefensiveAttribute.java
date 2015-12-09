@@ -13,7 +13,7 @@ public abstract class DefensiveAttribute extends Attribute {
 
     public DamageRecord apply(DamageRecord damage, Effect effect, Player attacker, Player defender) {
 
-        defender.suffer(damage.extent, effect);
+        defender.suffer(damage, effect);
 
         return damage;
     }

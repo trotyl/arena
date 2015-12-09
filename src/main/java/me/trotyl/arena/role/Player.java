@@ -1,6 +1,7 @@
 package me.trotyl.arena.role;
 
 
+import me.trotyl.arena.Game;
 import me.trotyl.arena.attribute.AggressiveAttribute;
 import me.trotyl.arena.attribute.Attribute;
 import me.trotyl.arena.attribute.DefensiveAttribute;
@@ -37,6 +38,7 @@ public class Player {
     protected int health;
     protected final int aggressivity;
     protected Effect effect;
+    protected Game game;
 
     protected Player(String name, int health, int aggressivity) {
 
@@ -78,6 +80,10 @@ public class Player {
         return 1;
     }
 
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
     public boolean alive() {
         return health > 0;
     }
@@ -113,9 +119,10 @@ public class Player {
         return PlayerRecord.create(name, health);
     }
 
-    public void suffer(int damage, Effect effect) {
+    public void suffer(DamageRecord damage, Effect effect) {
 
-        health -= damage;
+        health -= damage.extent;
+        game.increaseDistance(damage.distance);
 
         if (effect.getClass().equals(this.effect.getClass())) {
             this.effect.append(effect.getRemain());
@@ -145,6 +152,7 @@ public class Player {
     protected MoveProcedure move(Player defender) {
 
         int distance = effect.rein(this);
+        game.decreaseDistance(distance);
 
         return MoveProcedure.create(distance, record(), defender.record());
     }

@@ -24,12 +24,27 @@ public class Game {
 
         this.player1 = player1;
         this.player2 = player2;
+
+        player1.setGame(this);
+        player2.setGame(this);
+
         inTurnOfPlayer1 = true;
         distance = 1;
     }
 
+    public void decreaseDistance(int decrement) {
+        distance -= decrement;
+        if (distance < 0) {
+            distance = 0;
+        }
+    }
+
     public boolean end() {
         return !player1.alive() || !player2.alive();
+    }
+
+    public void increaseDistance(int increment) {
+        distance += increment;
     }
 
     public OverProcedure over() {
@@ -56,16 +71,6 @@ public class Game {
         Triplet<EffectProcedure, MoveProcedure, AttackProcedure> triplet = attacker.action(defender, distance);
 
         inTurnOfPlayer1 = ! inTurnOfPlayer1;
-
-        distance -= triplet.getValue1().decrement;
-        if (distance < 1) {
-            distance = 1;
-        }
-
-        int increment = triplet.getValue2().damage.distance;
-        if (increment > 0) {
-            distance += increment;
-        }
 
         return triplet;
     }

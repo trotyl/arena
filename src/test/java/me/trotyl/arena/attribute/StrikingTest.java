@@ -1,5 +1,6 @@
 package me.trotyl.arena.attribute;
 
+import me.trotyl.arena.Game;
 import me.trotyl.arena.effect.Effect;
 import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.record.PlayerRecord;
@@ -36,6 +37,7 @@ public class StrikingTest {
 
         player1 = spy(Player.create("张三", 10, 5));
         player2 = spy(Player.create("李四", 20, 8));
+        Game.between(player1, player2);
     }
 
     @After
@@ -81,7 +83,7 @@ public class StrikingTest {
         InOrder inOrder = inOrder(player1, player2);
         inOrder.verify(player1).getAggressivity();
         inOrder.verify(player2).getDefence();
-        inOrder.verify(player2).suffer(15, Effect.none);
+        inOrder.verify(player2).suffer(argThat(instanceOf(DamageRecord.class)), eq(Effect.none));
     }
 
     @Test
@@ -93,6 +95,6 @@ public class StrikingTest {
         InOrder inOrder = inOrder(player1, player2);
         inOrder.verify(player1).getAggressivity();
         inOrder.verify(player2).getDefence();
-        inOrder.verify(player2).suffer(5, Effect.none);
+        inOrder.verify(player2).suffer(argThat(instanceOf(DamageRecord.class)), eq(Effect.none));
     }
 }

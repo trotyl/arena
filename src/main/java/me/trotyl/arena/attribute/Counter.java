@@ -21,6 +21,7 @@ public class Counter extends DefensiveAttribute {
         this.defence = defence;
     }
 
+    @Override
     public DamageRecord apply(DamageRecord damage, Effect effect, Player attacker, Player defender) {
 
         if (!works()) {

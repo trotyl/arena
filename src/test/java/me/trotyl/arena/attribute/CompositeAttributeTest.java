@@ -1,5 +1,6 @@
 package me.trotyl.arena.attribute;
 
+import me.trotyl.arena.Game;
 import me.trotyl.arena.effect.Effect;
 import me.trotyl.arena.effect.Flame;
 import me.trotyl.arena.record.DamageRecord;
@@ -33,6 +34,7 @@ public class CompositeAttributeTest {
 
         player1 = spy(Player.create("张三", 10, 5));
         player2 = spy(Player.create("李四", 20, 8));
+        Game.between(player1, player2);
     }
 
     @After

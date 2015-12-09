@@ -1,5 +1,6 @@
 package me.trotyl.arena.effect;
 
+import me.trotyl.arena.Game;
 import me.trotyl.arena.attribute.AggressiveAttribute;
 import me.trotyl.arena.attribute.Attribute;
 import me.trotyl.arena.attribute.DefensiveAttribute;
@@ -14,6 +15,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InOrder;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
@@ -33,6 +35,7 @@ public class ToxinTest {
 
         player1 = spy(Player.create("张三", 10, 5));
         player2 = spy(Player.create("李四", 20, 8));
+        Game.between(player1, player2);
 
         attribute = spy(new AggressiveAttribute(-1, 0.0f) {
 
@@ -70,9 +73,7 @@ public class ToxinTest {
 
         toxin.sway(player1, player2, attribute);
 
-        verifyZeroInteractions(player1);
-
-        InOrder inOrder = inOrder(attribute, player2);
+        InOrder inOrder = inOrder(attribute, player1, player2);
         inOrder.verify(player2).getDefensiveAttribute();
         inOrder.verify(attribute).apply(player1, player2, Attribute.normalAttack, Attribute.normalDefence);
 
@@ -100,9 +101,7 @@ public class ToxinTest {
         toxin.take(player1);
 
         InOrder inOrder = inOrder(player1);
-        inOrder.verify(player1).suffer(2, Effect.none);
-
-        verifyNoMoreInteractions(player1);
+        inOrder.verify(player1).suffer(argThat(instanceOf(DamageRecord.class)), eq(Effect.none));
     }
 
     @Test

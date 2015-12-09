@@ -1,5 +1,6 @@
 package me.trotyl.arena.role;
 
+import me.trotyl.arena.Game;
 import me.trotyl.arena.attribute.AggressiveAttribute;
 import me.trotyl.arena.attribute.Genre;
 import me.trotyl.arena.effect.Effect;
@@ -31,6 +32,8 @@ public class SoldierTest {
 
         soldier0 = Fighter.create("张三", 10, 5);
         soldier1 = Fighter.create("李四", 20, 8);
+
+        Game.between(soldier0, soldier1);
     }
 
     @After

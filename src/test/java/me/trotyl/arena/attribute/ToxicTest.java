@@ -1,5 +1,6 @@
 package me.trotyl.arena.attribute;
 
+import me.trotyl.arena.Game;
 import me.trotyl.arena.effect.Effect;
 import me.trotyl.arena.effect.Toxin;
 import me.trotyl.arena.record.DamageRecord;
@@ -37,6 +38,7 @@ public class ToxicTest {
 
         player1 = spy(Player.create("张三", 10, 5));
         player2 = spy(Player.create("李四", 20, 8));
+        Game.between(player1, player2);
     }
 
     @After
@@ -92,7 +94,7 @@ public class ToxicTest {
         InOrder inOrder = inOrder(player1, player2);
         inOrder.verify(player1).getAggressivity();
         inOrder.verify(player2).getDefence();
-        inOrder.verify(player2).suffer(eq(5), argThat(instanceOf(Toxin.class)));
+        inOrder.verify(player2).suffer(argThat(instanceOf(DamageRecord.class)), argThat(instanceOf(Toxin.class)));
     }
 
     @Test
@@ -104,6 +106,6 @@ public class ToxicTest {
         InOrder inOrder = inOrder(player1, player2);
         inOrder.verify(player1).getAggressivity();
         inOrder.verify(player2).getDefence();
-        inOrder.verify(player2).suffer(5, Effect.none);
+        inOrder.verify(player2).suffer(argThat(instanceOf(DamageRecord.class)), eq(Effect.none));
     }
 }

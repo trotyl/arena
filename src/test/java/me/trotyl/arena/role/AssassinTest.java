@@ -1,5 +1,6 @@
 package me.trotyl.arena.role;
 
+import me.trotyl.arena.Game;
 import me.trotyl.arena.attribute.Attribute;
 import me.trotyl.arena.attribute.Genre;
 import me.trotyl.arena.attribute.Toxic;
@@ -26,6 +27,7 @@ import static org.mockito.Mockito.when;
 public class AssassinTest {
 
     private Assassin assassin;
+    private Player player;
 
     private Weapon shortWeapon;
     private Weapon mediumWeapon;
@@ -40,6 +42,9 @@ public class AssassinTest {
         Attribute.config(random);
 
         assassin = Assassin.create("张三", 10, 5);
+        player = Player.create("王二", 10, 5);
+
+        Game.between(assassin, player);
 
         shortWeapon = ShortWeapon.create("诸葛连弩", 3, Toxic.create(1, 2, 1.0f));
         mediumWeapon = MediumWeapon.create("雌雄双股剑", 4, 0, Toxic.create(2, 2, 1.0f));
@@ -56,7 +61,7 @@ public class AssassinTest {
 
         assassin.equip(shortWeapon);
 
-        Triplet<EffectProcedure, MoveProcedure, AttackProcedure> triplet = assassin.action(Player.create("王二", 10, 5), 1);
+        Triplet<EffectProcedure, MoveProcedure, AttackProcedure> triplet = assassin.action(player, 1);
         AttackProcedure procedure = triplet.getValue2();
 
         assertThat(procedure.damage.genre, is(Genre.toxic));
@@ -67,7 +72,7 @@ public class AssassinTest {
 
         assassin.equip(mediumWeapon);
 
-        Triplet<EffectProcedure, MoveProcedure, AttackProcedure> triplet = assassin.action(Player.create("王二", 10, 5), 1);
+        Triplet<EffectProcedure, MoveProcedure, AttackProcedure> triplet = assassin.action(player, 1);
         AttackProcedure procedure = triplet.getValue2();
 
         assertThat(procedure.damage.genre, is(Genre.none));

@@ -1,6 +1,7 @@
 package me.trotyl.arena.attribute;
 
 
+import me.trotyl.arena.effect.Effect;
 import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.record.RepelDamageRecord;
 import me.trotyl.arena.role.Player;
@@ -32,6 +33,9 @@ public class Repel extends AggressiveAttribute {
             return record;
         }
 
-        return RepelDamageRecord.create(distance, record);
+        RepelDamageRecord repel = RepelDamageRecord.create(distance, record);
+        defender.suffer(repel, Effect.none);
+
+        return repel;
     }
 }

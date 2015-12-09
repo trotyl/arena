@@ -1,5 +1,6 @@
 package me.trotyl.arena.role;
 
+import me.trotyl.arena.Game;
 import me.trotyl.arena.attribute.Genre;
 import me.trotyl.arena.effect.Effect;
 import me.trotyl.arena.effect.Flame;
@@ -8,6 +9,7 @@ import me.trotyl.arena.procedure.AttackProcedure;
 import me.trotyl.arena.procedure.EffectProcedure;
 import me.trotyl.arena.procedure.MoveProcedure;
 import me.trotyl.arena.record.ArmorRecord;
+import me.trotyl.arena.record.DamageRecord;
 import me.trotyl.arena.record.PlayerRecord;
 import me.trotyl.arena.record.WeaponRecord;
 import org.javatuples.Triplet;
@@ -18,6 +20,8 @@ import org.mockito.InOrder;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Matchers.argThat;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.spy;
 
@@ -31,6 +35,8 @@ public class PlayerTest {
 
         player0 = Player.create("张三", 10, 5);
         player1 = Player.create("李四", 20, 8);
+
+        Game.between(player0, player1);
     }
 
     @After
@@ -74,7 +80,8 @@ public class PlayerTest {
 
         Player player2 = Player.create("王二", 1, 2);
         Player player3 = spy(Player.create("麻子", 1, 2));
-        player2.suffer(0, Flame.create(5, 2));
+        Game.between(player2, player3);
+        player2.suffer(DamageRecord.none, Flame.create(5, 2));
 
         assertThat(player2.getHealth(), is(1));
         assertThat(player3.getHealth(), is(1));
@@ -102,7 +109,7 @@ public class PlayerTest {
         inOrder.verify(player3).record();
         inOrder.verify(player3).getAggressivity();
         inOrder.verify(player4).getDefence();
-        inOrder.verify(player4).suffer(5, Effect.none);
+        inOrder.verify(player4).suffer(argThat(instanceOf(DamageRecord.class)), eq(Effect.none));
         inOrder.verify(player3).record();
         inOrder.verify(player4).record();
     }
@@ -132,12 +139,12 @@ public class PlayerTest {
         PlayerRecord record0 = player0.record();
         assertThat(record0.getHealth(), is(10));
 
-        player0.suffer(5, Effect.none);
+        player0.suffer(DamageRecord.create(5), Effect.none);
 
         PlayerRecord record1 = player0.record();
         assertThat(record1.getHealth(), is(5));
 
-        player0.suffer(5, Effect.none);
+        player0.suffer(DamageRecord.create(5), Effect.none);
 
         PlayerRecord record2 = player0.record();
         assertThat(record2.getHealth(), is(0));
@@ -148,12 +155,12 @@ public class PlayerTest {
 
         Flame flame = Flame.create(2, 2);
 
-        player1.suffer(1, flame);
+        player1.suffer(DamageRecord.create(1), flame);
         assertThat(player1.effect, is(flame));
 
         Toxin toxin = Toxin.create(2, 2);
 
-        player1.suffer(2, toxin);
+        player1.suffer(DamageRecord.create(2), toxin);
         assertThat(player1.effect, is(toxin));
         assertThat(player1.effect.getRemain(), is(2));
     }
@@ -161,11 +168,11 @@ public class PlayerTest {
     @Test
     public void suffer_should_have_proper_result_for_effect_overlying() {
 
-        player1.suffer(2, Toxin.create(2, 2));
+        player1.suffer(DamageRecord.create(2), Toxin.create(2, 2));
         assertThat(player1.effect, instanceOf(Toxin.class));
         assertThat(player1.effect.getRemain(), is(2));
 
-        player1.suffer(2, Toxin.create(2, 1));
+        player1.suffer(DamageRecord.create(2), Toxin.create(2, 1));
         assertThat(player1.effect, instanceOf(Toxin.class));
         assertThat(player1.effect.getRemain(), is(3));
     }
@@ -173,11 +180,11 @@ public class PlayerTest {
     @Test
     public void suffer_should_have_proper_result_for_effect_replacing() {
 
-        player1.suffer(2, Toxin.create(2, 2));
+        player1.suffer(DamageRecord.create(2), Toxin.create(2, 2));
         assertThat(player1.effect, instanceOf(Toxin.class));
         assertThat(player1.effect.getRemain(), is(2));
 
-        player1.suffer(2, Flame.create(2, 4));
+        player1.suffer(DamageRecord.create(2), Flame.create(2, 4));
         assertThat(player1.effect, instanceOf(Flame.class));
         assertThat(player1.effect.getRemain(), is(4));
     }
