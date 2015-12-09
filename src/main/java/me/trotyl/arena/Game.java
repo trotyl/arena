@@ -43,6 +43,10 @@ public class Game {
         return !player1.alive() || !player2.alive();
     }
 
+    public int getDistance() {
+        return distance;
+    }
+
     public void increaseDistance(int increment) {
         distance += increment;
     }
@@ -68,7 +72,7 @@ public class Game {
         Player attacker = inTurnOfPlayer1? player1: player2;
         Player defender = attacker.equals(player1)? player2: player1;
 
-        Triplet<EffectProcedure, MoveProcedure, AttackProcedure> triplet = attacker.action(defender, distance);
+        Triplet<EffectProcedure, MoveProcedure, AttackProcedure> triplet = attacker.action(defender);
 
         inTurnOfPlayer1 = ! inTurnOfPlayer1;
 

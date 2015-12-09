@@ -61,7 +61,7 @@ public class KnightTest {
 
         knight.equip(longWeapon);
 
-        Triplet<EffectProcedure, MoveProcedure, AttackProcedure> triplet = knight.action(player, 1);
+        Triplet<EffectProcedure, MoveProcedure, AttackProcedure> triplet = knight.action(player);
         AttackProcedure procedure = triplet.getValue2();
 
         assertThat(procedure.damage.genre, is(Genre.toxic));
@@ -72,7 +72,7 @@ public class KnightTest {
 
         knight.equip(mediumWeapon);
 
-        Triplet<EffectProcedure, MoveProcedure, AttackProcedure> triplet = knight.action(player, 1);
+        Triplet<EffectProcedure, MoveProcedure, AttackProcedure> triplet = knight.action(player);
         AttackProcedure procedure = triplet.getValue2();
 
         assertThat(procedure.damage.genre, is(Genre.none));

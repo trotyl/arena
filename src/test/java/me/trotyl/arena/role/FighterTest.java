@@ -60,7 +60,7 @@ public class FighterTest {
 
         fighter.equip(mediumWeapon);
 
-        Triplet<EffectProcedure, MoveProcedure, AttackProcedure> triplet = fighter.action(player, 1);
+        Triplet<EffectProcedure, MoveProcedure, AttackProcedure> triplet = fighter.action(player);
         AttackProcedure procedure = triplet.getValue2();
 
         assertThat(procedure.damage.genre, is(Genre.toxic));

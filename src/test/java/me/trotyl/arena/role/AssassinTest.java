@@ -61,7 +61,7 @@ public class AssassinTest {
 
         assassin.equip(shortWeapon);
 
-        Triplet<EffectProcedure, MoveProcedure, AttackProcedure> triplet = assassin.action(player, 1);
+        Triplet<EffectProcedure, MoveProcedure, AttackProcedure> triplet = assassin.action(player);
         AttackProcedure procedure = triplet.getValue2();
 
         assertThat(procedure.damage.genre, is(Genre.toxic));
@@ -72,7 +72,7 @@ public class AssassinTest {
 
         assassin.equip(mediumWeapon);
 
-        Triplet<EffectProcedure, MoveProcedure, AttackProcedure> triplet = assassin.action(player, 1);
+        Triplet<EffectProcedure, MoveProcedure, AttackProcedure> triplet = assassin.action(player);
         AttackProcedure procedure = triplet.getValue2();
 
         assertThat(procedure.damage.genre, is(Genre.none));

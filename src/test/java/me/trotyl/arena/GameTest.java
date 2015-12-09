@@ -135,9 +135,9 @@ public class GameTest {
         Player player1 = mock(Player.class);
         when(player0.alive()).thenReturn(true);
         when(player1.alive()).thenReturn(false);
-        when(player0.action(player1, 1))
+        when(player0.action(player1))
                 .thenReturn(new Triplet<>(EffectProcedure.none, MoveProcedure.none, AttackProcedure.none));
-        when(player1.action(player0, 1))
+        when(player1.action(player0))
                 .thenReturn(new Triplet<>(EffectProcedure.none, MoveProcedure.none, AttackProcedure.none));
 
         game = Game.between(player0, player1);
@@ -329,9 +329,9 @@ public class GameTest {
         Player player1 = mock(Player.class);
         when(player0.alive()).thenReturn(true);
         when(player1.alive()).thenReturn(true);
-        when(player0.action(player1, 1))
+        when(player0.action(player1))
                 .thenReturn(new Triplet<>(EffectProcedure.none, MoveProcedure.none, AttackProcedure.none));
-        when(player1.action(player0, 1))
+        when(player1.action(player0))
                 .thenReturn(new Triplet<>(EffectProcedure.none, MoveProcedure.none, AttackProcedure.none));
 
         game = Game.between(player0, player1);
@@ -341,9 +341,9 @@ public class GameTest {
         InOrder inOrder = inOrder(player0, player1);
         inOrder.verify(player0).alive();
         inOrder.verify(player1).alive();
-        inOrder.verify(player0).action(player1, 1);
+        inOrder.verify(player0).action(player1);
         inOrder.verify(player0).alive();
         inOrder.verify(player1).alive();
-        inOrder.verify(player1).action(player0, 1);
+        inOrder.verify(player1).action(player0);
     }
 }

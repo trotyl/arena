@@ -53,7 +53,7 @@ public class SoldierTest {
     @Test
     public void attack_should_have_proper_result_without_effect() {
 
-        Triplet<EffectProcedure, MoveProcedure, AttackProcedure> triplet = soldier0.action(soldier1, 1);
+        Triplet<EffectProcedure, MoveProcedure, AttackProcedure> triplet = soldier0.action(soldier1);
         EffectProcedure effectProcedure = triplet.getValue0();
         AttackProcedure attackProcedure = triplet.getValue2();
 
@@ -74,7 +74,7 @@ public class SoldierTest {
         soldier0.effect = Flame.create(2, 10);
         soldier0.weapon = MediumWeapon.create("玄铁重剑", 3, 0);
 
-        Triplet<EffectProcedure, MoveProcedure, AttackProcedure> triplet = soldier0.action(soldier1, 1);
+        Triplet<EffectProcedure, MoveProcedure, AttackProcedure> triplet = soldier0.action(soldier1);
         EffectProcedure effectProcedure = triplet.getValue0();
         AttackProcedure attackProcedure = triplet.getValue2();
 
@@ -107,7 +107,7 @@ public class SoldierTest {
         soldier2.effect = effect;
         soldier2.weapon = spy(MediumWeapon.create("玄铁重剑", 3, 0, attribute));
 
-        soldier2.action(soldier3, 1);
+        soldier2.action(soldier3);
 
         verifyZeroInteractions(attribute);
 

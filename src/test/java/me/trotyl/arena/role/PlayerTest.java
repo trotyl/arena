@@ -63,7 +63,7 @@ public class PlayerTest {
     @Test
     public void attack_should_have_proper_result_without_effect() {
 
-        Triplet<EffectProcedure, MoveProcedure, AttackProcedure> triplet = player0.action(player1, 1);
+        Triplet<EffectProcedure, MoveProcedure, AttackProcedure> triplet = player0.action(player1);
         EffectProcedure effectProcedure = triplet.getValue0();
         AttackProcedure attackProcedure = triplet.getValue2();
 
@@ -88,7 +88,7 @@ public class PlayerTest {
 
         assertThat(player2.effect, instanceOf(Flame.class));
 
-        Triplet<EffectProcedure, MoveProcedure, AttackProcedure> triplet = player2.action(player3, 1);
+        Triplet<EffectProcedure, MoveProcedure, AttackProcedure> triplet = player2.action(player3);
 
         assertThat(player2.getHealth(), is(-4));
         assertThat(player3.getHealth(), is(1));
@@ -103,7 +103,7 @@ public class PlayerTest {
         Player player3 = spy(player0);
         Player player4 = spy(player1);
 
-        player3.action(player4, 1);
+        player3.action(player4);
 
         InOrder inOrder = inOrder(player3, player4);
         inOrder.verify(player3).record();
