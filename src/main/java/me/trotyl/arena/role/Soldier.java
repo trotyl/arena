@@ -43,6 +43,11 @@ public abstract class Soldier extends Player {
         return weapon.getDefensiveAttribute();
     }
 
+    @Override
+    public int getRange() {
+        return weapon.getRange();
+    }
+
     public Weapon getWeapon() {
         return weapon;
     }

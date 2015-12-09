@@ -34,8 +34,8 @@ public class Game {
 
     public void decreaseDistance(int decrement) {
         distance -= decrement;
-        if (distance < 0) {
-            distance = 0;
+        if (distance < 1) {
+            distance = 1;
         }
     }
 

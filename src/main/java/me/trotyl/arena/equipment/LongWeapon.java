@@ -28,6 +28,11 @@ public class LongWeapon extends Weapon {
         return new LongWeapon(name, aggressivity, repel, attribute);
     }
 
+    @Override
+    public int getRange() {
+        return 2;
+    }
+
     protected final int repel;
 
     protected LongWeapon(String name, int aggressivity, int repel, AggressiveAttribute attribute) {

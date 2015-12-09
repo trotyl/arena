@@ -56,4 +56,8 @@ public abstract class Weapon implements Aggressive {
     public int getDefence() {
         return 0;
     }
+
+    public int getRange() {
+        return 1;
+    }
 }
