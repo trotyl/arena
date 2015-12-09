@@ -20,7 +20,10 @@ public class Striking extends AggressiveAttribute {
 
     @Override
     protected int getDamage(Player attacker, Player defender) {
-        return 3 * (attacker.getAggressivity() - defender.getDefence());
+
+        int damage = 3 * (attacker.getAggressivity() - defender.getDefence());
+
+        return damage > 0? damage: 0;
     }
 
     @Override

@@ -65,7 +65,10 @@ public abstract class AggressiveAttribute extends Attribute {
     }
 
     protected int getDamage(Player attacker, Player defender) {
-        return attacker.getAggressivity() - defender.getDefence();
+
+        int damage = attacker.getAggressivity() - defender.getDefence();
+
+        return damage > 0? damage: 0;
     }
 
     protected Effect getEffect() {
