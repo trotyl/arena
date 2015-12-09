@@ -41,6 +41,11 @@ public class Counter extends DefensiveAttribute {
             return original;
         }
 
+
+        if (defender.getRange() < defender.getGame().getDistance()) {
+            return CounterDamageRecord.create(original, DamageRecord.none);
+        }
+
         AggressiveAttribute aggressive = defender.getAggressiveAttribute();
         DamageRecord counter = aggressive.apply(defender, attacker, Attribute.normalAttack, Attribute.normalDefence);
 

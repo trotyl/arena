@@ -88,6 +88,31 @@ public class CounterTest {
     }
 
     @Test
+    public void apply_should_have_proper_result_when_unreachable() {
+
+        Game game = Game.between(player1, player2);
+        game.increaseDistance(1);
+
+        DamageRecord damage = Attribute.normalAttack.apply(player1, player2, Attribute.normalAttack, counter);
+
+        PlayerRecord player1Record = player1.record();
+        PlayerRecord player2Record = player2.record();
+
+        assertThat(damage.genre, is(Genre.counter));
+        assertThat(damage.extent, is(0));
+        assertThat(damage.distance, is(0));
+        assertThat(damage, instanceOf(CounterDamageRecord.class));
+
+        CounterDamageRecord caromDamage = (CounterDamageRecord) damage;
+
+        assertThat(caromDamage.original.extent, is(2));
+        assertThat(caromDamage.counter, is(DamageRecord.none));
+
+        assertThat(player1Record.getHealth(), is(10));
+        assertThat(player2Record.getHealth(), is(18));
+    }
+
+    @Test
     public void apply_should_have_proper_invocation_with_effect() {
 
         Attribute.normalAttack.apply(player1, player2, Attribute.normalAttack, counter);

@@ -138,7 +138,12 @@ public class Player {
         return AttackProcedure.create(record(), defender.record(), attackDamage);
     }
 
-    protected int getRange() {
+
+    public Game getGame() {
+        return game;
+    }
+
+    public int getRange() {
         return 1;
     }
 
