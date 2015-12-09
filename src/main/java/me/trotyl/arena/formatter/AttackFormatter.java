@@ -83,7 +83,12 @@ public class AttackFormatter extends Formatter<AttackProcedure> {
                 DamageRecord original = ((CounterDamageRecord) damage).original;
                 DamageRecord counter = ((CounterDamageRecord) damage).counter;
                 String originalInnerPart = formatInner(original, attacker, defender);
-                String counterInnerPart = formatInner(counter, defender, attacker);
+                String counterInnerPart;
+                if (counter.equals(DamageRecord.none)) {
+                    counterInnerPart = String.format("%s不在攻击范围内, ", attacker.getName());
+                } else {
+                    counterInnerPart = formatInner(counter, defender, attacker);
+                }
                 return String.format("%s%s%s", originalInnerPart, attributePart, counterInnerPart);
             default:
                 throw new IllegalArgumentException("The genre is invalid in ths context.");
